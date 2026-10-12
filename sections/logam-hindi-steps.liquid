@@ -1,0 +1,252 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-steps', hi: true, fb_steps: 'hh-en-step1-chaupai-explained.jpg,hh-en-step2-hand-painted-art.jpg,hh-en-step3-happy-hanuman-challenge.jpg,hh-step4-find-ram.jpg', fb_lock: 'hh-step5-colouring-sheets.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Steps",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "कैसे काम करती है"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "हैप्पी हनुमान थेरेपी के 5 स्टेप"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "स्टेप 1 से 4 इसी किताब में हैं। स्टेप 5 एक अलग सेट है: आर्ट थेरेपी कलरिंग शीट्स।"
+    },
+    {
+      "type": "checkbox",
+      "id": "img_mobile",
+      "label": "Show step photos on mobile",
+      "info": "Off: step photos (and step 4's caption and the step 5 photo) show on desktop only.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout_d",
+      "label": "Desktop layout",
+      "default": "cards",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Step cards in a row"
+        },
+        {
+          "value": "side",
+          "label": "List with example image on the side"
+        }
+      ],
+      "info": "'List with example image' uses the Example page image and Text under image below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Example page image"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Text under image"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "color",
+      "id": "bg_d",
+      "label": "Background (desktop)",
+      "info": "Leave empty to use the same background as mobile.",
+      "default": "#F9EFDF"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "हाथ से बने चित्र"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Shown full width under the step, square."
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption under image"
+        }
+      ]
+    },
+    {
+      "type": "locked",
+      "name": "Locked step",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Small text",
+          "default": "स्टेप 5 · अलग से मिलता है"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "कलरिंग शीट्स के साथ आर्ट थेरेपी"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "43 शीट्स। हर शीट के आगे चित्र है और पीछे उसकी लाइन आर्ट, जिसमें आप रंग भरेंगे। राम नाम ढूँढ़ने का खेल इन शीट्स पर भी है, और इनमें किताब से ज़्यादा नाम छिपे हैं।"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product to unlock",
+          "info": "Price and thumbnail load from the product. The button adds it to the cart."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under price",
+          "default": "किताब के साथ लें: पाँचों स्टेप और कुल रकम पर 10% छूट"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button",
+          "info": "[price] = product price",
+          "default": "स्टेप 5 अनलॉक करें · [price] में जोड़ें"
+        },
+        {
+          "type": "text",
+          "id": "added",
+          "label": "Button after adding",
+          "default": "स्टेप 5 अनलॉक · कार्ट में जुड़ गया ✓"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "आसान भाषा में गहरी समझ",
+            "text": "हर चौपाई का आसान और गहरा अर्थ, वाल्मीकि रामायण, रामचरितमानस और भगवद् गीता के संदर्भ के साथ"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "हाथ से बने चित्र",
+            "text": "हर चित्र में उस चौपाई का भाव और सीख है, मन पर अच्छा असर डालने के लिए बनाया गया"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "हैप्पी हनुमान चैलेंज",
+            "text": "उस चौपाई की सीख को अपनी ज़िंदगी में उतारने का एक चैलेंज"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "छिपा हुआ राम नाम ढूँढ़िए",
+            "text": "हर हाथ से बने चित्र में छिपा “राम” नाम ढूँढ़िए",
+            "caption": "मिल गया? इस चित्र में “राम” मगरमच्छ के जबड़े पर छिपा है"
+          }
+        },
+        {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "स्टेप 5 · अलग से मिलता है",
+            "title": "कलरिंग शीट्स के साथ आर्ट थेरेपी",
+            "text": "43 शीट्स। हर शीट के आगे चित्र है और पीछे उसकी लाइन आर्ट, जिसमें आप रंग भरेंगे। राम नाम ढूँढ़ने का खेल इन शीट्स पर भी है, और इनमें किताब से ज़्यादा नाम छिपे हैं।",
+            "note": "किताब के साथ लें: पाँचों स्टेप और कुल रकम पर 10% छूट",
+            "button": "स्टेप 5 अनलॉक करें · [price] में जोड़ें",
+            "added": "स्टेप 5 अनलॉक · कार्ट में जुड़ गया ✓"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

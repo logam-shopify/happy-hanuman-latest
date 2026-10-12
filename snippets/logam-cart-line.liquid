@@ -1,0 +1,28 @@
+{%- comment -%} One cart line in the Logam cart drawer. Params: item, title, sub, step5 (true = "Remove" instead of quantity), s (section settings) {%- endcomment -%}
+{%- liquid
+  assign line_was = item.original_line_price
+  if item.variant.compare_at_price > item.original_price
+    assign line_was = item.variant.compare_at_price | times: item.quantity
+  endif
+-%}
+<div class="hh-item{% if step5 %} hh-in{% endif %}">
+  <a class="hh-item__img" href="{{ item.url }}">
+    {%- if item.image -%}{{ item.image | image_url: width: 228 | image_tag: loading: 'lazy', alt: title, width: 76, height: 76 }}{%- endif -%}
+  </a>
+  <div class="hh-item__main">
+    <div class="hh-item__t">{{ title }}</div>
+    {%- if sub != blank -%}<div class="hh-item__s">{{ sub }}</div>{%- endif -%}
+    <div class="hh-item__row">
+      <div class="hh-price"><b>{{ item.original_line_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if line_was > item.original_line_price %} <s>{{ line_was | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}</div>
+      {%- if step5 -%}
+        <button type="button" class="hh-remove" data-hh-key="{{ item.key }}" data-hh-q="0">{{ s.remove }}</button>
+      {%- else -%}
+        <div class="hh-qty">
+          <button type="button" data-hh-key="{{ item.key }}" data-hh-q="{{ item.quantity | minus: 1 }}" aria-label="{{ s.qty_less | escape }}">−</button>
+          <span>{{ item.quantity }}</span>
+          <button type="button" data-hh-key="{{ item.key }}" data-hh-q="{{ item.quantity | plus: 1 }}" aria-label="{{ s.qty_more | escape }}">+</button>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

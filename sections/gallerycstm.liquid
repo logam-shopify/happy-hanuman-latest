@@ -1,0 +1,357 @@
+{% comment %}
+  Gallery Auto Slider — vanilla JS + CSS scroll snapping
+  - Autoplay with pause on hover & user scroll
+  - Arrows & dots (toggle)
+  - Responsive slides per view (desktop/tablet/mobile)
+  - Native touch swipe; smooth snapping
+{% endcomment %}
+
+<section class="gallery-auto-slider color-{{ section.settings.color_scheme }} {% if section.settings.remove_top_spacing %}section--no-top{% endif %} {% if section.settings.remove_bottom_spacing %}section--no-bottom{% endif %}" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <div class="gas-header">
+        <h2 class="gas-title">{{ section.settings.heading | escape }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="gas-subtitle">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div
+      class="gas-carousel"
+      id="gas-{{ section.id }}"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.heading | default: 'Gallery slider' | escape }}"
+      data-autoplay="{{ section.settings.autoplay }}"
+      data-interval="{{ section.settings.interval }}"
+      data-snap="{{ section.settings.snap_behavior }}"
+      data-show-arrows="{{ section.settings.show_arrows }}"
+      data-show-dots="{{ section.settings.show_dots }}"
+      data-loop="true"
+    >
+
+      {% if section.settings.show_arrows %}
+      <button class="gas-arrow gas-arrow--prev" aria-label="Previous slide">
+        <span aria-hidden="true">‹</span>
+      </button>
+      {% endif %}
+
+      <div class="gas-viewport">
+        <ul class="gas-track" aria-live="polite">
+          {% for block in section.blocks %}
+            {% assign img = block.settings.image %}
+            <li class="gas-slide" {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}<a href="{{ block.settings.link }}"{% if block.settings.open_new_tab %} target="_blank" rel="noopener"{% endif %}>{% endif %}
+                {% if img %}
+                  {{ img
+                    | image_url: width: 1296
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 50vw, 100vw',
+                      widths: '360,540,720,900,1080,1296',
+                      alt: block.settings.alt,
+                      class: 'gas-media'
+                  }}
+                {% else %}
+                  <div class="gas-media gas-media--placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              {% if block.settings.link != blank %}</a>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.show_arrows %}
+      <button class="gas-arrow gas-arrow--next" aria-label="Next slide">
+        <span aria-hidden="true">›</span>
+      </button>
+      {% endif %}
+
+      {% if section.settings.show_dots %}
+        <div class="gas-dots" aria-label="Slide pagination"></div>
+      {% endif %}
+    </div>
+  </div>
+
+  <style>
+    .gallery-auto-slider.section--no-top { margin-top: 0 !important; }
+    .gallery-auto-slider.section--no-bottom { margin-bottom: 0 !important; }
+
+    .gas-header { margin-bottom: 1.25rem; text-align: center; }
+    .gas-title { margin: 0 0 .25rem; }
+    .gas-subtitle { margin: 0; opacity: .8; }
+
+    .gas-carousel {
+      --gap: {{ section.settings.gap | default: 16 }}px;
+      --per-desktop: {{ section.settings.slides_desktop | default: 4 }};
+      --per-tablet: {{ section.settings.slides_tablet | default: 2 }};
+      --per-mobile: {{ section.settings.slides_mobile | default: 1 }};
+      position: relative;
+    }
+
+    .gas-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x var(--snap, mandatory);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .gas-viewport::-webkit-scrollbar { display: none; }
+
+    .gas-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - (var(--gap) * (var(--per) - 1))) / var(--per));
+      column-gap: var(--gap);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      align-items: stretch;
+    }
+
+    .gas-slide { scroll-snap-align: start; scroll-snap-stop: always; }
+
+    .gas-media { width: 100%; height: auto; display: block; border-radius: {{ section.settings.radius }}px; }
+    .gas-media--placeholder { aspect-ratio: 4/3; background: #f3f3f3; display: grid; place-items: center; }
+
+    .gas-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      border: 0; background: rgba(0,0,0,.5); color: #fff; width: 40px; height: 40px;
+      display: grid; place-items: center; border-radius: 999px; cursor: pointer;
+    }
+    .gas-arrow[disabled] { opacity: .4; cursor: default; }
+    .gas-arrow--prev { left: -8px; }
+    .gas-arrow--next { right: -8px; }
+
+    .gas-dots { display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+    .gas-dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; background: rgba(0,0,0,.25); cursor: pointer; }
+    .gas-dots button[aria-current="true"] { background: rgba(0,0,0,.8); }
+
+    @media (min-width: 990px) { .gas-carousel { --per: var(--per-desktop); } }
+    @media (min-width: 750px) and (max-width: 989px) { .gas-carousel { --per: var(--per-tablet); } }
+    @media (max-width: 749px) {
+      .gas-carousel { --per: var(--per-mobile); }
+      .gas-arrow--prev { left: 4px; }
+      .gas-arrow--next { right: 4px; }
+    }
+  </style>
+
+ <script>
+  (function() {
+    const root = document.currentScript.closest('[data-section-id]');
+    const carousel = root.querySelector('.gas-carousel');
+    if (!carousel) return;
+
+    const viewport = carousel.querySelector('.gas-viewport');
+    const track = carousel.querySelector('.gas-track');
+    let slides = Array.from(track.children);            // live list after cloning
+    const prev = carousel.querySelector('.gas-arrow--prev');
+    const next = carousel.querySelector('.gas-arrow--next');
+    const dotsWrap = carousel.querySelector('.gas-dots');
+
+    const ORIGINAL_COUNT = slides.length;               // keep real count for dots
+    const SNAP = carousel.dataset.snap === 'mandatory' ? 'mandatory' : 'proximity';
+    viewport.style.setProperty('--snap', SNAP);
+
+    // Helpers
+    function perView() {
+      const style = getComputedStyle(carousel);
+      const pv = parseFloat(style.getPropertyValue('--per')) || 1;
+      return Math.max(1, Math.round(pv));
+    }
+    function pageWidth() {
+      const first = track.children[0];
+      return first ? first.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap) : viewport.clientWidth;
+    }
+    function totalPages() {
+      return Math.max(1, Math.ceil(ORIGINAL_COUNT / perView())); // use original count for pagination
+    }
+    function currentIndex() {
+      const step = pageWidth();
+      return Math.round(viewport.scrollLeft / step);
+    }
+    function goTo(index) {
+      const maxIdx = Math.max(0, slides.length - perView());
+      const clamped = Math.min(Math.max(index, 0), maxIdx);
+      viewport.scrollTo({ left: clamped * pageWidth(), behavior: 'smooth' });
+      updateDotsFromScroll(Math.min(index, totalPages()-1)); // map to real pages
+    }
+
+    // Ensure there is always room to move (clone slides when needed)
+    function ensureLoopable() {
+      // remove previous clones
+      Array.from(track.querySelectorAll('[data-clone="true"]')).forEach(n => n.remove());
+
+      // If total slides <= perView, clone enough to make at least perView+1
+      const pv = perView();
+      const need = Math.max(0, (pv + 1) - ORIGINAL_COUNT);
+      for (let i = 0; i < need; i++) {
+        const clone = slides[i % ORIGINAL_COUNT].cloneNode(true);
+        clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
+        // Remove ids inside clone if any
+        clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+        track.appendChild(clone);
+      }
+      slides = Array.from(track.children);
+    }
+
+    // Arrows
+    function updateArrows() { /* keep always enabled for loop UX */ }
+    prev && prev.addEventListener('click', () => { stopAutoplayTemporarily(); goTo(currentIndex() - 1); });
+    next && next.addEventListener('click', () => { stopAutoplayTemporarily(); goTo(currentIndex() + 1); });
+
+    // Dots
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      const pages = totalPages();
+      for (let i = 0; i < pages; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', `Go to slide ${i+1}`);
+        b.addEventListener('click', () => { stopAutoplayTemporarily(); goTo(i); });
+        dotsWrap.appendChild(b);
+      }
+      updateDotsFromScroll(currentIndex());
+    }
+    function updateDotsFromScroll(idx) {
+      if (!dotsWrap) return;
+      const pages = dotsWrap.children;
+      const pageIdx = Math.min(pages.length - 1, Math.round(idx));
+      Array.from(pages).forEach((d, i) => d.setAttribute('aria-current', i === pageIdx ? 'true' : 'false'));
+    }
+
+    // Sync dots on scroll
+    let scrollTimeout;
+    viewport.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { updateDotsFromScroll(currentIndex()); }, 80);
+    }, { passive: true });
+
+    // Autoplay
+    let autoplayTimer = null;
+    const AUTOPLAY = carousel.dataset.autoplay === 'true';
+    const INTERVAL = Math.max(1500, parseInt(carousel.dataset.interval) || 3000);
+
+    function startAutoplay() {
+      if (!AUTOPLAY) return;
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        const step = currentIndex() + 1;
+        const maxIdx = Math.max(0, slides.length - perView());
+        if (maxIdx <= 0) return;                  // safety (shouldn’t happen after cloning)
+        if (step > maxIdx) {
+          viewport.scrollTo({ left: 0, behavior: 'smooth' });
+          updateDotsFromScroll(0);
+        } else {
+          goTo(step);
+        }
+      }, INTERVAL);
+    }
+    function stopAutoplay() { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } }
+
+    let resumeTimeout;
+    function stopAutoplayTemporarily() {
+      stopAutoplay();
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(startAutoplay, INTERVAL * 1.5);
+    }
+
+    ['mouseenter','focusin','touchstart','pointerdown','wheel'].forEach(evt => {
+      carousel.addEventListener(evt, stopAutoplayTemporarily, { passive: true });
+    });
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    // Init
+    ensureLoopable();
+    buildDots();
+    updateArrows();
+    startAutoplay();
+
+    // Rebuild on resize (per-view can change)
+    let ro;
+    const onResize = () => { ensureLoopable(); buildDots(); updateArrows(); };
+    if ('ResizeObserver' in window) { ro = new ResizeObserver(onResize); ro.observe(viewport); }
+    else { window.addEventListener('resize', onResize); }
+
+    // Cleanup for Theme Editor hot-reload
+    document.addEventListener('shopify:section:unload', e => {
+      if (e.target === root) { stopAutoplay(); ro && ro.disconnect && ro.disconnect(); }
+    });
+  })();
+</script>
+
+
+  {% schema %}
+  {
+    "name": "Gallery Auto Slider",
+    "class": "section",
+    "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Gallery" },
+      { "type": "text", "id": "subheading", "label": "Subheading" },
+      {
+        "type": "select",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "default": "default",
+        "options": [
+          { "value": "default", "label": "Default" },
+          { "value": "inverse", "label": "Inverse" }
+        ]
+      },
+      { "type": "range", "id": "gap", "label": "Gap between slides (px)", "min": 0, "max": 48, "step": 2, "default": 16 },
+      { "type": "range", "id": "radius", "label": "Image corner radius (px)", "min": 0, "max": 24, "step": 2, "default": 8 },
+
+      { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+      { "type": "range", "id": "interval", "label": "Autoplay interval (ms)", "min": 1500, "max": 2500, "step": 500, "default": 2000 },
+      {
+        "type": "select",
+        "id": "snap_behavior",
+        "label": "Snap behavior",
+        "default": "mandatory",
+        "options": [
+          { "value": "mandatory", "label": "Tight (mandatory)" },
+          { "value": "proximity", "label": "Soft (proximity)" }
+        ]
+      },
+
+      { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+      { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
+
+      { "type": "range", "id": "slides_desktop", "label": "Slides per view (desktop ≥ 990px)", "min": 1, "max": 6, "step": 1, "default": 4 },
+      { "type": "range", "id": "slides_tablet", "label": "Slides per view (tablet 750–989px)", "min": 1, "max": 4, "step": 1, "default": 2 },
+      { "type": "range", "id": "slides_mobile", "label": "Slides per view (mobile ≤ 749px)", "min": 1, "max": 3, "step": 1, "default": 1 },
+
+      { "type": "checkbox", "id": "remove_top_spacing", "label": "Remove top spacing", "default": false },
+      { "type": "checkbox", "id": "remove_bottom_spacing", "label": "Remove bottom spacing", "default": false }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Slide",
+        "settings": [
+          { "type": "image_picker", "id": "image", "label": "Image" },
+          { "type": "text", "id": "alt", "label": "Alt text" },
+          { "type": "url", "id": "link", "label": "Link (optional)" },
+          { "type": "checkbox", "id": "open_new_tab", "label": "Open link in new tab", "default": false }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gallery Auto Slider",
+        "category": "Image",
+        "blocks": [
+          { "type": "image" },
+          { "type": "image" },
+          { "type": "image" },
+          { "type": "image" }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+</section>

@@ -1,0 +1,120 @@
+{%- render 'logam-book-author' -%}
+
+{% schema %}
+{
+  "name": "Logam-English Author",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "About the author"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Ashish Bhalani"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role",
+      "default": "TEDx speaker · co-author of Garbh Yatra and Pregnancy 90"
+    },
+    {
+      "type": "richtext",
+      "id": "bio",
+      "label": "Bio",
+      "default": "<p>Ashish calls himself not the writer of this book but a medium of Hanuman ji’s blessings. That is why the cover says it is “written by the blessing of the Supreme” instead of carrying his name.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Band background",
+      "default": "#FBEFDD"
+    },
+    {
+      "type": "color",
+      "id": "page_bg",
+      "label": "Space above background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "gap_m",
+      "label": "Space above (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space above (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English Author"
+    }
+  ]
+}
+{% endschema %}

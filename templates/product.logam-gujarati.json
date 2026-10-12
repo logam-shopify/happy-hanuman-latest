@@ -1,0 +1,484 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "logam-gujarati-main",
+      "settings": {
+        "box_title": "તમને શું મળશે",
+        "box_eyebrow": ""
+      },
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "product": "therapy-book-english",
+            "match": "english"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी",
+            "product": "happy-hanuman-therapy-book-hindi",
+            "match": "hindi"
+          }
+        },
+        "b3": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી",
+            "product": "therapy-book-gujarati",
+            "match": "gujarati"
+          }
+        },
+        "b4": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "3 થી 5 વર્કિંગ દિવસમાં ફ્રી ડિલિવરી",
+            "text": "પુસ્તક મોકલતાં જ ઇમેઇલ પર ટ્રેકિંગ નંબર"
+          }
+        },
+        "b5": {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "પુસ્તક ખરાબ હાલતમાં કે ખોટી ભાષામાં આવ્યું? ફ્રીમાં બદલી આપીશું",
+            "text": "ડિલિવરીના 7 દિવસમાં WhatsApp પર ફોટો મોકલો"
+          }
+        },
+        "pay1": {
+          "type": "payment",
+          "settings": {
+            "name": "UPI",
+            "icon": "logo_upi",
+            "show_name": false
+          }
+        },
+        "pay2": {
+          "type": "payment",
+          "settings": {
+            "name": "Google Pay",
+            "icon": "logo_gpay",
+            "show_name": false
+          }
+        },
+        "pay3": {
+          "type": "payment",
+          "settings": {
+            "name": "PhonePe",
+            "icon": "logo_phonepe",
+            "show_name": false
+          }
+        },
+        "pay4": {
+          "type": "payment",
+          "settings": {
+            "name": "Paytm",
+            "icon": "logo_paytm",
+            "show_name": false
+          }
+        },
+        "pay5": {
+          "type": "payment",
+          "settings": {
+            "name": "Visa",
+            "icon": "logo_visa",
+            "show_name": false
+          }
+        },
+        "pay6": {
+          "type": "payment",
+          "settings": {
+            "name": "Mastercard",
+            "icon": "logo_mastercard",
+            "show_name": false
+          }
+        },
+        "pay7": {
+          "type": "payment",
+          "settings": {
+            "name": "RuPay",
+            "icon": "logo_rupay",
+            "show_name": false
+          }
+        },
+        "pay8": {
+          "type": "payment",
+          "settings": {
+            "name": "નેટ બેન્કિંગ",
+            "icon": "bank",
+            "show_name": true
+          }
+        },
+        "box1": {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>હેપ્પી હનુમાન થેરાપી બુક</b>, ગુજરાતી એડિશન, A4 સાઇઝ"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "pay1",
+        "pay2",
+        "pay3",
+        "pay4",
+        "pay5",
+        "pay6",
+        "pay7",
+        "pay8",
+        "box1"
+      ]
+    },
+    "inside": {
+      "type": "logam-gujarati-inside",
+      "settings": {}
+    },
+    "steps": {
+      "type": "logam-gujarati-steps",
+      "settings": {
+        "title": "હેપ્પી હનુમાન થેરાપીનાં 5 સ્ટેપ",
+        "sub": "સ્ટેપ 1 થી 4 આ જ પુસ્તકમાં છે. સ્ટેપ 5 અલગ સેટ છે: આર્ટ થેરાપી કલરિંગ શીટ્સ.",
+        "layout_d": "cards",
+        "img_mobile": true,
+        "bg_d": "#F9EFDF",
+        "hint": ""
+      },
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "સરળ ભાષામાં ઊંડી સમજ",
+            "text": "દરેક ચોપાઈનો સરળ અને ઊંડો અર્થ, વાલ્મીકિ રામાયણ, રામચરિતમાનસ અને ભગવદ્ ગીતાના સંદર્ભ સાથે"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "હાથે દોરેલાં ચિત્રો",
+            "text": "દરેક ચિત્રમાં એ ચોપાઈનો ભાવ અને શીખ છે, મન પર સારી અસર થાય એ રીતે બનાવેલું"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "હેપ્પી હનુમાન ચેલેન્જ",
+            "text": "એ ચોપાઈની શીખને પોતાના જીવનમાં ઉતારવાની એક ચેલેન્જ"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "છુપાયેલું રામ નામ શોધો",
+            "text": "દરેક હાથે દોરેલા ચિત્રમાં છુપાયેલું “રામ” નામ શોધો",
+            "caption": "મળ્યું? આ ચિત્રમાં “રામ” મગરના જડબા પર છુપાયેલું છે"
+          }
+        },
+        "lock5": {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "સ્ટેપ 5 · અલગથી મળે છે",
+            "title": "કલરિંગ શીટ્સ સાથે આર્ટ થેરાપી",
+            "text": "43 શીટ્સ. દરેક શીટની આગળ ચિત્ર છે અને પાછળ તેની લાઇન આર્ટ, જેમાં તમે રંગ પૂરશો. રામ નામ શોધવાની રમત આ શીટ્સ પર પણ છે, અને એમાં પુસ્તક કરતાં વધુ નામ છુપાયેલાં છે.",
+            "note": "પુસ્તક સાથે લો: પાંચેય સ્ટેપ અને કુલ રકમ પર 10% છૂટ",
+            "button": "સ્ટેપ 5 અનલૉક કરો · [price]માં ઉમેરો",
+            "added": "સ્ટેપ 5 અનલૉક · કાર્ટમાં ઉમેરાઈ ગયું ✓",
+            "product": "happy-hanuman-art-therapy-colouring-sheets"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "lock5"
+      ]
+    },
+    "details": {
+      "type": "logam-gujarati-details",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "label": "એડિશન",
+            "value": "ગુજરાતી"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "label": "સાઇઝ",
+            "value": "A4"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "label": "પાનાં",
+            "value": "43, હાથે દોરેલાં ચિત્રો સાથે"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "label": "કોના માટે",
+            "value": "બાળકો અને મોટાઓ: પરિવાર, માતા-પિતા, ટીચર, હનુમાન ભક્તો"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "label": "ડિલિવરી",
+            "value": "ફ્રી, 3 થી 5 વર્કિંગ દિવસમાં"
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "label": "બદલી",
+            "value": "ખરાબ હાલતમાં કે ખોટી એડિશન આવે તો 7 દિવસમાં"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "videos": {
+      "type": "logam-gujarati-videos",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "video",
+          "settings": {
+            "duration": "2:45",
+            "video": "shopify://files/videos/Video-259.mp4"
+          }
+        },
+        "b2": {
+          "type": "video",
+          "settings": {
+            "duration": "0:52",
+            "video": "shopify://files/videos/Video-778.mp4"
+          }
+        },
+        "b3": {
+          "type": "video",
+          "settings": {
+            "duration": "0:49",
+            "video": "shopify://files/videos/Video-707.mp4"
+          }
+        },
+        "b4": {
+          "type": "video",
+          "settings": {
+            "duration": "1:04",
+            "video": "shopify://files/videos/Video-840.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "leaders": {
+      "type": "logam-gujarati-leaders",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક ફક્ત યુવાનો અને બાળકો માટે જ નહીં, સૌ માટે ખૂબ ઉપયોગી છે. પુસ્તકનાં ચિત્રો અદ્ભુત છે, ખૂબ સરસ કામ.",
+            "name": "અનુપમ ખેર",
+            "role": "એક્ટર અને ડિરેક્ટર, હનુમાન ભક્ત"
+          }
+        },
+        "b2": {
+          "type": "quote",
+          "settings": {
+            "quote": "સારાં ચિત્રો સારું ચરિત્ર બનાવી શકે છે. આ કામથી મને ખૂબ આનંદ છે.",
+            "name": "પૂજ્ય મોરારિબાપુ",
+            "role": ""
+          }
+        },
+        "b3": {
+          "type": "quote",
+          "settings": {
+            "quote": "હનુમાનજી પર આટલું ઊંડું અને ઉત્તમ કામ મેં ક્યારેય જોયું નથી.",
+            "name": "પૂજ્ય હરિપ્રકાશ શાસ્ત્રી",
+            "role": "સાળંગપુર ધામ"
+          }
+        },
+        "b4": {
+          "type": "quote",
+          "settings": {
+            "quote": "ખૂબ સુંદર કામ છે. બાળકો અને યુવાનો માટે હનુમાનજી પર આનાથી વધુ રસપ્રદ પુસ્તક મેં જોયું નથી.",
+            "name": "અક્ષત ગુપ્તા",
+            "role": "લેખક"
+          }
+        },
+        "b5": {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક દરેકના હાથમાં પહોંચવું જોઈએ. રજૂઆત ખૂબ રસપ્રદ છે.",
+            "name": "જય વસાવડા",
+            "role": "લેખક"
+          }
+        },
+        "b6": {
+          "type": "quote",
+          "settings": {
+            "quote": "આશિષ, ભગવાન તારી સાથે છે. ખૂબ સરસ કામ, હવે પુસ્તક પૂરું થયું. આ કામમાં ખુદ ભગવાન તારી સાથે છે.",
+            "name": "પદ્મભૂષણ સ્વામી સચ્ચિદાનંદ",
+            "role": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "stats": {
+      "type": "logam-gujarati-stats",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "logam-gujarati-reviews",
+      "settings": {}
+    },
+    "author": {
+      "type": "logam-gujarati-author",
+      "settings": {}
+    },
+    "faq": {
+      "type": "logam-gujarati-faq",
+      "settings": {},
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "શું મને ગુજરાતી એડિશન જ મળશે?",
+            "answer": "<p>હા. આ પેજ પરથી ગુજરાતી એડિશન મળે છે. English કે हिन्दी જોઈએ? ઉપર એડિશન બદલો. ચિત્રો અને બાકી બધું ત્રણેયમાં સરખું છે.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "શું કલરિંગ શીટ્સ સાથે આવે છે?",
+            "answer": "<p>ના. આ પુસ્તકમાં સ્ટેપ 1 થી 4 છે. આર્ટ થેરાપી કલરિંગ શીટ્સ (સ્ટેપ 5) 43 શીટ્સનો અલગ સેટ છે, ₹999નો. પુસ્તક સાથે લેશો તો કુલ રકમ પર 10% છૂટ મળશે.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "આ પુસ્તક કોના માટે છે?",
+            "answer": "<p>બાળકો અને મોટાઓ, બંને માટે: પરિવાર, માતા-પિતા, ટીચર અને હનુમાન ભક્તો.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "પેમેન્ટ કેવી રીતે કરું?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, ડેબિટ કે ક્રેડિટ કાર્ડ (Visa, Mastercard, RuPay), અથવા નેટ બેન્કિંગથી. અથવા હમણાં ફક્ત 20% ચૂકવો અને બાકીના પુસ્તક મળે ત્યારે.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ક્યારે પહોંચશે?",
+            "answer": "<p>આખા ભારતમાં 3 થી 5 વર્કિંગ દિવસમાં, ફ્રી શિપિંગ સાથે. પુસ્તક મોકલતાં જ તમને ઇમેઇલ પર ટ્રેકિંગ નંબર મળશે.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ખરાબ હાલતમાં કે ખોટી ભાષામાં આવે તો?",
+            "answer": "<p>ડિલિવરીના 7 દિવસમાં +91 82381 88824 પર WhatsAppથી ફોટો મોકલો, અમે નવું પુસ્તક મોકલી આપીશું.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq",
+          "settings": {
+            "question": "શું આ ગિફ્ટ તરીકે મોકલી શકાય?",
+            "answer": "<p>હા. ચેકઆઉટ વખતે જેને મોકલવું હોય તેનું નામ અને સરનામું લખો, અમે સીધું તેમને પહોંચાડીશું.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ]
+    },
+    "languages": {
+      "type": "logam-gujarati-languages",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "English એડિશન",
+            "product": "therapy-book-english"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी એડિશન",
+            "product": "happy-hanuman-therapy-book-hindi"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "inside",
+    "steps",
+    "details",
+    "videos",
+    "leaders",
+    "stats",
+    "reviews",
+    "author",
+    "faq",
+    "languages"
+  ]
+}

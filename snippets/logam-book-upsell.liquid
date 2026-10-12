@@ -1,0 +1,13 @@
+{%- comment -%} Add-on product card. Params: product, note, label. {%- endcomment -%}
+{%- assign uv = product.selected_or_first_available_variant -%}
+{%- if product != blank and uv.available -%}
+  <div class="lh-upsell">
+    <a class="lh-upsell__img" href="{{ product.url }}">{{ product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: product.title }}</a>
+    <div class="lh-upsell__txt">
+      {%- if note != blank -%}<small>{{ note }}</small>{%- endif -%}
+      <b>{{ product.title }}</b>
+      <div><b style="display: inline">{{ uv.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if uv.compare_at_price > uv.price %} <s>{{ uv.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}</div>
+    </div>
+    <button type="button" class="lh-btn lh-btn--outline" data-lh-upsell="{{ uv.id }}" aria-label="{{ label }}: {{ product.title | escape }}">{{ label }}</button>
+  </div>
+{%- endif -%}

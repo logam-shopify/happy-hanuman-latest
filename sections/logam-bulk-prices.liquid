@@ -1,0 +1,219 @@
+{%- comment -%} Free demo page: bulk price tiers (display only) with a link to the bulk order page. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{{ 'logam-bulk-content.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh lb-prices">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.text -%}
+    {%- if section.blocks.size > 0 -%}
+      <ul class="lb-prices__tiers" role="list">
+        {%- for block in section.blocks -%}
+          <li class="lb-prices__tier" {{ block.shopify_attributes }}>
+            <span class="lb-prices__range">{{ block.settings.range }}</span>
+            <span class="lb-prices__price">{{ block.settings.price }}</span>
+            {%- if block.settings.badge != blank -%}
+              <span class="lb-prices__badge{% if block.settings.badge_style == 'green' %} lb-prices__badge--green{% endif %}">{{ block.settings.badge }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}<p class="lb-prices__note">{{ section.settings.note }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="lh-btn lh-btn--outline lh-btn--full lb-prices__btn" href="{{ section.settings.button_url | default: '/pages/bulk-order' }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logam-Bulk Prices",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Next, when you like it"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Order for everyone, from ₹40 a book"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Order 120 or more books with the same back cover. The more you order, the less each book costs. Your ₹69 is adjusted."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note under the prices",
+      "default": "GST included · Free delivery across India · Pay 50% now, the rest before dispatch"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Leave empty to hide the button.",
+      "default": "See bulk prices and order"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link",
+      "info": "Empty: /pages/bulk-order"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Price tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "range",
+          "label": "Quantity",
+          "default": "120 books"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price per book",
+          "default": "₹40"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "info": "Leave empty to hide the badge.",
+          "default": "Starting price"
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Badge style",
+          "options": [
+            {
+              "value": "neutral",
+              "label": "Neutral (beige)"
+            },
+            {
+              "value": "green",
+              "label": "Saving (green)"
+            }
+          ],
+          "default": "neutral"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Bulk Prices",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "range": "120 books",
+            "price": "₹40",
+            "badge": "Starting price",
+            "badge_style": "neutral"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "range": "500 books",
+            "price": "₹35",
+            "badge": "Save ₹5 a book",
+            "badge_style": "green"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "range": "1,000 books",
+            "price": "₹30",
+            "badge": "Save ₹10 a book",
+            "badge_style": "green"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "range": "5,000 books",
+            "price": "₹25",
+            "badge": "Save ₹15 a book",
+            "badge_style": "green"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "range": "10,000 books",
+            "price": "₹22",
+            "badge": "Save ₹18 a book",
+            "badge_style": "green"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

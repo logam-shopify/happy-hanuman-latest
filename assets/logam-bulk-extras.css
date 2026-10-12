@@ -1,0 +1,64 @@
+/* Logam-Bulk sections (record band, final CTA). Builds on logam-hindi.css; every rule is scoped
+   two classes deep so a later copy of logam-hindi.css on the page cannot override it. */
+
+/* ---------- Record band ---------- */
+.lb-record .lb-record__row { display: flex; gap: 14px; align-items: center; }
+.lb-record .lb-record__row + .lb-record__row { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(243, 230, 211, .18); }
+.lb-record .lb-record__media { flex: none; display: flex; align-items: center; justify-content: center; }
+.lb-record .lb-record__media--icon { width: 79px; height: 79px; border-radius: 16px; border: 1.5px solid rgba(242, 179, 61, .45); }
+.lb-record .lb-record__media--icon svg { width: 30px; height: 30px; fill: none; stroke: #F2B33D; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lb-record .lb-record__media--icon .lb-fill { fill: #F2B33D; stroke: none; }
+.lb-record .lb-record__media--img { position: relative; width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: #FFFDF8; border: 2px solid rgba(242, 179, 61, .6); }
+.lb-record .lb-record__media--img img { width: 100%; height: 100%; object-fit: cover; }
+/* default seal: the Mission 100 Million seal cropped out of the back-cover template (same crop as the design: 380px wide at -45px/-14px in a 76px circle) */
+.lb-record .lb-record__media--img .lb-record__seal { position: absolute; width: 500%; max-width: none; height: auto; left: -59.21%; top: -18.42%; }
+.lb-record .lh-eyebrow { color: #F2B33D; }
+.lb-record .lb-record__title { font-size: 21px; line-height: 1.2; color: #FFF8EE; margin: 0 0 2px; }
+.lb-record .lb-record__text { font-size: 14px; line-height: 1.6; color: #E2D0BA; }
+
+/* ---------- Final CTA card ---------- */
+.lb-cta .lb-cta__card { border-radius: 18px; overflow: hidden; background: var(--lb-card, #2B1A0E); }
+.lb-cta .lb-cta__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; }
+.lb-cta .lb-cta__body { padding: 16px 16px 18px; }
+.lb-cta .lh-eyebrow { color: #F2B33D; }
+.lb-cta .lb-cta__title { font-size: 24px; line-height: 1.2; color: #FFF8EE; margin: 0 0 4px; }
+.lb-cta .lb-cta__text { font-size: 14.5px; line-height: 1.6; color: #E2D0BA; }
+.lb-cta .lb-cta__actions { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.lb-cta .lb-cta__btn { width: 100%; height: 54px; gap: 6px; font-size: 17px; }
+.lb-cta .lb-cta__btn2 { width: 100%; height: 48px; font-size: 16px; font-weight: 700; color: #FFF8EE; border-color: rgba(255, 248, 238, .55); }
+
+@media (min-width: 750px) {
+  /* record: rows side by side, vertical divider */
+  .lb-record .lb-record__rows { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); column-gap: 32px; align-items: center; }
+  .lb-record .lb-record__row { gap: 18px; }
+  .lb-record .lb-record__row + .lb-record__row { margin-top: 0; padding-top: 0; border-top: 0; padding-left: 32px; border-left: 1px solid rgba(243, 230, 211, .18); }
+  .lb-record .lb-record__title { font-size: 22px; }
+  .lb-record .lb-record__text { font-size: 15px; line-height: 1.6; }
+
+  /* CTA: image left, text right in one card */
+  .lb-cta .lb-cta__card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-radius: 20px; }
+  .lb-cta .lb-cta__media { position: relative; min-height: 360px; }
+  .lb-cta .lb-cta__media img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+  .lb-cta .lb-cta__body { align-self: center; padding: 40px; }
+  .lb-cta .lb-cta__title { font-size: 32px; line-height: 1.15; margin: 4px 0 10px; }
+  .lb-cta .lb-cta__text { font-size: 16px; line-height: 1.6; }
+  /* buttons stacked, both as wide as the longer label */
+  .lb-cta .lb-cta__actions { display: grid; grid-template-columns: minmax(0, max-content); gap: 12px; margin-top: 24px; }
+  .lb-cta .lb-cta__btn, .lb-cta .lb-cta__btn2 { width: auto; height: 56px; padding: 0 32px; }
+  .lb-cta .lb-cta__btn2:hover { background: #FFF8EE; color: #2B1A0E; border-color: #FFF8EE; }
+}
+@media (min-width: 1200px) {
+  .lb-record .lb-record__rows { column-gap: 56px; }
+  .lb-record .lb-record__row { gap: 22px; }
+  .lb-record .lb-record__row + .lb-record__row { padding-left: 56px; }
+  .lb-record .lb-record__media--icon { width: 99px; height: 99px; border-radius: 20px; }
+  .lb-record .lb-record__media--icon svg { width: 40px; height: 40px; }
+  .lb-record .lb-record__media--img { width: 100px; height: 100px; }
+  .lb-record .lb-record__title { font-size: 28px; }
+
+  .lb-cta .lb-cta__card { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .lb-cta .lb-cta__media { min-height: 460px; }
+  .lb-cta .lb-cta__body { padding: 56px 64px; }
+  .lb-cta .lb-cta__title { font-size: 40px; line-height: 1.1; }
+  .lb-cta .lb-cta__text { font-size: 17px; }
+}

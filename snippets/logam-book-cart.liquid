@@ -1,0 +1,214 @@
+{%- comment -%}
+  Logam cart drawer: the design's "hh-cart" drawer with live cart data.
+  Rendered by the static sections logam-english-cart / logam-hindi-cart
+  (layout/theme.liquid: whole site, Hindi text on the logam-hindi template). logam-hindi.js
+  re-renders it through the Section Rendering API and swaps only the
+  [data-hh-part] pieces, so Hanuman ji's run keeps animating between states.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Serif:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@600;700&family=Noto+Serif+Gujarati:wght@600;700&display=swap" media="print" onload="this.media='all'">
+{{ 'logam-cart.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'logam-hindi.js' | asset_url }}" defer></script>
+{%- liquid
+  assign s = section.settings
+  assign up = s.step5_product
+  assign uv = up.selected_or_first_available_variant
+  assign up_title = s.step5_title | default: up.title
+  # Offer off (default): the journey and step 5 card are design only.
+  assign offer = s.offer_on
+  if up == blank
+    assign offer = false
+  endif
+  assign in_cart = false
+  assign was_total = 0
+  assign variant_ids = ''
+  for item in cart.items
+    if offer and item.product_id == up.id
+      assign in_cart = true
+    endif
+    assign line_was = item.original_line_price
+    if item.variant.compare_at_price > item.original_price
+      assign line_was = item.variant.compare_at_price | times: item.quantity
+    endif
+    assign was_total = was_total | plus: line_was
+    assign variant_ids = variant_ids | append: item.variant_id | append: ','
+  endfor
+  # Step 5 unlocks at the cart value of the store's 10% discount (setting: unlock_amount, in ₹)
+  assign added = false
+  assign unlock_at = s.unlock_amount | default: 1998 | times: 100
+  if offer and cart.items_subtotal_price >= unlock_at
+    assign added = true
+  endif
+-%}
+<div class="hh-overlay" data-hh-drawer data-section="{{ section.id }}" hidden>
+  <button type="button" class="hh-scrim" data-hh-close aria-label="{{ s.close_label | escape }}"></button>
+  <aside
+    class="hh-cart hh-drawer{% if added %} is-added{% endif %}{% if cart.item_count == 0 %} is-empty{% endif %}"
+    data-hh-root
+    data-count="{{ cart.item_count }}"
+    data-total="{{ cart.total_price }}"
+    data-variants="{{ variant_ids }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ s.title | escape }}"
+  >
+    <div class="hh-head">
+      <button type="button" class="hh-x" data-hh-close aria-label="{{ s.close_label | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button>
+      <h2 class="hh-title">{{ s.title }}</h2>
+      <span class="hh-count" data-hh-part="count">{{ cart.item_count }} {% if cart.item_count == 1 %}{{ s.item_one }}{% else %}{{ s.item_many }}{% endif %}</span>
+    </div>
+
+    <div class="hh-body">
+      <p class="hh-err" data-hh-err role="alert" hidden></p>
+
+      {%- if s.show_journey -%}
+        <section class="hh-journey" aria-label="{{ s.label_book | escape }}">
+          <div class="hh-jtop">
+            <div class="hh-when-off"><p class="hh-jtitle">{{ s.j_title }}</p></div>
+            <div class="hh-when-on"><p class="hh-jtitle hh-late">{{ s.j_title_done }}</p></div>
+            <span class="hh-pill"><span class="hh-when-off">{{ s.pill }}</span><span class="hh-when-on">{{ s.pill_done }}</span></span>
+          </div>
+          <div class="hh-stage">
+            {%- capture cloud -%}<svg viewBox="0 0 64 30" aria-hidden="true"><path d="M 14 26 C 6 26, 2 20, 6 15 C 8 11, 14 10, 17 12 C 19 5, 28 2, 34 6 C 38 2, 48 3, 50 10 C 57 9, 62 14, 60 20 C 59 24, 55 26, 51 26 Z" fill="#FFFFFF"/></svg>{%- endcapture -%}
+            <div class="hh-cloud hh-cloud--1">{{ cloud }}</div>
+            <div class="hh-cloud hh-cloud--2">{{ cloud }}</div>
+            <div class="hh-cloud hh-cloud--3">{{ cloud }}</div>
+            <div class="hh-track">
+              <div class="hh-fill hh-fill-in"></div>
+              <span class="hh-dot" style="left: 0%">1</span>
+              <span class="hh-dot" style="left: 25%">2</span>
+              <span class="hh-dot" style="left: 50%">3</span>
+              <span class="hh-dot" style="left: 75%">4</span>
+              <div class="hh-when-off">
+                <span class="hh-lockdot">
+                  <span class="hh-pulse"></span>
+                  <span class="hh-lockdot__in"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>
+                </span>
+              </div>
+              <div class="hh-when-on">
+                <span class="hh-dot hh-pop" style="left: 100%">5</span>
+                <span class="hh-burstwrap"><span class="hh-burst"></span><span class="hh-p hh-p1"></span><span class="hh-p hh-p2"></span><span class="hh-p hh-p3"></span><span class="hh-p hh-p4"></span><span class="hh-p hh-p5"></span><span class="hh-p hh-p6"></span><span class="hh-p hh-p7"></span><span class="hh-p hh-p8"></span><span class="hh-p hh-p9"></span><span class="hh-p hh-p10"></span></span>
+              </div>
+              <div class="hh-runner hh-run-in">
+                <div class="hh-bob">{%- render 'logam-cart-hanuman', label: s.hanuman_label -%}</div>
+              </div>
+            </div>
+            <div class="hh-labels">
+              <span class="hh-labels__book">{{ s.label_book }}</span>
+              <div class="hh-when-off"><span class="hh-gpill">{{ s.label_step5 }}</span></div>
+              <div class="hh-when-on"><span class="hh-gpill hh-late">{{ s.label_step5_done }}</span></div>
+            </div>
+          </div>
+          <div class="hh-when-off"><p class="hh-jtext">{{ s.j_text }}</p></div>
+          <div class="hh-when-on"><p class="hh-jtext hh-late">{{ s.j_text_done }}</p></div>
+        </section>
+      {%- endif -%}
+
+      <div class="hh-items" data-hh-part="items">
+        {%- if cart.item_count == 0 -%}
+          <div class="hh-empty">
+            <p>{{ s.empty_text }}</p>
+            <button type="button" class="hh-checkout" data-hh-close>{{ s.empty_button }}</button>
+          </div>
+        {%- else -%}
+          {%- comment -%} Books and other products first, then the step 5 product where the upsell card sits {%- endcomment -%}
+          {%- for item in cart.items -%}
+            {%- unless offer and item.product_id == up.id -%}
+              {%- liquid
+                assign line_title = item.product.title
+                assign line_sub = ''
+                assign hay = item.product.handle | append: ' ' | append: item.product.title | downcase
+                for block in section.blocks
+                  assign word = block.settings.match | downcase | strip
+                  if block.settings.product.id == item.product_id or word != blank and hay contains word
+                    assign line_sub = block.settings.text
+                    if block.settings.title != blank
+                      assign line_title = block.settings.title
+                    endif
+                    break
+                  endif
+                endfor
+                if line_sub == blank and item.product.has_only_default_variant == false
+                  assign line_sub = item.variant.title
+                endif
+              -%}
+              {%- render 'logam-cart-line', item: item, title: line_title, sub: line_sub, step5: false, s: s -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          {%- for item in cart.items -%}
+            {%- if offer and item.product_id == up.id -%}
+              {%- render 'logam-cart-line', item: item, title: up_title, sub: s.step5_line, step5: true, s: s -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- liquid
+            assign show_card = false
+            if s.show_journey and added == false and in_cart == false
+              assign show_card = true
+              if offer and uv.available == false
+                assign show_card = false
+              endif
+            endif
+          -%}
+          {%- if show_card -%}
+            {%- assign up_img = s.step5_image -%}
+            <div class="hh-up">
+              <div class="hh-up__top">
+                {%- if up_img -%}
+                  {{ up_img | image_url: width: 288 | image_tag: loading: 'lazy', alt: up_title, width: 96, height: 72 }}
+                {%- else -%}
+                  {%- comment -%} Default: the colouring sheets photo from the design {%- endcomment -%}
+                  <img src="{{ 'logam-step5-sheets.jpg' | asset_url }}" alt="{{ up_title | escape }}" width="96" height="72" loading="lazy">
+                {%- endif -%}
+                <div class="hh-up__txt">
+                  <div class="hh-up__eyebrow">{{ s.up_eyebrow }}</div>
+                  <div class="hh-up__t">{{ up_title }}</div>
+                  {%- if s.up_text != blank -%}<div class="hh-up__d">{{ s.up_text }}</div>{%- endif -%}
+                </div>
+              </div>
+              <div class="hh-up__row">
+                <div class="hh-up__price">
+                  {%- if up != blank -%}
+                    <div><b>{{ uv.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if uv.compare_at_price > uv.price %} <s>{{ uv.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}</div>
+                  {%- else -%}
+                    <div><b>{{ s.card_price }}</b>{% if s.card_compare != blank %} <s>{{ s.card_compare }}</s>{% endif %}</div>
+                  {%- endif -%}
+                  {%- if s.up_off != blank -%}<div class="hh-up__off">{{ s.up_off }}</div>{%- endif -%}
+                </div>
+                {%- if offer -%}
+                  <button type="button" class="hh-up__add" data-hh-add="{{ uv.id }}">{{ s.up_button }}</button>
+                {%- else -%}
+                  {%- comment -%} Offer switched off: same look, no action {%- endcomment -%}
+                  <button type="button" class="hh-up__add" aria-disabled="true" tabindex="-1">{{ s.up_button }}</button>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="hh-foot" data-hh-part="foot">
+      {%- if cart.item_count > 0 -%}
+        {%- if cart.total_discount > 0 -%}
+          {%- liquid
+            assign disc_label = s.disc_label
+            if added == false
+              assign disc_label = cart.discount_applications.first.title | default: s.disc_label
+            endif
+          -%}
+          <div class="hh-disc hh-in"><span>{{ disc_label }}</span><span>−{{ cart.total_discount | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</span></div>
+        {%- endif -%}
+        <form action="{{ routes.cart_url }}" method="post" class="hh-totrow">
+          <div class="hh-tot">
+            <small>{{ s.total_label }}</small>
+            <div><b>{{ cart.total_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if was_total > cart.total_price %} <s>{{ was_total | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}</div>
+          </div>
+          {%- comment -%} Standard checkout button: Razorpay Magic Checkout picks it up {%- endcomment -%}
+          <button type="submit" name="checkout" class="hh-checkout">{{ s.checkout }}</button>
+        </form>
+        {%- if s.foot_note != blank -%}<div class="hh-foot__note">{{ s.foot_note }}</div>{%- endif -%}
+      {%- endif -%}
+    </div>
+  </aside>
+</div>

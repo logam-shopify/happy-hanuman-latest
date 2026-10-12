@@ -1,0 +1,31 @@
+{%- capture app_html -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- render 'logam-book-reviews', hi: true, app_html: app_html -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Reviews",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small text", "default": "રિવ્યૂ" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "વાચકો શું કહે છે" },
+    { "type": "paragraph", "content": "Rating and review count load from Judge.me automatically. Reviews show Judge.me's widget; you can also add the Judge.me app block here instead." },
+    { "type": "text", "id": "count_text", "label": "Review count text", "info": "[count] = number of reviews", "default": "[count] રિવ્યૂ" },
+    { "type": "text", "id": "stat_value", "label": "Second stat value", "default": "84%" },
+    { "type": "text", "id": "stat_text", "label": "Second stat text", "default": "વાચકોએ 5 સ્ટાર આપ્યા" },
+    { "type": "text", "id": "note", "label": "Note", "default": "ગુજરાતી, English અને हिन्दी, ત્રણેય એડિશનના રિવ્યૂ સાથે. પુસ્તક એક જ છે." },
+    { "type": "text", "id": "anchor", "label": "Section ID (for rating link)", "default": "reviews" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFF8EE" },
+    { "type": "range", "id": "pt_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pb_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "pt", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pb", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Logam-Gujarati Reviews" } ]
+}
+{% endschema %}

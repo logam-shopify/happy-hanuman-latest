@@ -1,0 +1,156 @@
+{%- comment -%}
+  Payment + trust block for the product page. Added by EDD (Aug 2026), logos Aug 2026.
+
+  Replaces the theme's `payment` block body, which rendered a single 250x22px PNG of
+  Mastercard / PayPal / VISA / Amex / Skrill / Google Pay / Discover — the theme's demo
+  graphic. PayPal, Skrill, Amex and Discover are not accepted here, it omitted UPI
+  entirely, and at 250x22 it was too low-resolution to read on a phone.
+
+  Methods shown are the ones the merchant confirmed: UPI (Google Pay / PhonePe / Paytm),
+  cards (Visa / Mastercard / RuPay) and Net Banking. Full Cash on Delivery is NOT offered
+  and is deliberately never claimed — partial COD is a different promise and is worded as
+  one. The logo row itself lives in snippets/payment-logos.liquid so the product page
+  and the footer share one list — edit the accepted methods there, not here.
+
+  Both money lines are settings-driven and render only when set:
+    settings.pdp_partial_cod_percent  — blank hides the partial-COD line entirely
+    settings.pdp_show_replacement     — checkbox
+    settings.pdp_delivery_days        — blank hides the delivery line
+  No claim about money or delivery can ship by accident.
+{%- endcomment -%}
+
+{%- liquid
+  assign cod_pct = settings.pdp_partial_cod_percent | strip
+  assign delivery = settings.pdp_delivery_days | strip
+  assign show_replacement = settings.pdp_show_replacement
+-%}
+
+<div class="pdp-trust">
+
+  {%- if cod_pct != blank -%}
+    <div class="pdp-trust__hero">
+      <span class="pdp-trust__hero-pct">{{ cod_pct }}%</span>
+      <span class="pdp-trust__hero-copy">
+        <strong>Pay just {{ cod_pct }}% now</strong>
+        <span>Pay the rest when the book reaches you</span>
+      </span>
+    </div>
+  {%- endif -%}
+
+  <ul class="pdp-trust__points" role="list">
+    {%- if delivery != blank -%}
+      <li>
+        <svg class="pdp-trust__ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="7" cy="18" r="1.9" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="17.5" cy="18" r="1.9" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span>Delivered in <strong>{{ delivery }}</strong></span>
+      </li>
+    {%- endif -%}
+    {%- if show_replacement -%}
+      <li>
+        <svg class="pdp-trust__ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 12l2.2 2.2L15.5 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Damaged in transit? <strong>We replace it</strong></span>
+      </li>
+    {%- endif -%}
+  </ul>
+
+  <div class="pdp-trust__pay">
+    <div class="pdp-trust__pay-label">Secure checkout</div>
+    {% render 'payment-logos' %}
+  </div>
+</div>
+
+{%- style -%}
+  .pdp-trust {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Partial COD — the single strongest risk-reducer on a Rs.999 prepaid order, so it
+     gets the only coloured panel in the block. */
+  .pdp-trust__hero {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #FFF6EC 0%, #FFF1E1 100%);
+    border: 1px solid #F3D9BC;
+  }
+  .pdp-trust__hero-pct {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #E78318;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .pdp-trust__hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .pdp-trust__hero-copy strong {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #2B1A0E;
+    line-height: 1.25;
+  }
+  .pdp-trust__hero-copy span {
+    font-size: 12.5px;
+    color: #6B5744;
+    line-height: 1.35;
+  }
+
+  .pdp-trust__points {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pdp-trust__points li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: #3A2E22;
+  }
+  .pdp-trust__points strong { font-weight: 700; }
+  .pdp-trust__ico {
+    flex: none;
+    width: 19px;
+    height: 19px;
+    color: #1E7A46;
+  }
+
+  /* Frame around the shared logo row (snippets/payment-logos.liquid). */
+  .pdp-trust__pay {
+    border-top: 1px solid #EDE4D8;
+    padding-top: 12px;
+  }
+  .pdp-trust__pay-label {
+    font-size: 10.5px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #8A7A66;
+    margin-bottom: 9px;
+  }
+{%- endstyle -%}

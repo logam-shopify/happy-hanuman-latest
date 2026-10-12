@@ -1,0 +1,295 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- liquid
+  assign p = section.settings.product | default: product
+  assign v = p.selected_or_first_available_variant
+  assign sid = section.id
+  assign rating_value = p.metafields.reviews.rating.value.rating | default: 0
+  assign rating_count = p.metafields.reviews.rating_count | plus: 0
+  assign rating_pct = rating_value | times: 20
+  assign save = 0
+  assign pct = 0
+  if v.compare_at_price > v.price
+    assign save = v.compare_at_price | minus: v.price
+    assign pct = save | times: 100 | divided_by: v.compare_at_price
+  endif
+  assign editions = section.blocks | where: 'type', 'edition'
+  assign trusts = section.blocks | where: 'type', 'trust'
+  assign box_items = section.blocks | where: 'type', 'box_item'
+  assign has_box = false
+  if box_items.size > 0 or section.settings.box_image != blank or fb_box != blank
+    assign has_box = true
+  endif
+-%}
+{%- style -%}
+  #lh-{{ sid }} { --lh-bg: {{ section.settings.bg }}; --lh-pt: 32px; --lh-pb: {{ section.settings.pb }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-ratio: {{ section.settings.ratio }}; }
+  body { --lh-accent-global: {{ section.settings.accent }}; }
+{%- endstyle -%}
+
+<section id="lh-{{ sid }}" class="lh{% if hi %} lh--hi{% endif %} lh-main{% if has_box %} lh-main--box{% endif %}" data-lh-main data-money-format="{{ shop.money_format | escape }}">
+  {%- if p == blank -%}
+    <div class="lh__in"><p class="lh-empty">Pick a product in this section's settings, or use this section on a product template.</p></div>
+  {%- else -%}
+  <div class="lh__in">
+    <div class="lh-main__left">
+    <div class="lh-main__media">
+      <div class="lh-gallery">
+        <div class="lh-gallery__track" data-lh-track>
+          {%- for media in p.media -%}
+            <div class="lh-gallery__slide" data-media-id="{{ media.id }}">
+              {%- if forloop.first -%}
+                {{ media.preview_image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 990px) 55vw, 100vw', fetchpriority: 'high', loading: 'eager', alt: media.alt | default: p.title }}
+              {%- else -%}
+                {{ media.preview_image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 990px) 55vw, 100vw', loading: 'lazy', alt: media.alt | default: p.title }}
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="lh-gallery__slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.show_badge and pct > 0 -%}<span class="lh-gallery__badge">{{ pct }}% {{ section.settings.badge_text }}</span>{%- endif -%}
+        {%- if p.media.size > 1 -%}<span class="lh-gallery__count" data-lh-count>1 / {{ p.media.size }}</span>{%- endif -%}
+      </div>
+      {%- if p.media.size > 1 -%}
+        <div class="lh-gallery__thumbs">
+          {%- for media in p.media -%}
+            <button type="button" class="lh-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-lh-thumb aria-label="{{ forloop.index }} / {{ p.media.size }}">
+              {{ media.preview_image | image_url: width: 150 | image_tag: loading: 'lazy', alt: '' }}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if has_box -%}
+      <div class="lh-box">
+        {%- render 'logam-hindi-heading', eyebrow: section.settings.box_eyebrow, title: section.settings.box_title -%}
+        {%- if section.settings.box_image != blank -%}
+          <div class="lh-get__media">{{ section.settings.box_image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 50vw, 100vw', loading: 'lazy' }}</div>
+        {%- elsif fb_box != blank -%}
+          <div class="lh-get__media"><img src="{{ fb_box | asset_url }}" alt="" loading="lazy"></div>
+        {%- elsif request.design_mode -%}
+          <div class="lh-get__media lh-ph-empty">{{ 'image' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+        {%- if box_items.size > 0 -%}
+          <ul class="lh-check">
+            {%- for block in box_items -%}<li {{ block.shopify_attributes }}><span>{{ block.settings.text }}</span></li>{%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- render 'logam-book-upsell', product: section.settings.box_upsell, note: section.settings.box_upsell_note, label: section.settings.box_upsell_label -%}
+      </div>
+    {%- endif -%}
+    </div>
+
+    <div class="lh-info">
+      {%- if section.settings.eyebrow != blank -%}<p class="lh-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ p.title }}</h1>
+
+      {%- if section.settings.show_rating and rating_count > 0 -%}
+        <a class="lh-rating" href="#{{ section.settings.reviews_anchor | default: 'reviews' }}">
+          <span class="lh-stars" aria-hidden="true"><span style="width: {{ rating_pct }}%"></span></span>
+          <b>{{ rating_value | round: 1 }}</b>
+          <span>{{ section.settings.rating_text | replace: '[count]', rating_count }}</span>
+        </a>
+      {%- endif -%}
+
+      <div class="lh-price">
+        <span class="lh-price__now" data-lh-price>{{ v.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</span>
+        <s class="lh-price__was" data-lh-was {% if save == 0 %}hidden{% endif %}>{{ v.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>
+        {%- if save > 0 and section.settings.save_text != blank -%}
+          {%- assign save_money = save | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' -%}
+          <span class="lh-pill">{{ section.settings.save_text | replace: '[amount]', save_money | replace: '[percent]', pct }}</span>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.price_note != blank -%}<p class="lh-note">{{ section.settings.price_note }}</p>{%- endif -%}
+
+      {%- case section.settings.desc_source -%}
+        {%- when 'full' -%}<div class="lh-desc">{{ p.description }}</div>
+        {%- when 'short' -%}<div class="lh-desc"><p>{{ p.description | strip_html | truncatewords: section.settings.desc_words }}</p></div>
+        {%- when 'custom' -%}<div class="lh-desc">{{ section.settings.desc_custom }}</div>
+      {%- endcase -%}
+
+      {%- if editions.size > 0 -%}
+        {%- liquid
+          # Selected pill = the block linked to this product. Fallback while no
+          # product is linked: the block's label or match word in this product's title or handle.
+          assign active_index = -1
+          for block in editions
+            if block.settings.product.id == p.id
+              assign active_index = forloop.index0
+              break
+            endif
+          endfor
+          if active_index == -1
+            assign hay = p.title | append: ' ' | append: p.handle | downcase
+            for block in editions
+              assign word = block.settings.match | default: block.settings.label | downcase | strip
+              if word != blank and hay contains word
+                assign active_index = forloop.index0
+                break
+              endif
+            endfor
+          endif
+          assign active_label = ''
+          for block in editions
+            if forloop.index0 == active_index
+              assign active_label = block.settings.label
+            endif
+          endfor
+        -%}
+        <div class="lh-row">
+          <b>{{ section.settings.edition_label }}{% unless section.settings.edition_label contains active_label %} <em>{{ active_label }}</em>{% endunless %}</b>
+          <span>{{ section.settings.edition_note }}</span>
+        </div>
+        <nav class="lh-editions" style="--lh-cols: {{ editions.size }}" aria-label="{{ section.settings.edition_label | escape }}">
+          {%- for block in editions -%}
+            {%- assign ep = block.settings.product -%}
+            {%- assign cover = block.settings.cover | default: ep.featured_image -%}
+            <a href="{{ ep.url | default: block.settings.url | default: '#' }}"{% if forloop.index0 == active_index %} class="is-active" aria-current="page"{% endif %} {{ block.shopify_attributes }}>
+              {%- if cover != blank -%}{{ cover | image_url: width: 72 | image_tag: loading: 'lazy', alt: '', width: 24, height: 34 }}{%- endif -%}
+              <span>{{ block.settings.label | default: ep.title }}</span>
+            </a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%}
+        Dropdown only when there is a real choice. A single-value option
+        (e.g. "A4 page") is shown as a display-only pill instead.
+      {%- endcomment -%}
+      {%- liquid
+        assign has_choice = false
+        for option in p.options_with_values
+          if option.values.size > 1
+            assign has_choice = true
+          endif
+        endfor
+      -%}
+      {%- if has_choice -%}
+        <div class="lh-row"><b>{{ p.options.first }}</b></div>
+        <select class="lh-variant" data-lh-variant aria-label="{{ p.options.first }}">
+          {%- for variant in p.variants -%}
+            <option value="{{ variant.id }}"{% if variant.id == v.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }}</option>
+          {%- endfor -%}
+        </select>
+        <script type="application/json" data-lh-variants>{{ p.variants | json }}</script>
+      {%- endif -%}
+
+      {%- if section.settings.size_value != blank -%}
+        <p class="lh-size"><b>{{ section.settings.size_label }}</b><span>{{ section.settings.size_value }}</span></p>
+      {%- elsif has_choice == false and p.has_only_default_variant == false -%}
+        <p class="lh-size"><b>{{ p.options.first }}</b><span>{{ v.title }}</span></p>
+      {%- endif -%}
+
+      {%- form 'product', p, data-lh-form: '', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ v.id }}">
+        <div data-lh-buy-area>
+          <div class="lh-buy">
+            <div class="lh-qty">
+              <button type="button" data-lh-step="-1" aria-label="{{ section.settings.qty_less | escape }}">−</button>
+              <input type="text" name="quantity" value="1" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" data-lh-qty aria-label="{{ section.settings.qty_label | escape }}">
+              <button type="button" data-lh-step="1" aria-label="{{ section.settings.qty_more | escape }}">+</button>
+            </div>
+            {%- comment -%} Shopify's Buy-now class inside form[action="/cart/add"]: Razorpay Magic Checkout takes this click (logam-hindi.js falls back to a cart link) {%- endcomment -%}
+            <button type="button" class="lh-btn lh-btn--primary shopify-payment-button__button shopify-payment-button__button--unbranded" data-lh-buy {% unless v.available %}disabled{% endunless %}>
+              {%- if v.available -%}
+                {{ section.settings.buy_label }}{% if section.settings.buy_price %} · <span data-lh-price>{{ v.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</span>{% endif %}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </div>
+          <button type="submit" class="lh-btn lh-btn--outline lh-btn--full lh-cart" data-lh-add {% unless v.available %}disabled{% endunless %}>{{ section.settings.cart_label }}</button>
+          <p class="lh-error" data-lh-error role="alert" hidden></p>
+        </div>
+      {%- endform -%}
+
+      {%- if section.settings.offer_text != blank -%}
+        <div class="lh-offer">
+          {%- if section.settings.offer_badge != blank -%}<span class="lh-offer__badge">{{ section.settings.offer_badge }}</span>{%- endif -%}
+          <span>{{ section.settings.offer_text }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- assign pays = section.blocks | where: 'type', 'payment' -%}
+      {%- if trusts.size > 0 or pays.size > 0 or section.settings.pay_methods != blank -%}
+        <div class="lh-card">
+          {%- for block in trusts -%}
+            <div class="lh-trust" {{ block.shopify_attributes }}>
+              {%- case block.settings.icon -%}
+                {%- when 'truck' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+                {%- when 'mail' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                {%- when 'replace' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5v5h5"/><path d="M4.7 14.5a7.6 7.6 0 1 0 1.6-7.6L4 9.5"/></svg>
+                {%- when 'lock' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+                {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+              {%- endcase -%}
+              <div><b>{{ block.settings.title }}</b>{% if block.settings.text != blank %}<small>{{ block.settings.text }}</small>{% endif %}</div>
+            </div>
+          {%- endfor -%}
+
+          {%- if pays.size > 0 or section.settings.pay_methods != blank -%}
+            <div class="lh-pay">
+              <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>{{ section.settings.pay_title }}</p>
+              <ul>
+                {%- if pays.size > 0 -%}
+                  {%- for block in pays -%}
+                    <li {{ block.shopify_attributes }}>
+                      {%- if block.settings.image != blank -%}
+                        {{ block.settings.image | image_url: height: 48 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+                      {%- else -%}
+                        {%- case block.settings.icon -%}
+                          {%- when 'upi' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.2"/><rect x="6" y="6" width="1.6" height="1.6" class="lh-fill"/><rect x="16.5" y="6" width="1.6" height="1.6" class="lh-fill"/><rect x="6" y="16.5" width="1.6" height="1.6" class="lh-fill"/><path d="M14 14h2.6v2.6H14zM19.5 14v1.2M14 20.5h1.4M18.2 18.2h2.3v2.3h-2.3z"/></svg>
+                          {%- when 'phone' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 18.5h3"/><path d="M9.3 10.6l1.9 1.9 3.6-3.6"/></svg>
+                          {%- when 'card' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.8h19"/><path d="M6 14.8h4.5"/></svg>
+                          {%- when 'bank' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.3L12 4.5l8.5 4.8z"/><path d="M6 11v6M10 11v6M14 11v6M18 11v6"/><path d="M3.5 19.5h17"/></svg>
+                          {%- when 'logo_upi' -%}<img class="lh-paylogo" src="{{ 'logam-pay-upi.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 17px" width="47" height="17" loading="lazy">
+                          {%- when 'logo_gpay' -%}<img class="lh-paylogo" src="{{ 'logam-pay-gpay.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 19px" width="46" height="19" loading="lazy">
+                          {%- when 'logo_phonepe' -%}<img class="lh-paylogo" src="{{ 'logam-pay-phonepe.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 17px" width="70" height="17" loading="lazy">
+                          {%- when 'logo_paytm' -%}<img class="lh-paylogo" src="{{ 'logam-pay-paytm.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 16px" width="52" height="16" loading="lazy">
+                          {%- when 'logo_visa' -%}<img class="lh-paylogo" src="{{ 'logam-pay-visa.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 15px" width="46" height="15" loading="lazy">
+                          {%- when 'logo_mastercard' -%}<img class="lh-paylogo" src="{{ 'logam-pay-mastercard.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 22px" width="36" height="22" loading="lazy">
+                          {%- when 'logo_rupay' -%}<img class="lh-paylogo" src="{{ 'logam-pay-rupay.svg' | asset_url }}" alt="{{ block.settings.name | escape }}" style="height: 15px" width="54" height="15" loading="lazy">
+                        {%- endcase -%}
+                      {%- endif -%}
+                      {%- liquid
+                        # built-in logos (Hindi page) are logo-only unless "Show name" is on
+                        assign show_name = block.settings.show_name
+                        if block.settings.image == blank
+                          assign show_name = true
+                          if block.settings.icon contains 'logo_' and block.settings.show_name == false
+                            assign show_name = false
+                          endif
+                        endif
+                      -%}
+                      {%- if block.settings.name != blank and show_name -%}<span>{{ block.settings.name }}</span>{%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- assign methods = section.settings.pay_methods | split: ',' -%}
+                  {%- for m in methods -%}<li><span>{{ m | strip }}</span></li>{%- endfor -%}
+                {%- endif -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.sticky -%}
+    <div class="lh-sticky" data-lh-sticky>
+      <div class="lh-sticky__in">
+        <div class="lh-sticky__prod">
+          {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 100 | image_tag: loading: 'lazy', alt: '', width: 40, height: 52 }}{%- endif -%}
+          <b>{{ p.title }}</b>
+        </div>
+        <div class="lh-sticky__price">
+          <b data-lh-price>{{ v.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if save > 0 %}<s data-lh-was>{{ v.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}
+          {%- if section.settings.sticky_label != blank -%}<small>{{ section.settings.sticky_label }}</small>{%- endif -%}
+        </div>
+        <button type="button" class="lh-btn lh-btn--primary" data-lh-buy {% unless v.available %}disabled{% endunless %}>{{ section.settings.buy_label }}</button>
+      </div>
+    </div>
+  {%- endif -%}
+  {%- endif -%}
+</section>

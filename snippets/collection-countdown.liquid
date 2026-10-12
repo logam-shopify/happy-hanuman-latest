@@ -1,0 +1,88 @@
+<div data-date="{{ settings.date_picker }}" data-time="{{ settings.time_picker }}" class="countdown" id="countdowntimer">
+    <div class="day">
+        <span class="num"></span>
+        <span class="word"></span>
+    </div>
+    <div class="hour">
+        <span class="num"></span>
+        <span class="word"></span>
+    </div>
+    <div class="min">
+        <span class="num"></span>
+        <span class="word"></span>
+    </div>
+    <div class="sec">
+        <span class="num"></span>
+        <span class="word"></span>
+    </div>
+</div>
+
+<script>
+  (function () {
+    // Scope to THIS instance. The snippet can render several times on one page
+    // (image-banner, product-carousel, advanced-content, advanced-content-2, product-list),
+    // so nothing here may live in global scope or select by document-wide class.
+    var thisScript = document.currentScript;
+    if (!thisScript) return;
+
+    var root = thisScript.previousElementSibling;
+    while (root && !root.classList.contains('countdown')) {
+      root = root.previousElementSibling;
+    }
+    if (!root) return;
+
+    var q = function (sel) { return root.querySelector(sel); };
+    var addZero = function (x) { return (x < 10 && x >= 0) ? '0' + x : x; };
+
+    var dateParts = (root.getAttribute('data-date') || '').split('-');
+    var day = parseInt(dateParts[0], 10);
+    var month = parseInt(dateParts[1], 10);
+    var year = parseInt(dateParts[2], 10);
+    if (isNaN(day) || isNaN(month) || isNaN(year)) return;
+
+    var tarHour = 0;
+    var tarMin = 0;
+    var timeRaw = root.getAttribute('data-time');
+    if (timeRaw) {
+      var timeParts = timeRaw.split(':');
+      tarHour = parseInt(timeParts[0], 10) || 0;
+      tarMin = parseInt(timeParts[1], 10) || 0;
+    }
+
+    var countDownDate = new Date(year, month - 1, day, tarHour, tarMin, 0, 0).getTime();
+
+    var words = { '.day .word': ' days', '.hour .word': ' hours', '.min .word': ' mins', '.sec .word': ' secs' };
+    Object.keys(words).forEach(function (sel) {
+      var el = q(sel);
+      if (el) el.innerHTML = words[sel];
+    });
+
+    var set = function (sel, val) {
+      var el = q(sel);
+      if (el) el.innerHTML = addZero(val);
+    };
+
+    var timerId = null;
+
+    var updateTime = function () {
+      var distance = countDownDate - Date.now();
+
+      if (distance < 0) {
+        if (timerId) clearTimeout(timerId);
+        root.innerHTML = '<h1>EXPIRED</h1>';
+        return;
+      }
+
+      set('.day .num', Math.floor(distance / 86400000));
+      set('.hour .num', Math.floor((distance % 86400000) / 3600000));
+      set('.min .num', Math.floor((distance % 3600000) / 60000));
+      set('.sec .num', Math.floor((distance % 60000) / 1000));
+
+      // Tick once a second. The original used requestAnimationFrame, rewriting the
+      // DOM ~60x/second for a display that only changes once per second.
+      timerId = setTimeout(updateTime, 1000);
+    };
+
+    updateTime();
+  })();
+</script>

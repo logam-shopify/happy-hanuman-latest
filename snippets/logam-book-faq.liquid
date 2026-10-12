@@ -1,0 +1,27 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-faq">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    <div class="lh-faq__list">
+    {%- for block in section.blocks -%}
+      <details {{ block.shopify_attributes }}{% if forloop.first and section.settings.open_first %} open{% endif %}>
+        <summary>{{ block.settings.question }}</summary>
+        <div class="lh-faq__a">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- if section.blocks.size > 0 -%}
+<script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {%- for block in section.blocks -%}
+      {"@type":"Question","name":{{ block.settings.question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.answer | strip_html | json }}}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]}
+</script>
+{%- endif -%}

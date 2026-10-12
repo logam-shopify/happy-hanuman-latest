@@ -1,0 +1,8 @@
+{%- comment -%} Eyebrow + title + subtitle used by every Logam-hindi section. {%- endcomment -%}
+{%- if eyebrow != blank or title != blank or sub != blank -%}
+  <div class="lh-head{% if center %} lh-head--center{% endif %}">
+    {%- if eyebrow != blank -%}<p class="lh-eyebrow">{{ eyebrow }}</p>{%- endif -%}
+    {%- if title != blank -%}<h2 class="lh-title">{{ title }}</h2>{%- endif -%}
+    {%- if sub != blank -%}<p class="lh-sub">{{ sub }}</p>{%- endif -%}
+  </div>
+{%- endif -%}

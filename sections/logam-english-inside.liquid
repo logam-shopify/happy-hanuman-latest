@@ -1,0 +1,157 @@
+{%- render 'logam-book-inside' -%}
+
+{% schema %}
+{
+  "name": "Logam-English Inside Book",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Look inside"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Real photos of the English edition"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "fallback_count",
+      "label": "Product images to show when no photos are added",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image shape (mobile)",
+      "options": [
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.8",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "0.667",
+          "label": "Tall 2:3"
+        }
+      ],
+      "default": "0.75"
+    },
+    {
+      "type": "select",
+      "id": "ratio_d",
+      "label": "Image shape (desktop)",
+      "options": [
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.8",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "0.667",
+          "label": "Tall 2:3"
+        }
+      ],
+      "default": "0.667"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English Inside Book"
+    }
+  ]
+}
+{% endschema %}

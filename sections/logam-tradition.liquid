@@ -1,0 +1,230 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div class="lg-trad" style="--lg-trad-bg: {{ s.bg_color }}; --lg-trad-text: {{ s.text_color }}; --lg-trad-accent: {{ s.accent_color }}; --lg-trad-pt: {{ s.padding_top }}px; --lg-trad-pb: {{ s.padding_bottom }}px;">
+  <div class="lg-trad__inner">
+
+    <div class="lg-trad__head">
+      <h2 class="lg-trad__heading">
+        <span>{{ s.heading_part1 | escape }}</span>
+        {%- if s.heading_part2 != blank -%}<span class="lg-trad__heading-accent">{{ s.heading_part2 | escape }}</span>{%- endif -%}
+      </h2>
+      {%- if s.description != blank -%}
+        <div class="lg-trad__desc">{{ s.description }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="lg-trad__media">
+      {%- if s.image != blank -%}
+        {{ s.image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 500px', alt: s.image.alt | default: s.heading_part1 }}
+      {%- endif -%}
+      {%- if s.quote != blank -%}
+        <div class="lg-trad__quote">
+          <p class="lg-trad__quote-text">{{ s.quote | escape }}</p>
+          {%- if s.quote_caption != blank -%}
+            <p class="lg-trad__quote-cap">{{ s.quote_caption | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="lg-trad__points" role="list">
+        {%- for block in section.blocks -%}
+          <li class="lg-trad__point" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon_image != blank or block.settings.icon != 'none' -%}
+            <span class="lg-trad__icon" aria-hidden="true">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'book' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.3 5.2 7.9 4.6 4 4.6v13c3.9 0 6.3.6 8 1.9 1.7-1.3 4.1-1.9 8-1.9v-13c-3.9 0-6.3.6-8 1.9z"/><path d="M12 6.5v13"/><path d="M6.5 8.5h3M6.5 11.5h3M14.5 8.5h3M14.5 11.5h3"/></svg>
+                  {%- when 'palette' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.7-.8 1.7-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7h2A4.6 4.6 0 0 0 21 10.6C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="10" cy="7.3" r="1.1"/><circle cx="14.5" cy="7.3" r="1.1"/></svg>
+                  {%- when 'heart' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9.6c-1-1.6-3.6-1.3-3.6.7 0 1.7 3.6 3.9 3.6 3.9s3.6-2.2 3.6-3.9c0-2-2.6-2.3-3.6-.7z"/><path d="M3 14.5h3l3.3 1.4h3.2a1.2 1.2 0 0 1 0 2.4H9.5"/><path d="M12.7 18.1l5-1.7a1.3 1.3 0 0 1 1.1 2.3L13.4 21H6"/><path d="M3 13v8"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+            {%- endif -%}
+            <span class="lg-trad__point-body">
+              <span class="lg-trad__point-title">{{ block.settings.title | escape }}</span>
+              {%- if block.settings.text != blank -%}
+                <span class="lg-trad__point-text">{{ block.settings.text | escape }}</span>
+              {%- endif -%}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if s.note != blank -%}
+      <p class="lg-trad__note">{{ s.note | escape }}</p>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .lg-trad {
+    background: var(--lg-trad-bg);
+    color: var(--lg-trad-text);
+    padding: var(--lg-trad-pt) 20px var(--lg-trad-pb);
+  }
+  #shopify-section-{{ section.id }} .lg-trad__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "media head"
+      "media points"
+      "media note";
+    grid-template-rows: auto auto 1fr;
+    column-gap: 60px;
+    align-items: start;
+  }
+  #shopify-section-{{ section.id }} .lg-trad__head { grid-area: head; }
+  #shopify-section-{{ section.id }} .lg-trad__media { grid-area: media; align-self: center; }
+  #shopify-section-{{ section.id }} .lg-trad__points { grid-area: points; }
+  #shopify-section-{{ section.id }} .lg-trad__note { grid-area: note; }
+
+  #shopify-section-{{ section.id }} .lg-trad__heading {
+    margin: 0 0 18px;
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--lg-trad-text);
+  }
+  #shopify-section-{{ section.id }} .lg-trad__heading span { display: block; }
+  #shopify-section-{{ section.id }} .lg-trad__heading-accent { color: var(--lg-trad-accent); }
+  #shopify-section-{{ section.id }} .lg-trad__desc { font-size: 15px; line-height: 1.55; }
+  #shopify-section-{{ section.id }} .lg-trad__desc p { margin: 0; }
+  #shopify-section-{{ section.id }} .lg-trad__desc p + p { margin-top: 8px; }
+
+  #shopify-section-{{ section.id }} .lg-trad__media {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #ece6df;
+    aspect-ratio: 49 / 40;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .12);
+  }
+  #shopify-section-{{ section.id }} .lg-trad__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .lg-trad__quote {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .78);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  #shopify-section-{{ section.id }} .lg-trad__quote-text { margin: 0; font-size: 17px; font-style: italic; line-height: 1.35; color: #1a1a1a; }
+  #shopify-section-{{ section.id }} .lg-trad__quote-cap { margin: 6px 0 0; font-size: 10px; letter-spacing: .03em; text-transform: uppercase; color: #333; }
+
+  #shopify-section-{{ section.id }} .lg-trad__points { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 16px; }
+  #shopify-section-{{ section.id }} .lg-trad__point { display: flex; align-items: flex-start; gap: 12px; }
+  #shopify-section-{{ section.id }} .lg-trad__icon {
+    flex: 0 0 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--lg-trad-accent);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+  }
+  #shopify-section-{{ section.id }} .lg-trad__icon svg { width: 20px; height: 20px; }
+  #shopify-section-{{ section.id }} .lg-trad__icon img { width: 20px; height: 20px; object-fit: contain; }
+  #shopify-section-{{ section.id }} .lg-trad__point-body { display: flex; flex-direction: column; gap: 2px; }
+  #shopify-section-{{ section.id }} .lg-trad__point-title { font-size: 14px; font-weight: 500; line-height: 1.35; }
+  #shopify-section-{{ section.id }} .lg-trad__point-text { font-size: 10px; line-height: 1.5; max-width: 380px; }
+
+  #shopify-section-{{ section.id }} .lg-trad__note {
+    margin: 22px 0 0;
+    padding: 16px 14px;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-trad { padding-left: 16px; padding-right: 16px; }
+    #shopify-section-{{ section.id }} .lg-trad__inner {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "head" "media" "points" "note";
+      grid-template-rows: none;
+    }
+    #shopify-section-{{ section.id }} .lg-trad__heading { font-size: 20px; margin-bottom: 8px; line-height: 1.25; }
+    #shopify-section-{{ section.id }} .lg-trad__desc { font-size: 11px; line-height: 1.45; }
+    #shopify-section-{{ section.id }} .lg-trad__media { margin-top: 18px; border-radius: 18px; aspect-ratio: 32 / 26; box-shadow: none; }
+    #shopify-section-{{ section.id }} .lg-trad__quote-text { font-size: 15px; }
+    #shopify-section-{{ section.id }} .lg-trad__quote-cap { font-size: 9px; }
+    #shopify-section-{{ section.id }} .lg-trad__points { gap: 20px; }
+    #shopify-section-{{ section.id }} .lg-trad__point-title { font-size: 14px; }
+    #shopify-section-{{ section.id }} .lg-trad__point-text { font-size: 11px; }
+    #shopify-section-{{ section.id }} .lg-trad__note { display: none; }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-trad { padding-top: {{ section.settings.padding_top_mobile }}px; padding-bottom: {{ section.settings.padding_bottom_mobile }}px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Logam Tradition",
+  "tag": "section",
+  "class": "section--logam-tradition",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading_part1", "label": "Heading", "default": "Where Tradition Meets" },
+    { "type": "text", "id": "heading_part2", "label": "Heading (accent line)", "default": "Transformation" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Happy Hanuman began with a humble prayer: to bring Hanuman’s infinite compassion, strength, and values into everyday life.</p>" },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "quote", "label": "Quote on image", "default": "“Ancient wisdom, thoughtfully retold for a new generation.”" },
+    { "type": "text", "id": "quote_caption", "label": "Quote caption", "default": "Chapter 04 • The Ocean of Courage" },
+    { "type": "header", "content": "Bottom note" },
+    { "type": "textarea", "id": "note", "label": "Note", "info": "Hidden on mobile.", "default": "A gentle way to grow devotion — one page, one thought, one heartfelt blessing at a time." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FDF3EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#14201A" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#D9692E" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "book",
+          "options": [
+            { "value": "book", "label": "Book" },
+            { "value": "palette", "label": "Palette" },
+            { "value": "heart", "label": "Heart in hand" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon", "info": "Replaces the icon above." },
+        { "type": "text", "id": "title", "label": "Title", "default": "Timeless lessons made simple" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Logam Tradition", "blocks": [ { "type": "point" } ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,412 @@
+{%- liquid
+  assign s = section.settings
+  assign type = s.media_type
+
+  assign img_d = s.image
+  assign img_m = s.image_mobile | default: s.image
+  assign vid_d = s.video
+  assign vid_m = s.video_mobile | default: s.video
+  assign url_d = s.video_url
+  assign url_m = s.video_url_mobile | default: s.video_url
+
+  assign ratio_d = 1.7778
+  assign ratio_m = 0.8
+  if type == 'video'
+    if vid_d != blank
+      assign ratio_d = vid_d.aspect_ratio
+    endif
+    if vid_m != blank
+      assign ratio_m = vid_m.aspect_ratio
+    endif
+  else
+    if img_d != blank
+      assign ratio_d = img_d.aspect_ratio
+    endif
+    if img_m != blank
+      assign ratio_m = img_m.aspect_ratio
+    endif
+  endif
+
+  assign has_buttons = false
+  if s.button1_label != blank or s.button2_label != blank
+    assign has_buttons = true
+  endif
+  assign eager = false
+  if section.index == 1
+    assign eager = true
+  endif
+-%}
+
+<div
+  class="lg-hero lg-hero--h-{{ s.height }} lg-hero--hm-{{ s.height_mobile }} lg-hero--pos-{{ s.position }} lg-hero--posm-{{ s.position_mobile }} lg-hero--align-{{ s.text_align }}"
+  style="--lg-hero-ratio: {{ ratio_d }}; --lg-hero-ratio-m: {{ ratio_m }}; --lg-hero-overlay: {{ s.overlay_color }}; --lg-hero-overlay-op: {{ s.overlay_opacity | divided_by: 100.0 }}; --lg-hero-text: {{ s.text_color }}; --lg-hero-btn-bg: {{ s.button_bg }}; --lg-hero-btn-text: {{ s.button_text }}; --lg-hero-hsize: {{ s.heading_size }}px; --lg-hero-hsize-m: {{ s.heading_size_mobile }}px; --lg-hero-width: {{ s.content_width }}px; --lg-hero-radius: {{ s.button_radius }}px; --lg-hero-fade: {{ s.fade_color }}; --lg-hero-fade-op: {{ s.fade_opacity | divided_by: 100.0 }}; --lg-hero-fade-size: {{ s.fade_size }}%;"
+>
+  <div class="lg-hero__media" aria-hidden="{% if s.image.alt == blank %}true{% else %}false{% endif %}">
+    {%- case type -%}
+      {%- when 'image' -%}
+        {%- if img_d != blank -%}
+          {%- if eager -%}
+            {{ img_d | image_url: width: 3000 | image_tag: widths: '750,1100,1500,2000,2500,3000', sizes: '100vw', class: 'lg-hero__el lg-hero__el--d', loading: 'eager', fetchpriority: 'high', alt: img_d.alt }}
+            {{ img_m | image_url: width: 1500 | image_tag: widths: '450,750,1100,1500', sizes: '100vw', class: 'lg-hero__el lg-hero__el--m', loading: 'eager', alt: img_m.alt }}
+          {%- else -%}
+            {{ img_d | image_url: width: 3000 | image_tag: widths: '750,1100,1500,2000,2500,3000', sizes: '100vw', class: 'lg-hero__el lg-hero__el--d', loading: 'lazy', alt: img_d.alt }}
+            {{ img_m | image_url: width: 1500 | image_tag: widths: '450,750,1100,1500', sizes: '100vw', class: 'lg-hero__el lg-hero__el--m', loading: 'lazy', alt: img_m.alt }}
+          {%- endif -%}
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'lg-hero__el lg-hero__placeholder' }}
+        {%- endif -%}
+
+      {%- when 'gif' -%}
+        {%- comment -%} Original file keeps the GIF animation; resized CDN versions may not. {%- endcomment -%}
+        {%- if img_d != blank -%}
+          <img class="lg-hero__el lg-hero__el--d" src="{{ img_d | image_url }}" alt="{{ img_d.alt | escape }}" width="{{ img_d.width }}" height="{{ img_d.height }}" loading="{% if eager %}eager{% else %}lazy{% endif %}">
+          <img class="lg-hero__el lg-hero__el--m" src="{{ img_m | image_url }}" alt="{{ img_m.alt | escape }}" width="{{ img_m.width }}" height="{{ img_m.height }}" loading="{% if eager %}eager{% else %}lazy{% endif %}">
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'lg-hero__el lg-hero__placeholder' }}
+        {%- endif -%}
+
+      {%- when 'video' -%}
+        {%- if vid_d != blank -%}
+          {{ vid_d | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1600x', class: 'lg-hero__el lg-hero__el--d' }}
+        {%- elsif url_d != blank -%}
+          <video class="lg-hero__el lg-hero__el--d" src="{{ url_d }}" autoplay loop muted playsinline preload="metadata"></video>
+        {%- endif -%}
+        {%- if vid_m != blank -%}
+          {{ vid_m | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '900x', class: 'lg-hero__el lg-hero__el--m' }}
+        {%- elsif url_m != blank -%}
+          <video class="lg-hero__el lg-hero__el--m" src="{{ url_m }}" autoplay loop muted playsinline preload="metadata"></video>
+        {%- endif -%}
+        {%- if vid_d == blank and url_d == blank -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'lg-hero__el lg-hero__placeholder' }}
+        {%- endif -%}
+    {%- endcase -%}
+  </div>
+
+  {%- if s.overlay_opacity > 0 -%}
+    <div class="lg-hero__overlay" aria-hidden="true"></div>
+  {%- endif -%}
+  {%- if s.fade_opacity > 0 -%}
+    <div class="lg-hero__fade" aria-hidden="true"></div>
+  {%- endif -%}
+
+  {%- if s.banner_link != blank and has_buttons == false -%}
+    <a class="lg-hero__cover-link" href="{{ s.banner_link }}" aria-label="{{ s.banner_link_label | default: s.heading | default: shop.name | strip_html | escape }}"></a>
+  {%- endif -%}
+
+  {%- if s.eyebrow != blank or s.heading != blank or s.text != blank or has_buttons -%}
+    <div class="lg-hero__content">
+      <div class="lg-hero__box{% if s.content_box %} lg-hero__box--panel{% endif %}">
+        {%- if s.eyebrow != blank -%}
+          <p class="lg-hero__eyebrow">{{ s.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          {%- if eager -%}
+            <h1 class="lg-hero__heading">{{ s.heading | escape | newline_to_br }}</h1>
+          {%- else -%}
+            <h2 class="lg-hero__heading">{{ s.heading | escape | newline_to_br }}</h2>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <div class="lg-hero__text">{{ s.text }}</div>
+        {%- endif -%}
+        {%- if has_buttons -%}
+          <div class="lg-hero__buttons">
+            {%- if s.button1_label != blank -%}
+              <a class="lg-hero__btn lg-hero__btn--{{ s.button1_style }}" href="{{ s.button1_link | default: '#' }}">{{ s.button1_label | escape }}</a>
+            {%- endif -%}
+            {%- if s.button2_label != blank -%}
+              <a class="lg-hero__btn lg-hero__btn--{{ s.button2_style }}" href="{{ s.button2_link | default: '#' }}">{{ s.button2_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .lg-hero {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    color: var(--lg-hero-text);
+    background: #1a1a1a;
+  }
+  #shopify-section-{{ section.id }} .lg-hero > * { grid-area: 1 / 1; }
+
+  #shopify-section-{{ section.id }} .lg-hero--h-small { min-height: 420px; }
+  #shopify-section-{{ section.id }} .lg-hero--h-medium { min-height: 560px; }
+  #shopify-section-{{ section.id }} .lg-hero--h-large { min-height: 700px; }
+  #shopify-section-{{ section.id }} .lg-hero--h-full { min-height: 100vh; min-height: 100svh; }
+
+  #shopify-section-{{ section.id }} .lg-hero__media { position: relative; min-height: 100%; }
+  #shopify-section-{{ section.id }} .lg-hero__el {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  #shopify-section-{{ section.id }} .lg-hero__el--m { display: none; }
+  #shopify-section-{{ section.id }} .lg-hero--h-adapt { aspect-ratio: auto; }
+  #shopify-section-{{ section.id }} .lg-hero--h-adapt .lg-hero__el:not(.lg-hero__placeholder) { position: static; height: auto; object-fit: fill; }
+  #shopify-section-{{ section.id }} .lg-hero--h-adapt .lg-hero__placeholder { position: static; aspect-ratio: 16 / 9; }
+  #shopify-section-{{ section.id }} .lg-hero__placeholder { background: #d9d6d1; fill: #b9b4ae; }
+
+  #shopify-section-{{ section.id }} .lg-hero__overlay {
+    position: relative;
+    background: var(--lg-hero-overlay);
+    opacity: var(--lg-hero-overlay-op);
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .lg-hero__fade {
+    position: relative;
+    pointer-events: none;
+    background: linear-gradient(to right, var(--lg-hero-fade) 0%, transparent var(--lg-hero-fade-size));
+    opacity: var(--lg-hero-fade-op);
+  }
+  #shopify-section-{{ section.id }} .lg-hero--pos-top-right .lg-hero__fade,
+  #shopify-section-{{ section.id }} .lg-hero--pos-middle-right .lg-hero__fade,
+  #shopify-section-{{ section.id }} .lg-hero--pos-bottom-right .lg-hero__fade { background: linear-gradient(to left, var(--lg-hero-fade) 0%, transparent var(--lg-hero-fade-size)); }
+  #shopify-section-{{ section.id }} .lg-hero__cover-link { position: relative; z-index: 1; }
+
+  #shopify-section-{{ section.id }} .lg-hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    padding: 48px clamp(20px, 6vw, 96px);
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .lg-hero__box { max-width: var(--lg-hero-width); pointer-events: auto; }
+  #shopify-section-{{ section.id }} .lg-hero__box--panel {
+    padding: 28px 32px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .88);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  #shopify-section-{{ section.id }} .lg-hero--pos-top-left .lg-hero__content { align-items: flex-start; justify-content: flex-start; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-top-center .lg-hero__content { align-items: flex-start; justify-content: center; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-top-right .lg-hero__content { align-items: flex-start; justify-content: flex-end; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-middle-left .lg-hero__content { align-items: center; justify-content: flex-start; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-middle-center .lg-hero__content { align-items: center; justify-content: center; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-middle-right .lg-hero__content { align-items: center; justify-content: flex-end; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-bottom-left .lg-hero__content { align-items: flex-end; justify-content: flex-start; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-bottom-center .lg-hero__content { align-items: flex-end; justify-content: center; }
+  #shopify-section-{{ section.id }} .lg-hero--pos-bottom-right .lg-hero__content { align-items: flex-end; justify-content: flex-end; }
+
+  #shopify-section-{{ section.id }} .lg-hero--align-left .lg-hero__box { text-align: left; }
+  #shopify-section-{{ section.id }} .lg-hero--align-center .lg-hero__box { text-align: center; }
+  #shopify-section-{{ section.id }} .lg-hero--align-right .lg-hero__box { text-align: right; }
+  #shopify-section-{{ section.id }} .lg-hero--align-center .lg-hero__buttons { justify-content: center; }
+  #shopify-section-{{ section.id }} .lg-hero--align-right .lg-hero__buttons { justify-content: flex-end; }
+
+  #shopify-section-{{ section.id }} .lg-hero__eyebrow { margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  #shopify-section-{{ section.id }} .lg-hero__heading {
+    margin: 0;
+    font-size: var(--lg-hero-hsize);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--lg-hero-text);
+  }
+  #shopify-section-{{ section.id }} .lg-hero__text { margin-top: 16px; font-size: 17px; line-height: 1.55; }
+  #shopify-section-{{ section.id }} .lg-hero__text p { margin: 0; }
+  #shopify-section-{{ section.id }} .lg-hero__text p + p { margin-top: 8px; }
+  #shopify-section-{{ section.id }} .lg-hero__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  #shopify-section-{{ section.id }} .lg-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 28px;
+    border: 1.5px solid var(--lg-hero-btn-bg);
+    border-radius: var(--lg-hero-radius);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-decoration: none;
+    transition: filter .15s ease, background .15s ease, color .15s ease;
+  }
+  #shopify-section-{{ section.id }} .lg-hero__btn--solid { background: var(--lg-hero-btn-bg); color: var(--lg-hero-btn-text); }
+  #shopify-section-{{ section.id }} .lg-hero__btn--solid:hover { filter: brightness(.92); color: var(--lg-hero-btn-text); }
+  #shopify-section-{{ section.id }} .lg-hero__btn--outline { background: transparent; color: var(--lg-hero-text); border-color: currentColor; }
+  #shopify-section-{{ section.id }} .lg-hero__btn--outline:hover { background: var(--lg-hero-text); color: var(--lg-hero-btn-text); border-color: var(--lg-hero-text); }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-hero__el--d { display: none; }
+    #shopify-section-{{ section.id }} .lg-hero__el--m { display: block; }
+    #shopify-section-{{ section.id }} .lg-hero--h-adapt .lg-hero__el:not(.lg-hero__placeholder) { position: absolute; height: 100%; object-fit: cover; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-adapt { min-height: 0; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-adapt .lg-hero__el:not(.lg-hero__placeholder) { position: static; height: auto; object-fit: fill; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-small { min-height: 360px; aspect-ratio: auto; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-medium { min-height: 480px; aspect-ratio: auto; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-large { min-height: 620px; aspect-ratio: auto; }
+    #shopify-section-{{ section.id }} .lg-hero--hm-full { min-height: 100vh; min-height: 100svh; aspect-ratio: auto; }
+
+    #shopify-section-{{ section.id }} .lg-hero__content { padding: 44px 18px 28px; justify-content: flex-start; }
+    #shopify-section-{{ section.id }} .lg-hero .lg-hero__fade { background: linear-gradient(to bottom, var(--lg-hero-fade) 0%, transparent var(--lg-hero-fade-size)); }
+    #shopify-section-{{ section.id }} .lg-hero--posm-bottom .lg-hero__fade { background: linear-gradient(to top, var(--lg-hero-fade) 0%, transparent var(--lg-hero-fade-size)); }
+    #shopify-section-{{ section.id }} .lg-hero--posm-middle .lg-hero__fade { background: var(--lg-hero-fade); }
+    #shopify-section-{{ section.id }} .lg-hero--posm-top .lg-hero__content { align-items: flex-start; }
+    #shopify-section-{{ section.id }} .lg-hero--posm-middle .lg-hero__content { align-items: center; }
+    #shopify-section-{{ section.id }} .lg-hero--posm-bottom .lg-hero__content { align-items: flex-end; }
+    #shopify-section-{{ section.id }} .lg-hero__box { width: 100%; max-width: 70%; }
+    #shopify-section-{{ section.id }} .lg-hero__box--panel { padding: 20px; }
+    #shopify-section-{{ section.id }} .lg-hero__heading { font-size: var(--lg-hero-hsize-m); }
+    #shopify-section-{{ section.id }} .lg-hero__eyebrow { font-size: 11px; margin-bottom: 8px; }
+    #shopify-section-{{ section.id }} .lg-hero__heading { line-height: 1.4; }
+    #shopify-section-{{ section.id }} .lg-hero__text { margin-top: 44px; font-size: 13px; line-height: 1.45; }
+    #shopify-section-{{ section.id }} .lg-hero__buttons { margin-top: 44px; }
+    #shopify-section-{{ section.id }} .lg-hero__btn { flex: 0 1 auto; min-height: 42px; padding: 0 16px; font-size: 13px; border-radius: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .lg-hero__btn { transition: none; }
+  }
+</style>
+
+{%- if type == 'video' -%}
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var mq = window.matchMedia('(max-width: 749px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function sync() {
+      root.querySelectorAll('video.lg-hero__el').forEach(function (v) {
+        var visible = v.offsetParent !== null || getComputedStyle(v).display !== 'none';
+        if (visible && !reduce) { var p = v.play(); if (p) p.catch(function () {}); }
+        else v.pause();
+      });
+    }
+    sync();
+    if (mq.addEventListener) mq.addEventListener('change', sync);
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Logam Hero",
+  "tag": "section",
+  "class": "section--logam-hero",
+  "settings": [
+    { "type": "header", "content": "Background" },
+    {
+      "type": "select", "id": "media_type", "label": "Background type", "default": "image",
+      "options": [
+        { "value": "image", "label": "Image (JPG, PNG, WebP)" },
+        { "value": "gif", "label": "GIF (animated)" },
+        { "value": "video", "label": "Video" }
+      ]
+    },
+    { "type": "image_picker", "id": "image", "label": "Image / GIF — desktop", "info": "Used for Image and GIF. Upload a clean picture without text; add text below." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image / GIF — mobile", "info": "Optional. Falls back to the desktop file." },
+    { "type": "video", "id": "video", "label": "Video — desktop", "info": "Upload MP4 or MOV. Plays muted on loop." },
+    { "type": "video", "id": "video_mobile", "label": "Video — mobile", "info": "Optional. Use a vertical video for phones." },
+    { "type": "url", "id": "video_url", "label": "Video URL — desktop (.mp4)", "info": "Only used if no video is uploaded above." },
+    { "type": "url", "id": "video_url_mobile", "label": "Video URL — mobile (.mp4)" },
+
+    { "type": "header", "content": "Size" },
+    {
+      "type": "select", "id": "height", "label": "Height — desktop", "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Fit to image/video" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" }
+      ]
+    },
+    {
+      "type": "select", "id": "height_mobile", "label": "Height — mobile", "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Fit to image/video" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" }
+      ]
+    },
+
+    { "type": "header", "content": "Overlay" },
+    { "type": "color", "id": "overlay_color", "label": "Overlay colour", "default": "#000000" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 0, "info": "Darken the background so text is easier to read." },
+    { "type": "color", "id": "fade_color", "label": "Side fade colour", "default": "#FFFFFF" },
+    { "type": "range", "id": "fade_opacity", "label": "Side fade opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 0, "info": "Soft fade behind the text: from the text side on desktop, from the top or bottom on mobile." },
+    { "type": "range", "id": "fade_size", "label": "Side fade size", "min": 20, "max": 100, "step": 5, "unit": "%", "default": 60 },
+
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "eyebrow", "label": "Small line above heading" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "info": "Press Enter for a new line." },
+    { "type": "range", "id": "heading_size", "label": "Heading size — desktop", "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size — mobile", "min": 20, "max": 56, "step": 2, "unit": "px", "default": 32 },
+    { "type": "richtext", "id": "text", "label": "Text" },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button1_label", "label": "Button 1 label" },
+    { "type": "url", "id": "button1_link", "label": "Button 1 link" },
+    { "type": "select", "id": "button1_style", "label": "Button 1 style", "default": "solid", "options": [ { "value": "solid", "label": "Solid" }, { "value": "outline", "label": "Outline" } ] },
+    { "type": "text", "id": "button2_label", "label": "Button 2 label" },
+    { "type": "url", "id": "button2_link", "label": "Button 2 link" },
+    { "type": "select", "id": "button2_style", "label": "Button 2 style", "default": "outline", "options": [ { "value": "solid", "label": "Solid" }, { "value": "outline", "label": "Outline" } ] },
+    { "type": "url", "id": "banner_link", "label": "Whole banner link", "info": "Makes the whole banner clickable. Only used when there are no buttons." },
+    { "type": "text", "id": "banner_link_label", "label": "Whole banner link description", "info": "For screen readers, e.g. Shop all books." },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "position", "label": "Content position — desktop", "default": "middle-left",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top center" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "middle-left", "label": "Middle left" },
+        { "value": "middle-center", "label": "Middle center" },
+        { "value": "middle-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom center" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ]
+    },
+    {
+      "type": "select", "id": "position_mobile", "label": "Content position — mobile", "default": "bottom",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "select", "id": "text_align", "label": "Text alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "content_width", "label": "Content max width — desktop", "min": 320, "max": 900, "step": 20, "unit": "px", "default": 560 },
+    { "type": "checkbox", "id": "content_box", "label": "White box behind text", "default": false },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#D9692E" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#FFFFFF" },
+    { "type": "range", "id": "button_radius", "label": "Button corner roundness", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 14 }
+  ],
+  "presets": [
+    {
+      "name": "Logam Hero",
+      "settings": {
+        "heading": "Hanuman’s wisdom for every home",
+        "text": "<p>Illustrated stories, gentle lessons and daily devotion for children and families.</p>",
+        "button1_label": "Shop now",
+        "button1_link": "shopify://collections/all",
+        "overlay_opacity": 30,
+        "height": "medium",
+        "height_mobile": "large"
+      }
+    }
+  ]
+}
+{% endschema %}

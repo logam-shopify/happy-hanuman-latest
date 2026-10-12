@@ -1,0 +1,37 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; --lh-photo: {{ section.settings.ratio | default: '1' }}; --lh-photo-d: {{ section.settings.ratio_d | default: '0.75' }}; }
+{%- endstyle -%}
+{%- assign p = product -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-inside">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    {%- assign fb = fb_photos | default: '' | split: ',' -%}
+    <div class="lh-photos">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <figure {{ block.shopify_attributes }}>
+            <div class="lh-ph">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy' }}
+              {%- elsif fb[forloop.index0] != blank -%}
+                <img src="{{ fb[forloop.index0] | asset_url }}" alt="" loading="lazy">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            {%- if block.settings.caption != blank -%}<figcaption>{{ block.settings.caption }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endfor -%}
+      {%- elsif fb.size > 0 -%}
+        {%- for f in fb -%}<figure><div class="lh-ph"><img src="{{ f | asset_url }}" alt="" loading="lazy"></div></figure>{%- endfor -%}
+      {%- elsif p != blank -%}
+        {%- comment -%} No photos added: fall back to the product's own images (skipping the cover). {%- endcomment -%}
+        {%- for media in p.media offset: 1 limit: section.settings.fallback_count -%}
+          <figure><div class="lh-ph">{{ media.preview_image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', alt: media.alt }}</div></figure>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-author', hi: true, fb_image: 'hh-author-ashish-bhalani.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Author",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small text", "default": "લેખક વિશે" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name", "default": "આશિષ ભાલાણી" },
+    { "type": "text", "id": "role", "label": "Role", "default": "TEDx સ્પીકર · ‘ગર્ભયાત્રા’ અને ‘પ્રેગ્નન્સી 90’ના કો-ઓથર" },
+    { "type": "richtext", "id": "bio", "label": "Bio", "default": "<p>આશિષભાઈ પોતાને આ પુસ્તકના લેખક નહીં, પણ હનુમાનજીના આશીર્વાદનું માધ્યમ માને છે. એટલે જ કવર પર તેમનું નામ નથી; ત્યાં લખ્યું છે કે આ પુસ્તક પરમાત્માના આશીર્વાદથી લખાયું છે.</p>" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg", "label": "Band background", "default": "#FBEFDD" },
+    { "type": "color", "id": "page_bg", "label": "Space above background", "default": "#FFF8EE" },
+    { "type": "range", "id": "gap_m", "label": "Space above (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "gap", "label": "Space above (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pt_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "pb_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "pt", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pb", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [ { "name": "Logam-Gujarati Author" } ]
+}
+{% endschema %}

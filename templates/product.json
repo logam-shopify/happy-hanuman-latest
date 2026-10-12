@@ -1,0 +1,507 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "logam_product_info_db78rM": {
+      "type": "logam-product-info",
+      "blocks": {
+        "edition_hqDQGG": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "product": "therapy-book-english"
+          }
+        },
+        "edition_fncFag": {
+          "type": "edition",
+          "settings": {
+            "label": "Hindi",
+            "product": "happy-hanuman-therapy-book-hindi"
+          }
+        },
+        "edition_qeJTDy": {
+          "type": "edition",
+          "settings": {
+            "label": "Gujarati",
+            "product": "therapy-book-gujarati"
+          }
+        },
+        "reel_eXfkwQ": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Video-778.mp4"
+          }
+        },
+        "reel_jJRGWh": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-09 at 12.35.50.mp4"
+          }
+        },
+        "reel_phbGR8": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Video-840.mp4"
+          }
+        },
+        "reel_KwqJrr": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Video-40.mp4"
+          }
+        },
+        "accordion_DkA8z8": {
+          "type": "accordion",
+          "settings": {
+            "title": "DESCRIPTION",
+            "source": "description",
+            "content": ""
+          }
+        },
+        "accordion_Gf9KH6": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "ADDITIONAL INFORMATION",
+            "source": "metafield",
+            "content": ""
+          }
+        },
+        "link_CKb7bz": {
+          "type": "link",
+          "settings": {
+            "icon": "truck",
+            "label": "Shipping & Returns",
+            "url": ""
+          }
+        },
+        "link_3hT3in": {
+          "type": "link",
+          "settings": {
+            "icon": "card",
+            "label": "Secure Payment",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "edition_hqDQGG",
+        "edition_fncFag",
+        "edition_qeJTDy",
+        "reel_eXfkwQ",
+        "reel_jJRGWh",
+        "reel_phbGR8",
+        "reel_KwqJrr",
+        "accordion_DkA8z8",
+        "accordion_Gf9KH6",
+        "link_CKb7bz",
+        "link_3hT3in"
+      ],
+      "name": "Logam Product Info",
+      "settings": {
+        "product": "",
+        "sticky_media": true,
+        "editions_label": "Language",
+        "mrp_label": "MRP :",
+        "tax_note": "(incl. of all taxes)",
+        "badge_suffix": "Off",
+        "show_offer": true,
+        "show_buy_now": true,
+        "show_payments": true,
+        "payments_label": "SECURE CHECKOUT",
+        "short_from_description": true,
+        "short_words": 40,
+        "accent": "#F3561F",
+        "soft_bg": "#FBEAE3",
+        "text": "#1A1A1A",
+        "bg": "#FFFFFF",
+        "padding_top": 32,
+        "padding_bottom": 48,
+        "padding_top_mobile": 12,
+        "padding_bottom_mobile": 28
+      }
+    },
+    "logam_image_WaQHeU": {
+      "type": "logam-image",
+      "name": "Logam Image",
+      "settings": {
+        "image": "shopify://shop_images/27ab5b0ea69ff7c5865d26510573344861ea9a91.png",
+        "image_mobile": "shopify://shop_images/8e6f0ff3396ded38e3a93c753e294be702300dbd.png",
+        "alt": "",
+        "link": "",
+        "full_width": true,
+        "radius": 14,
+        "padding_side_mobile": 12,
+        "priority": true,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_top_mobile": 16,
+        "padding_bottom_mobile": 16
+      }
+    },
+    "17901485768ca55ecb": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_FDjgq6": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_FDjgq6"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "logam_container_9Ttxti": {
+      "type": "logam-container",
+      "blocks": {
+        "slide_VWYz9e": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/44cce6c6d772385a78853e4a4c16f123eb84cc15.png",
+            "quote": "Costs are low, there's always promotions or discounts..."
+          }
+        },
+        "slide_fxKDft": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ec32e9cbef9a6114c48828a6faf93f4876c0311a.jpg",
+            "quote": "Costs are low, there's always promotions or discounts..."
+          }
+        },
+        "slide_ejTid9": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2_d2d1df75-00c2-4068-9fca-4076d93cc266.png",
+            "quote": "Costs are low, there's always promotions or discounts..."
+          }
+        }
+      },
+      "block_order": [
+        "slide_VWYz9e",
+        "slide_fxKDft",
+        "slide_ejTid9"
+      ],
+      "name": "Logam Container",
+      "settings": {
+        "heading": "What Spiritual Leader Say",
+        "text": "<p>This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life.</p>",
+        "bg_color": "#FBF1E7",
+        "heading_color": "#C4602E",
+        "text_color": "#5B5B5B",
+        "accent": "#C4602E",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_jM7Dxx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "1393b77e-a8c0-433b-89a8-43bc490e6816": {
+          "type": "product_sku",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "free_shipping_bar_edd": {
+          "type": "free_shipping_bar",
+          "settings": {}
+        },
+        "text_7R7M3t": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.short_des.value }}"
+          }
+        },
+        "375e1ccb-99cc-41e5-813c-45a1a57566be": {
+          "type": "product_description",
+          "disabled": true,
+          "settings": {}
+        },
+        "b8da14d9-fa65-4645-913b-4e91ff632b94": {
+          "type": "product_variants",
+          "settings": {
+            "variant_type": "grid",
+            "color_variant": "default"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "83916474-fbe9-46c1-afd0-c761ee898dc6": {
+          "type": "wishlist-compare",
+          "disabled": true,
+          "settings": {}
+        },
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7": {
+          "type": "product_policy",
+          "disabled": true,
+          "settings": {
+            "content_1": "Quick delivery right to your door.",
+            "content_2": "Delivery time: 3-5 business days",
+            "content_3": "Easy process, your satisfaction first."
+          }
+        },
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92": {
+          "type": "payment",
+          "settings": {
+            "bg_color": "#f6f6f6",
+            "image": "shopify://shop_images/image_32.png"
+          }
+        },
+        "d2dc3fb0-828b-419d-831c-f2f77453e516": {
+          "type": "categories",
+          "disabled": true,
+          "settings": {}
+        },
+        "3906805c-dd1d-47bb-905f-c7609da7417d": {
+          "type": "tags",
+          "disabled": true,
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_jM7Dxx",
+        "1393b77e-a8c0-433b-89a8-43bc490e6816",
+        "price",
+        "free_shipping_bar_edd",
+        "text_7R7M3t",
+        "375e1ccb-99cc-41e5-813c-45a1a57566be",
+        "b8da14d9-fa65-4645-913b-4e91ff632b94",
+        "quantity_selector",
+        "83916474-fbe9-46c1-afd0-c761ee898dc6",
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7",
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92",
+        "d2dc3fb0-828b-419d-831c-f2f77453e516",
+        "3906805c-dd1d-47bb-905f-c7609da7417d",
+        "share"
+      ],
+      "disabled": true,
+      "settings": {
+        "media_type": "carousel",
+        "thumbnails_position": "bottom",
+        "carousel_page_dots": false,
+        "carousel_prevnextbuttons": false,
+        "enable_video_looping": true,
+        "show_cosselling": false,
+        "crossell_limit": 4,
+        "show_upsell": false,
+        "upsell_limit": 4,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70": {
+      "type": "product-content",
+      "blocks": {
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66": {
+          "type": "product_description",
+          "settings": {
+            "tab_name": "Description"
+          }
+        },
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03": {
+          "type": "tab_custom",
+          "settings": {
+            "tab_name": "Additional information",
+            "tab_custom_content": "{{ product.metafields.custom.additional_information | metafield_tag }}"
+          }
+        },
+        "judge_me_reviews_review_widget_WH7V8q": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66",
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03",
+        "judge_me_reviews_review_widget_WH7V8q"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_featured_products": false,
+        "featured_product_title": "You May Also Like",
+        "limit": 6,
+        "product": "",
+        "enable_guide": true,
+        "guide1_label": "Shipping & Returns",
+        "guide1_icon": "<svg fill=\"none\" focusable=\"false\" width=\"29\" height=\"24\" class=\"icon icon--picto-fast-delivery   product-tabs__trust-icon\" viewbox=\"0 0 29 24\">\n        <path d=\"M4 3H20V8M20 17H11.68C11.68 17 11 16 10 16M20 17V8M20 17H22.32M20 8H26.5L28 12.5V17H25.68C25.68 17 25 16 24 16M24 16C25 16 26 17 26 18C26 19 25 20 24 20C23 20 22 19 22 18C22 17.6527 22.1206 17.3054 22.32 17M24 16C23.3473 16 22.6946 16.426 22.32 17M10 16C11 16 12 17 12 18C12 19 11 20 10 20C9 20 8 19 8 18C8 17.6527 8.12061 17.3054 8.31996 17M10 16C9.3473 16 8.69459 16.426 8.31996 17M8.31996 17H4M10 12H3M10 8H1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide1_returns_content": "<p><strong>Shipping<br/></strong>We deliver your parcel within 2–3 working days. As soon as your package has left our warehouse, you will receive a confirmation by email. This confirmation contains a tracking number that you can use to find out where your package is.</p><p><strong>Return Policy</strong><br/><br/>We offer a <strong>7-day replacement policy</strong> for products that arrive with physical damage only. If you receive a damaged item, please report it within <strong>7 days of delivery</strong>.<br/><br/>To request a replacement, please contact our support team with clear photos of the damaged product and packaging. Once the issue is verified, we will arrange for a <strong>replacement of the same item</strong>.<br/><br/>Please note:<br/><em>This policy applies only to products with physical damage during transit.<br/>Returns or refunds are not available. Only </em><em><strong>replacement </strong></em><em>will be provided for eligible cases.</em></p>",
+        "guide2_label": "",
+        "guide2_icon": "",
+        "guide2_returns_content": "",
+        "guide3_label": "Secure Payment",
+        "guide3_icon": "<svg fill=\"none\" focusable=\"false\" width=\"24\" height=\"24\" class=\"icon icon--picto-secure-payment   product-tabs__trust-icon\" viewbox=\"0 0 24 24\">\n        <path d=\"M4 18H1V6M4 18V16H6M4 18V22H11V18M6 16C6 15.6667 6 15.3 6 14.5C6 13.5 6.73438 13 7.5 13C8.26562 13 9 13.5 9 14.5C9 15.3 9 15.6667 9 16M6 16H9M9 16H11V18M11 18H23V6M1 6V2H23V6M1 6H23M9 10H5M19 10V14H13V10H19Z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide3_returns_content": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p><p>We accept payments with :<br/>Visa, MasterCard, American Express, Paypal, Diners Club, Discover and more.</p>"
+      }
+    },
+    "slide_cstm_mgpaKr": {
+      "type": "slide-cstm",
+      "blocks": {
+        "testimonial_CWtCKN": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Small_hindi10_1.png",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_LMWzbc": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Happy-Hanuman-Logo_1.png",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_7YjMQ7": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_F7UnbM": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/4811218.jpg",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_CWtCKN",
+        "testimonial_LMWzbc",
+        "testimonial_7YjMQ7",
+        "testimonial_F7UnbM"
+      ],
+      "disabled": true,
+      "name": "slide-cstm",
+      "settings": {
+        "heading": "What Spiritual Leader Say",
+        "description": "This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life. Each page carries art, guidance, and exercises to help you live with devotion and strength."
+      }
+    },
+    "cstm_image_qbVty6": {
+      "type": "cstm-image",
+      "disabled": true,
+      "name": "Responsive Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/Group_372.png",
+        "mobile_image": "shopify://shop_images/Frame_292.jpg",
+        "banner_link": ""
+      }
+    },
+    "second_36Ya34": {
+      "type": "second",
+      "disabled": true,
+      "name": "second",
+      "settings": {
+        "main_image": "shopify://shop_images/Aashish_Bhalani.png",
+        "heading_part1": "Author Spotlight",
+        "heading_part2": "",
+        "description": "<p>Ashish Bhalani is a TEDx speaker and author known for his work in parenting, happiness, and culture.<br/><br/></p><p>He calls himself not the writer of this book, but <strong>a medium of Hanuman’s blessings</strong> - humbly offering divine thoughts in written form. His earlier works include <em>Garbh Yatra</em> and <em>Pregnancy 90</em>, which have touched thousands of families with wisdom and devotion.</p>",
+        "image_position": "right"
+      }
+    },
+    "7f59f038-f024-4094-9ff4-3fb2cc033feb": {
+      "type": "recently-viewed-products",
+      "disabled": true,
+      "settings": {
+        "heading": "Related Products",
+        "heading_size": 3,
+        "tab_description": "",
+        "text_align": "center",
+        "products_to_show": 10,
+        "products_per_row_mobile_sm": 1,
+        "products_per_row_desktop": 4,
+        "margin_desktop": "60px 0",
+        "margin_mobile": "40px 0",
+        "padding_desktop": "",
+        "padding_mobile": ""
+      }
+    },
+    "product_recommendations_McEAQn": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "setwidthout": "container",
+        "heading": "You may also like",
+        "heading_size": 3,
+        "tab_description": "",
+        "text_align": "center",
+        "products_per_row_desktop": 4,
+        "products_to_show": 10,
+        "margin_desktop": "0 0 60px",
+        "margin_mobile": "0 0 40px",
+        "padding_desktop": "",
+        "padding_mobile": ""
+      }
+    }
+  },
+  "order": [
+    "logam_product_info_db78rM",
+    "logam_image_WaQHeU",
+    "17901485768ca55ecb",
+    "logam_container_9Ttxti",
+    "main",
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70",
+    "slide_cstm_mgpaKr",
+    "cstm_image_qbVty6",
+    "second_36Ya34",
+    "7f59f038-f024-4094-9ff4-3fb2cc033feb",
+    "product_recommendations_McEAQn"
+  ]
+}

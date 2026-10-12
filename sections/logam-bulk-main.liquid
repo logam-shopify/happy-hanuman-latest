@@ -1,0 +1,581 @@
+{%- comment -%}
+  Logam-Bulk Main: top strip, photo gallery with caption cards, intro (title, badges,
+  price, lines, description) and promo cards. Used on the Bulk order and Free demo pages.
+  Gallery behaviour comes from initMain() in logam-hindi.js ([data-lh-main]).
+  [unit] [qty] [total] [half] in Price / Line 1 / Line 2 become <span data-lb-bind="…">
+  spans; the order form section's script keeps them in sync with the chosen quantity.
+{%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{{ 'logam-bulk-main.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+{%- liquid
+  assign s = section.settings
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign badges = section.blocks | where: 'type', 'badge'
+  assign steps = section.blocks | where: 'type', 'step'
+  assign fb = 'lb-bk-s2.jpg,lb-bk-s1.jpg,lb-bk-office.jpg,lb-bk-s4.jpg,lb-bk-s5.jpg,lb-bk-officegift.jpg' | split: ','
+
+  assign price = s.price | escape
+  assign line_1 = s.line_1
+  assign line_2 = s.line_2 | escape
+  assign keys = 'unit,qty,total,half' | split: ','
+  for k in keys
+    assign tok = '[' | append: k | append: ']'
+    assign init_key = 'init_' | append: k
+    assign span = section.settings[init_key] | escape | prepend: '">' | prepend: k | prepend: '<span data-lb-bind="' | append: '</span>'
+    assign price = price | replace: tok, span
+    assign line_1 = line_1 | replace: tok, span
+    assign line_2 = line_2 | replace: tok, span
+  endfor
+-%}
+{%- capture arrow -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>{%- endcapture -%}
+
+<section id="lh-{{ section.id }}" class="lh lb-main" data-lh-main>
+  {%- if s.strip_1 != blank or s.strip_2 != blank -%}
+    <p class="lb-main__strip">
+      {{- s.strip_1 -}}
+      {%- if s.strip_1 != blank and s.strip_2 != blank -%}<span aria-hidden="true">•</span>{%- endif -%}
+      {{- s.strip_2 -}}
+    </p>
+  {%- endif -%}
+
+  <div class="lb-main__in">
+    {%- if slides.size > 0 -%}
+      <div class="lb-main__media">
+        <div class="lh-gallery">
+          <div class="lh-gallery__track" data-lh-track>
+            {%- for block in slides -%}
+              {%- assign alt = block.settings.alt | default: block.settings.image.alt -%}
+              <div class="lh-gallery__slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {%- if forloop.first -%}
+                    {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 1200px) 580px, (min-width: 750px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: alt }}
+                  {%- else -%}
+                    {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 1200px) 580px, (min-width: 750px) 52vw, 100vw', loading: 'lazy', alt: alt }}
+                  {%- endif -%}
+                {%- elsif fb[forloop.index0] != blank -%}
+                  <img src="{{ fb[forloop.index0] | asset_url }}" width="1024" height="1024" alt="{{ alt | escape }}" decoding="async" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag }}
+                {%- endif -%}
+                {%- if block.settings.text != blank or block.settings.title != blank -%}
+                  <div class="lb-main__cap{% if block.settings.position == 'bottom' %} lb-main__cap--bottom{% endif %}">
+                    {%- if block.settings.text != blank -%}<p class="lb-main__cap-text">{{ block.settings.text }}</p>{%- endif -%}
+                    {%- if block.settings.title != blank -%}<p class="lb-main__cap-title">{{ block.settings.title }}</p>{%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if s.gallery_badge != blank -%}<span class="lh-gallery__badge">{{ s.gallery_badge }}</span>{%- endif -%}
+          {%- if slides.size > 1 -%}<span class="lh-gallery__count" data-lh-count>1 / {{ slides.size }}</span>{%- endif -%}
+        </div>
+        {%- if slides.size > 1 -%}
+          <div class="lh-gallery__thumbs">
+            {%- for block in slides -%}
+              <button type="button" class="lh-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-lh-thumb aria-label="Photo {{ forloop.index }} / {{ slides.size }}">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+                {%- elsif fb[forloop.index0] != blank -%}
+                  <img src="{{ fb[forloop.index0] | asset_url }}" width="1024" height="1024" alt="" loading="lazy" decoding="async">
+                {%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="lb-main__info">
+      {%- if s.eyebrow != blank -%}<p class="lh-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.title != blank -%}<h1 class="lh-title lb-main__title">{{ s.title }}</h1>{%- endif -%}
+
+      {%- if badges.size > 0 -%}
+        <div class="lb-main__badges">
+          {%- for block in badges -%}
+            <span class="lb-main__badge lb-main__badge--{{ block.settings.style }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if price != blank or s.price_was != blank or s.pill != blank -%}
+        <div class="lb-main__price">
+          {%- if price != blank -%}
+            <span class="lb-main__now{% if s.price_green %} lb-main__now--green{% endif %}">{{ price }}{% if s.price_suffix != blank %}<small> {{ s.price_suffix }}</small>{% endif %}</span>
+          {%- endif -%}
+          {%- if s.price_was != blank -%}<s class="lb-main__was">{{ s.price_was }}</s>{%- endif -%}
+          {%- if s.pill != blank -%}<span class="lh-pill">{{ s.pill }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if line_1 != blank -%}<p class="lb-main__line">{{ line_1 }}</p>{%- endif -%}
+      {%- if line_2 != blank -%}<p class="lb-main__note">{{ line_2 }}</p>{%- endif -%}
+      {%- if s.sub != blank -%}<div class="lh-desc">{{ s.sub }}</div>{%- endif -%}
+
+      {%- assign steps_done = false -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'card_link' -%}
+            {%- if block.settings.url != blank -%}
+              <a class="lb-main__promo lb-main__card" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+            {%- else -%}
+              <div class="lb-main__promo lb-main__card" {{ block.shopify_attributes }}>
+            {%- endif -%}
+              {%- if block.settings.icon == 'gift' -%}
+                <span class="lb-main__card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="9" width="17" height="11.5" rx="1.5"/><path d="M2.5 9h19V6.5h-19z"/><path d="M12 6.5v14"/><path d="M12 6.5C10.5 3.5 7 3.4 7 5.4 7 6.5 9 6.5 12 6.5zM12 6.5c1.5-3 5-3.1 5-1.1 0 1.1-2 1.1-5 1.1z"/></svg></span>
+              {%- endif -%}
+              <span class="lb-main__card-txt">
+                {%- if block.settings.title != blank -%}<span class="lb-main__card-title">{{ block.settings.title }}</span>{%- endif -%}
+                {%- if block.settings.text != blank -%}<span class="lb-main__card-text">{{ block.settings.text }}</span>{%- endif -%}
+              </span>
+              {%- if block.settings.url != blank -%}{{ arrow }}{%- endif -%}
+            {%- if block.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+
+          {%- when 'step' -%}
+            {%- comment -%} All steps render together, as one row where the first step sits. {%- endcomment -%}
+            {%- unless steps_done -%}
+              {%- assign steps_done = true -%}
+              <div class="lb-main__promo lb-main__steps">
+                {%- for st in steps -%}
+                  {%- unless forloop.first -%}<span class="lb-main__arrow">{{ arrow }}</span>{%- endunless -%}
+                  {%- if st.settings.url != blank -%}
+                    <a class="lb-main__step{% if st.settings.highlight %} is-hi{% endif %}" href="{{ st.settings.url }}" {{ st.shopify_attributes }}>
+                  {%- else -%}
+                    <div class="lb-main__step{% if st.settings.highlight %} is-hi{% endif %}" {{ st.shopify_attributes }}>
+                  {%- endif -%}
+                    {%- if st.settings.label != blank -%}<span class="lb-main__step-label">{{ st.settings.label }}</span>{%- endif -%}
+                    {%- if st.settings.title != blank -%}<span class="lb-main__step-title">{{ st.settings.title }}</span>{%- endif -%}
+                    {%- if st.settings.text != blank -%}<span class="lb-main__step-text">{{ st.settings.text }}</span>{%- endif -%}
+                  {%- if st.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logam-Bulk Main",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top strip"
+    },
+    {
+      "type": "text",
+      "id": "strip_1",
+      "label": "Strip text 1",
+      "info": "Dark bar at the top. Hidden when both texts are empty.",
+      "default": "Free demo, ₹69 delivery"
+    },
+    {
+      "type": "text",
+      "id": "strip_2",
+      "label": "Strip text 2",
+      "default": "Bulk from 120 books"
+    },
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "text",
+      "id": "gallery_badge",
+      "label": "Badge on photos",
+      "default": "Bulk order · your brand"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add photos with the Photo blocks. Without an image a Photo block shows the design's photo for its position (1–6)."
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text above title",
+      "default": "Bulk order · your brand on the back"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (page H1)",
+      "default": "Pocket Hanuman Chalisa with your brand"
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "₹[unit]"
+    },
+    {
+      "type": "checkbox",
+      "id": "price_green",
+      "label": "Green price",
+      "info": "For a price like \"Free\".",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "price_suffix",
+      "label": "Text after price",
+      "default": "/ book"
+    },
+    {
+      "type": "text",
+      "id": "price_was",
+      "label": "Struck-through price"
+    },
+    {
+      "type": "text",
+      "id": "pill",
+      "label": "Pill",
+      "default": "Down to ₹22 a book"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "line_1",
+      "label": "Line 1",
+      "default": "[qty] books · <b>[total]</b> in all · minimum 120"
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Line 2 (green)",
+      "default": "GST included · Free delivery across India"
+    },
+    {
+      "type": "richtext",
+      "id": "sub",
+      "label": "Description",
+      "default": "<p>Your logo, brand name, slogan and number on the back of every Hanuman Chalisa. Give it to your customers, clients and staff, and be remembered each time it is read.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Starting numbers (updated live by the order form)"
+    },
+    {
+      "type": "paragraph",
+      "content": "In Price, Line 1 and Line 2 you can type [unit] (price per book), [qty] (number of books), [total] (order total) and [half] (half of the total). They first show the numbers below; the order form on the same page then updates them as the shopper changes the quantity."
+    },
+    {
+      "type": "text",
+      "id": "init_unit",
+      "label": "[unit] price per book",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "init_qty",
+      "label": "[qty] number of books",
+      "default": "120"
+    },
+    {
+      "type": "text",
+      "id": "init_total",
+      "label": "[total] order total",
+      "default": "₹4,800"
+    },
+    {
+      "type": "text",
+      "id": "init_half",
+      "label": "[half] half of the total",
+      "default": "₹2,400"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "info": "Space under the top strip.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "info": "Space under the top strip.",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Square, at least 1200 × 1200 px. Empty: the design's photo for this position."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image description",
+          "info": "Read aloud by screen readers.",
+          "default": "The back cover with space for your brand, slogan, number and address, held up before a golden Hanuman ji murti"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Caption small text",
+          "info": "Orange line above the caption title."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Caption title",
+          "default": "Pocket Hanuman Chalisa with your brand"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "default": "top"
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Guinness World Record holder"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            {
+              "value": "dark",
+              "label": "Dark"
+            },
+            {
+              "value": "light",
+              "label": "Light"
+            }
+          ],
+          "default": "dark"
+        }
+      ]
+    },
+    {
+      "type": "card_link",
+      "name": "Link card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            }
+          ],
+          "default": "gift"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Try it free first"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Get 1 book with your brand free. Pay only ₹69 delivery."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link",
+          "info": "Free demo page, e.g. /pages/free-demo"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Small text",
+          "default": "STEP 1 · TODAY"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "1 free book with your brand"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Pay ₹69 delivery"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link",
+          "info": "Optional, e.g. /pages/bulk-order"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight",
+          "info": "Orange border.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Bulk Main",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "The back cover with space for your brand, slogan, number and address, held up before a golden Hanuman ji murti",
+            "title": "Pocket Hanuman Chalisa with your brand"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "The gold-foil front cover of the pocket Hanuman Chalisa, held up against a blue sky",
+            "text": "Front cover",
+            "title": "Gold foil, pocket size"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "The pocket Hanuman Chalisa on an office desk beside a laptop and a notebook",
+            "text": "For offices, shops and clinics",
+            "title": "Looks good on every desk"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Inside: a chaupai with its meaning, an Ask yourself question and a painting",
+            "text": "Inside the book",
+            "title": "Chaupai, meaning and a painting",
+            "position": "bottom"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Stacks of pocket Hanuman Chalisas tied with mauli thread, packed in a carton",
+            "text": "Bulk order",
+            "title": "From 120 books · ₹40 to ₹22 each"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Handing the pocket Hanuman Chalisa to a client across an office desk",
+            "text": "For clients, dealers and staff",
+            "title": "A gift they’ll keep"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Guinness World Record holder",
+            "style": "dark"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Gold-foil cover",
+            "style": "light"
+          }
+        },
+        {
+          "type": "card_link",
+          "settings": {
+            "icon": "gift",
+            "title": "Try it free first",
+            "text": "Get 1 book with your brand free. Pay only ₹69 delivery."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

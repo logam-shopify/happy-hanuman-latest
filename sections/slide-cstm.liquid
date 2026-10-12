@@ -1,0 +1,368 @@
+{% schema %}
+{
+  "name": "Spiritual Leader",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Spiritual Leader Say"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life. Each page carries art, guidance, and exercises to help you live with devotion and strength."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Leader Image"
+        },
+        {
+  "type": "image_picker",
+  "id": "mobile_image",
+  "label": "Mobile Image (Optional)"
+},
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Testimonial Quote"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name"
+        },
+        {
+          "type": "text",
+          "id": "designation",
+          "label": "Author Designation"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Spiritual Leader"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="spiritual-leader-wrapper">
+  <div class="container">
+    <!-- Static Heading + Description -->
+    <div class="header-text">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+    <!-- Slider Wrapper -->
+    <div class="testimonial-slider" id="testimonialSlider-{{ section.id }}">
+      {% for block in section.blocks %}
+      <div class="testimonial-item {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+        <div class="testimonial-content">
+          <!-- Image -->
+       <div class="testimonial-image">
+
+  {%- comment -%}
+    Desktop Image (always visible on desktop)
+  {%- endcomment -%}
+  {% if block.settings.image %}
+    {{ block.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        widths: '400,800,1200,1600,2000',
+        sizes: '(min-width: 769px) 60vw',
+        class: 'desktop-img',
+        alt: block.settings.author
+    }}
+  {% endif %}
+
+  {%- comment -%}
+    Mobile Image (shows only on mobile, else fallback to desktop)
+  {%- endcomment -%}
+
+  {% if block.settings.mobile_image %}
+    {{ block.settings.mobile_image
+      | image_url: width: 1200
+      | image_tag:
+        widths: '400,600,800,1200',
+        sizes: '(max-width: 768px) 100vw',
+        class: 'mobile-img',
+        alt: block.settings.author
+    }}
+  {% else %}
+    {%- comment -%}
+      Fallback: If no mobile image uploaded → use desktop image on mobile
+    {%- endcomment -%}
+
+    {% if block.settings.image %}
+      {{ block.settings.image
+        | image_url: width: 1200
+        | image_tag:
+          widths: '400,600,800,1200',
+          sizes: '(max-width: 768px) 100vw',
+          class: 'mobile-img',
+          alt: block.settings.author
+      }}
+    {% endif %}
+  {% endif %}
+
+</div>
+
+
+          <!-- Quote -->
+          <div class="testimonial-text">
+            <blockquote>
+              {{ block.settings.quote }}
+            </blockquote>
+            <p class="author"><strong>{{ block.settings.author }}</strong><br>{{ block.settings.designation }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Arrows at bottom-right -->
+    <div class="testimonial-arrows">
+  <button class="arrow prev" aria-label="Previous">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M15 6l-6 6 6 6" />
+    </svg>
+  </button>
+  <button class="arrow next" aria-label="Next">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 6l6 6-6 6" />
+    </svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.spiritual-leader-wrapper {
+  padding: 50px 20px;
+  background-color:#FFF9F2;
+}
+.spiritual-leader-wrapper .header-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+.spiritual-leader-wrapper .header-text h2 {
+ 
+  color: #b74e0f;
+}
+.spiritual-leader-wrapper .header-text p {
+  color: #555;
+
+}
+
+.testimonial-slider {
+  position: relative;
+}
+.testimonial-item {
+  display: none;
+}
+.testimonial-item.active {
+  display: block;
+}
+
+/* Desktop layout: Image 60%, Text 40% */
+.testimonial-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+.testimonial-image {
+  flex: 0 0 60%;
+}
+.testimonial-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.testimonial-text {
+  flex: 0 0 40%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.testimonial-text blockquote {
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.testimonial-text .author {
+  
+  color: #444;
+}
+
+/* Arrows bottom-right */
+/* Arrow group alignment */
+.testimonial-arrows {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* Circular light-grey buttons */
+.testimonial-arrows .arrow {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 9999px;
+  border: 1px solid #e6e9ee;     /* subtle ring */
+  background: #f4f6f8;            /* soft grey fill like mock */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .08s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,.02); /* very light depth */
+}
+
+/* Chevron icon */
+.testimonial-arrows .arrow svg {
+  width: 16px;
+  height: 16px;
+  stroke: #9aa3ad;                /* muted icon color from mock */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Hover/active */
+.testimonial-arrows .arrow:hover {
+  background: #eef1f4;
+  border-color: #d9dee5;
+}
+.testimonial-arrows .arrow:active {
+  transform: scale(0.98);
+}
+
+/* Focus ring for accessibility */
+.testimonial-arrows .arrow:focus-visible {
+  outline: 2px solid #cfd6df;
+  outline-offset: 2px;
+}
+
+/* Center on mobile like the design */
+@media (max-width: 768px) {
+  .testimonial-arrows {
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+}
+
+
+/* Responsive for mobile */
+@media(max-width: 768px) {
+  .testimonial-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .testimonial-image,
+  .testimonial-text {
+    flex: 0 0 100%;
+  }
+  .testimonial-image img {
+    width: 100%;
+  }
+  
+}
+.desktop-img {
+  display: block;
+}
+
+.mobile-img {
+  display: none;
+}
+
+@media(max-width: 768px) {
+  .desktop-img {
+    display: none;
+  }
+  .mobile-img {
+    display: block;
+  }
+}
+/* Quote icon on the testimonial card */
+.testimonial-text {
+  position: relative;
+  padding-top: 48px; /* make room for the icon */
+}
+
+.testimonial-text::before {
+  content: "“";                  /* the double quote mark */
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  font-size: 38px;                /* tweak to match your design */
+  color: #bfc3c7;                 /* soft grey like the design */
+  line-height: 1;
+  font-family: Georgia, "Times New Roman", serif; /* nice curly quotes */
+  opacity: 0.9;
+}
+
+/* (optional) tone it down a bit on small screens */
+@media (max-width: 768px) {
+  .testimonial-text {
+    padding-top: 44px;
+  }
+  .testimonial-text::before {
+    font-size: 24px;
+    top: 12px;
+    left: 16px;
+    opacity: 0.85;
+  }
+}
+
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const slider = document.querySelector("#testimonialSlider-{{ section.id }}");
+  if (!slider) return;
+
+  const items = slider.querySelectorAll(".testimonial-item");
+  const prevBtn = slider.querySelector(".prev");
+  const nextBtn = slider.querySelector(".next");
+  let currentIndex = 0;
+
+  function showItem(index) {
+    items.forEach((item, i) => {
+      item.classList.toggle("active", i === index);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    showItem(currentIndex);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+  });
+});
+</script>

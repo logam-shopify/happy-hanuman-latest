@@ -1,0 +1,147 @@
+{%- render 'logam-book-details', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Edition Info",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "जानकारी"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "इस एडिशन के बारे में"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "एडिशन"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "info": "Use the dynamic source icon to connect a product metafield.",
+          "default": "हिन्दी"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi Edition Info",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "एडिशन",
+            "value": "हिन्दी"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "साइज़",
+            "value": "A4"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "पेज",
+            "value": "43, हाथ से बने चित्रों के साथ"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "किसके लिए",
+            "value": "बच्चे और बड़े: परिवार, माता-पिता, टीचर, हनुमान भक्त"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "डिलीवरी",
+            "value": "फ़्री, 3 से 5 वर्किंग डे में"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "रिप्लेसमेंट",
+            "value": "ख़राब या ग़लत एडिशन आने पर 7 दिनों के अंदर"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

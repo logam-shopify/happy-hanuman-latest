@@ -1,0 +1,82 @@
+/* Logam-Bulk content sections (How it works, Inside the book, Occasions, Prices) for the Bulk order and
+   Free demo pages. Builds on logam-hindi.css (.lh tokens, headings, buttons, .lh-steps__n). Mobile first.
+   Every rule is scoped two classes deep so a later copy of logam-hindi.css on the page cannot override it. */
+
+/* ---------- shared ---------- */
+.lb-how .lh-title, .lb-inside .lh-title, .lb-occasions .lh-title, .lb-prices .lh-title { text-wrap: balance; }
+.lb-how .lb-how__media, .lb-inside .lb-inside__media, .lb-occasions .lb-occasions__media { margin: 0; border-radius: 16px; overflow: hidden; background: #F3E6D3; }
+.lb-how .lb-how__media img, .lb-occasions .lb-occasions__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.lb-inside .lb-inside__media img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.lb-how .lb-how__steps, .lb-inside .lb-inside__list, .lb-occasions .lb-occasions__chips, .lb-prices .lb-prices__tiers { list-style: none; margin: 0; padding: 0; }
+/* intro text under the heading (Occasions, Prices) */
+.lb-occasions .lh-sub, .lb-prices .lh-sub { font-size: 16px; line-height: 1.55; color: #3F2B1D; }
+
+/* ---------- How it works ---------- */
+.lb-how .lb-how__steps { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+.lb-how .lb-how__step { display: flex; gap: 12px; align-items: flex-start; }
+.lb-how .lb-how__step h3 { font-size: 16px; line-height: 1.4; color: var(--lh-ink); }
+.lb-how .lb-how__step p { font-size: 14.5px; line-height: 1.5; color: #3F2B1D; }
+
+/* ---------- Inside the book ---------- */
+.lb-inside .lb-inside__list { display: flex; flex-direction: column; gap: 9px; margin-top: 14px; }
+.lb-inside .lb-inside__list li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: var(--lh-ink); }
+.lb-inside .lb-inside__list svg { flex: none; width: 20px; height: 20px; fill: none; stroke: #2F6B3F; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Occasions ---------- */
+.lb-occasions .lh-head { margin-bottom: 14px; }
+.lb-occasions .lb-occasions__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.lb-occasions .lb-occasions__chips li { background: #FFFFFF; border: 1px solid #E6D6C3; color: var(--lh-ink); font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+
+/* ---------- Prices (display only) ---------- */
+.lb-prices .lb-prices__tiers { display: flex; flex-direction: column; gap: 6px; }
+.lb-prices .lb-prices__tier { display: grid; grid-template-columns: 1fr auto 112px; align-items: center; gap: 10px; min-height: 50px; padding: 6px 12px; border: 1.5px solid #E6D6C3; border-radius: 12px; background: #FFFFFF; color: var(--lh-ink); }
+.lb-prices .lb-prices__range { font-size: 15px; font-weight: 700; }
+.lb-prices .lb-prices__price { font-size: 18px; font-weight: 800; }
+.lb-prices .lb-prices__badge { justify-self: end; font-size: 12.5px; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: #F3E6D3; color: #5C4636; white-space: nowrap; }
+.lb-prices .lb-prices__badge--green { background: #E3F1E6; color: #1F5C33; }
+.lb-prices .lb-prices__note { margin-top: 6px; font-size: 13px; line-height: 1.45; color: #5C4636; }
+.lb-prices .lb-prices__btn { display: flex; height: 48px; margin-top: 12px; font-weight: 700; }
+
+/* ---------- Desktop (>=750px): two columns, text block centred against the photo / price list ---------- */
+@media (min-width: 750px) {
+  .lb-how .lh__in, .lb-inside .lh__in, .lb-occasions .lh__in, .lb-prices .lh__in { max-width: 1200px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto auto 1fr; column-gap: 32px; }
+  .lb-how .lh-head, .lb-inside .lh-head, .lb-occasions .lh-head, .lb-prices .lh-head { grid-area: head; }
+  .lb-how .lb-how__media, .lb-inside .lb-inside__media, .lb-occasions .lb-occasions__media { grid-area: media; align-self: center; border-radius: 20px; }
+  .lb-occasions .lh-head { margin-bottom: 24px; }
+  .lb-occasions .lh-sub, .lb-prices .lh-sub { margin-top: 12px !important; font-size: 17px; line-height: 1.6; }
+
+  /* How it works: photo left, steps right */
+  .lb-how .lh__in { grid-template-areas: 'media .' 'media head' 'media body' 'media .'; }
+  .lb-how .lb-how__media img { aspect-ratio: 1; }
+  .lb-how .lb-how__steps { grid-area: body; margin: 0; gap: 22px; }
+  .lb-how .lb-how__step { gap: 16px; }
+  .lb-how .lb-how__step h3 { font-size: 19px; line-height: 1.35; margin-bottom: 2px; }
+  .lb-how .lb-how__step p { font-size: 16px; }
+
+  /* Inside the book: list left, photo right */
+  .lb-inside .lh__in { grid-template-areas: '. media' 'head media' 'body media' '. media'; }
+  .lb-inside .lb-inside__media img { aspect-ratio: 4 / 3; }
+  .lb-inside .lb-inside__list { grid-area: body; margin: 0; gap: 12px; }
+  .lb-inside .lb-inside__list li { font-size: 17px; gap: 12px; }
+  .lb-inside .lb-inside__list svg { width: 22px; height: 22px; margin-top: 1px; }
+
+  /* Occasions: text + chips left, photo right */
+  .lb-occasions .lh__in { grid-template-areas: '. media' 'head media' 'body media' '. media'; }
+  .lb-occasions .lb-occasions__chips { grid-area: body; margin: 0; gap: 10px; }
+  .lb-occasions .lb-occasions__chips li { font-size: 15px; padding: 7px 16px; }
+
+  /* Prices: text, note and button left, tier list right */
+  .lb-prices .lh__in { grid-template-rows: 1fr auto auto auto 1fr; grid-template-areas: '. tiers' 'head tiers' 'note tiers' 'btn tiers' '. tiers'; }
+  .lb-prices .lh-head { margin-bottom: 16px; }
+  .lb-prices .lb-prices__tiers { grid-area: tiers; align-self: center; gap: 8px; }
+  .lb-prices .lb-prices__note { grid-area: note; margin: 0; font-size: 14px; }
+  .lb-prices .lb-prices__btn { grid-area: btn; justify-self: start; width: auto; min-width: 300px; height: 52px; margin-top: 24px; }
+}
+@media (min-width: 1200px) {
+  .lb-how .lh__in, .lb-inside .lh__in, .lb-occasions .lh__in, .lb-prices .lh__in { column-gap: 56px; }
+  .lb-prices .lb-prices__tiers { gap: 10px; }
+  .lb-prices .lb-prices__tier { grid-template-columns: 1fr auto 136px; gap: 16px; min-height: 62px; padding: 8px 20px; border-radius: 16px; }
+  .lb-prices .lb-prices__range { font-size: 17px; }
+  .lb-prices .lb-prices__price { font-size: 22px; }
+  .lb-prices .lb-prices__badge { font-size: 13.5px; padding: 4px 10px; }
+}

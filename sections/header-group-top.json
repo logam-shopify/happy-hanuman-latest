@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Top",
+  "sections": {
+    "scroll_text_VkCzAz": {
+      "type": "scroll-text",
+      "blocks": {
+        "item_edd_1": {
+          "type": "item",
+          "settings": {
+            "code": "Free shipping across India — on every order",
+            "text_style": "solid"
+          }
+        },
+        "item_edd_2": {
+          "type": "item",
+          "settings": {
+            "code": "Guinness World Record holder · 30,303 books signed in 30 hours",
+            "text_style": "solid"
+          }
+        },
+        "item_edd_3": {
+          "type": "item",
+          "settings": {
+            "code": "Available in English, ગુજરાતી and हिन्दी",
+            "text_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "item_edd_1",
+        "item_edd_2",
+        "item_edd_3"
+      ],
+      "settings": {
+        "background-color": "#2B1A0E",
+        "text": "#FFF4E8",
+        "margin_desktop": "0px 0px 0px 0px",
+        "margin_tablet_large": "0px 0px 0px 0px",
+        "margin_mobile": "0px 0px 0px 0px",
+        "padding_desktop": "10px 0",
+        "padding_tablet_lager": "10px 0",
+        "padding_mobile": "8px 0",
+        "size_text": "p",
+        "speed": 26,
+        "scroll_type": "from-right",
+        "size_icon": 20,
+        "radius_image": 0,
+        "space_image": "mx-20"
+      }
+    },
+    "announcement_bar_c4nzng": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_freeship": {
+          "type": "announcement",
+          "settings": {
+            "width": "100%",
+            "text_align": "center",
+            "text": "Free shipping across India — on every order",
+            "view_more": "",
+            "link_view": ""
+          }
+        },
+        "announcement_record": {
+          "type": "announcement",
+          "settings": {
+            "width": "100%",
+            "text_align": "center",
+            "text": "Guinness World Record holder · 30,303 books signed in 30 hours",
+            "view_more": "",
+            "link_view": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_freeship",
+        "announcement_record"
+      ],
+      "disabled": true,
+      "settings": {
+        "fullwidth": false,
+        "transparent": false,
+        "show_btn": true,
+        "location_btn": "30",
+        "heading_color": "#FFF4E8",
+        "text_color": "#FFF4E8",
+        "background": "#2B1A0E",
+        "border_color": "#2B1A0E",
+        "z_index": "4",
+        "top": "0"
+      }
+    }
+  },
+  "order": [
+    "scroll_text_VkCzAz",
+    "announcement_bar_c4nzng"
+  ]
+}

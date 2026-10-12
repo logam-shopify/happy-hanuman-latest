@@ -1,0 +1,159 @@
+{%- render 'logam-book-faq', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "सवाल-जवाब"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "जानने लायक बातें"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "क्या मुझे हिन्दी एडिशन ही मिलेगा?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>हाँ। इस पेज से हिन्दी एडिशन मिलता है।</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "क्या मुझे हिन्दी एडिशन ही मिलेगा?",
+            "answer": "<p>हाँ। इस पेज से हिन्दी एडिशन मिलता है। English या ગુજરાતી चाहिए? ऊपर एडिशन बदल लें। चित्र और बाकी सब कुछ तीनों में एक जैसा है।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "क्या कलरिंग शीट्स साथ में आती हैं?",
+            "answer": "<p>नहीं। इस किताब में स्टेप 1 से 4 हैं। आर्ट थेरेपी कलरिंग शीट्स (स्टेप 5) 43 शीट्स का अलग सेट है, ₹999 का। किताब के साथ लेंगे तो कुल रकम पर 10% छूट मिलेगी।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "यह किताब किसके लिए है?",
+            "answer": "<p>बच्चों और बड़ों, दोनों के लिए: परिवार, माता-पिता, टीचर और हनुमान भक्त।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "पेमेंट कैसे करें?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, डेबिट या क्रेडिट कार्ड (Visa, Mastercard, RuPay), या नेट बैंकिंग से। या अभी सिर्फ़ 20% दें और बाकी किताब मिलने पर।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "किताब कब तक पहुँचेगी?",
+            "answer": "<p>पूरे भारत में 3 से 5 वर्किंग डे में, फ़्री शिपिंग के साथ। किताब भेजते ही आपको ईमेल पर ट्रैकिंग नंबर मिल जाएगा।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "किताब ख़राब या ग़लत भाषा में आए तो?",
+            "answer": "<p>डिलीवरी के 7 दिनों के अंदर +91 82381 88824 पर WhatsApp से फ़ोटो भेजें, हम नई किताब भेज देंगे।</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "क्या इसे गिफ़्ट में भेज सकते हैं?",
+            "answer": "<p>हाँ। चेकआउट पर जिसे भेजना है, उसका नाम और पता डालें। हम सीधे उन्हें भेज देंगे।</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

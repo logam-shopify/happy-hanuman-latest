@@ -1,0 +1,196 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-leaders', hi: true, fb_photos: 'hh-leader-1-anupam-kher.jpg,hh-leader-2-morari-bapu.jpg,hh-leader-3-hari-prakash-shastri.jpg,hh-leader-4-akshat-gupta.jpg,hh-leader-5-jay-vasavada.jpg,hh-leader-6-swami-sachidananda.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Leaders",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "આશીર્વાદ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "સંતો અને મહાનુભાવોના વિચાર"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "અંગ્રેજી પરથી અનુવાદ"
+    },
+    {
+      "type": "range",
+      "id": "dcols",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Band background",
+      "default": "#FBEFDD"
+    },
+    {
+      "type": "color",
+      "id": "page_bg",
+      "label": "Space above background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "gap_m",
+      "label": "Space above (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space above (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        },
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Photo",
+          "info": "Shown on top of the card, wide (2:1)."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Gujarati Leaders",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક ફક્ત યુવાનો અને બાળકો માટે જ નહીં, સૌ માટે ખૂબ ઉપયોગી છે. પુસ્તકનાં ચિત્રો અદ્ભુત છે, ખૂબ સરસ કામ.",
+            "name": "અનુપમ ખેર",
+            "role": "એક્ટર અને ડિરેક્ટર, હનુમાન ભક્ત"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "સારાં ચિત્રો સારું ચરિત્ર બનાવી શકે છે. આ કામથી મને ખૂબ આનંદ છે.",
+            "name": "પૂજ્ય મોરારિબાપુ"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "હનુમાનજી પર આટલું ઊંડું અને ઉત્તમ કામ મેં ક્યારેય જોયું નથી.",
+            "name": "પૂજ્ય હરિપ્રકાશ શાસ્ત્રી",
+            "role": "સાળંગપુર ધામ"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "ખૂબ સુંદર કામ છે. બાળકો અને યુવાનો માટે હનુમાનજી પર આનાથી વધુ રસપ્રદ પુસ્તક મેં જોયું નથી.",
+            "name": "અક્ષત ગુપ્તા",
+            "role": "લેખક"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક દરેકના હાથમાં પહોંચવું જોઈએ. રજૂઆત ખૂબ રસપ્રદ છે.",
+            "name": "જય વસાવડા",
+            "role": "લેખક"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "આશિષ, ભગવાન તારી સાથે છે. ખૂબ સરસ કામ, હવે પુસ્તક પૂરું થયું. આ કામમાં ખુદ ભગવાન તારી સાથે છે.",
+            "name": "પદ્મભૂષણ સ્વામી સચ્ચિદાનંદ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

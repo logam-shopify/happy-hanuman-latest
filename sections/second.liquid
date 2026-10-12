@@ -1,0 +1,217 @@
+{% schema %}
+{
+  "name": "second",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Illustration Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading (First Part)",
+      "default": "Where Tradition Meets"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading (Second Part)",
+      "default": "Transformation"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life. Each page carries art, guidance, and exercises to help you live with devotion and strength.</p>"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Bullet Point",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Ancient lessons, simplified for today"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "second",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="where-tradition-wrapper">
+  <div class="where-tradition-container image-{{ section.settings.image_position }}">
+
+    {% if section.settings.image_position == 'left' %}
+      <!-- Left Image -->
+      <div class="where-tradition-image">
+        {% if section.settings.main_image %}
+          <img src="{{ section.settings.main_image | img_url: '800x' }}" alt="Tradition Meets Image">
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <!-- Content -->
+    <div class="where-tradition-content">
+      <h2 class="where-tradition-heading">
+        <span class="part1">{{ section.settings.heading_part1 }}</span>
+        <span class="part2">{{ section.settings.heading_part2 }}</span>
+      </h2>
+      <div class="where-tradition-description">
+        {{ section.settings.description }}
+      </div>
+
+      <ul class="where-tradition-points">
+        {% for block in section.blocks %}
+          <li class="point-item">
+            {% if block.settings.icon %}
+              <img src="{{ block.settings.icon | img_url: '50x' }}" alt="Icon">
+            {% endif %}
+            <span>{{ block.settings.text }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if section.settings.image_position == 'right' %}
+      <!-- Right Image -->
+      <div class="where-tradition-image">
+        {% if section.settings.main_image %}
+          <img src="{{ section.settings.main_image | img_url: '800x' }}" alt="Tradition Meets Image">
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<style>
+.where-tradition-wrapper {
+  padding: 60px 20px;
+}
+
+.where-tradition-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.where-tradition-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.where-tradition-heading {
+
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.where-tradition-heading .part1 {
+  color: #E76F00; /* Orange */
+  margin-right: 8px;
+}
+
+.where-tradition-heading .part2 {
+  color: #D4AF37; /* Golden */
+}
+
+.where-tradition-description {
+
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.where-tradition-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.point-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.point-item img {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+}
+
+.point-item span {
+
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .where-tradition-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .point-item {
+    justify-content: center;
+  }
+
+  .where-tradition-heading {
+
+  }
+}
+
+/* Optional: image order override for left image on desktop */
+.image-left .where-tradition-image {
+  order: 1;
+}
+
+.image-left .where-tradition-content {
+  order: 2;
+}
+
+.image-right .where-tradition-image {
+  order: 2;
+}
+
+.image-right .where-tradition-content {
+  order: 1;
+}
+</style>

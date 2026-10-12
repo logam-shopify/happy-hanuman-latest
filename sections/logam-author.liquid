@@ -1,0 +1,223 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div class="lg-auth" style="--lg-auth-bg: {{ s.bg_color }}; --lg-auth-text: {{ s.text_color }}; --lg-auth-accent: {{ s.accent_color }}; --lg-auth-pt: {{ s.padding_top }}px; --lg-auth-pb: {{ s.padding_bottom }}px;">
+  <div class="lg-auth__inner">
+
+    <h2 class="lg-auth__heading">
+      <span>{{ s.heading_part1 | escape }}</span>
+      {%- if s.heading_part2 != blank -%}<span class="lg-auth__heading-accent">{{ s.heading_part2 | escape }}</span>{%- endif -%}
+    </h2>
+
+    <div class="lg-auth__media">
+      {%- if s.image != blank -%}
+        {{ s.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 450px', alt: s.name | default: s.heading_part1 }}
+      {%- endif -%}
+      {%- if s.name != blank -%}
+        <div class="lg-auth__tag">
+          <p class="lg-auth__name">{{ s.name | escape }}</p>
+          {%- if s.role != blank -%}<p class="lg-auth__role">{{ s.role | escape }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="lg-auth__body">
+      {%- if s.lead != blank -%}<p class="lg-auth__lead">{{ s.lead | escape }}</p>{%- endif -%}
+      {%- if s.text != blank -%}<p class="lg-auth__text">{{ s.text | escape }}</p>{%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="lg-auth__pills" role="list">
+          {%- for block in section.blocks -%}
+            <li class="lg-auth__pill" {{ block.shopify_attributes }}>
+              {%- case block.settings.icon -%}
+                {%- when 'badge' -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.3 1.7 2.8-.1.9 2.7 2.3 1.6-.9 2.7.9 2.7-2.3 1.6-.9 2.7-2.8-.1L12 21.2l-2.3-1.7-2.8.1-.9-2.7-2.3-1.6.9-2.7-.9-2.7 2.3-1.6.9-2.7 2.8.1z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></svg>
+                {%- when 'trophy' -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5v1.5A3 3 0 0 0 8 10.4M16 6h3v1.5a3 3 0 0 1-3 2.9"/><path d="M12 13v4M9 20h6M10 17h4v3h-4z"/></svg>
+                {%- when 'family' -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="5" r="2"/><circle cx="17.5" cy="5" r="2"/><circle cx="12" cy="10.5" r="1.6"/><path d="M4 21v-7.5A2.5 2.5 0 0 1 6.5 11 2.5 2.5 0 0 1 9 13.5V21M15 21v-7.5a2.5 2.5 0 0 1 5 0V21M10.3 21v-5a1.7 1.7 0 0 1 3.4 0v5"/></svg>
+              {%- endcase -%}
+              <span>{{ block.settings.label | escape }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if s.link_label != blank and s.link != blank -%}
+        <a class="lg-auth__link" href="{{ s.link }}">{{ s.link_label | escape }} <span aria-hidden="true">&rarr;</span></a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .lg-auth {
+    background: var(--lg-auth-bg);
+    color: var(--lg-auth-text);
+    padding: var(--lg-auth-pt) 20px var(--lg-auth-pb);
+  }
+  #shopify-section-{{ section.id }} .lg-auth__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 443px);
+    grid-template-areas: "heading media" "body media";
+    grid-template-rows: auto 1fr;
+    column-gap: 72px;
+    align-items: start;
+  }
+  #shopify-section-{{ section.id }} .lg-auth__heading { grid-area: heading; align-self: end; }
+  #shopify-section-{{ section.id }} .lg-auth__media { grid-area: media; align-self: center; }
+  #shopify-section-{{ section.id }} .lg-auth__body { grid-area: body; }
+
+  #shopify-section-{{ section.id }} .lg-auth__heading {
+    margin: 0 0 22px;
+    font-size: clamp(28px, 3.2vw, 40px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--lg-auth-text);
+  }
+  #shopify-section-{{ section.id }} .lg-auth__heading span { display: block; }
+  #shopify-section-{{ section.id }} .lg-auth__heading-accent { color: var(--lg-auth-accent); }
+
+  #shopify-section-{{ section.id }} .lg-auth__media {
+    position: relative;
+    aspect-ratio: 443 / 417;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #e8e2dc;
+    box-shadow: 0 20px 40px rgba(217, 105, 46, .18);
+  }
+  #shopify-section-{{ section.id }} .lg-auth__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .lg-auth__tag {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .9);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #14201a;
+  }
+  #shopify-section-{{ section.id }} .lg-auth__name { margin: 0; font-size: 18px; line-height: 1.25; }
+  #shopify-section-{{ section.id }} .lg-auth__role { margin: 2px 0 0; font-size: 10px; letter-spacing: .03em; text-transform: uppercase; opacity: .75; }
+
+  #shopify-section-{{ section.id }} .lg-auth__lead { margin: 0; max-width: 600px; font-size: 17px; line-height: 1.5; }
+  #shopify-section-{{ section.id }} .lg-auth__text { margin: 16px 0 0; max-width: 600px; font-size: 14px; line-height: 1.45; opacity: .8; }
+
+  #shopify-section-{{ section.id }} .lg-auth__pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin: 20px 0 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .lg-auth__pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border: 1px solid #ece6e0;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+  }
+  #shopify-section-{{ section.id }} .lg-auth__pill + .lg-auth__pill::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    margin-top: -2.5px;
+    border-radius: 50%;
+    background: #cfcac5;
+  }
+  #shopify-section-{{ section.id }} .lg-auth__pill svg { width: 14px; height: 14px; fill: none; stroke: var(--lg-auth-accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  #shopify-section-{{ section.id }} .lg-auth__link {
+    display: inline-block;
+    margin-top: 28px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--lg-auth-accent);
+  }
+  #shopify-section-{{ section.id }} .lg-auth__link:hover { text-decoration: underline; }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-auth { padding-left: 16px; padding-right: 16px; }
+    #shopify-section-{{ section.id }} .lg-auth__inner {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "heading" "media" "body";
+      grid-template-rows: none;
+    }
+    #shopify-section-{{ section.id }} .lg-auth__heading { font-size: 20px; margin-bottom: 14px; }
+    #shopify-section-{{ section.id }} .lg-auth__media { aspect-ratio: 352 / 323; border-radius: 28px; box-shadow: none; }
+    #shopify-section-{{ section.id }} .lg-auth__name { font-size: 15px; }
+    #shopify-section-{{ section.id }} .lg-auth__role { font-size: 9px; }
+    #shopify-section-{{ section.id }} .lg-auth__body { padding: 28px 14px 0; }
+    #shopify-section-{{ section.id }} .lg-auth__lead { font-size: 15px; line-height: 1.4; }
+    #shopify-section-{{ section.id }} .lg-auth__text { margin-top: 10px; font-size: 13px; line-height: 1.5; }
+    #shopify-section-{{ section.id }} .lg-auth__pills { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 14px; }
+    #shopify-section-{{ section.id }} .lg-auth__pill + .lg-auth__pill::before { display: none; }
+    #shopify-section-{{ section.id }} .lg-auth__link { margin-top: 18px; font-size: 13px; text-transform: none; letter-spacing: 0; }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-auth { padding-top: {{ section.settings.padding_top_mobile }}px; padding-bottom: {{ section.settings.padding_bottom_mobile }}px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Logam Author",
+  "tag": "section",
+  "class": "section--logam-author",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading_part1", "label": "Heading", "default": "The Heart Behind" },
+    { "type": "text", "id": "heading_part2", "label": "Heading (accent line)", "default": "Happy Hanuman" },
+    { "type": "textarea", "id": "lead", "label": "Intro paragraph" },
+    { "type": "textarea", "id": "text", "label": "Second paragraph" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the Author’s Full Story" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name on photo", "default": "Ashish Bhalani" },
+    { "type": "text", "id": "role", "label": "Role on photo", "default": "Author & Devotional Catalyst" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FDF3EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#14201A" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#D9692E" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "badge",
+          "options": [
+            { "value": "badge", "label": "Badge" },
+            { "value": "trophy", "label": "Trophy" },
+            { "value": "family", "label": "Family" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        { "type": "text", "id": "label", "label": "Label", "default": "TEDx Speaker" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Logam Author", "blocks": [ { "type": "pill" } ] }
+  ]
+}
+{% endschema %}

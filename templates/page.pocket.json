@@ -1,0 +1,552 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "setwidthout": "full",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "height": 150,
+        "margin_desktop": "",
+        "background_color": "#282828",
+        "color_title": "#ffffff",
+        "color_breadcrumb": "#ffffff"
+      }
+    },
+    "slideshow_EYNTzR": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_ncVyme": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/Group_371.jpg",
+            "link_url": "shopify://products/happy-hanuman-pocket-book",
+            "open_in_new_tab": false,
+            "image_mobile": "shopify://shop_images/Frame_291.jpg",
+            "position_image_mb": "center",
+            "color_subheading": "",
+            "subheading": "",
+            "heading": "",
+            "description": "",
+            "color_des": "",
+            "button1_label": "",
+            "link1": "shopify://products/happy-hanuman-pocket-book",
+            "style_btn": "btn-base",
+            "button2_label": "",
+            "link2": "",
+            "style_btn_2": "btn-base",
+            "slide_morecontent": "",
+            "box_size": "medium",
+            "box_align": "center",
+            "text_align": "left",
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "color_btn": "",
+            "bg_btn": "",
+            "color_btn_hover": "",
+            "bg_btn_hover": "",
+            "button_opacity": 0,
+            "blocks_overlay_color": "#000000",
+            "overlay_opacity": 1
+          }
+        }
+      },
+      "block_order": [
+        "slide_ncVyme"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "setwidthout": "full",
+        "setwidthout_content": "container",
+        "progress_bar_color": "#ffffff",
+        "bg_btn_arrow": "",
+        "color_btn_arrow": "#ffffff",
+        "autoplay_duration": 5,
+        "background_color": "#282828",
+        "slideshow_height": "slideshow--fit slideshow--desktop-full",
+        "slideshow_height_mobile": "adapt",
+        "auto_play": true,
+        "show_dot": false,
+        "show_btn": false,
+        "show_bg_content": false,
+        "slide_font_size": 100,
+        "slide_font_weight": "400",
+        "slide_font_transform": "none",
+        "slide_font_lineheight": "1.2",
+        "slide_font_spacing": "0",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "social_facebook": "",
+        "social_tw": "",
+        "social_pinterest": "",
+        "social_linkedin": ""
+      }
+    },
+    "second_J7xPWq": {
+      "type": "second",
+      "blocks": {
+        "point_J8BLjA": {
+          "type": "point",
+          "settings": {
+            "icon": "shopify://shop_images/Group.png",
+            "text": "Timeless lessons, made simple"
+          }
+        },
+        "point_TUHkbL": {
+          "type": "point",
+          "settings": {
+            "icon": "shopify://shop_images/fi_65607.png",
+            "text": "Hand-painted soulful art"
+          }
+        },
+        "point_CpGVnW": {
+          "type": "point",
+          "settings": {
+            "icon": "shopify://shop_images/fi_5827668.png",
+            "text": "Created with pure Bhakti"
+          }
+        },
+        "point_VDQBRd": {
+          "type": "point",
+          "settings": {
+            "text": "A gentle way to grow devotion — one page, one thought, one blessing at a time."
+          }
+        }
+      },
+      "block_order": [
+        "point_J8BLjA",
+        "point_TUHkbL",
+        "point_CpGVnW",
+        "point_VDQBRd"
+      ],
+      "name": "second",
+      "settings": {
+        "main_image": "shopify://shop_images/Small_hindi10_1.png",
+        "heading_part1": "Where Tradition Meets",
+        "heading_part2": "Transformation",
+        "description": "<p>Happy Hanuman began with a humble prayer -  to bring Hanuman’s love, strength, and values into everyday life.</p><p>Every page blends devotion with creativity - guiding children and families toward faith, courage, and clarity.</p>",
+        "image_position": "right"
+      }
+    },
+    "gallerycstm_VJExgw": {
+      "type": "gallerycstm",
+      "blocks": {
+        "image_RNYwEk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_e785bee785bee785_2.png",
+            "alt": "",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "image_L66g6Y": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_q54dkrq54dkrq54d.png",
+            "alt": "",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "image_Rqkkkr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_e785bee785bee785_4.png",
+            "alt": "",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "image_fG4WgQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/819a3365eeacfcd63534f4c284ba2bd8b3f580ee.png",
+            "alt": "",
+            "link": "",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "image_RNYwEk",
+        "image_L66g6Y",
+        "image_Rqkkkr",
+        "image_fG4WgQ"
+      ],
+      "name": "Gallery Auto Slider",
+      "settings": {
+        "heading": "Gallery",
+        "subheading": "",
+        "color_scheme": "default",
+        "gap": 16,
+        "radius": 8,
+        "autoplay": true,
+        "interval": 2000,
+        "snap_behavior": "mandatory",
+        "show_arrows": true,
+        "show_dots": true,
+        "slides_desktop": 4,
+        "slides_tablet": 2,
+        "slides_mobile": 1,
+        "remove_top_spacing": false,
+        "remove_bottom_spacing": false
+      }
+    },
+    "3section_qEwAxE": {
+      "type": "3section",
+      "blocks": {
+        "feature_ULd6GF": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/HND_03_1.png",
+            "alt": "",
+            "title": "Builds Faith in Kids",
+            "text": "Make devotion a habit, not a lecture.",
+            "link": ""
+          }
+        },
+        "feature_K6UMUU": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/Guj-6_1.png",
+            "alt": "",
+            "title": "Travel Blessing",
+            "text": "Keep Hanuman with you in journey & exams.",
+            "link": ""
+          }
+        },
+        "feature_zJi77e": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/Guj-3_1.png",
+            "alt": "",
+            "title": "Pocket-Friendly Gift",
+            "text": "Temple groups, schools, satsang, corporates.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_ULd6GF",
+        "feature_K6UMUU",
+        "feature_zJi77e"
+      ],
+      "name": "Why Every Home – Features",
+      "settings": {
+        "heading": "Why Every Home Needs This",
+        "heading_align": "center",
+        "columns_desktop": 3,
+        "gap": 24,
+        "bg": "#fff7ef",
+        "color_scheme": "",
+        "heading_color": "#c05a00",
+        "title_color": "#222222",
+        "text_color": "#444444",
+        "card_bg": "#ffffff",
+        "image_ratio": "landscape",
+        "radius": 12,
+        "image_radius": 8,
+        "shadow": false,
+        "card_padding": 16,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "max_width": 1600
+      }
+    },
+    "psc_DEe48Y": {
+      "type": "psc",
+      "name": "Promo CTA Bar",
+      "settings": {
+        "heading": "A Small Book. A Lifelong Blessing.",
+        "subheading": "Teach devotion, not through words – but by habit.",
+        "cta_mode": "product",
+        "product": "happy-hanuman-pocket-book",
+        "button_label": "Add Pocket Chalisa to Cart",
+        "button_link": "shopify://products/happy-hanuman-pocket-book",
+        "open_new_tab": false,
+        "quantity": 1,
+        "redirect_to_cart": true,
+        "success_text": "Added to cart!",
+        "bg_color": "#cc6200",
+        "text_color": "#ffffff",
+        "btn_bg": "#ffffff",
+        "btn_text": "#000000",
+        "btn_bg_hover": "#f0f0f0",
+        "btn_text_hover": "#000000",
+        "pad_y": 21,
+        "full_bleed": false,
+        "max_width": 1200,
+        "show_divider": false
+      }
+    },
+    "ap_imagewithtext_3wDrX9": {
+      "type": "ap-imagewithtext",
+      "blocks": {
+        "ap_imagetextblock_JJbUMa": {
+          "type": "ap-imagetextblock",
+          "settings": {
+            "image": "shopify://shop_images/image_38.png",
+            "heading_1": "",
+            "heading1_size": "heading--small",
+            "heading_2": "Bulk Orders with Custom Message",
+            "heading2_size": 3,
+            "text": "<p>Share devotion with your community, customers, students, and loved ones.  </p><p>Order the Happy Hanuman Pocket Chalisa in bulk and add your logo, blessing message, or event dedication inside.  </p><p>A meaningful spiritual gift for festivals, satsangs, corporate gifting, schools, temples, events, and more.</p>",
+            "navigation_text": "Enquire on WhatsApp",
+            "navigation_link": "https://wa.me/917069002999",
+            "color_title": "#db5c04",
+            "color_text": "#db5c04",
+            "color_text_2": "#282828",
+            "color_text_3": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ap_imagetextblock_JJbUMa"
+      ],
+      "custom_css": [
+        ".ap-imagewithtext__content-list {text-align: left;}",
+        ".ap-imagewithtext__navigation-item {background: #1e9800; padding: 12px 30px; border-radius: 40px; color: white;}"
+      ],
+      "name": "t:sections.ap-imagewithtext.presets.name",
+      "settings": {
+        "setwidthout": "container-fluid",
+        "margin_desktop": "20px 0",
+        "margin_mobile": "",
+        "heading_color": "#282828",
+        "text_color": "#282828",
+        "button_background": "#845640",
+        "button_text_color": "#ffffff",
+        "accent_background": "#f3ff34",
+        "image_position": "left",
+        "enable_accent_background": true,
+        "overlap_image": true,
+        "accent_background_opacity": 100,
+        "autoplay_duration": 8,
+        "navigation_size": "heading--small",
+        "margin_top": 0
+      }
+    },
+    "cstm_video_rByEcW": {
+      "type": "cstm-video",
+      "blocks": {
+        "video_4kRpxw": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/3a062e52a9a043f3bbf4f7187e64db41.mp4",
+            "product_link": ""
+          }
+        },
+        "video_CtVC3m": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/50bceda5292d4bdebf80fe8f44dbc9c1.mp4",
+            "product_link": ""
+          }
+        },
+        "video_6AgJbG": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/177f6fcfe2104c3e855f602d69f8927d.mp4",
+            "product_link": ""
+          }
+        },
+        "video_xq6BUx": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/af2e22ade7de40c7b888ef5797562524.mp4",
+            "product_link": ""
+          }
+        },
+        "video_pyyq43": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b413df13ca66410ab4ee3a2ed203a958.mp4",
+            "product_link": ""
+          }
+        },
+        "video_9j3mza": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b4fcf8579daf4865a6c4a66cb50de993.mp4",
+            "product_link": ""
+          }
+        },
+        "video_NFqRzP": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0d579796e53f4475ac9ad5ff4684be46.mp4",
+            "product_link": ""
+          }
+        },
+        "video_AzdbpH": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/beed91a6442f44bb9cde8984dd1828c0.mp4",
+            "product_link": ""
+          }
+        },
+        "video_FzF3ha": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/068d27fcb222462fab08e4305cae8310.mp4",
+            "product_link": ""
+          }
+        },
+        "video_VjXmC9": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/74006de5341b4f82a97c69abac66515f.mp4",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_4kRpxw",
+        "video_CtVC3m",
+        "video_6AgJbG",
+        "video_xq6BUx",
+        "video_pyyq43",
+        "video_9j3mza",
+        "video_NFqRzP",
+        "video_AzdbpH",
+        "video_FzF3ha",
+        "video_VjXmC9"
+      ],
+      "name": "Cstm Video Reel",
+      "settings": {
+        "text": "The Journey from Sketch to Soul"
+      }
+    },
+    "collapsible_content_6gDKBn": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_3HEBDz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "In which languages is the book available?",
+            "icon": "none",
+            "row_content": "<p>The book is available in English, Hindi, and Gujarati, ensuring accessibility to readers across different regions and preferences.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_p86pmC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What sizes are available for the book?",
+            "icon": "none",
+            "row_content": "<p>The book comes in three sizes: pocket size for convenience, A4 size for easy reading, and a larger size for an immersive experience.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_MiMLrG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How can I pre-book the Hanuman Chalisa book?",
+            "icon": "none",
+            "row_content": "<p>You can pre-book directly on our website through the pre-booking section. Limited copies are available, so don’t miss the opportunity!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JNLRk8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What are Art Combos, and how can I purchase them?",
+            "icon": "none",
+            "row_content": "<p>Art Combos are coloring pages featuring the beautiful illustrations from the book. You can purchase these combos on our website and enjoy the meditative joy of coloring divine artworks.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Kjz48j": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How can I track my order?",
+            "icon": "none",
+            "row_content": "<p>Once you place your order, we’ll send you a confirmation email with tracking details. You can also check the status through the “Track Your Order” section on our website.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_rVcNnH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Are there any discounts or offers available?",
+            "icon": "none",
+            "row_content": "<p>We occasionally run special offers for our customers. Check the homepage or subscribe to our newsletter for updates on discounts and exclusive deals.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HyV6Rz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I gift this book to someone?",
+            "icon": "none",
+            "row_content": "<p>Absolutely! The Hanuman Chalisa book makes a thoughtful gift. Just mention the recipient’s details at checkout, and we’ll take care of the rest.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JCKLX9": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you ship internationally?",
+            "icon": "none",
+            "row_content": "<p>Currently, we ship within India, but we are working on expanding our delivery options to international locations. Stay tuned for updates!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JzMhMy": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I contact customer support?",
+            "icon": "none",
+            "row_content": "<p>If you have any questions or need assistance, feel free to reach out to us via the “Contact Us” page. Our team is here to help!</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_3HEBDz",
+        "collapsible_row_p86pmC",
+        "collapsible_row_MiMLrG",
+        "collapsible_row_JNLRk8",
+        "collapsible_row_Kjz48j",
+        "collapsible_row_rVcNnH",
+        "collapsible_row_HyV6Rz",
+        "collapsible_row_JCKLX9",
+        "collapsible_row_JzMhMy"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "heading_color": "#db5c04",
+        "caption": "",
+        "heading": "Got Questions? We’re Here.\"",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "open_first_collapsible_row": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_EYNTzR",
+    "second_J7xPWq",
+    "gallerycstm_VJExgw",
+    "3section_qEwAxE",
+    "psc_DEe48Y",
+    "ap_imagewithtext_3wDrX9",
+    "cstm_video_rByEcW",
+    "collapsible_content_6gDKBn"
+  ]
+}

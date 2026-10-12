@@ -1,0 +1,27 @@
+{%- comment -%}
+  The back cover with the buyer's details printed on it (design: bk_template + overlay).
+  Text sizes use container units, so the same markup works full size and as a cart thumbnail.
+  Params: s (order section settings), brand, slogan, phone, address, chalisa, lang, mini (cart thumbnail).
+  logam-bulk-order.js fills the [data-lb-pv] parts as the buyer types.
+{%- endcomment -%}
+<div class="lb-cover{% if mini %} lb-cover--mini{% endif %}" data-lb-cover>
+  {%- if s.cover_image != blank -%}
+    {%- if mini -%}
+      {{ s.cover_image | image_url: width: 240 | image_tag: class: 'lb-cover__bg', loading: 'lazy', alt: '' }}
+    {%- else -%}
+      {{ s.cover_image | image_url: width: 1200 | image_tag: class: 'lb-cover__bg', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 460px, calc(100vw - 62px)', loading: 'lazy', alt: '' }}
+    {%- endif -%}
+  {%- else -%}
+    <img class="lb-cover__bg" src="{{ 'lb-bk-template.jpg' | asset_url }}" width="1200" height="896" alt="" loading="lazy">
+  {%- endif -%}
+  <div class="lb-cover__logo">
+    <img data-lb-pv="logo" alt="" width="400" height="400" hidden>
+    <div class="lb-cover__box" data-lb-pv="box"><span data-lb-pv="boxText">{{ brand | default: s.pv_brand | escape }}</span></div>
+  </div>
+  <div class="lb-cover__brand" data-lb-pv="brandLine" hidden></div>
+  <div class="lb-cover__quote">“<span data-lb-pv="chalisa" lang="{{ lang | default: 'en' }}">{{ chalisa | escape }}</span>”</div>
+  {%- if s.cover_meaning != blank -%}<div class="lb-cover__meaning">{{ s.cover_meaning | escape }}</div>{%- endif -%}
+  <div class="lb-cover__slogan{% if slogan == blank %} is-empty{% endif %}" data-lb-pv="slogan">{{ slogan | default: s.pv_slogan | escape }}</div>
+  <div class="lb-cover__contact lb-cover__contact--phone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2B1A0E"/><path d="M9.4 6.8l1.4 2.8-1.1 1.2a7 7 0 0 0 3.5 3.5l1.2-1.1 2.8 1.4-.6 2.3c-4.9.3-9.8-4.6-9.5-9.5z" fill="#FFFFFF"/></svg><span data-lb-pv="phone">{{ phone | default: s.pv_phone | escape }}</span></div>
+  <div class="lb-cover__contact lb-cover__contact--addr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2B1A0E"/><path d="M12 5.8a4.2 4.2 0 0 0-4.2 4.2c0 3.2 4.2 8 4.2 8s4.2-4.8 4.2-8A4.2 4.2 0 0 0 12 5.8z" fill="#FFFFFF"/><circle cx="12" cy="10" r="1.6" fill="#2B1A0E"/></svg><span data-lb-pv="address">{{ address | default: s.pv_address | escape }}</span></div>
+</div>

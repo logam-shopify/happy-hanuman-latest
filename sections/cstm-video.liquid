@@ -1,0 +1,176 @@
+<section class="video-reel-section">
+  <h2 class="video-reel-heading">{{ section.settings.text }}</h2>
+  <div class="video-reel-container">
+    <div class="video-reel">
+      {% for block in section.blocks %}
+        <div class="video-item">
+          <a href="{{ block.settings.product_link }}" target="_blank" class="video-link">
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              controls
+              class="video"
+            >
+              <source src="{{ block.settings.video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Heading */
+  .video-reel-heading {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  section.video-reel-section {
+    padding: 40px;
+  }
+
+  /* Container */
+  .video-reel-container {
+    position: relative;
+    width: 100%;
+    max-width:1200px;
+     margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Video reel */
+  .video-reel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .video-reel::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Each video item */
+  .video-item {
+    display: flex;
+    flex: 0 0 calc(100% / 4);
+    max-height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .video-link {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .video-reel {
+      justify-content: flex-start;
+    }
+
+    .video-item {
+      flex: 0 0 66.66%;
+    }
+
+    .video-reel::after {
+      content: '';
+      flex: 0 0 16px;
+    }
+
+    section.video-reel-section {
+      padding: 15px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const videoReel = document.querySelector('.video-reel');
+    const videoItems = document.querySelectorAll('.video-item');
+    let scrollAmount = 0;
+
+    // Stop link navigation when clicking video controls
+    document.querySelectorAll('.video-link video').forEach(video => {
+      video.addEventListener('click', function (event) {
+        // Allow controls to work, prevent link click
+        event.stopPropagation();
+        event.preventDefault();
+      });
+    });
+
+    // Optional: next/prev buttons (if you add them)
+    const nextButton = document.querySelector('.slider-button.next');
+    const prevButton = document.querySelector('.slider-button.prev');
+
+    if (nextButton && prevButton) {
+      nextButton.addEventListener('click', () => {
+        if (scrollAmount < (videoItems.length - 1) * (videoItems[0].offsetWidth + 16)) {
+          scrollAmount += videoItems[0].offsetWidth + 16;
+          videoReel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+      });
+
+      prevButton.addEventListener('click', () => {
+        if (scrollAmount > 0) {
+          scrollAmount -= videoItems[0].offsetWidth + 16;
+          videoReel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Cstm Video Reel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cstm Video Reel",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,72 @@
+{%- comment -%}
+  "N+ sold" social proof. Added by EDD (Aug 2026).
+
+  Usage: {% render 'units-sold', product: product %}
+         {% render 'units-sold', product: product, variant: 'card' %}
+
+  Reads product.metafields.custom.units_sold — an exact all-time count set from
+  Shopify Analytics (inventory_units_sold). Nothing here queries orders; Liquid cannot,
+  and a live count would be a page-load cost for a number that changes by single digits.
+
+  Two rules, both deliberate:
+
+  1. HIDDEN BELOW 100. The three books have sold 6,235 / 734 / 221. The jars are on 7 to
+     20. "8 sold" is worse than saying nothing at all — it is the one number that talks a
+     visitor out of buying. The threshold means the badge only ever appears where it helps.
+
+  2. ROUNDED DOWN, NEVER UP. 6,235 shows as "6,000+", 734 as "700+". Rounding down keeps
+     the claim true no matter how stale the metafield gets — the real figure only ever
+     climbs past it — and a round number does not look like it was frozen on a date.
+
+  Refresh: Analytics -> Reports, FROM inventory SHOW inventory_units_sold GROUP BY
+  product_title, then update the metafield on each product. Quarterly is plenty.
+{%- endcomment -%}
+
+{%- liquid
+  assign sold = product.metafields.custom.units_sold.value | plus: 0
+  assign min_to_show = 100
+-%}
+
+{%- if sold >= min_to_show -%}
+  {%- liquid
+    if sold >= 1000
+      assign thousands = sold | divided_by: 1000
+      assign shown = thousands | append: ',000'
+    else
+      assign hundreds = sold | divided_by: 100 | times: 100
+      assign shown = hundreds | append: ''
+    endif
+  -%}
+  <p class="units-sold units-sold--{{ variant | default: 'card' }}">
+    <svg class="units-sold__ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 7.5h14l-1.1 12.1a1.4 1.4 0 0 1-1.4 1.3H7.5a1.4 1.4 0 0 1-1.4-1.3L5 7.5Z"
+            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M9 9.4V6.8a3 3 0 0 1 6 0v2.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>
+    <span><strong>{{ shown }}+</strong> sold</span>
+  </p>
+
+  {%- style -%}
+    .units-sold {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      line-height: 1.3;
+      color: #6B5744;
+    }
+    .units-sold strong {
+      font-weight: 700;
+      color: #2B1A0E;
+    }
+    /* A bag, not a heart: a heart on a product card reads as "wishlist", and this
+       card already has a real wishlist control on the image. */
+    .units-sold__ico {
+      flex: none;
+      width: 14px;
+      height: 14px;
+      color: #8A7A66;
+    }
+  {%- endstyle -%}
+{%- endif -%}

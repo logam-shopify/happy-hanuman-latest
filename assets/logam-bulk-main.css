@@ -1,0 +1,112 @@
+/* Logam-Bulk Main (sections/logam-bulk-main.liquid). Builds on logam-hindi.css (.lh tokens, .lh-gallery*, .lh-pill, .lh-desc).
+   Mobile follows the Bulk order / Free demo design; desktop: gallery left (sticky), intro right. */
+.lh.lb-main { padding-top: 0; line-height: 1.6; }
+.lb-main a { color: inherit; }
+.lb-main a:focus-visible, .lb-main button:focus-visible { outline: 3px solid #1F5FBF; outline-offset: 2px; }
+.lb-main .lh-gallery__thumb:focus-visible { outline-offset: -3px; }
+
+/* top strip */
+.lb-main__strip { background: #2B1A0E; color: #FFF3E2; font-size: 13.5px; font-weight: 600; line-height: 1.6; text-align: center; padding: 8px 16px; letter-spacing: .01em; }
+.lb-main__strip span { color: #F2B33D; padding: 0 8px; }
+
+.lb-main__in { padding-top: var(--lh-pt-m, 0px); }
+
+/* gallery (behaviour: initMain() in logam-hindi.js) */
+.lb-main .lh-gallery__slide { position: relative; }
+.lb-main .lh-gallery__slide img { object-fit: cover; }
+.lb-main .lh-gallery__slide > svg { width: 100%; height: 100%; }
+.lb-main .lh-gallery__badge { background: rgba(43, 26, 14, .85); color: #FFF3E2; font-size: 13px; }
+.lb-main .lh-gallery__count { background: rgba(43, 26, 14, .8); font-size: 13px; padding: 3px 9px; }
+.lb-main .lh-gallery__thumbs { padding-bottom: 2px; }
+.lb-main__cap { position: absolute; left: 12px; top: 52px; max-width: calc(100% - 24px); background: rgba(255, 248, 238, .95); border-radius: 14px; padding: 8px 14px 10px; box-shadow: 0 8px 24px rgba(43, 26, 14, .18); }
+.lb-main__cap--bottom { top: auto; bottom: 12px; }
+.lb-main__cap-text { font-size: 12.5px; font-weight: 800; line-height: 1.35; color: #B04600; }
+.lb-main__cap-title { font-family: var(--lh-serif); font-weight: 700; font-size: 20px; line-height: 1.2; color: var(--lh-ink); text-wrap: balance; }
+.lb-main__cap-title:only-child { font-size: 21px; }
+
+/* intro */
+.lb-main__info { padding: 14px 16px 0; }
+.lb-main .lb-main__title { font-size: 28px; line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
+.lb-main__badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.lb-main__badge { background: #2B1A0E; color: #FFE7B8; font-size: 12.5px; font-weight: 800; padding: 3px 10px; border-radius: 999px; }
+.lb-main__badge--light { background: #fff; border: 1px solid #E6D6C3; color: #2B1A0E; font-weight: 700; padding: 2px 10px; }
+
+/* price */
+.lb-main__price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px; }
+.lb-main__price:has(.lb-main__was) { align-items: center; row-gap: 6px; }
+.lb-main__now { font-size: 30px; font-weight: 800; color: var(--lh-ink); letter-spacing: -.01em; line-height: 1.1; }
+.lb-main__now--green { color: #1F5C33; }
+.lb-main__now small { font-size: 16px; font-weight: 700; color: #5C4636; }
+.lb-main__was { font-size: 16px; color: #5C4636; }
+.lb-main__line { margin-top: 4px; font-size: 14.5px; color: #3F2B1D; }
+.lb-main__line :is(b, strong) { color: var(--lh-ink); font-weight: 700; }
+.lb-main__note { margin-top: 2px; font-size: 14px; font-weight: 600; color: #2F6B3F; }
+
+/* promo: link card + steps */
+.lb-main__promo { margin-top: 16px; }
+.lb-main__card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #EEF6EF; border: 1.5px dashed #7DB38A; border-radius: 14px; line-height: 1.4; color: #1F5C33; }
+.lb-main__card-icon { flex: none; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 999px; background: #fff; }
+.lb-main__card-icon svg { width: 22px; height: 22px; }
+.lb-main__card-txt { flex: 1; min-width: 0; }
+.lb-main__card-title { display: block; font-size: 15.5px; font-weight: 800; color: #1F5C33; }
+.lb-main__card-text { display: block; font-size: 13.5px; color: #3F2B1D; }
+.lb-main__card > svg { flex: none; width: 18px; height: 18px; }
+.lb-main__steps { display: flex; align-items: stretch; gap: 6px; }
+.lb-main__step { flex: 1 1 0; min-width: 0; display: block; padding: 10px 12px; background: #fff; border: 1px solid #EBDCC8; border-radius: 16px; }
+.lb-main__step.is-hi { border: 2px solid #C24E00; }
+.lb-main__step-label { display: block; font-size: 12px; font-weight: 800; color: #5C4636; letter-spacing: .03em; }
+.lb-main__step.is-hi .lb-main__step-label { color: #B04600; }
+.lb-main__step-title { display: block; margin-top: 2px; font-size: 15px; font-weight: 800; line-height: 1.3; color: var(--lh-ink); }
+.lb-main__step-text { display: block; margin-top: 2px; font-size: 13px; line-height: 1.4; color: #5C4636; }
+.lb-main__arrow { flex: none; display: flex; align-items: center; color: #B04600; }
+.lb-main__arrow svg { width: 18px; height: 18px; }
+
+/* desktop: strip full width, then gallery (sticky) | intro, max 1200px */
+@media (min-width: 750px) {
+  .lb-main__strip { font-size: 14px; padding: 10px 32px; }
+  .lb-main__in { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 32px; align-items: start; max-width: 1200px; margin: 0 auto; padding: var(--lh-pt, 32px) 32px 0; }
+  .lb-main__in:not(:has(.lb-main__media)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+  .lb-main__media { position: sticky; top: calc(var(--header-height, 0px) * var(--enable-sticky-header, 0) + 24px); }
+  .lb-main .lh-gallery { border-radius: 24px; }
+  .lb-main .lh-gallery__badge { top: 16px; left: 16px; }
+  .lb-main .lh-gallery__count { top: 16px; right: 16px; }
+  .lb-main .lh-gallery__thumbs { gap: 10px; padding: 12px 0 0; }
+  .lb-main__cap { left: 16px; top: 58px; max-width: calc(100% - 32px); padding: 10px 16px 12px; }
+  .lb-main__cap--bottom { top: auto; bottom: 16px; }
+  .lb-main__cap-text { font-size: 13.5px; }
+  .lb-main__cap-title { font-size: 22px; }
+  .lb-main__cap-title:only-child { font-size: 24px; }
+
+  .lb-main__info { padding: 0; }
+  .lb-main .lb-main__title { font-size: 34px; line-height: 1.12; margin: 2px 0 12px; }
+  .lb-main__badge { font-size: 13.5px; padding: 4px 12px; }
+  .lb-main__badge--light { padding: 3px 12px; }
+  .lb-main__price { gap: 6px 12px; margin-top: 16px; }
+  .lb-main__now { font-size: 36px; }
+  .lb-main__now small { font-size: 18px; }
+  .lb-main__was { font-size: 18px; }
+  .lb-main .lh-pill { padding: 4px 10px; }
+  .lb-main__line { margin-top: 6px; font-size: 15.5px; }
+  .lb-main__note { margin-top: 4px; font-size: 15px; }
+  .lb-main .lh-desc { margin-top: 14px; }
+  .lb-main__promo { margin-top: 24px; }
+  .lb-main__card { gap: 14px; padding: 16px 18px; }
+  .lb-main__card-title { font-size: 17px; }
+  .lb-main__card-text { font-size: 14.5px; }
+  .lb-main__steps { gap: 10px; }
+  .lb-main__step { padding: 14px 16px; }
+  .lb-main__step-label { font-size: 12.5px; }
+  .lb-main__step-title { font-size: 17px; }
+  .lb-main__step-text { font-size: 14px; }
+  .lb-main__arrow svg { width: 20px; height: 20px; }
+
+  .lb-main__card { transition: border-color .15s, background-color .15s; }
+  .lb-main__card:is(a):hover { border-color: #1F5C33; background: #E4F0E6; }
+  a.lb-main__step { transition: border-color .15s; }
+  a.lb-main__step:hover { border-color: #C24E00; }
+}
+@media (min-width: 1200px) {
+  .lb-main__in { gap: 48px; padding-left: 40px; padding-right: 40px; }
+  .lb-main .lb-main__title { font-size: 44px; }
+}
+@media (prefers-reduced-motion: reduce) { .lb-main__card, a.lb-main__step { transition: none; } }

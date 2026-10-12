@@ -1,0 +1,147 @@
+{%- render 'logam-book-details', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Details",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "વિગતો"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "આ એડિશન વિશે"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "એડિશન"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "info": "Use the dynamic source icon to connect a product metafield.",
+          "default": "ગુજરાતી"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Gujarati Details",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "એડિશન",
+            "value": "ગુજરાતી"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "સાઇઝ",
+            "value": "A4"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "પાનાં",
+            "value": "43, હાથે દોરેલાં ચિત્રો સાથે"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "કોના માટે",
+            "value": "બાળકો અને મોટાઓ: પરિવાર, માતા-પિતા, ટીચર, હનુમાન ભક્તો"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "ડિલિવરી",
+            "value": "ફ્રી, 3 થી 5 વર્કિંગ દિવસમાં"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "બદલી",
+            "value": "ખરાબ હાલતમાં કે ખોટી એડિશન આવે તો 7 દિવસમાં"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,220 @@
+{%- comment -%}
+  Logam footer, Hindi text (same layout as the Logam-English Footer).
+  Policy links come from the chosen menu; without one, the store's standard pages are used.
+{%- endcomment -%}
+{%- comment -%} Hindi pages only, so it can also sit in the site-wide footer group {%- endcomment -%}
+{%- if template.suffix contains 'hindi' -%}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&family=Noto+Serif:wght@700&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@700&display=swap" media="print" onload="this.media='all'">
+{%- liquid
+  assign s = section.settings
+  assign logo = s.logo | default: images['logo.png']
+  assign logo_w = logo.aspect_ratio | times: 54 | round
+  assign year = 'now' | date: '%Y'
+  assign copyright = s.copyright | replace: '[year]', year
+-%}
+{%- style -%}
+  #lf-{{ section.id }} { --lf-bg: {{ s.bg }}; }
+{%- endstyle -%}
+<footer id="lf-{{ section.id }}" class="lf">
+  <div class="lf__in">
+    <div class="lf__brand">
+      <a href="{{ routes.root_url }}" class="lf__logo">
+        {%- if logo != blank and logo.width -%}
+          {{ logo | image_url: width: 400 | image_tag: alt: shop.name, width: logo_w, height: 54, loading: 'lazy' }}
+        {%- else -%}
+          <span class="lf__name">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if s.tagline != blank -%}<p class="lf__tagline">{{ s.tagline }}</p>{%- endif -%}
+    </div>
+
+    <div class="lf__help">
+      {%- if s.help_title != blank -%}<p class="lf__title">{{ s.help_title }}</p>{%- endif -%}
+      <div class="lf__btns">
+        {%- if s.whatsapp_url != blank -%}<a class="lf__btn" href="{{ s.whatsapp_url }}" target="_blank" rel="noopener">{{ s.whatsapp_label }}</a>{%- endif -%}
+        {%- if s.phone != blank -%}<a class="lf__btn" href="tel:{{ s.phone | remove: ' ' }}">{{ s.call_label }}</a>{%- endif -%}
+      </div>
+      {%- if s.contact != blank -%}<p class="lf__contact">{{ s.contact }}</p>{%- endif -%}
+    </div>
+
+    <nav class="lf__links" aria-label="{{ s.menu_label | escape }}">
+      {%- if s.menu != blank and s.menu.links.size > 0 -%}
+        {%- for link in s.menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- else -%}
+        <a href="/pages/about-us">हमारे बारे में</a>
+        <a href="/pages/shipping-policy">शिपिंग</a>
+        <a href="/pages/refund-policy">रिप्लेसमेंट और रिफ़ंड</a>
+        <a href="/pages/privacy-policy">प्राइवेसी</a>
+        <a href="/pages/terms-of-service">शर्तें</a>
+      {%- endif -%}
+    </nav>
+  </div>
+
+  <div class="lf__bottom">
+    <span>{{ copyright }}</span>
+    {%- if s.powered_name != blank -%}
+      <span class="lf__powered">{{ s.powered_text }} <a href="{{ s.powered_url | default: 'https://www.logamdigital.com/' }}" target="_blank" rel="noopener">{{ s.powered_name }}</a></span>
+    {%- endif -%}
+  </div>
+</footer>
+
+{%- endif -%}
+
+{% stylesheet %}
+  .lf { background: var(--lf-bg, #F3E6D3); color: #3F2B1D; font-family: 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .lf *, .lf *::before, .lf *::after { box-sizing: border-box; }
+  .lf :where(p, nav) { margin: 0; padding: 0; }
+  .lf a { color: inherit; }
+  .lf__in { padding: 26px 16px 0; }
+  .lf__logo { display: inline-block; text-decoration: none; }
+  .lf__logo img { display: block; height: 44px; width: auto; }
+  .lf__name { font-family: 'Noto Serif', 'Noto Serif Devanagari', Georgia, serif; font-size: 22px; font-weight: 700; color: #2B1A0E; }
+  .lf .lf__tagline { margin-top: 10px !important; font-size: 14.5px; line-height: 1.5; color: #3F2B1D; }
+  .lf .lf__title { margin: 18px 0 8px !important; font-size: 14px; font-weight: 800; color: #2B1A0E; }
+  .lf__btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .lf__btn { display: flex; align-items: center; justify-content: center; height: 46px; padding: 0 18px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E2CFB7; color: #2B1A0E !important; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .lf .lf__contact { margin-top: 10px !important; font-size: 14px; color: #5C4636; overflow-wrap: anywhere; }
+  .lf__links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 18px !important; font-size: 14px; font-weight: 600; }
+  .lf__links a { color: #3F2B1D; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #C9A88A; }
+  .lf__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: 16px 16px calc(22px + env(safe-area-inset-bottom)); font-size: 13px; color: #5C4636; }
+  .lf__powered a { color: #2B1A0E; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #C9A88A; }
+  @media (hover: hover) {
+    .lf__btn:hover { border-color: #2B1A0E; }
+    .lf__links a:hover, .lf__powered a:hover { color: #B04600; }
+  }
+  @media (min-width: 750px) {
+    .lf__in { max-width: 1320px; margin: 0 auto; padding: 48px 40px 32px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, .8fr); gap: 40px; align-items: start; }
+    .lf__logo img { height: 54px; }
+    .lf .lf__tagline { margin-top: 14px !important; max-width: 380px; font-family: 'Noto Serif', 'Noto Serif Devanagari', Georgia, serif; font-weight: 700; font-size: 17px; line-height: 1.6; color: #2B1A0E; }
+    .lf .lf__title { margin: 0 0 12px !important; }
+    .lf__btns { display: flex; gap: 10px; }
+    .lf__btn { height: 44px; min-width: 200px; }
+    .lf .lf__contact { margin-top: 12px !important; }
+    .lf__links { flex-direction: column; flex-wrap: nowrap; gap: 10px; margin-top: 0 !important; font-size: 15px; }
+    .lf__bottom { max-width: 1240px; margin: 0 auto; padding: 18px 0 26px; border-top: 1px solid #E2CFB7; font-size: 13.5px; }
+  }
+  @media (min-width: 750px) and (max-width: 1279px) { .lf__bottom { margin: 0 40px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Logam-hindi Footer",
+  "tag": "div",
+  "class": "logam-footer-hi-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Uses logo.png from your Files if empty."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "हर पन्ना हनुमान जी का आशीर्वाद है। हम तो बस माध्यम हैं।"
+    },
+    {
+      "type": "header",
+      "content": "Help"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Heading",
+      "default": "मदद चाहिए? सुबह 9 से शाम 6 बजे तक"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp button",
+      "default": "WhatsApp करें"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_url",
+      "label": "WhatsApp link",
+      "default": "https://wa.me/918238188824"
+    },
+    {
+      "type": "text",
+      "id": "call_label",
+      "label": "Call button",
+      "default": "कॉल करें"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+91 82381 88824"
+    },
+    {
+      "type": "text",
+      "id": "contact",
+      "label": "Contact line",
+      "default": "+91 82381 88824 · samvad.happyhanuman@gmail.com"
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Without a menu: हमारे बारे में, शिपिंग, रिप्लेसमेंट और रिफ़ंड, प्राइवेसी, शर्तें."
+    },
+    {
+      "type": "text",
+      "id": "menu_label",
+      "label": "Menu name (screen readers)",
+      "default": "नीतियाँ"
+    },
+    {
+      "type": "header",
+      "content": "Bottom"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "info": "[year] = current year",
+      "default": "© [year] हैप्पी हनुमान"
+    },
+    {
+      "type": "text",
+      "id": "powered_text",
+      "label": "Powered by text",
+      "default": "Powered by"
+    },
+    {
+      "type": "text",
+      "id": "powered_name",
+      "label": "Powered by name",
+      "default": "Logam Digital"
+    },
+    {
+      "type": "text",
+      "id": "powered_url",
+      "label": "Powered by link",
+      "default": "https://www.logamdigital.com/"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F3E6D3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi Footer"
+    }
+  ]
+}
+{% endschema %}

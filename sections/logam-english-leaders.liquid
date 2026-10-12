@@ -1,0 +1,194 @@
+{%- render 'logam-book-leaders' -%}
+
+{% schema %}
+{
+  "name": "Logam-English Leaders",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Blessed by"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Spiritual leaders who have read it"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "dcols",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Band background",
+      "default": "#FBEFDD"
+    },
+    {
+      "type": "color",
+      "id": "page_bg",
+      "label": "Space above background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "gap_m",
+      "label": "Space above (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space above (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        },
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Photo",
+          "info": "Shown on top of the card, wide (2:1)."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English Leaders",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "This book is very useful not only for youth and children but for everyone, the pictures in the book are wonderful, great work.",
+            "name": "Anupam Kher",
+            "role": "Indian actor and director / Hanuman Bhakt"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Good pictures can create good character, I express my pleasure in this work.",
+            "name": "Pujya Morari Bapu"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "I have never seen such deep and excellent work on Hanumanji.",
+            "name": "Pujya Hari Prakash Shastri",
+            "role": "Salangpur Dham"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "That’s a wonderful work, I have never seen a more interesting book on Hanumanji for children and youth.",
+            "name": "Akshat Gupta",
+            "role": "Author"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "This book should be something that goes into everyone’s hands. Very interesting presentation.",
+            "name": "Jay Vasavada",
+            "role": "Author"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Ashish, God is with you. Very nice work, now done with the book. God himself is with you in this work.",
+            "name": "Padma Bhushan Swami Sachidananda"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,131 @@
+{%- render 'logam-book-languages' -%}
+
+{% schema %}
+{
+  "name": "Logam-English Languages",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Also available in"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "paragraph",
+      "content": "Pick a product per card: image, price and link load automatically. The card for the product on this page hides itself."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "edition",
+      "name": "Edition",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "हिन्दी edition"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Badge",
+          "info": "e.g. बेस्टसेलर"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Product image is used if empty."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English Languages",
+      "blocks": [
+        {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी edition"
+          }
+        },
+        {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી edition",
+            "tag": "Bestseller"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

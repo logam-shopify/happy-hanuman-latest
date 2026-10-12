@@ -1,0 +1,35 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-languages">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    <div class="lh-langs">
+      {%- for block in section.blocks -%}
+        {%- assign ep = block.settings.product -%}
+        {%- if ep == blank or ep.id != product.id -%}
+          {%- assign ev = ep.selected_or_first_available_variant -%}
+          <a class="lh-lang" href="{{ ep.url | default: '#' }}" {{ block.shopify_attributes }}>
+            <div class="lh-ph">
+              {%- assign img = block.settings.image | default: ep.featured_image -%}
+              {%- if img != blank -%}
+                {{ img | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', alt: ep.title }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <div class="lh-lang__txt">
+              <b>{{ block.settings.label | default: ep.title }}</b>
+              <span class="lh-lang__price">
+                {%- if ev -%}<b>{{ ev.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</b>{% if ev.compare_at_price > ev.price %}<s>{{ ev.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}{%- endif -%}
+                {%- if block.settings.tag != blank -%}<em class="lh-lang__tag">{{ block.settings.tag }}</em>{%- endif -%}
+              </span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

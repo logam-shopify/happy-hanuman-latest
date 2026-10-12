@@ -1,0 +1,225 @@
+{% comment %}
+  Why Every Home Needs This – features grid section
+  - Desktop: 3 columns (auto-wraps if you add more)
+  - Tablet: 2 columns
+  - Mobile: 1 column
+  - Optional mobile-specific image (falls back to desktop image)
+{% endcomment %}
+
+<section id="why-home-{{ section.id }}" class="why-home-section color-{{ section.settings.color_scheme }}">
+  <div class="why-home-wrapper page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="why-home-heading" style="text-align: {{ section.settings.heading_align }};">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {% endif %}
+
+    <div class="why-home-grid" style="--card-gap: {{ section.settings.gap }}px;">
+      {% for block in section.blocks %}
+        {% assign desktop_img = block.settings.image %}
+        {% assign mobile_img  = block.settings.image_mobile | default: block.settings.image %}
+
+        <article class="why-home-card" {{ block.shopify_attributes }}>
+          <a class="why-home-media" {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %} aria-label="{{ block.settings.title | escape }}">
+            {% if mobile_img != blank or desktop_img != blank %}
+              <picture>
+                {% if mobile_img != blank %}
+                  <source media="(max-width: 749px)" srcset="{{ mobile_img | image_url: width: 750 }}">
+                {% endif %}
+                {% if desktop_img != blank %}
+                  <img
+                    src="{{ desktop_img | image_url: width: 900 }}"
+                    alt="{{ block.settings.alt | default: block.settings.title | escape }}"
+                    loading="lazy"
+                    class="why-home-img"
+                    width="{{ desktop_img.width }}"
+                    height="{{ desktop_img.height }}"
+                  >
+                {% else %}
+                  <img
+                    src="{{ mobile_img | image_url: width: 750 }}"
+                    alt="{{ block.settings.alt | default: block.settings.title | escape }}"
+                    loading="lazy"
+                    class="why-home-img"
+                    width="{{ mobile_img.width }}"
+                    height="{{ mobile_img.height }}"
+                  >
+                {% endif %}
+              </picture>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'why-home-placeholder' }}
+            {% endif %}
+          </a>
+
+          {% if block.settings.title != blank %}
+            <h3 class="why-home-title">{{ block.settings.title | escape }}</h3>
+          {% endif %}
+
+          {% if block.settings.text != blank %}
+            <p class="why-home-text">{{ block.settings.text | escape }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <style>
+    /* ====== Section base ====== */
+    #why-home-{{ section.id }}{
+      padding: {{ section.settings.padding_top | default: 48 }}px 0 {{ section.settings.padding_bottom | default: 48 }}px;
+      background: {{ section.settings.bg }};
+    }
+    #why-home-{{ section.id }} }
+
+    .why-home-heading{
+      margin: 0 0 20px;
+      font-size: clamp(22px, 2.6vw, 36px);
+      line-height: 1.2;
+      color: {{ section.settings.heading_color }};
+      font-weight: 700;
+    }
+
+    /* ====== Grid ====== */
+    .why-home-grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--card-gap);
+    }
+    @media (min-width: 750px){
+      .why-home-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 990px){
+      .why-home-grid{ grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr); }
+    }
+
+    /* ====== Card ====== */
+    .why-home-card{
+      background: {{ section.settings.card_bg }};
+      border-radius: {{ section.settings.radius }}px;
+      padding: {{ section.settings.card_padding }}px;
+      box-shadow: {% if section.settings.shadow %}0 8px 24px rgba(0,0,0,.06){% else %}none{% endif %};
+    }
+
+    /* Image wrapper keeps aspect ratio */
+    .why-home-media{
+      display: block;
+      overflow: hidden;
+      border-radius: {{ section.settings.image_radius }}px;
+      position: relative;
+      margin-bottom: 14px;
+      background: #f6f6f6;
+      /* Aspect ratios */
+      {% case section.settings.image_ratio %}
+        {% when 'square' %}
+          padding-top: 100%;
+        {% when 'portrait' %}
+          padding-top: 125%;
+        {% when 'landscape' %}
+          padding-top: 66.66%;
+        {% else %}
+          padding-top: 56.25%;
+      {% endcase %}
+    }
+    .why-home-img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+    .why-home-media:hover .why-home-img{ transform: scale(1.03); }
+
+    .why-home-title{
+      margin: 6px 0 6px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.35;
+      color: {{ section.settings.title_color }};
+    }
+    .why-home-text{
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: {{ section.settings.text_color }};
+      opacity: .9;
+    }
+
+    /* Placeholder style (if no image selected) */
+    .why-home-placeholder{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Why Every Home – Features",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Every Home Needs This" },
+    { "type": "select", "id": "heading_align", "label": "Heading alignment", "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "step": 1, "default": 3, "label": "Columns on desktop" },
+    { "type": "range", "id": "gap", "min": 8, "max": 40, "step": 2, "default": 24, "label": "Card gap" },
+
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFF7EF" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "background-1" },
+
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#C05A00" },
+    { "type": "color", "id": "title_color", "label": "Card title color", "default": "#222222" },
+    { "type": "color", "id": "text_color", "label": "Card text color", "default": "#444444" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+
+    { "type": "select", "id": "image_ratio", "label": "Image aspect ratio", "default": "landscape",
+      "options": [
+        { "value": "landscape", "label": "16:9" },
+        { "value": "square", "label": "1:1" },
+        { "value": "portrait", "label": "4:5" }
+      ]
+    },
+
+    { "type": "range", "id": "radius", "min": 0, "max": 24, "step": 2, "default": 12, "label": "Card corner radius" },
+    { "type": "range", "id": "image_radius", "min": 0, "max": 24, "step": 2, "default": 8, "label": "Image corner radius" },
+    { "type": "checkbox", "id": "shadow", "label": "Card shadow", "default": false },
+
+    { "type": "range", "id": "card_padding", "min": 8, "max": 32, "step": 2, "default": 16, "label": "Card padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "default": 56, "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "default": 56, "label": "Padding bottom" },
+    { "type": "range", "id": "max_width", "min": 900, "max": 1600, "step": 20, "default": 1200, "label": "Max content width (px)" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (desktop)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile, optional)" },
+        { "type": "text", "id": "alt", "label": "Image alt text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Builds Faith in Kids" },
+        { "type": "text", "id": "text", "label": "Short description", "default": "Make devotion a habit, not a lecture." },
+        { "type": "url", "id": "link", "label": "Optional link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Why Every Home – Features",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Builds Faith in Kids", "text": "Make devotion a habit, not a lecture." } },
+        { "type": "feature", "settings": { "title": "Travel Blessing", "text": "Keep Hanuman with you in journey & exams." } },
+        { "type": "feature", "settings": { "title": "Pocket-Friendly Gift", "text": "Temple groups, schools, satsang, corporates." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

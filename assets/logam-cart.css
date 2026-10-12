@@ -1,0 +1,178 @@
+/* Logam cart drawer: same layout, values and animations as the "hh-cart" drawer in the design file. */
+.hh-overlay { position: fixed; inset: 0; z-index: 10000; }
+.hh-overlay[hidden] { display: none !important; }
+.hh-overlay *, .hh-overlay *::before, .hh-overlay *::after { box-sizing: border-box; }
+html.hh-lock, html.hh-lock body { overflow: hidden !important; }
+
+/* neutralise theme / Bootstrap element styles inside the drawer */
+.hh-overlay :where(p, h2, section, form, b, s, img) { margin: 0; padding: 0; }
+.hh-overlay :where(h2) { letter-spacing: 0; text-transform: none; }
+.hh-overlay :where(button) { margin: 0; padding: 0; font: inherit; letter-spacing: normal; text-transform: none; line-height: normal; border-radius: 0; text-align: center; }
+.hh-overlay :where(b, strong) { font-weight: 700; }
+.hh-overlay :where(a) { text-decoration: none; color: inherit; }
+.hh-overlay :where(img) { display: block; max-width: none; transition: none; }
+.hh-overlay a:focus-visible, .hh-overlay button:focus-visible { outline: 3px solid #1F5FBF; outline-offset: 2px; border-radius: 8px; }
+
+.hh-scrim { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: rgba(20, 12, 6, .55); cursor: pointer; }
+.hh-drawer {
+  position: absolute; top: 0; bottom: 0; right: 0; width: min(350px, 90%);
+  display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: #FFF8EE; box-shadow: -14px 0 32px rgba(20, 12, 6, .32);
+  font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Gujarati', system-ui, sans-serif;
+  font-size: 16px; line-height: 1.5; color: #3F2B1D; text-align: left; -webkit-font-smoothing: antialiased;
+  animation: hh-drawer .28s ease;
+}
+@keyframes hh-drawer { from { transform: translateX(40px); opacity: 0; } }
+@media (min-width: 750px) { .hh-drawer { width: min(420px, 92vw); } }
+
+/* header */
+.hh-head { flex: none; display: flex; align-items: center; gap: 4px; padding: 6px 14px 6px 4px; border-bottom: 1px solid #EBDCC8; }
+.hh-x { width: 44px; height: 44px; border: 0; background: none; color: #2B1A0E; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.hh-x svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hh-title { font-family: 'Noto Serif', 'Noto Serif Devanagari', 'Noto Serif Gujarati', serif; font-size: 22px; font-weight: 700; line-height: 1.2; color: #2B1A0E; }
+.hh-count { margin-left: auto; font-size: 13px; font-weight: 700; color: #5C4636; }
+
+/* body */
+.hh-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.hh-items { display: flex; flex-direction: column; gap: 12px; }
+.hh-err { flex: none; padding: 10px 12px; border-radius: 12px; background: #FDECEA; color: #8A1C12; font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+
+/* journey card */
+.hh-journey { flex: none; position: relative; border-radius: 18px; border: 1px solid #F0D7B4; background: linear-gradient(180deg, #FFDDB0 0%, #FFEBD0 55%, #FFF6E6 100%); padding: 12px 14px; overflow: hidden; }
+.hh-jtop { display: flex; align-items: flex-start; gap: 10px; }
+.hh-jtitle { flex: 1; font-size: 16px; font-weight: 800; line-height: 1.3; color: #2B1A0E; text-wrap: balance; }
+.hh-pill { flex: none; margin-top: 1px; background: #2B1A0E; color: #FFE7B8; font-size: 12px; font-weight: 800; line-height: 1.5; padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
+.hh-stage { position: relative; height: 152px; margin-top: 6px; }
+.hh-cloud { position: absolute; }
+.hh-cloud svg { width: 100%; height: auto; display: block; }
+.hh-cloud--1 { left: 6px; top: 16px; width: 52px; opacity: .95; }
+.hh-cloud--2 { left: 132px; top: 2px; width: 40px; opacity: .8; animation-delay: -3s; }
+.hh-cloud--3 { left: 214px; top: 30px; width: 34px; opacity: .85; animation-delay: -6s; }
+.hh-track { position: absolute; left: 16px; right: 30px; top: 116px; height: 6px; border-radius: 999px; background: #EAD3B4; }
+.hh-fill { display: block !important; position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: linear-gradient(90deg, #F2B33D, #C24E00); overflow: hidden; }
+.hh-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 999px; background: #C24E00; color: #FFFFFF; border: 2px solid #FFF6E6; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; line-height: 1; }
+.hh-lockdot { position: absolute; left: 100%; top: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; }
+.hh-pulse { position: absolute; inset: 0; border-radius: 999px; border: 2px solid #C24E00; }
+.hh-lockdot__in { position: absolute; inset: 0; border-radius: 999px; background: #FFFFFF; border: 2px dashed #C24E00; display: flex; align-items: center; justify-content: center; }
+.hh-lockdot__in svg { width: 13px; height: 13px; fill: none; stroke: #C24E00; stroke-width: 2.6; stroke-linejoin: round; }
+.hh-burstwrap { position: absolute; left: 100%; top: 50%; width: 0; height: 0; }
+.hh-runner { position: absolute; bottom: 10px; width: 0; height: 0; }
+.hh-bob { position: absolute; left: -66px; bottom: 0; width: 104px; }
+.hh-bob svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hh-labels { position: absolute; left: 0; right: 0; top: 134px; display: flex; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 700; line-height: 1.3; }
+.hh-labels__book { color: #5C4636; padding-top: 2px; }
+.hh-gpill { background: #2F6B3F; color: #FFFFFF; padding: 2px 8px; border-radius: 999px; }
+.hh-cart p.hh-jtext { margin-top: 6px !important; font-size: 13.5px; line-height: 1.5; color: #3F2B1D; }
+.hh-jtext b, .hh-jtext strong { color: #1F5C33; }
+
+/* cart lines */
+.hh-item { flex: none; display: flex; gap: 12px; padding: 12px; background: #FFFFFF; border: 1px solid #EBDCC8; border-radius: 16px; }
+.hh-item__img { flex: none; width: 76px; height: 76px; border-radius: 10px; overflow: hidden; background: #F3E6D3; }
+.hh-item__img img { width: 76px; height: 76px; object-fit: cover; }
+.hh-item__main { flex: 1; min-width: 0; }
+.hh-item__t { font-size: 15px; font-weight: 800; line-height: 1.3; color: #2B1A0E; }
+.hh-item__s { font-size: 13px; line-height: 1.4; color: #5C4636; margin-top: 2px; }
+.hh-item__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+.hh-price { line-height: 1.2; }
+.hh-price b { font-size: 16px; color: #2B1A0E; }
+.hh-price s { font-size: 13px; color: #5C4636; }
+.hh-qty { flex: none; display: flex; align-items: center; height: 36px; border: 1.5px solid #E6D6C3; border-radius: 999px; background: #FFFFFF; }
+.hh-qty button { width: 34px; height: 34px; border: 0; background: none; font-size: 18px; color: #2B1A0E; cursor: pointer; }
+.hh-qty span { min-width: 14px; text-align: center; font-size: 14px; font-weight: 800; color: #2B1A0E; }
+.hh-remove { flex: none; height: 36px; padding: 0 12px !important; border: 0; background: none; font-size: 13.5px; font-weight: 700; color: #5C4636; text-decoration: underline; cursor: pointer; }
+
+/* step 5 upsell card */
+.hh-up { flex: none; border: 2px dashed #E0B184; background: #FBF2E6; border-radius: 16px; padding: 12px; }
+.hh-up__top { display: flex; gap: 12px; align-items: flex-start; }
+.hh-up__top img { flex: none; width: 96px; height: 72px; object-fit: cover; border-radius: 10px; }
+.hh-up__ph { flex: none; width: 96px; height: 72px; border-radius: 10px; background: linear-gradient(135deg, #EED9BC, #D9BFA0); }
+.hh-up__txt { min-width: 0; }
+.hh-up__eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .05em; color: #B04600; text-transform: uppercase; }
+.hh-up__t { font-size: 15px; font-weight: 800; line-height: 1.3; color: #2B1A0E; }
+.hh-up__d { font-size: 13px; line-height: 1.45; color: #3F2B1D; margin-top: 2px; }
+.hh-up__row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.hh-up__price { line-height: 1.25; }
+.hh-up__price b { font-size: 17px; color: #2B1A0E; }
+.hh-up__price s { font-size: 13px; color: #5C4636; }
+.hh-up__off { font-size: 12.5px; font-weight: 800; color: #1F5C33; }
+.hh-up__add { margin-left: auto !important; flex: none; height: 44px; padding: 0 16px !important; border: 0; border-radius: 999px !important; background: #C24E00; color: #FFFFFF; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 14px rgba(160, 64, 0, .25); white-space: nowrap; }
+
+/* footer */
+.hh-foot { flex: none; border-top: 1px solid #EBDCC8; background: #FFFFFF; padding: 10px 14px 14px; }
+.hh-disc { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 6px; font-size: 13.5px; font-weight: 700; color: #1F5C33; }
+.hh-totrow { display: flex; align-items: center; gap: 12px; }
+.hh-tot { line-height: 1.25; }
+.hh-tot small { display: block; font-size: 12.5px; color: #5C4636; }
+.hh-tot b { font-size: 21px; color: #2B1A0E; }
+.hh-tot s { font-size: 13px; color: #5C4636; }
+.hh-checkout { margin-left: auto !important; flex: 1; max-width: 190px; height: 50px; border: 0; border-radius: 999px !important; background: #2B1A0E; color: #FFFFFF; font-size: 16px; font-weight: 800; cursor: pointer; }
+.hh-foot__note { font-size: 12.5px; font-weight: 600; color: #2F6B3F; margin-top: 6px; }
+.hh-empty { padding: 40px 8px; text-align: center; }
+.hh-cart .hh-empty p { font-size: 16px; font-weight: 700; color: #2B1A0E; margin-bottom: 16px !important; }
+.hh-empty .hh-checkout { margin: 0 auto !important; width: auto; max-width: none; padding: 0 28px !important; flex: none; }
+/* offer switched off: same look, no action */
+.hh-up__add[aria-disabled="true"] { cursor: default; }
+@media (hover: hover) {
+  .hh-up__add:not([aria-disabled="true"]):hover { background: #A84200; }
+  .hh-checkout:hover { background: #000000; }
+}
+
+/* states: before / after the step 5 product is in the cart */
+.hh-cart .hh-when-on { display: none; }
+.hh-cart .hh-when-off { display: contents; }
+.hh-cart.is-added .hh-when-on { display: contents; }
+.hh-cart.is-added .hh-when-off { display: none; }
+.hh-cart .hh-fill { width: 75%; }
+.hh-cart.is-added .hh-fill { width: 100%; }
+.hh-cart .hh-runner { left: 75%; }
+.hh-cart.is-added .hh-runner { left: 100%; }
+.hh-cart.is-empty .hh-journey, .hh-cart.is-empty .hh-foot { display: none; }
+.hh-cart.is-busy [data-hh-part="items"], .hh-cart.is-busy [data-hh-part="foot"] { opacity: .55; pointer-events: none; transition: opacity .15s; }
+
+/* animations (from the design) */
+.hh-twinkle { transform-box: fill-box; transform-origin: center; animation: hh-twinkle 1.8s ease-in-out infinite; }
+@keyframes hh-twinkle { 0%, 100% { opacity: .35; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.15); } }
+.hh-tail { transform-box: fill-box; transform-origin: 100% 90%; animation: hh-tail 1.6s ease-in-out infinite alternate; }
+@keyframes hh-tail { from { transform: rotate(-7deg); } to { transform: rotate(6deg); } }
+.hh-dhoti { transform-box: fill-box; transform-origin: 90% 20%; animation: hh-dhoti .9s ease-in-out infinite alternate; }
+@keyframes hh-dhoti { from { transform: skewX(0deg); } to { transform: skewX(-6deg); } }
+.hh-speed { animation: hh-speed .8s linear infinite; }
+@keyframes hh-speed { from { transform: translateX(8px); opacity: 1; } to { transform: translateX(-14px); opacity: .2; } }
+.hh-runner { transition: left 1.7s cubic-bezier(.45, .05, .25, 1); }
+.hh-fill { transition: width 1.7s cubic-bezier(.45, .05, .25, 1); }
+.hh-play .hh-run-in { animation: hh-run-in 2s cubic-bezier(.3, .1, .2, 1) .35s backwards; }
+.hh-play .hh-fill-in { animation: hh-fill-in 2s cubic-bezier(.3, .1, .2, 1) .35s backwards; }
+@keyframes hh-run-in { from { left: 0%; } }
+@keyframes hh-fill-in { from { width: 0%; } }
+.hh-bob { animation: hh-bob 2.4s ease-in-out infinite; }
+@keyframes hh-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.hh-cloud { animation: hh-cloud 9s ease-in-out infinite alternate; }
+@keyframes hh-cloud { from { transform: translateX(0); } to { transform: translateX(-18px); } }
+.hh-pulse { animation: hh-pulse 1.8s ease-out infinite; }
+@keyframes hh-pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2); opacity: 0; } }
+.hh-fill::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, .55) 50%, transparent 75%); background-size: 220% 100%; animation: hh-shine 1.6s linear infinite; }
+@keyframes hh-shine { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+.hh-late { animation: hh-late .45s ease-out 1.6s backwards; }
+@keyframes hh-late { from { opacity: 0; transform: translateY(4px); } }
+.hh-in { animation: hh-late .35s ease-out backwards; }
+.hh-pop { animation: hh-pop .5s cubic-bezier(.3, 1.6, .5, 1) 1.6s backwards; }
+@keyframes hh-pop { from { transform: translate(-50%, -50%) scale(.4); } }
+.hh-burst { position: absolute; left: -20px; top: -20px; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #F2B33D; opacity: 0; animation: hh-burst .9s ease-out 1.6s forwards; }
+@keyframes hh-burst { 0% { opacity: 1; transform: scale(.3); } 100% { opacity: 0; transform: scale(2.6); } }
+.hh-p { position: absolute; left: -5px; top: -7px; width: 10px; height: 14px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: 0; animation-duration: 1.6s; animation-timing-function: cubic-bezier(.2, .7, .3, 1); animation-delay: 1.6s; animation-fill-mode: forwards; }
+.hh-p1 { background: #F59E0B; animation-name: hh-p1; } @keyframes hh-p1 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-74px, -58px) rotate(220deg) scale(1); } }
+.hh-p2 { background: #F97316; animation-name: hh-p2; } @keyframes hh-p2 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-40px, -84px) rotate(-160deg) scale(1); } }
+.hh-p3 { background: #FACC15; animation-name: hh-p3; } @keyframes hh-p3 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-96px, -18px) rotate(300deg) scale(1); } }
+.hh-p4 { background: #E8577D; animation-name: hh-p4; } @keyframes hh-p4 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-18px, -70px) rotate(140deg) scale(1); } }
+.hh-p5 { background: #F59E0B; animation-name: hh-p5; } @keyframes hh-p5 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-62px, 14px) rotate(-250deg) scale(1); } }
+.hh-p6 { background: #FACC15; animation-name: hh-p6; } @keyframes hh-p6 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(8px, -64px) rotate(200deg) scale(1); } }
+.hh-p7 { background: #F97316; animation-name: hh-p7; } @keyframes hh-p7 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-110px, -50px) rotate(180deg) scale(1); } }
+.hh-p8 { background: #E8577D; animation-name: hh-p8; } @keyframes hh-p8 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-84px, 30px) rotate(-200deg) scale(1); } }
+.hh-p9 { background: #FACC15; animation-name: hh-p9; } @keyframes hh-p9 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(-30px, 26px) rotate(260deg) scale(1); } }
+.hh-p10 { background: #F59E0B; animation-name: hh-p10; } @keyframes hh-p10 { 0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(.4); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(14px, -30px) rotate(-120deg) scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .hh-overlay *, .hh-overlay *::before, .hh-overlay *::after { animation: none !important; transition: none !important; }
+}
+
+/* the store's font app forces h1–h6 to "Philosopher" 400 (!important) */
+.hh-overlay .hh-title { font-family: 'Noto Serif', 'Noto Serif Devanagari', 'Noto Serif Gujarati', serif !important; font-weight: 700 !important; font-style: normal !important; }

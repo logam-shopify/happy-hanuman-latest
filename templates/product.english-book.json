@@ -1,0 +1,853 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "logam_english_main_GF8dXe": {
+      "type": "logam-english-main",
+      "blocks": {
+        "edition_bzzRJ7": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "product": "therapy-book-english",
+            "cover": "shopify://shop_images/11.jpg",
+            "match": "english",
+            "url": ""
+          }
+        },
+        "edition_Bmpker": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी",
+            "product": "happy-hanuman-therapy-book-hindi",
+            "cover": "shopify://shop_images/12.jpg",
+            "match": "hindi",
+            "url": ""
+          }
+        },
+        "edition_9W8BGT": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી",
+            "product": "therapy-book-gujarati",
+            "cover": "shopify://shop_images/WhatsAppImage2026-08-25at10.59.25.jpg",
+            "match": "gujarati",
+            "url": ""
+          }
+        },
+        "trust_Ugc9MB": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery in 3–5 business days",
+            "text": "Tracking number by email once it ships"
+          }
+        },
+        "trust_f9bUYK": {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "Damaged or wrong edition? Free replacement",
+            "text": "WhatsApp us a photo within 7 days of delivery"
+          }
+        },
+        "payment_MCrYza": {
+          "type": "payment",
+          "settings": {
+            "icon": "upi",
+            "image": "shopify://shop_images/upi.svg",
+            "name": "",
+            "show_name": true
+          }
+        },
+        "payment_FmAhCj": {
+          "type": "payment",
+          "settings": {
+            "icon": "phone",
+            "image": "shopify://shop_images/gpay.svg",
+            "name": "",
+            "show_name": true
+          }
+        },
+        "payment_NnDCdK": {
+          "type": "payment",
+          "settings": {
+            "icon": "phone",
+            "image": "shopify://shop_images/phone_pay.svg",
+            "name": "",
+            "show_name": true
+          }
+        },
+        "payment_d3izx9": {
+          "type": "payment",
+          "settings": {
+            "icon": "phone",
+            "image": "shopify://shop_images/paytm.svg",
+            "name": "",
+            "show_name": true
+          }
+        },
+        "payment_fP7yRX": {
+          "type": "payment",
+          "settings": {
+            "icon": "card",
+            "image": "shopify://shop_images/card.svg",
+            "name": "Cards",
+            "show_name": true
+          }
+        },
+        "payment_Grfdkr": {
+          "type": "payment",
+          "settings": {
+            "icon": "bank",
+            "name": "Net banking",
+            "show_name": true
+          }
+        },
+        "box_item_kFNphF": {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>Happy Hanuman Therapy Book</b>, English edition: A4, 43 hand-illustrated pages"
+          }
+        }
+      },
+      "block_order": [
+        "edition_bzzRJ7",
+        "edition_Bmpker",
+        "edition_9W8BGT",
+        "trust_Ugc9MB",
+        "trust_f9bUYK",
+        "payment_MCrYza",
+        "payment_FmAhCj",
+        "payment_NnDCdK",
+        "payment_d3izx9",
+        "payment_fP7yRX",
+        "payment_Grfdkr",
+        "box_item_kFNphF"
+      ],
+      "name": "Logam-English Product",
+      "settings": {
+        "product": "",
+        "eyebrow": "Hanuman Chalisa · English edition",
+        "show_rating": true,
+        "rating_text": "[count] reviews, all editions",
+        "reviews_anchor": "reviews",
+        "save_text": "Save [amount] · [percent]% off",
+        "price_note": "Free shipping across India",
+        "show_badge": false,
+        "badge_text": "off",
+        "ratio": "1",
+        "desc_source": "short",
+        "desc_words": 45,
+        "desc_custom": "",
+        "edition_label": "Edition:",
+        "edition_note": "Same book and art in all 3",
+        "size_label": "Format",
+        "size_value": "A4 · 43  pages",
+        "buy_label": "Buy now",
+        "buy_price": true,
+        "cart_label": "Add to cart",
+        "qty_label": "Quantity",
+        "qty_less": "Decrease quantity",
+        "qty_more": "Increase quantity",
+        "offer_badge": "20%",
+        "offer_text": "<strong>Pay just 20% now,</strong> the rest when the book reaches you",
+        "pay_title": "Secure checkout",
+        "pay_methods": "",
+        "box_eyebrow": "In the box",
+        "box_title": "What you’ll receive",
+        "box_image": "shopify://shop_images/hh-all-hero-desktop.jpg",
+        "box_upsell": "",
+        "box_upsell_note": "Colouring pages are sold separately",
+        "box_upsell_label": "Add",
+        "sticky": true,
+        "sticky_label": "English edition",
+        "accent": "#c24e00",
+        "bg": "#fff8ee",
+        "pb_m": 0,
+        "pb": 0
+      }
+    },
+    "logam_english_inside_E4RyTn": {
+      "type": "logam-english-inside",
+      "blocks": {
+        "photo_3BCgQp": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download.jpg",
+            "caption": ""
+          }
+        },
+        "photo_WVK6qM": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download_1.jpg",
+            "caption": ""
+          }
+        },
+        "photo_Nb77RJ": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download_2.jpg",
+            "caption": ""
+          }
+        },
+        "photo_G4ePNF": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download_3.jpg",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_3BCgQp",
+        "photo_WVK6qM",
+        "photo_Nb77RJ",
+        "photo_G4ePNF"
+      ],
+      "name": "Logam-English Inside Book",
+      "settings": {
+        "eyebrow": "Look inside",
+        "title": "Real photos of the English edition",
+        "sub": "",
+        "fallback_count": 5,
+        "ratio": "0.75",
+        "ratio_d": "0.667",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 12
+      }
+    },
+    "logam_english_steps_e7k6iA": {
+      "type": "logam-english-steps",
+      "blocks": {
+        "step_F636JF": {
+          "type": "step",
+          "settings": {
+            "title": "Simple, in-depth explanation",
+            "text": "Every chaupai explained simply and in depth, with references from the Valmiki Ramayan, Ramcharitmanas and Bhagavad Gita",
+            "image": "shopify://shop_images/eng2.jpg",
+            "caption": ""
+          }
+        },
+        "step_ehyjBY": {
+          "type": "step",
+          "settings": {
+            "title": "Hand-illustrated paintings",
+            "text": "Each painting carries the feeling and value of its chaupai, made with a psychological effect in mind",
+            "image": "shopify://shop_images/2_f6659011-050f-4b78-8add-1165ed73b151.jpg",
+            "caption": ""
+          }
+        },
+        "step_ypBTPg": {
+          "type": "step",
+          "settings": {
+            "title": "Happy Hanuman Challenge",
+            "text": "A challenge to bring the value of that chaupai into your own life",
+            "image": "shopify://shop_images/eng1.jpg",
+            "caption": ""
+          }
+        },
+        "step_GGaHUy": {
+          "type": "step",
+          "settings": {
+            "title": "Find the hidden Ram Naam",
+            "text": "Look for the name “Ram” hidden in every hand-illustrated painting",
+            "image": "shopify://shop_images/hh-step4-find-ram.jpg",
+            "caption": ""
+          }
+        },
+        "locked_7XNhX6": {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "Step 5 · Sold separately",
+            "title": "Art therapy with the Colouring Sheets",
+            "text": "43 sheets, each with the painting on the front and its line art on the back for you to colour. The Ram Naam game is on these sheets too, with more names to find than in the book.",
+            "image": "shopify://shop_images/step_5.jpg",
+            "product": "happy-hanuman-art-therapy-colouring-sheets",
+            "note": "Add it with your book: all 5 steps and 10% off the total",
+            "button": "Unlock step 5 · Add for [price]",
+            "added": "Step 5 unlocked · Added to cart ✓"
+          }
+        }
+      },
+      "block_order": [
+        "step_F636JF",
+        "step_ehyjBY",
+        "step_ypBTPg",
+        "step_GGaHUy",
+        "locked_7XNhX6"
+      ],
+      "name": "Logam-English Steps",
+      "settings": {
+        "eyebrow": "How it works",
+        "title": "Three things on every page",
+        "sub": "",
+        "img_mobile": true,
+        "layout_d": "cards",
+        "hint": "Found it? In this picture, “Ram” hides on the crocodile’s jaw",
+        "bg": "#fff8ee",
+        "bg_d": "#f9efdf",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 12
+      }
+    },
+    "logam_english_details_aR7iGG": {
+      "type": "logam-english-details",
+      "blocks": {
+        "row_MRyjrw": {
+          "type": "row",
+          "settings": {
+            "label": "Edition",
+            "value": "English"
+          }
+        },
+        "row_ce4ctA": {
+          "type": "row",
+          "settings": {
+            "label": "Format",
+            "value": "A4"
+          }
+        },
+        "row_7VfMFc": {
+          "type": "row",
+          "settings": {
+            "label": "Pages",
+            "value": "43, hand-illustrated"
+          }
+        },
+        "row_cwLThP": {
+          "type": "row",
+          "settings": {
+            "label": "Best for",
+            "value": "Children and adults: families, parents, teachers, seekers"
+          }
+        },
+        "row_fyiBUM": {
+          "type": "row",
+          "settings": {
+            "label": "Delivery",
+            "value": "Free, in 3–5 business days"
+          }
+        },
+        "row_NYUJNF": {
+          "type": "row",
+          "settings": {
+            "label": "Replacement",
+            "value": "Within 7 days if damaged in transit or the wrong edition arrives"
+          }
+        }
+      },
+      "block_order": [
+        "row_MRyjrw",
+        "row_ce4ctA",
+        "row_7VfMFc",
+        "row_cwLThP",
+        "row_fyiBUM",
+        "row_NYUJNF"
+      ],
+      "name": "Logam-English Details",
+      "settings": {
+        "eyebrow": "Details",
+        "title": "About this edition",
+        "sub": "",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_english_videos_WiN4dp": {
+      "type": "logam-english-videos",
+      "blocks": {
+        "video_jfxNag": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-259.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_LAdQjx": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-840.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_gFCp3V": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-707.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_jRbeW4": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-40.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_jfxNag",
+        "video_LAdQjx",
+        "video_gFCp3V",
+        "video_jRbeW4"
+      ],
+      "name": "Logam-English Videos",
+      "settings": {
+        "eyebrow": "Watch",
+        "title": "Hear it from readers",
+        "sub": "",
+        "dcols": 4,
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_english_leaders_nrEC6f": {
+      "type": "logam-english-leaders",
+      "blocks": {
+        "quote_jtJcYU": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book is very useful not only for youth and children but for everyone, the pictures in the book are wonderful, great work.",
+            "name": "Anupam Kher",
+            "role": "Indian actor and director / Hanuman Bhakt",
+            "photo": "shopify://shop_images/anupam.jpg"
+          }
+        },
+        "quote_bNCgjE": {
+          "type": "quote",
+          "settings": {
+            "quote": "Good pictures can create good character, I express my pleasure in this work.",
+            "name": "Pujya Morari Bapu",
+            "role": "",
+            "photo": "shopify://shop_images/bapu.jpg"
+          }
+        },
+        "quote_8n86Ga": {
+          "type": "quote",
+          "settings": {
+            "quote": "I have never seen such deep and excellent work on Hanumanji.",
+            "name": "Pujya Hari Prakash Shastri",
+            "role": "Salangpur Dham",
+            "photo": "shopify://shop_images/shastri.jpg"
+          }
+        },
+        "quote_9BKVQH": {
+          "type": "quote",
+          "settings": {
+            "quote": "That’s a wonderful work, I have never seen a more interesting book on Hanumanji for children and youth.",
+            "name": "Akshat Gupta",
+            "role": "Author",
+            "photo": "shopify://shop_images/gupta.jpg"
+          }
+        },
+        "quote_CEiRet": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book should be something that goes into everyone’s hands. Very interesting presentation.",
+            "name": "Jay Vasavada",
+            "role": "Author",
+            "photo": "shopify://shop_images/jay.jpg"
+          }
+        },
+        "quote_rARjVf": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ashish, God is with you. Very nice work, now done with the book. God himself is with you in this work.",
+            "name": "Padma Bhushan Swami Sachidananda",
+            "role": "",
+            "photo": "shopify://shop_images/swami.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "quote_jtJcYU",
+        "quote_bNCgjE",
+        "quote_8n86Ga",
+        "quote_9BKVQH",
+        "quote_CEiRet",
+        "quote_rARjVf"
+      ],
+      "name": "Logam-English Leaders",
+      "settings": {
+        "eyebrow": "Blessed by",
+        "title": "Spiritual leaders who have read it",
+        "sub": "",
+        "dcols": 3,
+        "bg": "#fbefdd",
+        "page_bg": "#fff8ee",
+        "gap_m": 28,
+        "gap": 64,
+        "pt_m": 26,
+        "pb_m": 22,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "logam_english_stats_xKhdPM": {
+      "type": "logam-english-stats",
+      "name": "Logam-English Stats",
+      "settings": {
+        "image": "shopify://shop_images/record.svg",
+        "eyebrow": "Guinness World Record holder",
+        "title": "30,303 books signed in 30 hours",
+        "sub": "Surat, Gujarat · 3 December 2024 · 1,00,000+ readers",
+        "bg": "#2b1a0e",
+        "pt_m": 22,
+        "pb_m": 22,
+        "pt": 40,
+        "pb": 40
+      }
+    },
+    "logam_english_reviews_zPdEDX": {
+      "type": "logam-english-reviews",
+      "name": "Logam-English Reviews",
+      "settings": {
+        "eyebrow": "Reviews",
+        "title": "What readers say",
+        "count_text": "[count] reviews",
+        "stat_value": "84%",
+        "stat_text": "gave it 5 stars",
+        "note": "Reviews from the English, हिन्दी and ગુજરાતી editions together. It’s the same book.",
+        "anchor": "reviews",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_english_author_zamFY8": {
+      "type": "logam-english-author",
+      "name": "Logam-English Author",
+      "settings": {
+        "eyebrow": "About the author",
+        "image": "shopify://shop_images/Aashish_Bhalani.png",
+        "name": "Ashish Bhalani",
+        "role": "TEDx speaker · co-author of Garbh Yatra and Pregnancy 90",
+        "bio": "<p>Ashish calls himself not the writer of this book but a medium of Hanuman ji’s blessings. That is why the cover says it is “written by the blessing of the Supreme” instead of carrying his name.</p>",
+        "bg": "#fbefdd",
+        "page_bg": "#fff8ee",
+        "gap_m": 28,
+        "gap": 64,
+        "pt_m": 26,
+        "pb_m": 26,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "logam_english_faq_eEQPWW": {
+      "type": "logam-english-faq",
+      "blocks": {
+        "faq_YFF4X4": {
+          "type": "faq",
+          "settings": {
+            "question": "Will I receive the English edition?",
+            "answer": "<p>Yes. This page sells the English edition. Want it in हिन्दी or ગુજરાતી? Switch the edition above. The art and content are the same.</p>"
+          }
+        },
+        "faq_iqEcBU": {
+          "type": "faq",
+          "settings": {
+            "question": "Who is the book for?",
+            "answer": "<p>Children and grown-ups alike: families, parents, teachers and seekers.</p>"
+          }
+        },
+        "faq_YWhz3U": {
+          "type": "faq",
+          "settings": {
+            "question": "How can I pay?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, debit or credit cards, or net banking. Or pay just 20% now and the rest when the book reaches you.</p>"
+          }
+        },
+        "faq_GgDzCY": {
+          "type": "faq",
+          "settings": {
+            "question": "When will it arrive?",
+            "answer": "<p>In 3–5 business days, anywhere in India, with free shipping. You get a tracking number by email once it ships.</p>"
+          }
+        },
+        "faq_faVjBV": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it arrives damaged or in the wrong language?",
+            "answer": "<p>WhatsApp us a photo on +91 82381 88824 within 7 days of delivery and we send a replacement.</p>"
+          }
+        },
+        "faq_EkP3zF": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I send it as a gift?",
+            "answer": "<p>Yes. Enter the recipient’s name and address at checkout and we deliver it to them.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_YFF4X4",
+        "faq_iqEcBU",
+        "faq_YWhz3U",
+        "faq_GgDzCY",
+        "faq_faVjBV",
+        "faq_EkP3zF"
+      ],
+      "name": "Logam-English FAQ",
+      "settings": {
+        "eyebrow": "Questions",
+        "title": "Good to know",
+        "sub": "",
+        "open_first": false,
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_english_languages_DQzBJT": {
+      "type": "logam-english-languages",
+      "blocks": {
+        "edition_gEwn8r": {
+          "type": "edition",
+          "settings": {
+            "product": "happy-hanuman-therapy-book-hindi",
+            "label": "हिन्दी edition",
+            "tag": ""
+          }
+        },
+        "edition_pcwzcR": {
+          "type": "edition",
+          "settings": {
+            "product": "therapy-book-gujarati",
+            "label": "ગુજરાતી edition",
+            "tag": "Bestseller"
+          }
+        }
+      },
+      "block_order": [
+        "edition_gEwn8r",
+        "edition_pcwzcR"
+      ],
+      "name": "Logam-English Languages",
+      "settings": {
+        "eyebrow": "",
+        "title": "Also available in",
+        "sub": "",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 30,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_jM7Dxx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "1393b77e-a8c0-433b-89a8-43bc490e6816": {
+          "type": "product_sku",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "free_shipping_bar_edd": {
+          "type": "free_shipping_bar",
+          "settings": {}
+        },
+        "text_7R7M3t": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.short_des.value }}"
+          }
+        },
+        "375e1ccb-99cc-41e5-813c-45a1a57566be": {
+          "type": "product_description",
+          "disabled": true,
+          "settings": {}
+        },
+        "b8da14d9-fa65-4645-913b-4e91ff632b94": {
+          "type": "product_variants",
+          "settings": {
+            "variant_type": "grid",
+            "color_variant": "default"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "83916474-fbe9-46c1-afd0-c761ee898dc6": {
+          "type": "wishlist-compare",
+          "disabled": true,
+          "settings": {}
+        },
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7": {
+          "type": "product_policy",
+          "disabled": true,
+          "settings": {
+            "content_1": "Quick delivery right to your door.",
+            "content_2": "Delivery time: 3-5 business days",
+            "content_3": "Easy process, your satisfaction first."
+          }
+        },
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92": {
+          "type": "payment",
+          "settings": {
+            "bg_color": "#f6f6f6",
+            "image": "shopify://shop_images/image_32.png"
+          }
+        },
+        "d2dc3fb0-828b-419d-831c-f2f77453e516": {
+          "type": "categories",
+          "disabled": true,
+          "settings": {}
+        },
+        "3906805c-dd1d-47bb-905f-c7609da7417d": {
+          "type": "tags",
+          "disabled": true,
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_jM7Dxx",
+        "1393b77e-a8c0-433b-89a8-43bc490e6816",
+        "price",
+        "free_shipping_bar_edd",
+        "text_7R7M3t",
+        "375e1ccb-99cc-41e5-813c-45a1a57566be",
+        "b8da14d9-fa65-4645-913b-4e91ff632b94",
+        "quantity_selector",
+        "83916474-fbe9-46c1-afd0-c761ee898dc6",
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7",
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92",
+        "d2dc3fb0-828b-419d-831c-f2f77453e516",
+        "3906805c-dd1d-47bb-905f-c7609da7417d",
+        "share"
+      ],
+      "disabled": true,
+      "settings": {
+        "media_type": "carousel",
+        "thumbnails_position": "bottom",
+        "carousel_page_dots": false,
+        "carousel_prevnextbuttons": false,
+        "enable_video_looping": true,
+        "show_cosselling": false,
+        "crossell_limit": 4,
+        "show_upsell": false,
+        "upsell_limit": 4,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70": {
+      "type": "product-content",
+      "blocks": {
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66": {
+          "type": "product_description",
+          "settings": {
+            "tab_name": "Description"
+          }
+        },
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03": {
+          "type": "tab_custom",
+          "settings": {
+            "tab_name": "Additional information",
+            "tab_custom_content": "{{ product.metafields.custom.additional_information | metafield_tag }}"
+          }
+        },
+        "judge_me_reviews_review_widget_WH7V8q": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66",
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03",
+        "judge_me_reviews_review_widget_WH7V8q"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_featured_products": false,
+        "featured_product_title": "You May Also Like",
+        "limit": 6,
+        "product": "",
+        "enable_guide": true,
+        "guide1_label": "Shipping & Returns",
+        "guide1_icon": "<svg fill=\"none\" focusable=\"false\" width=\"29\" height=\"24\" class=\"icon icon--picto-fast-delivery   product-tabs__trust-icon\" viewbox=\"0 0 29 24\">\n        <path d=\"M4 3H20V8M20 17H11.68C11.68 17 11 16 10 16M20 17V8M20 17H22.32M20 8H26.5L28 12.5V17H25.68C25.68 17 25 16 24 16M24 16C25 16 26 17 26 18C26 19 25 20 24 20C23 20 22 19 22 18C22 17.6527 22.1206 17.3054 22.32 17M24 16C23.3473 16 22.6946 16.426 22.32 17M10 16C11 16 12 17 12 18C12 19 11 20 10 20C9 20 8 19 8 18C8 17.6527 8.12061 17.3054 8.31996 17M10 16C9.3473 16 8.69459 16.426 8.31996 17M8.31996 17H4M10 12H3M10 8H1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide1_returns_content": "<p><strong>Shipping<br/></strong>We deliver your parcel within 2–3 working days. As soon as your package has left our warehouse, you will receive a confirmation by email. This confirmation contains a tracking number that you can use to find out where your package is.</p><p><strong>Return Policy</strong><br/><br/>We offer a <strong>7-day replacement policy</strong> for products that arrive with physical damage only. If you receive a damaged item, please report it within <strong>7 days of delivery</strong>.<br/><br/>To request a replacement, please contact our support team with clear photos of the damaged product and packaging. Once the issue is verified, we will arrange for a <strong>replacement of the same item</strong>.<br/><br/>Please note:<br/><em>This policy applies only to products with physical damage during transit.<br/>Returns or refunds are not available. Only </em><em><strong>replacement </strong></em><em>will be provided for eligible cases.</em></p>",
+        "guide2_label": "",
+        "guide2_icon": "",
+        "guide2_returns_content": "",
+        "guide3_label": "Secure Payment",
+        "guide3_icon": "<svg fill=\"none\" focusable=\"false\" width=\"24\" height=\"24\" class=\"icon icon--picto-secure-payment   product-tabs__trust-icon\" viewbox=\"0 0 24 24\">\n        <path d=\"M4 18H1V6M4 18V16H6M4 18V22H11V18M6 16C6 15.6667 6 15.3 6 14.5C6 13.5 6.73438 13 7.5 13C8.26562 13 9 13.5 9 14.5C9 15.3 9 15.6667 9 16M6 16H9M9 16H11V18M11 18H23V6M1 6V2H23V6M1 6H23M9 10H5M19 10V14H13V10H19Z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide3_returns_content": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p><p>We accept payments with :<br/>Visa, MasterCard, American Express, Paypal, Diners Club, Discover and more.</p>"
+      }
+    }
+  },
+  "order": [
+    "logam_english_main_GF8dXe",
+    "logam_english_inside_E4RyTn",
+    "logam_english_steps_e7k6iA",
+    "logam_english_details_aR7iGG",
+    "logam_english_videos_WiN4dp",
+    "logam_english_leaders_nrEC6f",
+    "logam_english_stats_xKhdPM",
+    "logam_english_reviews_zPdEDX",
+    "logam_english_author_zamFY8",
+    "logam_english_faq_eEQPWW",
+    "logam_english_languages_DQzBJT",
+    "main",
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70"
+  ]
+}

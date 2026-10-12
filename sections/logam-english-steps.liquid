@@ -1,0 +1,250 @@
+{%- render 'logam-book-steps' -%}
+
+{% schema %}
+{
+  "name": "Logam-English Steps",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "5 steps of Happy Hanuman Therapy"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "Steps 1 to 4 are inside this book. Step 5 is a separate set: the Art Therapy Colouring Sheets."
+    },
+    {
+      "type": "checkbox",
+      "id": "img_mobile",
+      "label": "Show step photos on mobile",
+      "info": "Off: step photos (and step 4's caption and the step 5 photo) show on desktop only.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout_d",
+      "label": "Desktop layout",
+      "default": "cards",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Step cards in a row"
+        },
+        {
+          "value": "side",
+          "label": "List with example image on the side"
+        }
+      ],
+      "info": "'List with example image' uses the Example page image and Text under image below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Example page image"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Text under image"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "color",
+      "id": "bg_d",
+      "label": "Background (desktop)",
+      "info": "Leave empty to use the same background as mobile.",
+      "default": "#F9EFDF"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Hand-painted art"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Shown full width under the step, square."
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption under image"
+        }
+      ]
+    },
+    {
+      "type": "locked",
+      "name": "Locked step",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Small text",
+          "default": "Step 5 · Sold separately"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Art therapy with the Colouring Sheets"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "43 sheets, each with the painting on the front and its line art on the back for you to colour. The Ram Naam game is on these sheets too, with more names to find than in the book."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product to unlock",
+          "info": "Price and thumbnail load from the product. The button adds it to the cart."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under price",
+          "default": "Add it with your book: all 5 steps and 10% off the total"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button",
+          "info": "[price] = product price",
+          "default": "Unlock step 5 · Add for [price]"
+        },
+        {
+          "type": "text",
+          "id": "added",
+          "label": "Button after adding",
+          "default": "Step 5 unlocked · Added to cart ✓"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Simple, in-depth explanation",
+            "text": "Every chaupai explained simply and in depth, with references from the Valmiki Ramayan, Ramcharitmanas and Bhagavad Gita"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Hand-illustrated paintings",
+            "text": "Each painting carries the feeling and value of its chaupai, made with a psychological effect in mind"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Happy Hanuman Challenge",
+            "text": "A challenge to bring the value of that chaupai into your own life"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Find the hidden Ram Naam",
+            "text": "Look for the name “Ram” hidden in every hand-illustrated painting",
+            "caption": "Found it? In this picture, “Ram” hides on the crocodile’s jaw"
+          }
+        },
+        {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "Step 5 · Sold separately",
+            "title": "Art therapy with the Colouring Sheets",
+            "text": "43 sheets, each with the painting on the front and its line art on the back for you to colour. The Ram Naam game is on these sheets too, with more names to find than in the book.",
+            "note": "Add it with your book: all 5 steps and 10% off the total",
+            "button": "Unlock step 5 · Add for [price]"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

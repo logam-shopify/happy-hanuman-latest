@@ -1,0 +1,146 @@
+{%- comment -%}
+  Sticky bottom navigation for mobile.
+  Rendered once from layout/theme.liquid. Settings live in Theme settings > Mobile bottom nav.
+
+  Notes:
+  - Reuses the theme's own <ap-cartcount> element so the badge stays in sync with
+    cart:updated. Each instance subscribes independently, so having a second one
+    alongside the header cart is safe.
+  - Publishes --hh-bottom-nav-h so the floating WhatsApp button can sit above it
+    instead of overlapping.
+  - Yields to the theme's sticky Add To Cart on product pages (see :has() rule
+    below). Without that, this bar covers the sticky CTA and blocks the tap.
+{%- endcomment -%}
+
+{%- comment -%} Hidden on all product pages: their sticky Add to cart / Buy bar takes the bottom of the screen. {%- endcomment -%}
+{%- unless template.name == 'product' -%}{%- if settings.mobile_nav_enabled -%}
+  {%- liquid
+    assign nav_bp = settings.mobile_nav_breakpoint | default: 767
+    assign home_url = settings.mobile_nav_home_url | default: routes.root_url
+    assign shop_url = settings.mobile_nav_shop_url | default: '/collections/all-products'
+  -%}
+
+  <nav class="hh-botnav" aria-label="Primary mobile navigation">
+    <a class="hh-botnav__item" href="{{ home_url }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M3 10.2 12 3.5l9 6.7V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>
+      </svg>
+      <span class="hh-botnav__label">{{ settings.mobile_nav_home_label | default: 'Home' }}</span>
+    </a>
+
+    <a class="hh-botnav__item" href="{{ shop_url }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 5.5A1.5 1.5 0 0 1 5.5 4H9v16H5.5A1.5 1.5 0 0 1 4 18.5zM9 4h9.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H9"/>
+      </svg>
+      <span class="hh-botnav__label">{{ settings.mobile_nav_shop_label | default: 'Books' }}</span>
+    </a>
+
+    <a class="hh-botnav__item" href="{{ routes.search_url }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="m16 16 4 4"/>
+      </svg>
+      <span class="hh-botnav__label">{{ settings.mobile_nav_search_label | default: 'Search' }}</span>
+    </a>
+
+    <a
+      class="hh-botnav__item hh-botnav__item--cart"
+      href="{{ routes.cart_url }}"
+      is="ap-togglelink"
+      ap-controlsaria="mini-cart"
+      ap-expanded-aria="false"
+      data-no-instant=""
+    >
+      <span class="hh-botnav__iconwrap">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4 6h16l-1.3 12.2a1.5 1.5 0 0 1-1.5 1.3H6.8a1.5 1.5 0 0 1-1.5-1.3z"/>
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8.5 9V6.2a3.5 3.5 0 1 1 7 0V9"/>
+        </svg>
+        <ap-cartcount class="hh-botnav__count">{{ cart.item_count }}</ap-cartcount>
+      </span>
+      <span class="hh-botnav__label">{{ settings.mobile_nav_cart_label | default: 'Cart' }}</span>
+    </a>
+  </nav>
+
+  <style>
+    @media screen and (max-width: {{ nav_bp }}px) {
+      :root { --hh-bottom-nav-h: 62px; }
+
+      .hh-botnav {
+        position: fixed;
+        inset: auto 0 0 0;
+        z-index: 901;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: stretch;
+        background: {{ settings.mobile_nav_bg | default: '#ffffff' }};
+        border-top: 1px solid {{ settings.mobile_nav_border | default: '#E8E2D9' }};
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, .07);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .hh-botnav__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        min-height: 62px;
+        padding: 8px 4px;
+        color: {{ settings.mobile_nav_color | default: '#2B1A0E' }};
+        text-decoration: none;
+        line-height: 1;
+      }
+      .hh-botnav__item:hover,
+      .hh-botnav__item:focus-visible { color: {{ settings.mobile_nav_accent | default: '#E8630A' }}; }
+      .hh-botnav__label { font-size: 11px; font-weight: 600; letter-spacing: .01em; }
+      .hh-botnav__iconwrap { position: relative; display: inline-flex; }
+      .hh-botnav__count {
+        position: absolute;
+        top: -6px;
+        right: -9px;
+        min-width: 17px;
+        height: 17px;
+        padding: 0 4px;
+        border-radius: 999px;
+        background: {{ settings.mobile_nav_accent | default: '#E8630A' }};
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: center;
+      }
+
+      /* Keep the footer and any sticky page CTAs clear of the bar. */
+      body { padding-bottom: calc(var(--hh-bottom-nav-h) + env(safe-area-inset-bottom, 0px)); }
+
+      /* Float the WhatsApp button above the bar rather than on top of it. */
+      .hh-whatsapp {
+        bottom: calc(var(--hh-bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 14px);
+      }
+
+      /* On product pages the theme ships its own sticky Add To Cart
+         (<ap-productstickyform>, fixed to bottom:0 at z-index 100). This bar is
+         z-index 901, so it sat on top of that CTA and swallowed every tap on it.
+         While the CTA is showing, stand down and give it the bottom of the screen. */
+      .hh-botnav {
+        transition: transform .25s ease-in-out, visibility .25s ease-in-out;
+      }
+      body:has(ap-productstickyform:not([hidden])) .hh-botnav {
+        transform: translateY(100%);
+        visibility: hidden;
+        pointer-events: none;
+      }
+      body:has(ap-productstickyform:not([hidden])) .hh-whatsapp {
+        bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      }
+
+      /* Fallback for engines without :has() — the CTA must still win the
+         stacking contest even if this bar never hides. */
+      .ap-productstickyform { z-index: 950; }
+    }
+
+    @media screen and (min-width: {{ nav_bp | plus: 1 }}px) {
+      .hh-botnav { display: none; }
+    }
+  </style>
+{%- endif -%}{%- endunless -%}

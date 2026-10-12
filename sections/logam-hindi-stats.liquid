@@ -1,0 +1,21 @@
+{%- render 'logam-book-stats', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Stats Banner",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Record photo" },
+    { "type": "text", "id": "eyebrow", "label": "Small text", "default": "गिनीज़ वर्ल्ड रिकॉर्ड होल्डर" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "30 घंटों में 30,303 किताबों पर हस्ताक्षर" },
+    { "type": "text", "id": "sub", "label": "Text", "default": "सूरत, गुजरात · 3 दिसंबर 2024 · 1,00,000+ पाठक" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#2B1A0E" },
+    { "type": "range", "id": "pt_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "pb_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "pt", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pb", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "Logam-hindi Stats Banner" } ]
+}
+{% endschema %}

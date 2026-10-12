@@ -1,0 +1,309 @@
+{%- comment -%}
+  Product page — first section design. Added by EDD (Aug 2026), revamped Aug 2026.
+  Rendered from sections/main-product.liquid, so it only ever loads on a PDP.
+
+  GOAL
+  Everything a buyer needs to decide — image, title, rating, price, and BOTH buy
+  buttons — usable without scrolling on a 390x844 phone.
+
+  THE REAL FOLD IS 781px, NOT 844.
+  .hh-botnav is position:fixed and owns the bottom 63px. Geometry alone will happily
+  report an element "above the fold" while the nav sits on top of it, so every number
+  below is measured against 781 and confirmed with a screenshot.
+
+  WHAT THE REVAMP CHANGED (measured before -> after, 390x844)
+    Gallery image      300px            -> 280px
+    Quantity stepper   own row at 669   -> relocated below the buy buttons
+    Add To Cart        730-780          -> 643-693
+    Buy It Now         790-840 (BEHIND  -> 703-753 (28px clear of the nav)
+                       the bottom nav,
+                       100% unreachable)
+    Floating video     covered 31% of ATC and all of Buy It Now -> yields to both
+
+  Buy It Now was the worst of it: the client asked for it to carry the primary colour,
+  and on a phone it was rendering entirely underneath the fixed bottom nav. Colour on an
+  invisible button is worth nothing, so the layout had to give it somewhere to live.
+
+  WHY QUANTITY MOVED BELOW THE BUTTONS
+  The stepper cost 72px (50px control + 22px gap) directly above the CTA. This is a
+  single-title book: nearly every order is one copy, the cart drawer edits quantity in
+  one tap, and the theme's own sticky Add To Cart bar carries no quantity control
+  either — so treating it as secondary is consistent with the theme, not a break from
+  it. It is still on the page, immediately under Buy It Now, and now shows its
+  "Quantity" label (the theme hides it) since it no longer sits in an obvious buy row.
+
+  WHY NOT PUT QUANTITY BESIDE ADD TO CART
+  Tried and rejected twice. Side-by-side needs the buy block flattened with
+  display:contents through .ap-productform__buy-buttons > form > ap-paymentcontainerproduct,
+  and that last element is #ApolloProductSticky — the anchor the theme's sticky-CTA
+  IntersectionObserver measures. display:contents removes its box, so the observer would
+  see a zero-height target and the sticky bar would stop appearing. Not worth it.
+
+  Related changes made outside this file:
+  - sections/header-group-top.json: static announcement bar off, `scroll-text` marquee on.
+  - sections/main-product.liquid: breadcrumb render commented out; the `text` block
+    wrapped in .pdp-short-desc; the `payment` block body replaced with pdp-payment-trust.
+  - templates/product.json: vendor, sku, categories, tags, share and product_policy
+    blocks disabled.
+  - snippets/product-buy.liquid: #AddToCart swapped to button--secondary.
+{%- endcomment -%}
+
+{%- assign fs_bp = 767 -%}
+
+<style>
+  /* ---------- All widths ---------- */
+
+  /* The free-shipping line duplicated the marquee message directly below the price.
+     One statement, in one place — the strip. Scoped to the product form so the cart
+     drawer's own shipping progress bar is untouched. */
+  .ap-productform .shipping-bar { display: none; }
+
+  /* GALLERY — SQUARE BOX.
+     The theme sizes each slide with the padding-top aspect hack, written INLINE per
+     slide as style="padding-top:140.0%" (the media's natural 640x896 ratio) with the
+     image absolutely positioned inside. Inline styles beat stylesheets, so forcing the
+     box square needs !important — there is no class or setting to do it.
+
+     Desktop cost of the natural ratio: .product__media was 1014px tall, so the gallery
+     ran ~300px past the entire buy column beside it. At 1:1 the slide is 648x648 and the
+     whole media block comes down to ~755px.
+
+     object-fit goes cover -> contain. These are book covers: cropping a 140%-tall image
+     into a square would slice ~29% off the top and bottom and take the title with it.
+     contain fits the whole cover inside the square and gutters the sides instead. */
+  .product__media .ap-product-media-image-wrapper {
+    padding-top: 100% !important;
+    max-height: none;
+  }
+  .product__media .ap-product-media-image-wrapper img,
+  .product__media .product__media-item-image img {
+    object-fit: contain;
+  }
+
+  /* The <img> box still fills the whole square; contain letterboxes the painted pixels
+     inside it, so the visible cover sits centred with a gutter each side. The thumbnail
+     strip is only 372px wide and was left-aligned to the 648px column, which read as
+     misaligned against the centred cover.
+
+     It is centred on .product__media-nav (flex, 648px) — margin:auto on the strip itself
+     does nothing because every ancestor down to it is also 372px wide.
+
+     Desktop only: on mobile that same .product__media-nav carries the prev/next arrows
+     and the dots, laid out edge-to-edge. Centring it there would pull the arrows into
+     the middle of the page. */
+  @media screen and (min-width: {{ fs_bp | plus: 1 }}px) {
+    .product__media-nav { justify-content: center; }
+  }
+
+  /* The Save badge shipped as pure rgb(255,0,0). Next to the brand orange on the price
+     and on Buy It Now that raw red is the one unbranded colour on the screen, and it
+     reads as a sticker rather than a designed element. #C42B1C keeps the badge loud
+     enough to be the second thing you see after the price, without putting a third
+     competing warm hue beside the CTA. Scoped to the product meta so .label--highlight
+     on collection cards is untouched. */
+  .ap-productmeta__label-list .label--highlight {
+    background-color: #C42B1C;
+    border-color: #C42B1C;
+  }
+
+  /* Button hierarchy — Buy It Now is the committed action and keeps the primary
+     orange; Add To Cart steps back to the theme's secondary.
+
+     Done by swapping the class in snippets/product-buy.liquid, NOT with a colour
+     override here. These buttons are painted with `background-image:
+     linear-gradient(...)`, so a `background-color` rule applies but is covered by
+     the gradient — computed style reports your colour while the pixels stay orange.
+
+     Buy It Now needs no rule at all: its orange comes from the .shopify-payment-button
+     WRAPPER, which the theme already colours (the inner button is transparent, and its
+     class is `--unbrand`, not `--unbranded`). */
+
+  /* Two fixed widgets sit in the bottom-right corner, both ON TOP of the buy buttons:
+       .video-float-preview  Shoppable ShortVid player, z-1000, covered 102px (31%) of
+                             Add To Cart and the whole of Buy It Now
+       .hh-whatsapp          WhatsApp bubble, z-900, covers 42px (13%) of Buy It Now
+     Buy It Now is full-bleed at 330px wide, so there is no corner left to move either
+     widget into while the buy block is on screen — the only honest fix is to have them
+     yield. Both fade out while the buttons are visible and return the instant they
+     scroll away, so each widget still works everywhere except standing on the CTA.
+
+     The video is an app embed and cannot be changed at the source, but its markup sets
+     only `display`, leaving opacity and visibility free for us to drive.
+
+     Toggle: Theme settings -> Product page - payment & trust -> "Hide the floating
+     video and WhatsApp bubble while the buy buttons are on screen". */
+  .video-float-preview,
+  .hh-whatsapp {
+    transition: opacity .2s ease, visibility .2s ease;
+  }
+  body.pdp-cta-visible .video-float-preview,
+  body.pdp-cta-visible .hh-whatsapp {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* THE OTHER HALF OF THE SAME PROBLEM — the STICKY bar.
+     The rule above only covers the buy block in the first screen. Once that scrolls
+     away the theme raises the sticky Add To Cart / Buy Now bar, and those same two
+     widgets sit straight on top of it. Measured live at 1280x900:
+
+       sticky Buy Now button   x 1147-1265, y 821-869
+       .video-float-preview    x 1096-1260, y 588-880   z-1000
+       .hh-whatsapp            x 1101-1262, y 826-882   z-900
+
+     A hit test every 2px across the button came back 98% blocked on desktop and 32%
+     on a 390px phone. The button was there, painted, and all but unclickable.
+
+     This is not new — the old sticky "Add to cart" button sat in exactly the same
+     place under exactly the same widgets. It only became worth fixing when that
+     button became the primary way to buy.
+
+     They are LIFTED, not hidden. Hiding them here would mean hiding them for the
+     whole product page (the sticky bar shows precisely when the first-screen buttons
+     do not), which would switch off a video app the client pays for. Both are
+     position:fixed with a `bottom` and no transform of their own, so driving `bottom`
+     moves them cleanly and leaves .hh-whatsapp's hover transform alone.
+
+     The offset is the measured bar height, not a guess — the bar is 110px on desktop
+     and 74px on a phone, and it is an app-rendered element that can change. */
+  .video-float-preview,
+  .hh-whatsapp {
+    transition: opacity .2s ease, visibility .2s ease, bottom .2s ease;
+  }
+  body.pdp-sticky-visible .video-float-preview {
+    bottom: calc(var(--pdp-sticky-h, 110px) + 20px) !important;
+  }
+  body.pdp-sticky-visible .hh-whatsapp {
+    bottom: calc(var(--pdp-sticky-h, 110px) + 18px) !important;
+  }
+
+  /* ---------- Phone ---------- */
+  @media screen and (max-width: {{ fs_bp }}px) {
+
+    /* 1. Gallery — see the square-box rules above. On a 330px column a full-width
+          square would be 330 tall: 50px more than the 280px box it replaced, which puts
+          Buy It Now back under the bottom nav. 285 keeps the vertical footprint the same
+          as before the square change and centres the box with a 22px gutter each side.
+          Measured: at 300 the clearance under Buy It Now was 8px, which is inside the
+          margin a longer product title would eat. At 285 it is 25px. */
+    .product__media .ap-product-media-list-wrapper {
+      max-width: 285px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 2. Price. .price--large is only a wrapper; the visible type is on the inner
+          .price (30px) and .price--compare (14px). At 30px the pair overflowed the
+          223px the Save badge leaves and wrapped "Rs." onto its own line. */
+    .ap-productmeta__price-list-container { margin-bottom: 0; }
+    .ap-productmeta__price-list-container .price { font-size: 22px; }
+    .ap-productmeta__price-list-container .price--compare { font-size: 13px; }
+    .ap-productmeta__label-list .label { font-size: 11px; }
+
+    /* 3. Vertical rhythm. */
+    .ap-productmeta__title {
+      margin-bottom: 8px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    /* 4. Buy before read. Reordering is done here rather than in templates/product.json
+          because Shopify's template validator rejects a reordered block_order on this
+          template (with a misleading "product-recommendations does not refer to an
+          existing section file"). CSS also leaves desktop order intact. */
+    .ap-productform {
+      display: flex;
+      flex-direction: column;
+    }
+    .ap-productform > * { order: 50; }
+    .ap-productform > .ap-productmeta__title                { order: 10; }
+    .ap-productform > .shopify-block                        { order: 20; }  /* Judge.me rating */
+    .ap-productform > .ap-productmeta__price-list-container { order: 30; }
+    .ap-productform > .pdp-short-desc                       { order: 60; }
+    .ap-productform > .product-policy                       { order: 70; }
+    .ap-productform > .ap-productmeta__aside                { order: 99; }
+
+    /* 5. The buy row. .quantity_wrapper goes display:contents so its two children
+          become direct flex items of .ap-productform and can be ordered apart —
+          buttons first, stepper after. Nothing observes .quantity_wrapper's box, so
+          dissolving it is safe (unlike #ApolloProductSticky further down the tree). */
+    .quantity_wrapper { display: contents; }
+
+    /* NOTE the missing child combinator on the next two. display:contents makes these
+       flex ITEMS of .ap-productform, but selectors still match the DOM tree, where they
+       are grandchildren — `.ap-productform > .ap-productform__quantity` matches nothing.
+       Getting this wrong silently drops them to order 0 and floats the whole buy block
+       above the product title. The full path keeps them scoped to this form. */
+    .ap-productform > .quantity_wrapper > .ap-productform__buy-buttons { order: 40; margin-top: 12px; }
+    .ap-productform > .quantity_wrapper > .ap-productform__quantity    { order: 45; margin-top: 14px; }
+    .ap-productform > .pdp-trust                                       { order: 50; margin-top: 18px; }
+
+    /* The stepper no longer sits in an obvious buy row, so give it back its label.
+       sections/main-product.liquid hides it with
+       `.ap-productform .quantity_wrapper .ap-productform__quantity-label {display:none!important}`,
+       so this needs both !important and a longer selector to win. */
+    .ap-productform > .quantity_wrapper > .ap-productform__quantity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ap-productform > .quantity_wrapper > .ap-productform__quantity > .ap-productform__quantity-label {
+      display: block !important;
+      margin-bottom: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3A2E22;
+    }
+    .ap-quantityselector { height: 44px; }
+    .ap-quantityselector__button { width: 42px; height: 44px; }
+    .ap-quantityselector__input  { height: 44px; }
+
+    .pdp-short-desc { margin-top: 18px; }
+  }
+</style>
+
+{%- if settings.pdp_video_yields_to_cta -%}
+  <script>
+    /* Fades the floating video out while the buy block is on screen. Watches the buy
+       buttons, not the video, so it stays correct if the app changes its own markup.
+       Everything is feature-detected and wrapped — if any of it is unavailable the
+       page is simply left as it was. */
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      var start = function () {
+        var target = document.querySelector('.ap-productform__buy-buttons');
+        if (target) {
+          var io = new IntersectionObserver(function (entries) {
+            document.body.classList.toggle('pdp-cta-visible', entries[0].isIntersecting);
+          }, { threshold: 0 });
+          io.observe(target);
+        }
+
+        /* Sticky bar: publish its visibility and its measured height, so the widgets
+           above it move by exactly as much as they need to. The theme shows and hides
+           the bar with the `hidden` attribute, so that is what we watch. */
+        var bar = document.querySelector('ap-productstickyform');
+        if (!bar || !('MutationObserver' in window)) return;
+
+        var sync = function () {
+          var shown = !bar.hasAttribute('hidden');
+          document.body.classList.toggle('pdp-sticky-visible', shown);
+          if (shown) {
+            var h = Math.round(bar.getBoundingClientRect().height);
+            if (h > 0) document.documentElement.style.setProperty('--pdp-sticky-h', h + 'px');
+          }
+        };
+
+        new MutationObserver(sync).observe(bar, { attributes: true, attributeFilter: ['hidden'] });
+        window.addEventListener('resize', sync);
+        sync();
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
+      }
+    })();
+  </script>
+{%- endif -%}

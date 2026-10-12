@@ -1,0 +1,480 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "logam-hindi-main",
+      "settings": {
+        "box_title": "आपको क्या मिलेगा",
+        "box_eyebrow": ""
+      },
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "product": "therapy-book-english",
+            "match": "english"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी",
+            "product": "happy-hanuman-therapy-book-hindi",
+            "match": "hindi"
+          }
+        },
+        "b3": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી",
+            "product": "therapy-book-gujarati",
+            "match": "gujarati"
+          }
+        },
+        "b4": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "3 से 5 वर्किंग डे में फ़्री डिलीवरी",
+            "text": "किताब भेजते ही ईमेल पर ट्रैकिंग नंबर"
+          }
+        },
+        "b5": {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "किताब ख़राब या ग़लत भाषा में आई? फ़्री में बदल देंगे",
+            "text": "डिलीवरी के 7 दिनों के अंदर WhatsApp पर फ़ोटो भेजें"
+          }
+        },
+        "pay1": {
+          "type": "payment",
+          "settings": {
+            "name": "UPI",
+            "icon": "logo_upi",
+            "show_name": false
+          }
+        },
+        "pay2": {
+          "type": "payment",
+          "settings": {
+            "name": "Google Pay",
+            "icon": "logo_gpay",
+            "show_name": false
+          }
+        },
+        "pay3": {
+          "type": "payment",
+          "settings": {
+            "name": "PhonePe",
+            "icon": "logo_phonepe",
+            "show_name": false
+          }
+        },
+        "pay4": {
+          "type": "payment",
+          "settings": {
+            "name": "Paytm",
+            "icon": "logo_paytm",
+            "show_name": false
+          }
+        },
+        "pay5": {
+          "type": "payment",
+          "settings": {
+            "name": "Visa",
+            "icon": "logo_visa",
+            "show_name": false
+          }
+        },
+        "pay6": {
+          "type": "payment",
+          "settings": {
+            "name": "Mastercard",
+            "icon": "logo_mastercard",
+            "show_name": false
+          }
+        },
+        "pay7": {
+          "type": "payment",
+          "settings": {
+            "name": "RuPay",
+            "icon": "logo_rupay",
+            "show_name": false
+          }
+        },
+        "pay8": {
+          "type": "payment",
+          "settings": {
+            "name": "नेट बैंकिंग",
+            "icon": "bank",
+            "show_name": true
+          }
+        },
+        "box1": {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>हैप्पी हनुमान थेरेपी बुक</b>, हिन्दी एडिशन, A4 साइज़"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "pay1",
+        "pay2",
+        "pay3",
+        "pay4",
+        "pay5",
+        "pay6",
+        "pay7",
+        "pay8",
+        "box1"
+      ]
+    },
+    "inside": {
+      "type": "logam-hindi-inside",
+      "settings": {}
+    },
+    "steps": {
+      "type": "logam-hindi-steps",
+      "settings": {
+        "title": "हैप्पी हनुमान थेरेपी के 5 स्टेप",
+        "sub": "स्टेप 1 से 4 इसी किताब में हैं। स्टेप 5 एक अलग सेट है: आर्ट थेरेपी कलरिंग शीट्स।",
+        "layout_d": "cards",
+        "img_mobile": true,
+        "bg_d": "#F9EFDF",
+        "hint": ""
+      },
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "आसान भाषा में गहरी समझ",
+            "text": "हर चौपाई का आसान और गहरा अर्थ, वाल्मीकि रामायण, रामचरितमानस और भगवद् गीता के संदर्भ के साथ"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "हाथ से बने चित्र",
+            "text": "हर चित्र में उस चौपाई का भाव और सीख है, मन पर अच्छा असर डालने के लिए बनाया गया"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "हैप्पी हनुमान चैलेंज",
+            "text": "उस चौपाई की सीख को अपनी ज़िंदगी में उतारने का एक चैलेंज"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "छिपा हुआ राम नाम ढूँढ़िए",
+            "text": "हर हाथ से बने चित्र में छिपा “राम” नाम ढूँढ़िए",
+            "caption": "मिल गया? इस चित्र में “राम” मगरमच्छ के जबड़े पर छिपा है"
+          }
+        },
+        "lock5": {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "स्टेप 5 · अलग से मिलता है",
+            "title": "कलरिंग शीट्स के साथ आर्ट थेरेपी",
+            "text": "43 शीट्स। हर शीट के आगे चित्र है और पीछे उसकी लाइन आर्ट, जिसमें आप रंग भरेंगे। राम नाम ढूँढ़ने का खेल इन शीट्स पर भी है, और इनमें किताब से ज़्यादा नाम छिपे हैं।",
+            "note": "किताब के साथ लें: पाँचों स्टेप और कुल रकम पर 10% छूट",
+            "button": "स्टेप 5 अनलॉक करें · [price] में जोड़ें",
+            "added": "स्टेप 5 अनलॉक · कार्ट में जुड़ गया ✓"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "lock5"
+      ]
+    },
+    "details": {
+      "type": "logam-hindi-details",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "label": "एडिशन",
+            "value": "हिन्दी"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "label": "साइज़",
+            "value": "A4"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "label": "पेज",
+            "value": "43, हाथ से बने चित्रों के साथ"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "label": "किसके लिए",
+            "value": "बच्चे और बड़े: परिवार, माता-पिता, टीचर, हनुमान भक्त"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "label": "डिलीवरी",
+            "value": "फ़्री, 3 से 5 वर्किंग डे में"
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "label": "रिप्लेसमेंट",
+            "value": "ख़राब या ग़लत एडिशन आने पर 7 दिनों के अंदर"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "videos": {
+      "type": "logam-hindi-videos",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "video",
+          "settings": {
+            "duration": "2:45"
+          }
+        },
+        "b2": {
+          "type": "video",
+          "settings": {
+            "duration": "0:52"
+          }
+        },
+        "b3": {
+          "type": "video",
+          "settings": {
+            "duration": "0:49"
+          }
+        },
+        "b4": {
+          "type": "video",
+          "settings": {
+            "duration": "1:04"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "leaders": {
+      "type": "logam-hindi-leaders",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "quote",
+          "settings": {
+            "quote": "यह किताब सिर्फ़ युवाओं और बच्चों के लिए नहीं, सबके लिए बहुत उपयोगी है। किताब के चित्र अद्भुत हैं, बहुत बढ़िया काम।",
+            "name": "अनुपम खेर",
+            "role": "एक्टर और डायरेक्टर, हनुमान भक्त"
+          }
+        },
+        "b2": {
+          "type": "quote",
+          "settings": {
+            "quote": "अच्छे चित्र अच्छा चरित्र बना सकते हैं। इस काम से मुझे बहुत ख़ुशी है।",
+            "name": "पूज्य मोरारी बापू",
+            "role": ""
+          }
+        },
+        "b3": {
+          "type": "quote",
+          "settings": {
+            "quote": "हनुमान जी पर इतना गहरा और शानदार काम मैंने पहले कभी नहीं देखा।",
+            "name": "पूज्य हरि प्रकाश शास्त्री",
+            "role": "सालंगपुर धाम"
+          }
+        },
+        "b4": {
+          "type": "quote",
+          "settings": {
+            "quote": "बहुत सुंदर काम है। बच्चों और युवाओं के लिए हनुमान जी पर इससे दिलचस्प किताब मैंने नहीं देखी।",
+            "name": "अक्षत गुप्ता",
+            "role": "लेखक"
+          }
+        },
+        "b5": {
+          "type": "quote",
+          "settings": {
+            "quote": "यह किताब हर किसी के हाथ में पहुँचनी चाहिए। इसे बहुत दिलचस्प तरीके से पेश किया गया है।",
+            "name": "जय वसावड़ा",
+            "role": "लेखक"
+          }
+        },
+        "b6": {
+          "type": "quote",
+          "settings": {
+            "quote": "आशीष, भगवान तुम्हारे साथ हैं। बहुत अच्छा काम, अब किताब पूरी हुई। इस काम में ख़ुद भगवान तुम्हारे साथ हैं।",
+            "name": "पद्म भूषण स्वामी सच्चिदानंद",
+            "role": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "stats": {
+      "type": "logam-hindi-stats",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "logam-hindi-reviews",
+      "settings": {}
+    },
+    "author": {
+      "type": "logam-hindi-author",
+      "settings": {}
+    },
+    "faq": {
+      "type": "logam-hindi-faq",
+      "settings": {},
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "क्या मुझे हिन्दी एडिशन ही मिलेगा?",
+            "answer": "<p>हाँ। इस पेज से हिन्दी एडिशन मिलता है। English या ગુજરાતી चाहिए? ऊपर एडिशन बदल लें। चित्र और बाकी सब कुछ तीनों में एक जैसा है।</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "क्या कलरिंग शीट्स साथ में आती हैं?",
+            "answer": "<p>नहीं। इस किताब में स्टेप 1 से 4 हैं। आर्ट थेरेपी कलरिंग शीट्स (स्टेप 5) 43 शीट्स का अलग सेट है, ₹999 का। किताब के साथ लेंगे तो कुल रकम पर 10% छूट मिलेगी।</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "यह किताब किसके लिए है?",
+            "answer": "<p>बच्चों और बड़ों, दोनों के लिए: परिवार, माता-पिता, टीचर और हनुमान भक्त।</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "पेमेंट कैसे करें?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, डेबिट या क्रेडिट कार्ड (Visa, Mastercard, RuPay), या नेट बैंकिंग से। या अभी सिर्फ़ 20% दें और बाकी किताब मिलने पर।</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "किताब कब तक पहुँचेगी?",
+            "answer": "<p>पूरे भारत में 3 से 5 वर्किंग डे में, फ़्री शिपिंग के साथ। किताब भेजते ही आपको ईमेल पर ट्रैकिंग नंबर मिल जाएगा।</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "question": "किताब ख़राब या ग़लत भाषा में आए तो?",
+            "answer": "<p>डिलीवरी के 7 दिनों के अंदर +91 82381 88824 पर WhatsApp से फ़ोटो भेजें, हम नई किताब भेज देंगे।</p>"
+          }
+        },
+        "q7": {
+          "type": "faq",
+          "settings": {
+            "question": "क्या इसे गिफ़्ट में भेज सकते हैं?",
+            "answer": "<p>हाँ। चेकआउट पर जिसे भेजना है, उसका नाम और पता डालें। हम सीधे उन्हें भेज देंगे।</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ]
+    },
+    "languages": {
+      "type": "logam-hindi-languages",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "English एडिशन",
+            "product": "therapy-book-english"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી एडिशन",
+            "tag": "बेस्टसेलर",
+            "product": "therapy-book-gujarati"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "inside",
+    "steps",
+    "details",
+    "videos",
+    "leaders",
+    "stats",
+    "reviews",
+    "author",
+    "faq",
+    "languages"
+  ]
+}

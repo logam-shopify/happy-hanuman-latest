@@ -1,0 +1,159 @@
+{%- render 'logam-book-faq', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "સવાલ-જવાબ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "જાણવા જેવું"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "શું મને ગુજરાતી એડિશન જ મળશે?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>હા. આ પેજ પરથી ગુજરાતી એડિશન મળે છે.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Gujarati FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "શું મને ગુજરાતી એડિશન જ મળશે?",
+            "answer": "<p>હા. આ પેજ પરથી ગુજરાતી એડિશન મળે છે. English કે हिन्दी જોઈએ? ઉપર એડિશન બદલો. ચિત્રો અને બાકી બધું ત્રણેયમાં સરખું છે.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "શું કલરિંગ શીટ્સ સાથે આવે છે?",
+            "answer": "<p>ના. આ પુસ્તકમાં સ્ટેપ 1 થી 4 છે. આર્ટ થેરાપી કલરિંગ શીટ્સ (સ્ટેપ 5) 43 શીટ્સનો અલગ સેટ છે, ₹999નો. પુસ્તક સાથે લેશો તો કુલ રકમ પર 10% છૂટ મળશે.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "આ પુસ્તક કોના માટે છે?",
+            "answer": "<p>બાળકો અને મોટાઓ, બંને માટે: પરિવાર, માતા-પિતા, ટીચર અને હનુમાન ભક્તો.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "પેમેન્ટ કેવી રીતે કરું?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, ડેબિટ કે ક્રેડિટ કાર્ડ (Visa, Mastercard, RuPay), અથવા નેટ બેન્કિંગથી. અથવા હમણાં ફક્ત 20% ચૂકવો અને બાકીના પુસ્તક મળે ત્યારે.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ક્યારે પહોંચશે?",
+            "answer": "<p>આખા ભારતમાં 3 થી 5 વર્કિંગ દિવસમાં, ફ્રી શિપિંગ સાથે. પુસ્તક મોકલતાં જ તમને ઇમેઇલ પર ટ્રેકિંગ નંબર મળશે.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ખરાબ હાલતમાં કે ખોટી ભાષામાં આવે તો?",
+            "answer": "<p>ડિલિવરીના 7 દિવસમાં +91 82381 88824 પર WhatsAppથી ફોટો મોકલો, અમે નવું પુસ્તક મોકલી આપીશું.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "શું આ ગિફ્ટ તરીકે મોકલી શકાય?",
+            "answer": "<p>હા. ચેકઆઉટ વખતે જેને મોકલવું હોય તેનું નામ અને સરનામું લખો, અમે સીધું તેમને પહોંચાડીશું.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,156 @@
+{%- render 'logam-hindi-assets' -%}
+{{ 'logam-bulk-extras.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lb-card: {{ section.settings.card_bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh lb-cta">
+  <div class="lh__in">
+    <div class="lb-cta__card">
+      <div class="lb-cta__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 1200px) 640px, (min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: section.settings.image.alt | escape }}
+        {%- else -%}
+          <img src="{{ 'lb-bk-hero2.jpg' | asset_url }}" alt="The pocket Hanuman Chalisa held up before a golden Hanuman ji murti" width="1024" height="1024" loading="lazy" decoding="async">
+        {%- endif -%}
+      </div>
+      <div class="lb-cta__body">
+        {%- if section.settings.eyebrow != blank -%}<p class="lh-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="lh-title lb-cta__title">{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="lb-cta__text">{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.btn_label != blank or section.settings.btn2_label != blank -%}
+          <div class="lb-cta__actions">
+            {%- if section.settings.btn_label != blank -%}
+              <a class="lh-btn lh-btn--primary lb-cta__btn" href="{{ section.settings.btn_url | default: '#' | escape }}"{% if section.settings.btn_url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.btn_label }}</a>
+            {%- endif -%}
+            {%- if section.settings.btn2_label != blank -%}
+              <a class="lh-btn lh-btn--outline lb-cta__btn2" href="{{ section.settings.btn2_url | default: '#' | escape }}"{% if section.settings.btn2_url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.btn2_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logam-Bulk CTA",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Empty: the book held up before Hanuman ji. Mobile shows it 4:3 on top; desktop on the left."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Ready when you are"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Put your name on a blessing"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "120 books from ₹4,800, or a free demo with just ₹69 delivery"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Main button",
+      "default": "Start my order"
+    },
+    {
+      "type": "text",
+      "id": "btn_url",
+      "label": "Main button link",
+      "info": "#order scrolls to the order form on this page.",
+      "default": "#order"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Second button",
+      "default": "WhatsApp us · +91 70690 02999"
+    },
+    {
+      "type": "text",
+      "id": "btn2_url",
+      "label": "Second button link",
+      "default": "https://wa.me/917069002999"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#2B1A0E"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Bulk CTA"
+    }
+  ]
+}
+{% endschema %}

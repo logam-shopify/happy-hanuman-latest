@@ -1,0 +1,281 @@
+{% comment %}
+  Featured Promo with Product/Collection Grid — simple IMG version (no image_tag)
+{% endcomment %}
+
+<section class="promo-grid color-{{ section.settings.color_scheme }}" id="shopify-section-{{ section.id }}">
+  <div class="promo-grid__inner page-width">
+
+    {% if section.settings.heading != blank %}
+      <h2 class="promo-grid__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="promo-grid__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    <div class="promo-grid__layout">
+
+      {%- comment -%} LEFT PROMO CARD {%- endcomment -%}
+      <article class="promo-card">
+        {% if section.settings.promo_link != blank %}
+          <a href="{{ section.settings.promo_link }}" class="promo-card__link" aria-label="{{ section.settings.promo_alt | escape }}">
+        {% endif %}
+
+        {% if section.settings.promo_image %}
+          <img
+            class="promo-card__image"
+            src="{{ section.settings.promo_image | image_url: width: 800 }}"
+            srcset="
+              {{ section.settings.promo_image | image_url: width: 400 }} 400w
+              , {{ section.settings.promo_image | image_url: width: 600 }} 600w
+              , {{ section.settings.promo_image | image_url: width: 800 }} 800w
+            "
+            sizes="(max-width: 749px) 100vw, 320px"
+            loading="lazy"
+            alt="{{ section.settings.promo_alt | escape }}"
+          >
+        {% else %}
+          <div class="promo-card__placeholder">Upload promo image</div>
+        {% endif %}
+
+        {% if section.settings.promo_badge != blank or section.settings.promo_caption != blank %}
+          <div class="promo-card__overlay">
+            {% if section.settings.promo_badge != blank %}
+              <div class="promo-card__badge">{{ section.settings.promo_badge }}</div>
+            {% endif %}
+            {% if section.settings.promo_caption != blank %}
+              <div class="promo-card__caption">{{ section.settings.promo_caption }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.promo_link != blank %}
+          </a>
+        {% endif %}
+      </article>
+
+      {%- comment -%} RIGHT GRID {%- endcomment -%}
+      <div class="items-grid">
+        {%- assign max_items = section.settings.items_limit | default: 8 -%}
+
+        {%- if section.settings.source == 'collection' and section.settings.collection != blank -%}
+          {%- assign grid_products = section.settings.collection.products | slice: 0, max_items -%}
+
+          {% if grid_products.size == 0 %}
+            <div class="items-grid__empty">No products found in this collection.</div>
+          {% else %}
+            {% for product in grid_products %}
+              <div class="item-card">
+                <a class="item-card__media" href="{{ product.url }}">
+                  {% if product.featured_image %}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 700 }}"
+                      srcset="
+                        {{ product.featured_image | image_url: width: 300 }} 300w
+                        , {{ product.featured_image | image_url: width: 450 }} 450w
+                        , {{ product.featured_image | image_url: width: 600 }} 600w
+                        , {{ product.featured_image | image_url: width: 700 }} 700w
+                      "
+                      sizes="(max-width: 749px) 100vw, 300px"
+                      loading="lazy"
+                      alt="{{ product.title | escape }}"
+                    >
+                  {% else %}
+                    <div class="item-card__placeholder"></div>
+                  {% endif %}
+                </a>
+
+                <div class="item-card__content">
+                  <a class="item-card__title" href="{{ product.url }}">{{ product.title }}</a>
+                  <div class="item-card__price">
+                    {% render 'price', product: product %}
+                  </div>
+                  <a class="item-card__button" href="{{ product.url }}">{{ section.settings.button_label }}</a>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+        {%- else -%}
+
+          {%- assign picked = section.blocks | where: 'type', 'product' -%}
+          {% if picked.size == 0 %}
+            <div class="items-grid__empty">Add product blocks to show items.</div>
+          {% else %}
+            {% for block in picked limit: max_items %}
+              {% assign product = all_products[block.settings.product] %}
+              {% if product %}
+                <div class="item-card" {{ block.shopify_attributes }}>
+                  <a class="item-card__media" href="{{ product.url }}">
+                    {% if product.featured_image %}
+                      <img
+                        src="{{ product.featured_image | image_url: width: 700 }}"
+                        srcset="
+                          {{ product.featured_image | image_url: width: 300 }} 300w
+                          , {{ product.featured_image | image_url: width: 450 }} 450w
+                          , {{ product.featured_image | image_url: width: 600 }} 600w
+                          , {{ product.featured_image | image_url: width: 700 }} 700w
+                        "
+                        sizes="(max-width: 749px) 100vw, 300px"
+                        loading="lazy"
+                        alt="{{ product.title | escape }}"
+                      >
+                    {% else %}
+                      <div class="item-card__placeholder"></div>
+                    {% endif %}
+                  </a>
+
+                  <div class="item-card__content">
+                    <a class="item-card__title" href="{{ product.url }}">{{ product.title }}</a>
+                    <div class="item-card__price">
+                      {% render 'price', product: product %}
+                    </div>
+                    <a class="item-card__button" href="{{ product.url }}">{{ section.settings.button_label }}</a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --gap: 20px;
+      --radius: 18px;
+      --shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+
+    .promo-grid .page-width { max-width: 1200px; margin: auto; }
+    .promo-grid__heading { text-align:center; font-size:clamp(22px,2.6vw,36px); margin:10px 0 6px; font-weight:700; color:{{ section.settings.heading_color }}; }
+    .promo-grid__subheading { text-align:center; margin-bottom:24px; opacity:.8; }
+
+    .promo-grid__layout {
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:var(--gap);
+      align-items:start;
+    }
+
+    .promo-card {
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#f7f7f7;
+      position:relative;
+    }
+
+    .promo-card__image { width:100%; display:block; }
+    .promo-card__placeholder { padding:50px 0; text-align:center; }
+
+    .promo-card__overlay {
+      position:absolute; inset:auto 0 0 0;
+      padding:16px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      color:#fff;
+    }
+
+    .promo-card__badge {
+      background:rgba(255,255,255,.2);
+      padding:6px 10px;
+      border-radius:20px;
+      font-size:12px;
+      margin-bottom:8px;
+      display:inline-block;
+    }
+
+    .items-grid {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:var(--gap);
+    }
+
+    .item-card {
+      background:#fff;
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex; flex-direction:column;
+    }
+
+    .item-card__media img { width:100%; display:block; }
+    .item-card__placeholder { aspect-ratio:4/5; background:#f2f2f2; }
+
+    .item-card__content { padding:14px; display:flex; flex-direction:column; gap:8px; }
+    .item-card__title { font-weight:600; text-decoration:none; color:inherit; }
+    .item-card__price { font-size:14px; opacity:.9; }
+
+    .item-card__button {
+      margin-top:auto;
+      background:{{ section.settings.button_bg }};
+      color:{{ section.settings.button_text }};
+      padding:10px 12px;
+      border-radius:10px;
+      text-align:center;
+      text-decoration:none;
+    }
+
+    @media (max-width:1100px){
+      .promo-grid__layout{ grid-template-columns:280px 1fr; }
+      .items-grid{ grid-template-columns: repeat(2,1fr); }
+    }
+
+    @media (max-width:749px){
+      .promo-grid__layout{ grid-template-columns:1fr; }
+      .items-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Featured promo)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Hanuman Therapy Edition" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#C55A00" },
+
+    { "type": "image_picker", "id": "promo_image", "label": "Left promo image" },
+    { "type": "text", "id": "promo_alt", "label": "Promo image alt text" },
+    { "type": "url", "id": "promo_link", "label": "Promo link" },
+    { "type": "text", "id": "promo_badge", "label": "Promo badge", "default": "Therapy Book" },
+    { "type": "textarea", "id": "promo_caption", "label": "Promo caption" },
+
+    { "type": "select", "id": "source", "label": "Items source", "default": "products",
+      "options": [
+        { "value": "products", "label": "Pick products manually" },
+        { "value": "collection", "label": "Collection" }
+      ]
+    },
+
+    { "type": "collection", "id": "collection", "label": "Choose collection" },
+    { "type": "range", "id": "items_limit", "label": "Max items", "min": 1, "max": 12, "default": 4 },
+
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View details" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#000000" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#ffffff" },
+
+    { "type": "select", "id": "color_scheme", "label": "Color scheme", "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product", "settings": [
+      { "type": "product", "id": "product", "label": "Product" }
+    ]}
+  ],
+  "presets": [
+    {
+      "name": "Featured promo )",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
+    }
+  ]
+}
+{% endschema %}

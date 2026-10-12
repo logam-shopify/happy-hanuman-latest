@@ -1,0 +1,613 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-main', hi: true, fb_box: 'hh-hi-in-the-box.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Product Main",
+  "tag": "div",
+  "class": "logam-hindi-section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Leave empty on a product template to use that page's product."
+    },
+    {
+      "type": "header",
+      "content": "Title & price"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text above title",
+      "default": "हनुमान चालीसा · हिन्दी एडिशन"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Judge.me rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "info": "[count] = number of reviews",
+      "default": "तीनों एडिशन के [count] रिव्यू"
+    },
+    {
+      "type": "text",
+      "id": "reviews_anchor",
+      "label": "Rating links to section ID",
+      "default": "reviews"
+    },
+    {
+      "type": "text",
+      "id": "save_text",
+      "label": "Savings pill",
+      "info": "[amount] = money saved, [percent] = discount %",
+      "default": "[amount] की बचत · [percent]% छूट"
+    },
+    {
+      "type": "text",
+      "id": "price_note",
+      "label": "Note under price",
+      "default": "पूरे भारत में फ़्री शिपिंग"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show discount badge on image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text after %",
+      "default": "छूट"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image shape",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.8",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait 3:4"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "select",
+      "id": "desc_source",
+      "label": "Show",
+      "default": "short",
+      "options": [
+        {
+          "value": "short",
+          "label": "Product description (short)"
+        },
+        {
+          "value": "full",
+          "label": "Product description (full)"
+        },
+        {
+          "value": "custom",
+          "label": "Custom text"
+        },
+        {
+          "value": "none",
+          "label": "Nothing"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desc_words",
+      "label": "Short description words",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 45
+    },
+    {
+      "type": "richtext",
+      "id": "desc_custom",
+      "label": "Custom text"
+    },
+    {
+      "type": "header",
+      "content": "Editions & size"
+    },
+    {
+      "type": "text",
+      "id": "edition_label",
+      "label": "Editions label",
+      "info": "The selected edition's name is added after it.",
+      "default": "एडिशन:"
+    },
+    {
+      "type": "text",
+      "id": "edition_note",
+      "label": "Editions note",
+      "default": "तीनों में वही किताब, वही चित्र"
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size label",
+      "default": "साइज़"
+    },
+    {
+      "type": "text",
+      "id": "size_value",
+      "label": "Size value",
+      "info": "Can be connected to a product metafield.",
+      "default": "A4 · 43 पेज"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "buy_label",
+      "label": "Buy now label",
+      "default": "अभी खरीदें"
+    },
+    {
+      "type": "checkbox",
+      "id": "buy_price",
+      "label": "Show price in Buy now",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cart_label",
+      "label": "Add to cart label",
+      "default": "कार्ट में डालें"
+    },
+    {
+      "type": "text",
+      "id": "qty_label",
+      "label": "Quantity (screen readers)",
+      "default": "संख्या"
+    },
+    {
+      "type": "text",
+      "id": "qty_less",
+      "label": "Decrease (screen readers)",
+      "default": "संख्या कम करें"
+    },
+    {
+      "type": "text",
+      "id": "qty_more",
+      "label": "Increase (screen readers)",
+      "default": "संख्या बढ़ाएँ"
+    },
+    {
+      "type": "header",
+      "content": "Offer & payment"
+    },
+    {
+      "type": "text",
+      "id": "offer_badge",
+      "label": "Offer badge",
+      "default": "20%"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "offer_text",
+      "label": "Offer text",
+      "info": "Make part of it bold with the B button.",
+      "default": "<b>अभी सिर्फ़ 20% दें,</b> बाकी किताब मिलने पर"
+    },
+    {
+      "type": "text",
+      "id": "pay_title",
+      "label": "Payment title",
+      "default": "सुरक्षित पेमेंट"
+    },
+    {
+      "type": "text",
+      "id": "pay_methods",
+      "label": "Payment methods (text)",
+      "info": "Comma separated. Used only when no Payment logo blocks are added."
+    },
+    {
+      "type": "header",
+      "content": "In the box"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown under the gallery on desktop and after the buy box on mobile, once you add an 'In the box item' block or a photo."
+    },
+    {
+      "type": "text",
+      "id": "box_eyebrow",
+      "label": "Small text"
+    },
+    {
+      "type": "text",
+      "id": "box_title",
+      "label": "Heading",
+      "default": "आपको क्या मिलेगा"
+    },
+    {
+      "type": "image_picker",
+      "id": "box_image",
+      "label": "Photo of everything in the box"
+    },
+    {
+      "type": "product",
+      "id": "box_upsell",
+      "label": "Add-on product",
+      "info": "Price and image load from the product. The button adds it to the cart."
+    },
+    {
+      "type": "text",
+      "id": "box_upsell_note",
+      "label": "Note above add-on",
+      "default": "कलरिंग पेज अलग से मिलते हैं"
+    },
+    {
+      "type": "text",
+      "id": "box_upsell_label",
+      "label": "Add button",
+      "default": "जोड़ें"
+    },
+    {
+      "type": "header",
+      "content": "Sticky buy bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Show sticky bar on scroll",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_label",
+      "label": "Sticky bar label",
+      "default": "हिन्दी एडिशन"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent / button color",
+      "info": "Used by all Logam-hindi sections.",
+      "default": "#C24E00"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "edition",
+      "name": "Edition link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "हिन्दी"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Edition product",
+          "info": "Selected when it's the product on this page. Its image is used as the cover."
+        },
+        {
+          "type": "image_picker",
+          "id": "cover",
+          "label": "Cover image",
+          "info": "Optional. Uses the product image if empty."
+        },
+        {
+          "type": "text",
+          "id": "match",
+          "label": "Match word",
+          "info": "Optional. Selects this pill when the product title or handle contains it, e.g. hindi."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Or link"
+        }
+      ]
+    },
+    {
+      "type": "payment",
+      "name": "Payment logo",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "upi",
+          "options": [
+            {
+              "value": "upi",
+              "label": "UPI (QR)"
+            },
+            {
+              "value": "phone",
+              "label": "Phone app"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "bank",
+              "label": "Bank"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "logo_upi",
+              "label": "UPI logo"
+            },
+            {
+              "value": "logo_gpay",
+              "label": "Google Pay logo"
+            },
+            {
+              "value": "logo_phonepe",
+              "label": "PhonePe logo"
+            },
+            {
+              "value": "logo_paytm",
+              "label": "Paytm logo"
+            },
+            {
+              "value": "logo_visa",
+              "label": "Visa logo"
+            },
+            {
+              "value": "logo_mastercard",
+              "label": "Mastercard logo"
+            },
+            {
+              "value": "logo_rupay",
+              "label": "RuPay logo"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image",
+          "info": "Optional. Replaces the icon. Shown 24px tall; PNG or SVG with a transparent background works best."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "UPI"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_name",
+          "label": "Show name under logo",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust line",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "truck",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "replace",
+              "label": "Replace"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "3 से 5 वर्किंग डे में फ़्री डिलीवरी"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Small text"
+        }
+      ]
+    },
+    {
+      "type": "box_item",
+      "name": "In the box item",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<b>हैप्पी हनुमान थेरेपी बुक</b>, हिन्दी एडिशन, A4 साइज़"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi Product Main",
+      "blocks": [
+        {
+          "type": "edition",
+          "settings": {
+            "label": "English"
+          }
+        },
+        {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी"
+          }
+        },
+        {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "3 से 5 वर्किंग डे में फ़्री डिलीवरी",
+            "text": "किताब भेजते ही ईमेल पर ट्रैकिंग नंबर"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "किताब ख़राब या ग़लत भाषा में आई? फ़्री में बदल देंगे",
+            "text": "डिलीवरी के 7 दिनों के अंदर WhatsApp पर फ़ोटो भेजें"
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "UPI",
+            "icon": "logo_upi",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "Google Pay",
+            "icon": "logo_gpay",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "PhonePe",
+            "icon": "logo_phonepe",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "Paytm",
+            "icon": "logo_paytm",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "Visa",
+            "icon": "logo_visa",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "Mastercard",
+            "icon": "logo_mastercard",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "RuPay",
+            "icon": "logo_rupay",
+            "show_name": false
+          }
+        },
+        {
+          "type": "payment",
+          "settings": {
+            "name": "नेट बैंकिंग",
+            "icon": "bank",
+            "show_name": true
+          }
+        },
+        {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>हैप्पी हनुमान थेरेपी बुक</b>, हिन्दी एडिशन, A4 साइज़"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,252 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-steps', hi: true, fb_steps: 'hh-en-step1-chaupai-explained.jpg,hh-en-step2-hand-painted-art.jpg,hh-en-step3-happy-hanuman-challenge.jpg,hh-step4-find-ram.jpg', fb_lock: 'hh-step5-colouring-sheets.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Steps",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "કેવી રીતે કામ કરે છે"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "હેપ્પી હનુમાન થેરાપીનાં 5 સ્ટેપ"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "સ્ટેપ 1 થી 4 આ જ પુસ્તકમાં છે. સ્ટેપ 5 અલગ સેટ છે: આર્ટ થેરાપી કલરિંગ શીટ્સ."
+    },
+    {
+      "type": "checkbox",
+      "id": "img_mobile",
+      "label": "Show step photos on mobile",
+      "info": "Off: step photos (and step 4's caption and the step 5 photo) show on desktop only.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout_d",
+      "label": "Desktop layout",
+      "default": "cards",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Step cards in a row"
+        },
+        {
+          "value": "side",
+          "label": "List with example image on the side"
+        }
+      ],
+      "info": "'List with example image' uses the Example page image and Text under image below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Example page image"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Text under image"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "color",
+      "id": "bg_d",
+      "label": "Background (desktop)",
+      "info": "Leave empty to use the same background as mobile.",
+      "default": "#F9EFDF"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "હાથે દોરેલાં ચિત્રો"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Shown full width under the step, square."
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption under image"
+        }
+      ]
+    },
+    {
+      "type": "locked",
+      "name": "Locked step",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Small text",
+          "default": "સ્ટેપ 5 · અલગથી મળે છે"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "કલરિંગ શીટ્સ સાથે આર્ટ થેરાપી"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "43 શીટ્સ. દરેક શીટની આગળ ચિત્ર છે અને પાછળ તેની લાઇન આર્ટ, જેમાં તમે રંગ પૂરશો. રામ નામ શોધવાની રમત આ શીટ્સ પર પણ છે, અને એમાં પુસ્તક કરતાં વધુ નામ છુપાયેલાં છે."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product to unlock",
+          "info": "Price and thumbnail load from the product. The button adds it to the cart."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under price",
+          "default": "પુસ્તક સાથે લો: પાંચેય સ્ટેપ અને કુલ રકમ પર 10% છૂટ"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button",
+          "info": "[price] = product price",
+          "default": "સ્ટેપ 5 અનલૉક કરો · [price]માં ઉમેરો"
+        },
+        {
+          "type": "text",
+          "id": "added",
+          "label": "Button after adding",
+          "default": "સ્ટેપ 5 અનલૉક · કાર્ટમાં ઉમેરાઈ ગયું ✓"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Gujarati Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "સરળ ભાષામાં ઊંડી સમજ",
+            "text": "દરેક ચોપાઈનો સરળ અને ઊંડો અર્થ, વાલ્મીકિ રામાયણ, રામચરિતમાનસ અને ભગવદ્ ગીતાના સંદર્ભ સાથે"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "હાથે દોરેલાં ચિત્રો",
+            "text": "દરેક ચિત્રમાં એ ચોપાઈનો ભાવ અને શીખ છે, મન પર સારી અસર થાય એ રીતે બનાવેલું"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "હેપ્પી હનુમાન ચેલેન્જ",
+            "text": "એ ચોપાઈની શીખને પોતાના જીવનમાં ઉતારવાની એક ચેલેન્જ"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "છુપાયેલું રામ નામ શોધો",
+            "text": "દરેક હાથે દોરેલા ચિત્રમાં છુપાયેલું “રામ” નામ શોધો",
+            "caption": "મળ્યું? આ ચિત્રમાં “રામ” મગરના જડબા પર છુપાયેલું છે"
+          }
+        },
+        {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "સ્ટેપ 5 · અલગથી મળે છે",
+            "title": "કલરિંગ શીટ્સ સાથે આર્ટ થેરાપી",
+            "text": "43 શીટ્સ. દરેક શીટની આગળ ચિત્ર છે અને પાછળ તેની લાઇન આર્ટ, જેમાં તમે રંગ પૂરશો. રામ નામ શોધવાની રમત આ શીટ્સ પર પણ છે, અને એમાં પુસ્તક કરતાં વધુ નામ છુપાયેલાં છે.",
+            "note": "પુસ્તક સાથે લો: પાંચેય સ્ટેપ અને કુલ રકમ પર 10% છૂટ",
+            "button": "સ્ટેપ 5 અનલૉક કરો · [price]માં ઉમેરો",
+            "added": "સ્ટેપ 5 અનલૉક · કાર્ટમાં ઉમેરાઈ ગયું ✓"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

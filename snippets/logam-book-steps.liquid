@@ -1,0 +1,86 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px;{% if section.settings.bg_d != blank %} --lh-bg-d: {{ section.settings.bg_d }};{% endif %} }
+{%- endstyle -%}
+{%- assign side = false -%}{%- if section.settings.layout_d == 'side' -%}{%- assign side = true -%}{%- endif -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-steps-sec{% if side %} lh-steps-sec--side{% endif %}{% unless section.settings.img_mobile %} lh-steps-sec--noimg-m{% endunless %}">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    {%- assign steps = section.blocks | where: 'type', 'step' -%}
+    {%- assign locked = section.blocks | where: 'type', 'locked' -%}
+    <div class="lh-steps__list">
+      <ol class="lh-steps">
+        {%- assign fb = fb_steps | default: '' | split: ',' -%}
+        {%- for block in steps -%}
+          <li {{ block.shopify_attributes }}>
+            <div class="lh-steps__row">
+              <span class="lh-steps__n">{{ forloop.index }}</span>
+              <div>
+                <h3>{{ block.settings.title }}</h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              </div>
+            </div>
+            {%- if block.settings.image != blank -%}
+              <div class="lh-steps__img">{{ block.settings.image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 750px) 25vw, 100vw', loading: 'lazy', alt: block.settings.title | escape }}</div>
+            {%- elsif fb[forloop.index0] != blank -%}
+              <div class="lh-steps__img"><img src="{{ fb[forloop.index0] | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy"></div>
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}<p class="lh-steps__cap">{{ block.settings.caption }}</p>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+
+      {%- comment -%} "Sold separately" step: unlocks by adding the product to the cart {%- endcomment -%}
+      {%- for block in locked -%}
+        {%- assign lp = block.settings.product -%}
+        {%- assign lv = lp.selected_or_first_available_variant -%}
+        <div class="lh-lock" {{ block.shopify_attributes }}>
+          <div class="lh-lock__head">
+            <span class="lh-lock__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>
+            <div>
+              {%- if block.settings.eyebrow != blank -%}<p class="lh-lock__eyebrow">{{ block.settings.eyebrow }}</p>{%- endif -%}
+              <h3>{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+            </div>
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="lh-lock__img">{{ block.settings.image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 750px) 40vw, 90vw', loading: 'lazy' }}</div>
+          {%- elsif fb_lock != blank -%}
+            <div class="lh-lock__img"><img src="{{ fb_lock | asset_url }}" alt="" loading="lazy"></div>
+          {%- endif -%}
+          {%- if lp != blank -%}
+            {%- assign lprice = lv.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' -%}
+            <div class="lh-lock__prod">
+              {%- if lp.featured_image -%}<a class="lh-lock__thumb" href="{{ lp.url }}">{{ lp.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: lp.title | escape }}</a>{%- endif -%}
+              <div>
+                <p class="lh-lock__price"><b>{{ lprice }}</b>{% if lv.compare_at_price > lv.price %} <s>{{ lv.compare_at_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' }}</s>{% endif %}</p>
+                {%- if block.settings.note != blank -%}<p class="lh-lock__note">{{ block.settings.note }}</p>{%- endif -%}
+              </div>
+            </div>
+            {%- assign in_cart = false -%}
+            {%- for item in cart.items -%}{%- if item.variant_id == lv.id -%}{%- assign in_cart = true -%}{%- endif -%}{%- endfor -%}
+            {%- assign done_label = block.settings.added | default: 'Added to cart ✓' -%}
+            {%- assign btn_label = block.settings.button | replace: '[price]', lprice -%}
+            {%- if in_cart -%}
+              <button type="button" class="lh-btn lh-btn--dark lh-btn--full is-done" disabled data-lh-upsell="{{ lv.id }}" data-lh-done="{{ done_label | escape }}" data-lh-label="{{ btn_label | escape }}">{{ done_label }}</button>
+            {%- elsif lv.available -%}
+              <button type="button" class="lh-btn lh-btn--dark lh-btn--full" data-lh-upsell="{{ lv.id }}" data-lh-done="{{ done_label | escape }}" data-lh-label="{{ btn_label | escape }}">{{ btn_label }}</button>
+            {%- else -%}
+              <button type="button" class="lh-btn lh-btn--dark lh-btn--full" disabled>{{ 'products.product.sold_out' | t }}</button>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- comment -%} Section-level example image: only in the "side" desktop layout (cards put it inside step 4) {%- endcomment -%}
+    {%- if side and section.settings.image != blank or side and section.settings.hint != blank -%}
+      <div class="lh-hint">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
+        {%- endif -%}
+        {%- if section.settings.hint != blank -%}<p>{{ section.settings.hint }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>

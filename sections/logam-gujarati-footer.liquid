@@ -1,0 +1,188 @@
+{%- comment -%}
+  Logam footer, Gujarati text. Styles (.lf) come from the Logam-English / Logam-hindi Footer stylesheets.
+  Policy links come from the chosen menu; without one, the store's standard pages are used.
+{%- endcomment -%}
+{%- comment -%} Gujarati pages only, so it can also sit in the site-wide footer group {%- endcomment -%}
+{%- if template.suffix contains 'gujarati' -%}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&family=Noto+Serif:wght@700&family=Noto+Sans+Gujarati:wght@400;600;700;800&family=Noto+Serif+Gujarati:wght@700&display=swap" media="print" onload="this.media='all'">
+{%- liquid
+  assign s = section.settings
+  assign logo = s.logo | default: images['logo.png']
+  assign logo_w = logo.aspect_ratio | times: 54 | round
+  assign year = 'now' | date: '%Y'
+  assign copyright = s.copyright | replace: '[year]', year
+-%}
+{%- style -%}
+  #lf-{{ section.id }} { --lf-bg: {{ s.bg }}; }
+  #lf-{{ section.id }} { font-family: 'Noto Sans', 'Noto Sans Gujarati', system-ui, -apple-system, sans-serif; }
+  #lf-{{ section.id }} .lf__name { font-family: 'Noto Serif', 'Noto Serif Gujarati', Georgia, serif; }
+  @media (min-width: 750px) { #lf-{{ section.id }} .lf__tagline { font-family: 'Noto Serif', 'Noto Serif Gujarati', Georgia, serif; } }
+{%- endstyle -%}
+<footer id="lf-{{ section.id }}" class="lf">
+  <div class="lf__in">
+    <div class="lf__brand">
+      <a href="{{ routes.root_url }}" class="lf__logo">
+        {%- if logo != blank and logo.width -%}
+          {{ logo | image_url: width: 400 | image_tag: alt: shop.name, width: logo_w, height: 54, loading: 'lazy' }}
+        {%- else -%}
+          <span class="lf__name">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if s.tagline != blank -%}<p class="lf__tagline">{{ s.tagline }}</p>{%- endif -%}
+    </div>
+
+    <div class="lf__help">
+      {%- if s.help_title != blank -%}<p class="lf__title">{{ s.help_title }}</p>{%- endif -%}
+      <div class="lf__btns">
+        {%- if s.whatsapp_url != blank -%}<a class="lf__btn" href="{{ s.whatsapp_url }}" target="_blank" rel="noopener">{{ s.whatsapp_label }}</a>{%- endif -%}
+        {%- if s.phone != blank -%}<a class="lf__btn" href="tel:{{ s.phone | remove: ' ' }}">{{ s.call_label }}</a>{%- endif -%}
+      </div>
+      {%- if s.contact != blank -%}<p class="lf__contact">{{ s.contact }}</p>{%- endif -%}
+    </div>
+
+    <nav class="lf__links" aria-label="{{ s.menu_label | escape }}">
+      {%- if s.menu != blank and s.menu.links.size > 0 -%}
+        {%- for link in s.menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- else -%}
+        <a href="/pages/about-us">અમારા વિશે</a>
+        <a href="/pages/shipping-policy">શિપિંગ</a>
+        <a href="/pages/refund-policy">બદલી અને રિફંડ</a>
+        <a href="/pages/privacy-policy">પ્રાઇવસી</a>
+        <a href="/pages/terms-of-service">શરતો</a>
+      {%- endif -%}
+    </nav>
+  </div>
+
+  <div class="lf__bottom">
+    <span>{{ copyright }}</span>
+    {%- if s.powered_name != blank -%}
+      <span class="lf__powered">{{ s.powered_text }} <a href="{{ s.powered_url | default: 'https://www.logamdigital.com/' }}" target="_blank" rel="noopener">{{ s.powered_name }}</a></span>
+    {%- endif -%}
+  </div>
+</footer>
+
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Logam-Gujarati Footer",
+  "tag": "div",
+  "class": "logam-footer-hi-section logam-footer-gu-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Uses logo.png from your Files if empty."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "દરેક પાનું હનુમાનજીનો આશીર્વાદ છે. અમે તો ફક્ત માધ્યમ છીએ."
+    },
+    {
+      "type": "header",
+      "content": "Help"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Heading",
+      "default": "મદદ જોઈએ? સવારે 9 થી સાંજે 6 સુધી"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp button",
+      "default": "WhatsApp કરો"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_url",
+      "label": "WhatsApp link",
+      "default": "https://wa.me/918238188824"
+    },
+    {
+      "type": "text",
+      "id": "call_label",
+      "label": "Call button",
+      "default": "કૉલ કરો"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+91 82381 88824"
+    },
+    {
+      "type": "text",
+      "id": "contact",
+      "label": "Contact line",
+      "default": "+91 82381 88824 · samvad.happyhanuman@gmail.com"
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Without a menu: અમારા વિશે, શિપિંગ, બદલી અને રિફંડ, પ્રાઇવસી, શરતો."
+    },
+    {
+      "type": "text",
+      "id": "menu_label",
+      "label": "Menu name (screen readers)",
+      "default": "નીતિઓ"
+    },
+    {
+      "type": "header",
+      "content": "Bottom"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "info": "[year] = current year",
+      "default": "© [year] હેપ્પી હનુમાન"
+    },
+    {
+      "type": "text",
+      "id": "powered_text",
+      "label": "Powered by text",
+      "default": "Powered by"
+    },
+    {
+      "type": "text",
+      "id": "powered_name",
+      "label": "Powered by name",
+      "default": "Logam Digital"
+    },
+    {
+      "type": "text",
+      "id": "powered_url",
+      "label": "Powered by link",
+      "default": "https://www.logamdigital.com/"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F3E6D3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Gujarati Footer"
+    }
+  ]
+}
+{% endschema %}

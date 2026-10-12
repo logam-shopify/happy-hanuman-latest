@@ -1,0 +1,34 @@
+{%- render 'logam-book-receive', hi: true -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi What You Get",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small text" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "आपको क्या मिलेगा" },
+    { "type": "text", "id": "sub", "label": "Subheading" },
+    { "type": "image_picker", "id": "image", "label": "Photo of what's in the box" },
+    { "type": "header", "content": "Add-on product" },
+    { "type": "product", "id": "upsell", "label": "Add-on product", "info": "Price and image load from the product. Button adds it to the cart." },
+    { "type": "text", "id": "upsell_note", "label": "Note above add-on", "default": "कलरिंग पेज अलग से मिलते हैं" },
+    { "type": "text", "id": "upsell_label", "label": "Add button", "default": "जोड़ें" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFF8EE" },
+    { "type": "range", "id": "pt_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pb_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "pt", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pb", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "inline_richtext", "id": "text", "label": "Text", "default": "<b>हैप्पी हनुमान थेरेपी बुक</b>, हिन्दी एडिशन" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Logam-hindi What You Get", "blocks": [
+      { "type": "item", "settings": { "text": "<b>हैप्पी हनुमान थेरेपी बुक</b>, हिन्दी एडिशन: A4 साइज़, 43 पेज, हर पेज पर हाथ से बना चित्र" } }
+    ] }
+  ]
+}
+{% endschema %}

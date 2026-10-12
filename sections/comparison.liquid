@@ -1,0 +1,133 @@
+<section class="comparison-section">
+  <div class="comparison-container">
+    <!-- Left Block -->
+    <div class="comparison-item movie">
+      <h3>{{ section.settings.movie_title }}</h3>
+      <p class="price">{{ section.settings.movie_price }}</p>
+      <p class="desc">{{ section.settings.movie_desc }}</p>
+      {% if section.settings.movie_image != blank %}
+        <img src="{{ section.settings.movie_image | img_url: '500x' }}" alt="Movie Offer" class="image">
+      {% endif %}
+    </div>
+
+    <!-- Right Block -->
+    <div class="comparison-item book">
+      <h3>{{ section.settings.book_title }}</h3>
+      <p class="price">{{ section.settings.book_price }}</p>
+      <p class="desc">{{ section.settings.book_desc }}</p>
+      {% if section.settings.book_image != blank %}
+        <img src="{{ section.settings.book_image | img_url: '500x' }}" alt="Book Offer" class="image">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.comparison-section {
+  background: #fff;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.comparison-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: #fef6f0;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.comparison-item {
+  width: 45%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.comparison-item h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.comparison-item .price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d14;
+}
+
+.comparison-item .desc {
+  font-size: 14px;
+  color: #333;
+}
+
+.comparison-item .image {
+  margin-top: 15px;
+  max-width: 100%;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "movie_title",
+      "label": "Movie Title",
+      "default": "2 Movie Tickets"
+    },
+    {
+      "type": "text",
+      "id": "movie_price",
+      "label": "Movie Price",
+      "default": "1080/-"
+    },
+    {
+      "type": "text",
+      "id": "movie_desc",
+      "label": "Movie Description",
+      "default": "For 3 hour enjoyment"
+    },
+    {
+      "type": "image_picker",
+      "id": "movie_image",
+      "label": "Movie Image"
+    },
+    {
+      "type": "text",
+      "id": "book_title",
+      "label": "Book Title",
+      "default": "Happy Hanuman Chlaish"
+    },
+    {
+      "type": "text",
+      "id": "book_price",
+      "label": "Book Price",
+      "default": "999/-"
+    },
+    {
+      "type": "text",
+      "id": "book_desc",
+      "label": "Book Description",
+      "default": "For Lifelong Sanskar"
+    },
+    {
+      "type": "image_picker",
+      "id": "book_image",
+      "label": "Book Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

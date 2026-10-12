@@ -1,0 +1,715 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "logam-bulk-main",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "alt": "The back cover with space for your brand, slogan, number and address, held up before a golden Hanuman ji murti",
+            "text": "",
+            "title": "Pocket Hanuman Chalisa with your brand",
+            "position": "top"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "alt": "The gold-foil front cover of the pocket Hanuman Chalisa, held up against a blue sky",
+            "text": "Front cover",
+            "title": "Gold foil, pocket size",
+            "position": "top"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "alt": "The pocket Hanuman Chalisa on an office desk beside a laptop and a notebook",
+            "text": "For offices, shops and clinics",
+            "title": "Looks good on every desk",
+            "position": "top"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "alt": "Inside: a chaupai with its meaning, an Ask yourself question and a painting",
+            "text": "Inside the book",
+            "title": "Chaupai, meaning and a painting",
+            "position": "bottom"
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "alt": "Stacks of pocket Hanuman Chalisas tied with mauli thread, packed in a carton",
+            "text": "Bulk order",
+            "title": "From 120 books · ₹40 to ₹22 each",
+            "position": "top"
+          }
+        },
+        "slide_6": {
+          "type": "slide",
+          "settings": {
+            "alt": "Handing the pocket Hanuman Chalisa to a client across an office desk",
+            "text": "For clients, dealers and staff",
+            "title": "A gift they’ll keep",
+            "position": "top"
+          }
+        },
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "Guinness World Record holder",
+            "style": "dark"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "text": "Gold-foil cover",
+            "style": "light"
+          }
+        },
+        "card_link_1": {
+          "type": "card_link",
+          "settings": {
+            "icon": "gift",
+            "title": "Try it free first",
+            "text": "Get 1 book with your brand free. Pay only ₹69 delivery.",
+            "url": "/pages/free-demo"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4",
+        "slide_5",
+        "slide_6",
+        "badge_1",
+        "badge_2",
+        "card_link_1"
+      ],
+      "settings": {
+        "strip_1": "Free demo, ₹69 delivery",
+        "strip_2": "Bulk from 120 books",
+        "gallery_badge": "Bulk order · your brand",
+        "eyebrow": "Bulk order · your brand on the back",
+        "title": "Pocket Hanuman Chalisa with your brand",
+        "price": "₹[unit]",
+        "price_green": false,
+        "price_suffix": "/ book",
+        "price_was": "",
+        "pill": "Down to ₹22 a book",
+        "line_1": "[qty] books · <b>[total]</b> in all · minimum 120",
+        "line_2": "GST included · Free delivery across India",
+        "sub": "<p>Your logo, brand name, slogan and number on the back of every Hanuman Chalisa. Give it to your customers, clients and staff, and be remembered each time it is read.</p>",
+        "init_unit": "40",
+        "init_qty": "120",
+        "init_total": "₹4,800",
+        "init_half": "₹2,400",
+        "bg": "#FFF8EE",
+        "pt_m": 0,
+        "pb_m": 0,
+        "pt": 32,
+        "pb": 0
+      }
+    },
+    "order": {
+      "type": "logam-bulk-order",
+      "blocks": {
+        "steps": {
+          "type": "steps",
+          "settings": {}
+        },
+        "fields": {
+          "type": "fields",
+          "settings": {}
+        },
+        "messages": {
+          "type": "messages",
+          "settings": {}
+        },
+        "drawer_journey": {
+          "type": "drawer_journey",
+          "settings": {}
+        },
+        "drawer": {
+          "type": "drawer",
+          "settings": {}
+        },
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "min_qty": 120,
+            "price": 40
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "min_qty": 500,
+            "price": 35
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "min_qty": 1000,
+            "price": 30
+          }
+        },
+        "tier_4": {
+          "type": "tier",
+          "settings": {
+            "min_qty": 5000,
+            "price": 25
+          }
+        },
+        "tier_5": {
+          "type": "tier",
+          "settings": {
+            "min_qty": 10000,
+            "price": 22
+          }
+        },
+        "lang_1": {
+          "type": "language",
+          "settings": {
+            "label": "English",
+            "value": "English",
+            "code": "en",
+            "chalisa": "Charon jug partap tumhara"
+          }
+        },
+        "lang_2": {
+          "type": "language",
+          "settings": {
+            "label": "हिन्दी",
+            "value": "Hindi",
+            "code": "hi",
+            "chalisa": "चारों जुग परताप तुम्हारा"
+          }
+        },
+        "lang_3": {
+          "type": "language",
+          "settings": {
+            "label": "ગુજરાતી",
+            "value": "Gujarati",
+            "code": "gu",
+            "chalisa": "ચારો જુગ પરતાપ તુમ્હારા"
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "Your design on WhatsApp first",
+            "text": "Within 24 hours. We print only after you approve it"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery across India",
+            "text": "Printed in 7–10 working days after your OK, then 3–5 days to reach you"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "receipt",
+            "title": "GST included",
+            "text": "Add your GSTIN above for a GST invoice"
+          }
+        },
+        "payments": {
+          "type": "payments",
+          "settings": {
+            "title": "Secure checkout"
+          }
+        }
+      },
+      "block_order": [
+        "steps",
+        "fields",
+        "messages",
+        "drawer_journey",
+        "drawer",
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "tier_4",
+        "tier_5",
+        "lang_1",
+        "lang_2",
+        "lang_3",
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "payments"
+      ],
+      "settings": {
+        "mode": "bulk",
+        "product": "bulk-order",
+        "demo_product": "free-book",
+        "webhook_url": "https://connect.pabbly.com/webhook-listener/webhook/IjU3NmMwNTZmMDYzNzA0MzY1MjY1Ig_3D_3D_pc/IjU3NjcwNTY4MDYzZjA0MzU1MjZlNTUzMTUxMzQi_pc"
+      }
+    },
+    "how": {
+      "type": "logam-bulk-how",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Fill in your details",
+            "text": "Brand name, number and logo. It takes 2 minutes."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Pay 50% advance",
+            "text": "Or start with one free demo book: you pay only ₹69 delivery."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "Approve your design on WhatsApp",
+            "text": "We send it within 24 hours and make changes if you need them."
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "title": "We print and deliver",
+            "text": "Pay the other 50% before dispatch. Delivery is free across India."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ],
+      "settings": {
+        "eyebrow": "How it works",
+        "title": "From your logo to books in your hands",
+        "image_alt": "The back cover with space for your brand, slogan, number and address",
+        "bg": "#FFF8EE",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 80,
+        "pb": 0
+      }
+    },
+    "inside": {
+      "type": "logam-bulk-inside",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "text": "The complete Hanuman Chalisa, chaupai by chaupai"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "text": "The meaning of each chaupai in simple words"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "text": "An “Ask yourself” question to reflect on"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "text": "A colourful painting beside the words"
+          }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": {
+            "text": "Gold-foil cover, pocket size"
+          }
+        },
+        "item-6": {
+          "type": "item",
+          "settings": {
+            "text": "In English, हिन्दी or ગુજરાતી"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "item-6"
+      ],
+      "settings": {
+        "eyebrow": "Inside the book",
+        "title": "Vedic, scientific & psychological Sanjeevani",
+        "image_alt": "The open pocket Hanuman Chalisa on a silk cloth: a chaupai, its meaning and a painting",
+        "bg": "#FFF8EE",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 80,
+        "pb": 0
+      }
+    },
+    "occasions": {
+      "type": "logam-bulk-occasions",
+      "blocks": {
+        "chip-1": {
+          "type": "chip",
+          "settings": {
+            "text": "Diwali & New Year gifts"
+          }
+        },
+        "chip-2": {
+          "type": "chip",
+          "settings": {
+            "text": "Shop or office opening"
+          }
+        },
+        "chip-3": {
+          "type": "chip",
+          "settings": {
+            "text": "Gifts for clients"
+          }
+        },
+        "chip-4": {
+          "type": "chip",
+          "settings": {
+            "text": "Gifts for dealers & staff"
+          }
+        },
+        "chip-5": {
+          "type": "chip",
+          "settings": {
+            "text": "Weddings & functions"
+          }
+        },
+        "chip-6": {
+          "type": "chip",
+          "settings": {
+            "text": "Birthdays & anniversaries"
+          }
+        },
+        "chip-7": {
+          "type": "chip",
+          "settings": {
+            "text": "In loving memory"
+          }
+        },
+        "chip-8": {
+          "type": "chip",
+          "settings": {
+            "text": "Temple & trust events"
+          }
+        }
+      },
+      "block_order": [
+        "chip-1",
+        "chip-2",
+        "chip-3",
+        "chip-4",
+        "chip-5",
+        "chip-6",
+        "chip-7",
+        "chip-8"
+      ],
+      "settings": {
+        "eyebrow": "For every occasion",
+        "title": "Anyone can order",
+        "text": "Shops, offices, doctors, schools, temples and families give it to customers, clients, guests and loved ones.",
+        "image_alt": "Giving the pocket Hanuman Chalisa to a client in an office",
+        "bg": "#FBEFDD",
+        "page_bg": "#FFF8EE",
+        "gap_m": 28,
+        "gap": 80,
+        "pt_m": 26,
+        "pb_m": 26,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "leaders": {
+      "type": "logam-bulk-leaders",
+      "blocks": {
+        "quote-1": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book is very useful not only for youth and children but for everyone, the pictures in the book are wonderful, great work.",
+            "name": "Anupam Kher",
+            "role": "Indian actor and director / Hanuman Bhakt"
+          }
+        },
+        "quote-2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Good pictures can create good character, I express my pleasure in this work.",
+            "name": "Pujya Morari Bapu"
+          }
+        },
+        "quote-3": {
+          "type": "quote",
+          "settings": {
+            "quote": "I have never seen such deep and excellent work on Hanumanji.",
+            "name": "Pujya Hari Prakash Shastri",
+            "role": "Salangpur Dham"
+          }
+        },
+        "quote-4": {
+          "type": "quote",
+          "settings": {
+            "quote": "That’s a wonderful work, I have never seen a more interesting book on Hanumanji for children and youth.",
+            "name": "Akshat Gupta",
+            "role": "Author"
+          }
+        },
+        "quote-5": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book should be something that goes into everyone’s hands. Very interesting presentation.",
+            "name": "Jay Vasavada",
+            "role": "Author"
+          }
+        },
+        "quote-6": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ashish, God is with you. Very nice work, now done with the book. God himself is with you in this work.",
+            "name": "Padma Bhushan Swami Sachidananda"
+          }
+        }
+      },
+      "block_order": [
+        "quote-1",
+        "quote-2",
+        "quote-3",
+        "quote-4",
+        "quote-5",
+        "quote-6"
+      ],
+      "settings": {
+        "eyebrow": "Blessed by",
+        "title": "Spiritual leaders who have read it",
+        "dcols": 3,
+        "bg": "#FFF8EE",
+        "page_bg": "#FFF8EE",
+        "gap_m": 0,
+        "gap": 0,
+        "pt_m": 28,
+        "pb_m": 22,
+        "pt": 80,
+        "pb": 80
+      }
+    },
+    "record": {
+      "type": "logam-bulk-record",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "media": "award",
+            "eyebrow": "Guinness World Record holder",
+            "title": "30,303 books signed in 30 hours",
+            "text": "Surat, Gujarat · 3 December 2024 · 1,00,000+ readers"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "media": "image",
+            "eyebrow": "Mission 100 Million",
+            "title": "One mission, one India, every child",
+            "text": "Every book carries the Mission 100 Million seal: Happy Hanuman Chalisa for kids. Your order is part of it."
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2"
+      ],
+      "settings": {
+        "bg": "#2B1A0E",
+        "pt_m": 22,
+        "pb_m": 22,
+        "pt": 56,
+        "pb": 56
+      }
+    },
+    "author": {
+      "type": "logam-bulk-author",
+      "settings": {
+        "eyebrow": "About the author",
+        "name": "Ashish Bhalani",
+        "role": "TEDx speaker · co-author of Garbh Yatra and Pregnancy 90",
+        "bio": "<p>Ashish calls himself not the writer of this book but a medium of Hanuman ji’s blessings. That is why the cover says it is “written by the blessing of the Supreme” instead of carrying his name.</p>",
+        "bg": "#FBEFDD",
+        "page_bg": "#FFF8EE",
+        "gap_m": 0,
+        "gap": 0,
+        "pt_m": 26,
+        "pb_m": 26,
+        "pt": 80,
+        "pb": 80
+      }
+    },
+    "faq": {
+      "type": "logam-english-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the minimum order?",
+            "answer": "<p>120 books. Choose 120, 500, 1,000, 5,000 or 10,000 books. The bigger the pack, the less each book costs, for your whole order.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I see one before I order in bulk?",
+            "answer": "<p>Yes. Get one free demo book with your brand on the back. You pay only ₹69 for delivery, and the ₹69 is adjusted when you order 120 or more. One demo per buyer.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "When do I pay?",
+            "answer": "<p>Half when you order and half before dispatch. Pay by UPI, Google Pay, PhonePe, Paytm, debit or credit card, or net banking.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "Will I see my design before printing?",
+            "answer": "<p>Yes. We WhatsApp you the back cover design within 24 hours. We print only after you approve it.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does it take?",
+            "answer": "<p>Printing takes 7–10 working days after you approve the design. Delivery is free across India and takes 3–5 days.</p>"
+          }
+        },
+        "faq-6": {
+          "type": "faq",
+          "settings": {
+            "question": "What goes on the back cover?",
+            "answer": "<p>Your logo or photo, a Hanuman Chalisa line with its meaning, your slogan, your phone number and your address or website. The Ram mark and the Mission 100 Million seal stay as they are.</p>"
+          }
+        },
+        "faq-7": {
+          "type": "faq",
+          "settings": {
+            "question": "Is GST included? Can I get a GST invoice?",
+            "answer": "<p>Yes, all prices include GST. For a GST invoice, add your GSTIN in the order form.</p>"
+          }
+        },
+        "faq-8": {
+          "type": "faq",
+          "settings": {
+            "question": "Which logo files can I upload?",
+            "answer": "<p>JPG, PNG or PDF, up to 25 MB. No file handy? Tick “I’ll send my logo on WhatsApp” and send it after ordering.</p>"
+          }
+        },
+        "faq-9": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I print a photo instead of a logo?",
+            "answer": "<p>Yes. Upload a photo, for example a family photo for a wedding, or a loved one’s photo in their memory.</p>"
+          }
+        },
+        "faq-10": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I order books in different languages?",
+            "answer": "<p>One language per order. For another language, place a second order.</p>"
+          }
+        },
+        "faq-11": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I leave the slogan empty?",
+            "answer": "<p>No problem. We print the back cover without a slogan.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "faq-6",
+        "faq-7",
+        "faq-8",
+        "faq-9",
+        "faq-10",
+        "faq-11"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "title": "Good to know",
+        "open_first": true,
+        "bg": "#FFF8EE",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 80,
+        "pb": 0
+      }
+    },
+    "cta": {
+      "type": "logam-bulk-cta",
+      "settings": {
+        "eyebrow": "Ready when you are",
+        "title": "Put your name on a blessing",
+        "text": "120 books from ₹4,800, or a free demo with just ₹69 delivery",
+        "btn_label": "Start my order",
+        "btn_url": "#order",
+        "btn2_label": "WhatsApp us · +91 70690 02999",
+        "btn2_url": "https://wa.me/917069002999",
+        "bg": "#FFF8EE",
+        "card_bg": "#2B1A0E",
+        "pt_m": 28,
+        "pb_m": 30,
+        "pt": 80,
+        "pb": 80
+      }
+    }
+  },
+  "order": [
+    "main",
+    "order",
+    "how",
+    "inside",
+    "occasions",
+    "leaders",
+    "record",
+    "author",
+    "faq",
+    "cta"
+  ]
+}

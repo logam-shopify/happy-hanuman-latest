@@ -1,0 +1,202 @@
+<ap-productstickyform form-id="ap-productform-{{ section.id }}-{{ product.id }}" class="ap-productstickyform" hidden="">
+    <div class="container">
+      <div class="ap-productstickyform__inner">
+        <div class="ap-productstickyform__content-wrapper hd-pocket">
+          <div class="ap-productstickyform__image-wrapper">
+            {% assign price = 0 %}
+            {% if product.selected_or_first_available_variant.featured_media != null %}
+                {% assign featured_media = product.selected_or_first_available_variant.featured_media %}
+                {% assign price = product.selected_or_first_available_variant.price %}
+                <img class="ap-productstickyform__image" loading="lazy" sizes="55px" alt="{{ product.title }}" 
+                    src="{{ featured_media.preview_image | image_url: width: featured_media.preview_image.width }}" 
+                    data-srcset="{{ featured_media.preview_image | image_url: width: 55 }} 55w, {{ featured_media.preview_image | image_url: width: 110 }} 110w, {{ featured_media.preview_image | image_url: width: 165 }} 165w" 
+                    width="{{ featured_media.preview_image.width }}" height="{{ featured_media.preview_image.height }}">
+            {% else %}
+                {% assign price = product.price %}
+                <img class="product-item__primary-image" loading="eager" data-media-id="{{ product.featured_media.id }}" 
+                    sizes= "{{ sizes }}"
+                    alt="{{ product.title }}" 
+                    src="{{ product.featured_image | image_url: width: product.featured_media.width }}" 
+                    data-srcset="{%- if product.featured_media.width >= 55 -%}{{ product.featured_media | image_url: width: 55 }} 55w,{%- endif -%}{%- if product.featured_media.width >= 110 -%}{{ product.featured_media | image_url: width: 110 }} 110w,{%- endif -%}{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}"
+                    width="{{ product.featured_media.width }}" height="{{ product.featured_media.height }}">
+            {% endif %}
+          </div>
+
+          <div class="ap-productstickyform__info">
+            <div class="ap-productstickyform__bottom-info">
+              <span class="ap-productstickyform__title">{{ product.title }}</span>
+              <span class="square-separator square-separator--subdued"></span>
+              <span class="ap-productstickyform__price">{{ price | money }}</span>
+            
+            {% if  product.selected_or_first_available_variant.unit_price_measurement.reference_unit %}
+              <div class="ap-productstickyform__unit-price text--xsmall text--subdued" style="display: none">
+                <div class="unit-price-measurement">
+                  <span class="unit-price-measurement__price">{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+                  <span class="unit-price-measurement__separator">/</span>
+                  <span class="unit-price-measurement__reference-value">
+                    {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                        {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+                    {%- endif -%}
+                  </span>
+                  <span class="unit-price-measurement__reference-unit">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span>
+                </div>
+              </div>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="ap-productstickyform__form">
+            {%- comment -%}
+              A dropdown with one choice in it is not a choice. All three books are a
+              single variant named "A4", so the sticky bar was offering a selector that
+              could only ever say A4 — it reads as an unfinished page. Mirrors the guard
+              snippets/ap-productvariants.liquid already applies to the main form, plus a
+              per-option skip so a two-option product never shows a dead dropdown for the
+              option that has one value. Add a real second size and it comes back on its
+              own — nothing to remember here.
+            {%- endcomment -%}
+            {%- assign sticky_variant_count = product.variants | size -%}
+            {%- if sticky_variant_count > 1 -%}
+            <ap-productvariants handle="{{ product.handle }}" form-id="ap-productform-{{ section.id }}-{{ product.id }}" update-url="" class="ap-productstickyform__variants hd-pocket">
+                {% for option in product.options_with_values %}
+                    {% if option.values.size < 2 %}{% continue %}{% endif %}
+                    {% assign option_index = forloop.index %}
+                    
+                    <div class="select-wrapper" data-selector-type="dropdown">
+                        <ap-combobox fit-toggle="" initial-focus-selector="[aria-selected='true']" id="sticky-form-option-{{ product_form_id }}-{{ option_index }}-ap-combobox" class="ap-combobox">
+                          <span class="ap-combobox__overlay"></span>
+                          <header class="ap-combobox__header">
+                            <p class="ap-combobox__title heading h6">{{ option.name }}</p>
+                            <button type="button" class="ap-combobox__close-button tap-area" data-action="close" title="Close">
+                              <svg focusable="false" width="14" height="14" class="icon icon--close   " viewBox="0 0 14 14">
+                              <path d="M13 13L1 1M13 1L1 13" stroke="currentColor" stroke-width="2" fill="none"></path>
+                              </svg>
+                            </button>
+                          </header>
+        
+                          <div class="ap-combobox__option-list" role="listbox">
+                            {%- for value in option.values -%}
+                              {% if option_index == 1 %}
+                                <button type="button" role="option" class="ap-combobox__option-item" value="{{ value }}" aria-selected="{% if product.selected_or_first_available_variant.option1 == value %}true{%- else -%}false{%- endif -%}">{{ value }}</button>
+                              {% endif %}
+                              {% if option_index == 2 %}
+                                <button type="button" role="option" class="ap-combobox__option-item" value="{{ value }}" aria-selected="{% if product.selected_or_first_available_variant.option1 == value %}true{%- else -%}false{%- endif -%}">{{ value }}</button>
+                              {% endif %}
+                              {% if option_index == 3 %}
+                                <button type="button" role="option" class="ap-combobox__option-item" value="{{ value }}" aria-selected="{% if product.selected_or_first_available_variant.option1 == value %}true{%- else -%}false{%- endif -%}">{{ value }}</button>
+                              {% endif %}
+                            {%- endfor -%}
+                          </div>
+        
+                          <select class="visually-hidden" name="option{{ option_index }}" form="ap-productform-{{ section.id }}-{{ product.id }}" data-bind-value="sticky-form-option-{{ product_form_id }}-{{ option_index }}-value" aria-label="Size">
+                            {%- for value in option.values -%}
+                              {% if option_index == 1 %}
+                                <option value="{{ value }}" {% if product.selected_or_first_available_variant.option1 == value %}selected=""{%- endif -%}>{{ value }}</option>
+                              {% endif %}
+                              {% if option_index == 2 %}
+                                <option value="{{ value }}" {% if product.selected_or_first_available_variant.option2 == value %}selected=""{%- endif -%}>{{ value }}</option>
+                              {% endif %}
+                              {% if option_index == 3 %}
+                                <option value="{{ value }}" {% if product.selected_or_first_available_variant.option3 == value %}selected=""{%- endif -%}>{{ value }}</option>
+                              {% endif %}
+                                
+                            {%- endfor -%}
+                          </select>
+                        </ap-combobox>
+        
+                        <button type="button" is="toggle-button" class="select" ap-expanded-aria="false" aria-haspopup="listbox" ap-controlsaria="sticky-form-option-{{ product_form_id }}-{{ option_index }}-ap-combobox" style="--largest-option-width: 87px;">
+                          <span id="sticky-form-option-{{ product_form_id }}-{{ option_index }}-value" class="select__selected-value">{{ option.values[0] }}</span>
+                          <svg focusable="false" width="12" height="8" class="icon icon--chevron   " viewBox="0 0 12 8">
+                          <path fill="none" d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="2"></path>
+                          </svg>
+                        </button>
+                    </div>
+                {% endfor %}
+                
+                
+            </ap-productvariants>
+            {%- endif -%}
+        
+            {%- comment -%}
+              Buy Now, not Add to cart. The sticky bar follows the shopper down a long page
+              and is the last thing between them and paying — sending them to the cart
+              drawer at that point adds a step that earns nothing on a single-title store.
+              It matches the orange Buy It Now button in the first screen, so the same
+              promise is made in both places.
+
+              Deliberately NOT a form submit: this button carries no `form` attribute and no
+              data-product-add-to-cart-button, so the theme's cart-drawer JS leaves it alone
+              and the handler below owns the whole interaction. If the fetch fails for any
+              reason it falls back to submitting the real product form, which adds to cart as
+              before — a shopper is never left with a dead button.
+            {%- endcomment -%}
+            <ap-paymentcontainerproduct form-id="ap-productform-{{ section.id }}-{{ product.id }}" class="ap-productstickyform__payment-container">
+                <button id="StickyBuyNow" type="button" class="ap-productform__add-button button button--primary"
+                        data-form-id="ap-productform-{{ section.id }}-{{ product.id }}"
+                        data-fallback-variant="{{ product.selected_or_first_available_variant.id }}"
+                        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                    <span class="ap-text-loaderbutton">
+                      {%- if product.selected_or_first_available_variant.available -%}Buy Now{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+                      <img src="{{ 'fast-cart.png' | asset_url }}" alt="" width="20" height="20" style="display: block;">
+                    </span>
+                    <span class="ap-loader-loaderbutton" hidden="">
+                        <div class="spinner">
+                            <svg focusable="false" width="24" height="24" class="icon icon--spinner" viewBox="25 25 50 50">
+                            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+                            </svg>
+                        </div>
+                    </span>
+                </button>
+            </ap-paymentcontainerproduct>
+        </div>
+      </div>
+    </div>
+  </ap-productstickyform>
+
+<script>
+  /* Sticky Buy Now: add the selected variant, then go straight to checkout.
+     Reads the variant and quantity from the real product form so it always sends what
+     the page is actually showing, rather than a value baked in at render time. */
+  (function () {
+    var btn = document.getElementById('StickyBuyNow');
+    if (!btn) return;
+
+    var text = btn.querySelector('.ap-text-loaderbutton');
+    var loader = btn.querySelector('.ap-loader-loaderbutton');
+
+    function busy(on) {
+      btn.disabled = on;
+      if (text) text.hidden = on;
+      if (loader) loader.hidden = !on;
+    }
+
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      var form = document.getElementById(btn.dataset.formId);
+      var idField = form && form.querySelector('[name="id"]');
+      var qtyField = form && form.querySelector('[name="quantity"]');
+      var variantId = (idField && idField.value) || btn.dataset.fallbackVariant;
+      if (!variantId) return;
+
+      var qty = parseInt(qtyField && qtyField.value, 10);
+      if (!qty || qty < 1) qty = 1;
+
+      busy(true);
+
+      fetch(window.Shopify && Shopify.routes && Shopify.routes.root ? Shopify.routes.root + 'cart/add.js' : '/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: Number(variantId), quantity: qty }] })
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('add to cart failed');
+          window.location.href = '/checkout';
+        })
+        .catch(function () {
+          /* Never strand the shopper — hand it back to the normal add-to-cart form. */
+          busy(false);
+          if (form) { form.requestSubmit ? form.requestSubmit() : form.submit(); }
+        });
+    });
+  })();
+</script>

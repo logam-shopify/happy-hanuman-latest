@@ -1,0 +1,100 @@
+/* Payment method logos — shared by the product page trust block and the footer.
+   Added by EDD (Aug 2026).
+
+   One list, one stylesheet, two places. Loaded via stylesheet_tag from
+   snippets/payment-logos.liquid, so the PDP (which shows both) fetches it once.
+
+   Every one of these brand marks is drawn for a light ground, so each sits on its
+   own white tile rather than directly on the page. */
+
+.pay-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 6px of side padding rather than 8: at 8 the eight tiles wrapped 4 / 3 / 1 in the
+   330px product column and left "Net Banking" stranded alone on its own line.
+   At 6 they land 4 / 4. */
+.pay-logos__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 6px;
+  margin: 0;
+  background: #fff;
+  border: 1px solid #E6DCCE;
+  border-radius: 6px;
+}
+
+.pay-logos__item img {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-width: 100%;
+}
+
+.pay-logos__item--net {
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #3A2E22;
+  white-space: nowrap;
+}
+
+.pay-logos__item--net svg {
+  width: 17px;
+  height: 13px;
+  color: #6B5744;
+  flex: none;
+}
+
+/* ---------- Footer variant ----------
+   The footer column is narrower than the product column and the row is decorative
+   rather than reassurance-at-the-decision-point, so it runs one size down. */
+
+/* Sized to fit all eight chips on ONE line inside the 482px footer column. At the
+   product page's 18px logos they measured 531px and wrapped 7 / 1, stranding
+   "Net Banking" alone on a second line. Measured at 13px logos + 4px padding: 460px,
+   with 22px to spare. Narrower desktops wrap, which is fine — it is the lopsided
+   7 / 1 break that read as broken, not wrapping itself.
+
+   The row sits in the LEFT footer column on purpose. Four fixed widgets stack in the
+   bottom-right corner at full scroll — back-to-top (y 760-808), the WhatsApp bubble
+   (826-882), the Shoppable ShortVid player (588-880) and, on product pages, the
+   sticky Add To Cart bar. Right-aligned, the last three chips sat under them:
+   161px of the 460px row was covered on every page. There is no amount of padding
+   that clears a 292px-tall video overlay, so the row moved out of that corner
+   instead. */
+.pay-logos--footer {
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.pay-logos--footer .pay-logos__item {
+  height: 26px;
+  padding: 0 4px;
+  border-color: #E7E7E7;
+}
+
+.pay-logos--footer .pay-logos__item img {
+  height: 13px;
+}
+
+.pay-logos--footer .pay-logos__item--net {
+  font-size: 10px;
+  gap: 4px;
+}
+
+.pay-logos--footer .pay-logos__item--net svg {
+  width: 13px;
+  height: 10px;
+}
+
+/* On phones the column is full width and the eight chips wrap 6 / 2. Left-aligned,
+   the second line reads as an ordinary wrap and shares a clean left edge with the
+   copyright line below it. */

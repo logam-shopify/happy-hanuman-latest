@@ -1,0 +1,66 @@
+{%- comment -%}
+  Product JSON-LD structured data. Added by EDD (Aug 2026).
+  Enables price / availability / rating rich snippets in Google results.
+
+  Aug 2026 update (EDD): emit an explicit absolute @id and a server-side
+  aggregateRating. Judge.me injects its own Product node client-side with
+  @id "<canonical>#product"; matching that @id exactly lets Google merge the
+  two nodes into one product instead of treating them as two. The rating is
+  read from the `reviews` metafields Judge.me syncs, so it is present in the
+  raw HTML and does not depend on JS execution.
+{%- endcomment -%}
+{%- if request.page_type == 'product' and product != blank -%}
+  {%- liquid
+    assign p_desc = product.description | strip_html | truncate: 300
+
+    assign p_url = canonical_url
+    if p_url == blank
+      assign p_url = request.origin | append: product.url
+    endif
+    assign p_url = p_url | split: '?' | first
+    assign p_id = p_url | append: '#product'
+
+    assign r_val = product.metafields.reviews.rating.value
+    assign r_count = product.metafields.reviews.rating_count.value | plus: 0
+  -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "@id": {{ p_id | json }},
+    "name": {{ product.title | json }},
+    "url": {{ p_url | json }},
+    {% if product.featured_image -%}
+    "image": [{{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }}],
+    {%- endif %}
+    "description": {{ p_desc | json }},
+    {% if product.selected_or_first_available_variant.sku != blank -%}
+    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    {% if r_val != blank and r_count > 0 -%}
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ r_val.rating | json }},
+      "reviewCount": {{ r_count | json }},
+      "bestRating": {{ r_val.scale_max | json }},
+      "worstRating": {{ r_val.scale_min | json }}
+    },
+    {%- endif %}
+    "offers": {
+      "@type": "Offer",
+      "url": {{ p_url | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ product.selected_or_first_available_variant.price | divided_by: 100.0 | json }},
+      "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+      "seller": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      }
+    }
+  }
+  </script>
+{%- endif -%}

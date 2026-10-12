@@ -1,0 +1,36 @@
+<div class="ap-productform__buy-buttons">
+  <form method="post" action="/cart/add" id="ap-productform-{{ section.id }}-{{ product.id }}" accept-charset="UTF-8" class="shopify-ap-productform" enctype="multipart/form-data" is="ap-productform">
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <ap-paymentcontainerproduct id="ApolloProductSticky" form-id="ap-productform-{{ section.id }}-{{ product.id }}" class="ap-productform__payment-container">
+          <button id="AddToCart" type="submit" is="loader-button" data-use-primary="" data-product-add-to-cart-button="" data-button-content="{{ 'products.product.add_to_cart' | t }}" class="ap-productform__add-button button button--secondary button--full">
+            <span class="ap-text-loaderbutton">
+              {%- if product.selected_or_first_available_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+                <img src="{{ 'vector-cart.png' | asset_url }}" alt="" width="20" height="20" style="display: block;">
+              </span>
+            <span class="ap-loader-loaderbutton" hidden="">
+              <div class="spinner">
+                <svg focusable="false" width="24" height="24" class="icon icon--spinner" viewBox="25 25 50 50">
+                  <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+                </svg>
+              </div>
+            </span>
+          </button>
+
+          {{ form | payment_button }}
+
+        </ap-paymentcontainerproduct>
+      {%- endform -%}
+    </form>
+</div>

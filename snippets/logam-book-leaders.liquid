@@ -1,0 +1,24 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.page_bg }}; --lh-band: {{ section.settings.bg }}; --lh-gap-m: {{ section.settings.gap_m }}px; --lh-gap: {{ section.settings.gap }}px; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; --lh-dcols: {{ section.settings.dcols }}; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh--band lh-leaders">
+  <div class="lh-band"><div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    {%- assign fb = fb_photos | default: '' | split: ',' -%}
+    <div class="lh-scroll">
+      {%- for block in section.blocks -%}
+        <figure class="lh-quote" {{ block.shopify_attributes }}>
+          {%- if block.settings.photo != blank -%}
+            <div class="lh-quote__img">{{ block.settings.photo | image_url: width: 700 | image_tag: widths: '350, 520, 700', sizes: '(min-width: 750px) 33vw, 76vw', loading: 'lazy', alt: block.settings.name | escape }}</div>
+          {%- elsif fb[forloop.index0] != blank -%}
+            <div class="lh-quote__img"><img src="{{ fb[forloop.index0] | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy"></div>
+          {%- endif -%}
+          <blockquote>“{{ block.settings.quote }}”</blockquote>
+          <figcaption>{{ block.settings.name }}{% if block.settings.role != blank %}<span>{{ block.settings.role }}</span>{% endif %}</figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div></div>
+</section>

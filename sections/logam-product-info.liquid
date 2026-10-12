@@ -1,0 +1,605 @@
+{%- comment -%} Poppins isn't one of the theme's fonts; loaded the same way theme.liquid loads its Google fonts. {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+{{ 'logam-product-info.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign p = section.settings.product | default: product
+  assign v = p.selected_or_first_available_variant
+  assign sid = section.id
+
+  # Judge.me writes Shopify's standard rating metafields. No count means no
+  # stars row at all — never a placeholder number.
+  assign rating_value = p.metafields.reviews.rating.value.rating | default: 0
+  assign rating_count = p.metafields.reviews.rating_count | plus: 0
+  assign rating_pct = rating_value | times: 20
+
+  assign discount = 0
+  if v.compare_at_price > v.price
+    assign discount = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price
+  endif
+
+  # Offer box reads the same theme settings as snippets/pdp-payment-trust,
+  # so the product page and this section never disagree.
+  assign cod_pct = settings.pdp_partial_cod_percent | strip
+  assign delivery = settings.pdp_delivery_days | strip
+  assign show_replacement = settings.pdp_show_replacement
+
+  assign short_text = p.metafields.custom.short_description.value | default: p.metafields.custom.short_description
+  if short_text == blank and section.settings.short_from_description
+    assign short_text = p.description | strip_html | truncatewords: section.settings.short_words
+  endif
+-%}
+
+{%- style -%}
+  #logam-product-info-{{ sid }} {
+    --lpi-accent: {{ section.settings.accent }};
+    --lpi-soft: {{ section.settings.soft_bg }};
+    --lpi-text: {{ section.settings.text }};
+    --lpi-bg: {{ section.settings.bg }};
+    --lpi-pt: {{ section.settings.padding_top }}px;
+    --lpi-pb: {{ section.settings.padding_bottom }}px;
+    --lpi-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --lpi-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+  }
+{%- endstyle -%}
+
+<section
+  id="logam-product-info-{{ sid }}"
+  class="logam-product-info{% if section.settings.sticky_media %} logam-product-info--sticky-media{% endif %}"
+  data-lpi
+>
+  <div class="logam-product-info__container page-width">
+    {%- if p == blank -%}
+      <div class="logam-product-info__empty">
+        {{ 'product-1' | placeholder_svg_tag }}
+        <p>Pick a product in this section's settings, or add it to a product template.</p>
+      </div>
+    {%- else -%}
+    <div class="logam-product-info__grid">
+      {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
+      <div class="logam-product-info__gallery">
+        <div class="logam-product-info__stage">
+          <span class="logam-product-info__badge" data-lpi-badge {% if discount == 0 %}hidden{% endif %}>
+            <span data-lpi-badge-pct>{{ discount }}</span>% {{ section.settings.badge_suffix }}
+          </span>
+
+          <div class="logam-product-info__track" data-lpi-track>
+            {%- for media in p.media -%}
+              {%- liquid
+                if forloop.first
+                  assign priority = 'high'
+                else
+                  assign priority = 'low'
+                endif
+              -%}
+              <div class="logam-product-info__slide" data-media-id="{{ media.id }}">
+                {%- if media.media_type == 'image' -%}
+                  {{
+                    media
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '400, 600, 800, 1100',
+                      sizes: '(min-width: 990px) 50vw, 100vw',
+                      loading: 'eager',
+                      fetchpriority: priority,
+                      decoding: 'async',
+                      alt: media.alt | default: p.title
+                  }}
+                {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  {{ media | media_tag: image_size: '1100x' }}
+                {%- else -%}
+                  {{ media.preview_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: media.alt | default: p.title }}
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <div class="logam-product-info__slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {%- endfor -%}
+          </div>
+
+          {%- if p.media.size > 1 -%}
+            <button type="button" class="logam-product-info__nav logam-product-info__nav--prev" data-lpi-nav="-1" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button type="button" class="logam-product-info__nav logam-product-info__nav--next" data-lpi-nav="1" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+
+        {%- if p.media.size > 1 -%}
+          <div class="logam-product-info__thumbs">
+            {%- for media in p.media -%}
+              <button
+                type="button"
+                class="logam-product-info__thumb{% if forloop.first %} is-active{% endif %}"
+                aria-label="View image {{ forloop.index }}"
+              >
+                {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------------- Details ---------------- {%- endcomment -%}
+      <div class="logam-product-info__details">
+        {%- comment -%}
+          Language editions are separate products — each pill is a link to one.
+          The pill for the product being viewed is the active one.
+        {%- endcomment -%}
+        {%- comment -%}
+          Product tag "no language" opts a product out of the language pills
+          entirely — e.g. a book that only ever ships in one language.
+        {%- endcomment -%}
+        {%- assign hide_editions = false -%}
+        {%- for tag in p.tags -%}
+          {%- assign tag_norm = tag | downcase | strip | replace: '-', ' ' | replace: '_', ' ' -%}
+          {%- if tag_norm == 'no language' -%}
+            {%- assign hide_editions = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign editions = section.blocks | where: 'type', 'edition' -%}
+        {%- if editions.size > 0 and hide_editions == false -%}
+          {%- liquid
+            # Active = the block whose product is this product. If none is
+            # linked yet, fall back to the label appearing in the title,
+            # e.g. "English" in "Happy Hanuman Therapy Book (English)".
+            assign active_index = -1
+            for block in editions
+              if block.settings.product.id == p.id
+                assign active_index = forloop.index0
+                break
+              endif
+            endfor
+            if active_index == -1
+              assign title_lc = p.title | downcase
+              for block in editions
+                assign label_lc = block.settings.label | downcase | strip
+                if label_lc != blank and title_lc contains label_lc
+                  assign active_index = forloop.index0
+                  break
+                endif
+              endfor
+            endif
+          -%}
+          <nav class="logam-product-info__option" aria-label="{{ section.settings.editions_label | escape }}" data-lpi-editions>
+            {%- for block in editions -%}
+              {%- assign ed = block.settings.product -%}
+              {%- if block.settings.label != blank -%}
+                <a
+                  class="logam-product-info__pill{% if forloop.index0 == active_index %} is-active{% endif %}"
+                  href="{{ ed.url | default: '#' }}"
+                  {% if forloop.index0 == active_index %}aria-current="page"{% endif %}
+                  {{ block.shopify_attributes }}
+                ><span>{{ block.settings.label }}</span></a>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+
+        {%- unless p.has_only_default_variant -%}
+          {%- for option in p.options_with_values -%}
+            {%- comment -%} One value (e.g. only "A4") = nothing to choose, so no pills. {%- endcomment -%}
+            {%- if option.values.size < 2 -%}{%- continue -%}{%- endif -%}
+            <fieldset class="logam-product-info__option">
+              <legend class="visually-hidden">{{ option.name }}</legend>
+              {%- for value in option.values -%}
+                <label class="logam-product-info__pill">
+                  <input
+                    type="radio"
+                    name="lpi-{{ sid }}-option{{ option.position }}"
+                    value="{{ value | escape }}"
+                    data-lpi-option="{{ forloop.parentloop.index0 }}"
+                    {% if option.selected_value == value %}checked{% endif %}
+                  >
+                  <span>{{ value }}</span>
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <h1 class="logam-product-info__title"><b>{{ p.title }}</b></h1>
+
+        <div class="logam-product-info__meta">
+          <p class="logam-product-info__mrp" data-lpi-mrp-row {% if v.compare_at_price <= v.price %}hidden{% endif %}>
+            {{ section.settings.mrp_label }} <s data-lpi-mrp>{{ v.compare_at_price | money }}</s>
+          </p>
+
+          {%- if rating_count > 0 -%}
+            <button type="button" class="logam-product-info__reviews" data-lpi-reviews>
+              <span class="logam-product-info__stars" style="--lpi-rating: {{ rating_pct }}%" aria-label="Rated {{ rating_value }} out of 5"></span>
+              <span>{{ rating_count }} {% if rating_count == 1 %}review{% else %}reviews{% endif %}</span>
+            </button>
+          {%- endif -%}
+        </div>
+
+        <div class="logam-product-info__price-row">
+          <span class="logam-product-info__price" data-lpi-price>{{ v.price | money }}</span>
+          {%- if section.settings.tax_note != blank -%}
+            <span class="logam-product-info__tax">{{ section.settings.tax_note }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_offer and cod_pct != blank -%}
+          <div class="logam-product-info__offer">
+            <span class="logam-product-info__offer-pct">{{ cod_pct }}%</span>
+            <div class="logam-product-info__offer-copy">
+              <strong>Pay just {{ cod_pct }}% now</strong>
+              <span>Pay the rest when the book reaches you</span>
+              {%- if delivery != blank or show_replacement -%}
+                <ul role="list">
+                  {%- if delivery != blank -%}
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.9" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="18" r="1.9" stroke="currentColor" stroke-width="1.6"/></svg>
+                      <span>Delivered in <b>{{ delivery }}</b></span>
+                    </li>
+                  {%- endif -%}
+                  {%- if show_replacement -%}
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2.2 2.2L15.5 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Damaged in transit? <b>We replace it</b></span>
+                    </li>
+                  {%- endif -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}
+          The theme's own buy box, unchanged — the same two snippets main-product
+          renders: ap-quantityselector, ap-productform (AJAX add + cart drawer),
+          loader-button and Shopify's dynamic checkout (Buy it now). Only the
+          layout and skin are ours, in assets/logam-product-info.css.
+        {%- endcomment -%}
+        <div class="logam-product-info__buy{% unless section.settings.show_buy_now %} logam-product-info__buy--no-checkout{% endunless %}">
+          {%- render 'product-quantity', product: p -%}
+          {%- render 'product-buy', product: p, section_id: sid -%}
+        </div>
+
+        {%- comment -%} Reels {%- endcomment -%}
+        {%- assign reels = section.blocks | where: 'type', 'reel' -%}
+        {%- if reels.size > 0 -%}
+          <div class="logam-product-info__reels">
+            {%- for block in reels -%}
+              <div class="logam-product-info__reel" {{ block.shopify_attributes }}>
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata' }}
+                  <button type="button" class="logam-product-info__reel-sound" data-lpi-sound aria-pressed="false" aria-label="Turn sound on">
+                    <svg class="lpi-ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+                    <svg class="lpi-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                  </button>
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag }}
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_payments -%}
+          <div class="logam-product-info__pay">
+            <div class="logam-product-info__pay-label">{{ section.settings.payments_label }}</div>
+            {% render 'payment-logos' %}
+          </div>
+        {%- endif -%}
+
+        {%- if short_text != blank -%}
+          <div class="logam-product-info__short">{{ short_text }}</div>
+        {%- endif -%}
+
+        {%- comment -%} Accordions + links, in the order they sit in the editor {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'accordion' -%}
+              <details class="logam-product-info__acc" {{ block.shopify_attributes }}>
+                <summary>
+                  {{ block.settings.title }}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
+                <div class="logam-product-info__acc-body rte">
+                  {%- if block.settings.source == 'description' -%}
+                    {{ p.description }}
+                  {%- elsif block.settings.source == 'metafield' -%}
+                    {{ p.metafields.custom.additional_information }}
+                  {%- else -%}
+                    {{ block.settings.content }}
+                  {%- endif -%}
+                </div>
+              </details>
+            {%- when 'link' -%}
+              {%- if block.settings.label != blank -%}
+                <a
+                  class="logam-product-info__link"
+                  href="{{ block.settings.url | default: '#' }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.icon == 'truck' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 9h4.5L22 12.5V16h-8z"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="18" cy="17.5" r="1.8"/><path d="M4 9h5M4 12h3"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M6.5 14.5h4"/><rect x="14" y="12.5" width="4.5" height="3.5" rx=".6"/></svg>
+                  {%- endif -%}
+                  <span>{{ block.settings.label }}</span>
+                </a>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <script type="application/json" data-lpi-variants>
+      {{ p.variants | json }}
+    </script>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    function init(root) {
+      if (!root || root.dataset.lpiReady) return;
+      var variantsEl = root.querySelector('[data-lpi-variants]');
+      if (!variantsEl) return;
+      root.dataset.lpiReady = '1';
+
+      var $ = function (sel) { return root.querySelector(sel); };
+      var $$ = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var variants = JSON.parse(variantsEl.textContent);
+      var track = $('[data-lpi-track]');
+      var slides = $$('.logam-product-info__slide');
+      var thumbs = $$('.logam-product-info__thumb');
+      var navBtns = $$('[data-lpi-nav]');
+      var form = $('form[is="ap-productform"]');
+      var idInput = form && form.querySelector('input[name="id"]');
+
+      var moneyFormat = (window.themeVariables && themeVariables.settings.moneyFormat) || '{{ shop.money_format }}';
+      var money = function (cents) {
+        return moneyFormat.replace(/\{\{\s*(\w+)\s*\}\}/, function (_, type) {
+          var n = cents / 100;
+          if (type === 'amount_no_decimals') return Math.round(n).toLocaleString('en-IN');
+          if (type === 'amount_with_comma_separator') return n.toFixed(2).replace('.', ',');
+          return n.toFixed(2);
+        });
+      };
+
+      /* ---- gallery: native scroll-snap, JS only syncs thumbs + arrows ---- */
+      function currentIndex() {
+        return track && track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0;
+      }
+      function setCurrent(i) {
+        thumbs.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
+        navBtns.forEach(function (b) {
+          b.disabled = parseInt(b.dataset.lpiNav, 10) < 0 ? i <= 0 : i >= slides.length - 1;
+        });
+        if (thumbs[i]) thumbs[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+      function goToSlide(i) {
+        if (!track || !slides.length) return;
+        i = Math.max(0, Math.min(i, slides.length - 1));
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+        setCurrent(i);
+      }
+      thumbs.forEach(function (t, i) { t.addEventListener('click', function () { goToSlide(i); }); });
+      navBtns.forEach(function (b) {
+        b.addEventListener('click', function () { goToSlide(currentIndex() + parseInt(b.dataset.lpiNav, 10)); });
+      });
+      if (track) {
+        var settle;
+        track.addEventListener('scroll', function () {
+          clearTimeout(settle);
+          settle = setTimeout(function () { setCurrent(currentIndex()); }, 90);
+        }, { passive: true });
+      }
+      setCurrent(0);
+
+      /* ---- language pills: highlight the clicked one while its page loads ---- */
+      $$('[data-lpi-editions] a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (a.getAttribute('href') === '#') return;
+          $$('[data-lpi-editions] a').forEach(function (x) {
+            x.classList.toggle('is-active', x === a);
+            if (x === a) x.setAttribute('aria-current', 'page');
+            else x.removeAttribute('aria-current');
+          });
+        });
+      });
+
+      /* ---- option pills -> variant ---- */
+      function applyVariant(v) {
+        // The theme's ap-paymentcontainerproduct listens for this on the form
+        // and updates Add to cart (sold out / unavailable) and Buy it now.
+        if (form) form.dispatchEvent(new CustomEvent('variant:changed', { bubbles: true, detail: { variant: v || null } }));
+        if (!v) return;
+        if (idInput) idInput.value = v.id;
+
+        $('[data-lpi-price]').textContent = money(v.price);
+        var onSale = v.compare_at_price > v.price;
+        $('[data-lpi-mrp-row]').hidden = !onSale;
+        if (onSale) $('[data-lpi-mrp]').textContent = money(v.compare_at_price);
+
+        var badge = $('[data-lpi-badge]');
+        var pct = onSale ? Math.floor((v.compare_at_price - v.price) * 100 / v.compare_at_price) : 0;
+        badge.hidden = pct <= 0;
+        $('[data-lpi-badge-pct]').textContent = pct;
+
+
+        if (v.featured_media) {
+          var idx = slides.findIndex(function (s) { return s.dataset.mediaId == v.featured_media.id; });
+          if (idx > -1) goToSlide(idx);
+        }
+        if (root.closest('.shopify-section') && location.pathname.indexOf('/products/') > -1) {
+          history.replaceState({}, '', location.pathname + '?variant=' + v.id);
+        }
+      }
+      $$('[data-lpi-option]').forEach(function (input) {
+        input.addEventListener('change', function () {
+          // Keyed by option position: single-value options have no pills, so
+          // they match anything.
+          var chosen = {};
+          $$('[data-lpi-option]:checked').forEach(function (i) { chosen[i.dataset.lpiOption] = i.value; });
+          applyVariant(variants.find(function (v) {
+            return v.options.every(function (o, n) { return !(n in chosen) || o === chosen[n]; });
+          }));
+        });
+      });
+
+      /* ---- reels: one audible at a time ---- */
+      $$('[data-lpi-sound]').forEach(function (btn) {
+        var video = btn.parentNode.querySelector('video');
+        if (!video) return;
+        btn.addEventListener('click', function () {
+          var turnOn = video.muted;
+          document.querySelectorAll('.logam-product-info__reel video').forEach(function (x) { x.muted = true; });
+          document.querySelectorAll('[data-lpi-sound]').forEach(function (b) {
+            b.classList.remove('is-on');
+            b.setAttribute('aria-pressed', 'false');
+            b.setAttribute('aria-label', 'Turn sound on');
+          });
+          if (!turnOn) return;
+          video.muted = false;
+          btn.classList.add('is-on');
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', 'Turn sound off');
+          video.play().catch(function () {});
+        });
+      });
+
+      /* ---- stars -> Judge.me widget (most specific selector first) ---- */
+      var reviewsBtn = $('[data-lpi-reviews]');
+      if (reviewsBtn) {
+        reviewsBtn.addEventListener('click', function () {
+          var targets = ['#judgeme_product_reviews', '.jdgm-review-widget', '.jdgm-rev-widg', '#shopify-product-reviews'];
+          for (var i = 0; i < targets.length; i++) {
+            var el = document.querySelector(targets[i]);
+            if (el) {
+              window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 40, behavior: 'smooth' });
+              return;
+            }
+          }
+        });
+      }
+    }
+
+    document.querySelectorAll('[data-lpi]').forEach(init);
+    document.addEventListener('shopify:section:load', function (e) {
+      init(e.target.querySelector && e.target.querySelector('[data-lpi]'));
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Logam Product Info",
+  "tag": "section",
+  "class": "logam-product-info-section",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Leave blank to use the current product" },
+    { "type": "checkbox", "id": "sticky_media", "label": "Keep gallery in view while scrolling", "default": true, "info": "Desktop only" },
+
+    { "type": "text", "id": "editions_label", "label": "Language links name (screen readers)", "default": "Language" },
+
+    { "type": "header", "content": "Price" },
+    { "type": "text", "id": "mrp_label", "label": "MRP label", "default": "MRP :" },
+    { "type": "text", "id": "tax_note", "label": "Tax note", "default": "(incl. of all taxes)" },
+    { "type": "text", "id": "badge_suffix", "label": "Discount badge text", "default": "Off", "info": "Shown after the live % on the main image" },
+
+    { "type": "header", "content": "Offer box" },
+    { "type": "checkbox", "id": "show_offer", "label": "Show partial payment box", "default": true, "info": "Percentage, delivery days and replacement line come from Theme settings (same as the theme's product page)" },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "checkbox", "id": "show_buy_now", "label": "Show Buy it now", "default": true, "info": "Theme's own buttons. Texts come from the theme language file and Shopify checkout." },
+
+    { "type": "header", "content": "Payments & summary" },
+    { "type": "checkbox", "id": "show_payments", "label": "Show payment logos", "default": true },
+    { "type": "text", "id": "payments_label", "label": "Payment logos label", "default": "SECURE CHECKOUT" },
+    { "type": "checkbox", "id": "short_from_description", "label": "Summary falls back to product description", "default": true, "info": "Summary uses the metafield custom.short_description first" },
+    { "type": "range", "id": "short_words", "label": "Summary length (words)", "min": 10, "max": 80, "step": 5, "default": 40 },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#F3561F" },
+    { "type": "color", "id": "soft_bg", "label": "Soft background", "default": "#FBEAE3" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#1A1A1A" },
+    { "type": "color", "id": "bg", "label": "Section background", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 12 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "edition",
+      "name": "Language link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "English" },
+        { "type": "product", "id": "product", "label": "Book in this language", "info": "Clicking the pill opens this product" }
+      ]
+    },
+    {
+      "type": "reel",
+      "name": "Video reel",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "image_picker", "id": "image", "label": "Fallback image" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "DESCRIPTION" },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Content source",
+          "default": "description",
+          "options": [
+            { "value": "description", "label": "Product description" },
+            { "value": "metafield", "label": "Additional information (metafield)" },
+            { "value": "custom", "label": "Custom text" }
+          ]
+        },
+        { "type": "richtext", "id": "content", "label": "Custom text", "info": "Only used when Content source is \"Custom text\"" }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link row",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "truck", "options": [
+          { "value": "truck", "label": "Delivery truck" },
+          { "value": "card", "label": "Payment card" }
+        ] },
+        { "type": "text", "id": "label", "label": "Label", "default": "Shipping & Returns" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam Product Info",
+      "blocks": [
+        { "type": "edition", "settings": { "label": "English" } },
+        { "type": "edition", "settings": { "label": "Hindi" } },
+        { "type": "edition", "settings": { "label": "Gujarati" } },
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "accordion", "settings": { "title": "DESCRIPTION", "source": "description" } },
+        { "type": "accordion", "settings": { "title": "ADDITIONAL INFORMATION", "source": "metafield" } },
+        { "type": "link", "settings": { "icon": "truck", "label": "Shipping & Returns" } },
+        { "type": "link", "settings": { "icon": "card", "label": "Secure Payment" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

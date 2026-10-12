@@ -1,0 +1,440 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "logam-english-main",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "match": "english",
+            "product": "therapy-book-english"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी",
+            "match": "hindi",
+            "product": "happy-hanuman-therapy-book-hindi"
+          }
+        },
+        "b3": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી",
+            "match": "gujarati",
+            "product": "therapy-book-gujarati"
+          }
+        },
+        "b4": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery in 3–5 business days",
+            "text": "Tracking number by email once it ships"
+          }
+        },
+        "b5": {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "Damaged or wrong edition? Free replacement",
+            "text": "WhatsApp us a photo within 7 days of delivery"
+          }
+        },
+        "b6": {
+          "type": "payment",
+          "settings": {
+            "name": "UPI",
+            "icon": "upi"
+          }
+        },
+        "b7": {
+          "type": "payment",
+          "settings": {
+            "name": "Google Pay",
+            "icon": "phone"
+          }
+        },
+        "b8": {
+          "type": "payment",
+          "settings": {
+            "name": "PhonePe",
+            "icon": "phone"
+          }
+        },
+        "b9": {
+          "type": "payment",
+          "settings": {
+            "name": "Paytm",
+            "icon": "phone"
+          }
+        },
+        "b10": {
+          "type": "payment",
+          "settings": {
+            "name": "Cards",
+            "icon": "card"
+          }
+        },
+        "b11": {
+          "type": "payment",
+          "settings": {
+            "name": "Net banking",
+            "icon": "bank"
+          }
+        },
+        "b12": {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>Happy Hanuman Therapy Book</b>, English edition: A4, 43 hand-illustrated pages"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12"
+      ]
+    },
+    "inside": {
+      "type": "logam-english-inside",
+      "settings": {}
+    },
+    "steps": {
+      "type": "logam-english-steps",
+      "settings": {
+        "title": "5 steps of Happy Hanuman Therapy",
+        "sub": "Steps 1 to 4 are inside this book. Step 5 is a separate set: the Art Therapy Colouring Sheets.",
+        "hint": "",
+        "bg_d": "#F9EFDF"
+      },
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Simple, in-depth explanation",
+            "text": "Every chaupai explained simply and in depth, with references from the Valmiki Ramayan, Ramcharitmanas and Bhagavad Gita"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Hand-illustrated paintings",
+            "text": "Each painting carries the feeling and value of its chaupai, made with a psychological effect in mind"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Happy Hanuman Challenge",
+            "text": "A challenge to bring the value of that chaupai into your own life"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "Find the hidden Ram Naam",
+            "text": "Look for the name “Ram” hidden in every hand-illustrated painting",
+            "caption": "Found it? In this picture, “Ram” hides on the crocodile’s jaw"
+          }
+        },
+        "lock5": {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "Step 5 · Sold separately",
+            "title": "Art therapy with the Colouring Sheets",
+            "text": "43 sheets, each with the painting on the front and its line art on the back for you to colour. The Ram Naam game is on these sheets too, with more names to find than in the book.",
+            "note": "Add it with your book: all 5 steps and 10% off the total",
+            "button": "Unlock step 5 · Add for [price]"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "lock5"
+      ]
+    },
+    "details": {
+      "type": "logam-english-details",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "label": "Edition",
+            "value": "English"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "label": "Format",
+            "value": "A4"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "label": "Pages",
+            "value": "43, hand-illustrated"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "label": "Best for",
+            "value": "Children and adults: families, parents, teachers, seekers"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "label": "Delivery",
+            "value": "Free, in 3–5 business days"
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "label": "Replacement",
+            "value": "Within 7 days if damaged in transit or the wrong edition arrives"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "videos": {
+      "type": "logam-english-videos",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "video",
+          "settings": {
+            "duration": "2:45"
+          }
+        },
+        "b2": {
+          "type": "video",
+          "settings": {
+            "duration": "0:52"
+          }
+        },
+        "b3": {
+          "type": "video",
+          "settings": {
+            "duration": "0:49"
+          }
+        },
+        "b4": {
+          "type": "video",
+          "settings": {
+            "duration": "1:04"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "leaders": {
+      "type": "logam-english-leaders",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book is very useful not only for youth and children but for everyone, the pictures in the book are wonderful, great work.",
+            "name": "Anupam Kher",
+            "role": "Indian actor and director / Hanuman Bhakt"
+          }
+        },
+        "b2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Good pictures can create good character, I express my pleasure in this work.",
+            "name": "Pujya Morari Bapu"
+          }
+        },
+        "b3": {
+          "type": "quote",
+          "settings": {
+            "quote": "I have never seen such deep and excellent work on Hanumanji.",
+            "name": "Pujya Hari Prakash Shastri",
+            "role": "Salangpur Dham"
+          }
+        },
+        "b4": {
+          "type": "quote",
+          "settings": {
+            "quote": "That’s a wonderful work, I have never seen a more interesting book on Hanumanji for children and youth.",
+            "name": "Akshat Gupta",
+            "role": "Author"
+          }
+        },
+        "b5": {
+          "type": "quote",
+          "settings": {
+            "quote": "This book should be something that goes into everyone’s hands. Very interesting presentation.",
+            "name": "Jay Vasavada",
+            "role": "Author"
+          }
+        },
+        "b6": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ashish, God is with you. Very nice work, now done with the book. God himself is with you in this work.",
+            "name": "Padma Bhushan Swami Sachidananda"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "stats": {
+      "type": "logam-english-stats",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "logam-english-reviews",
+      "settings": {}
+    },
+    "author": {
+      "type": "logam-english-author",
+      "settings": {}
+    },
+    "faq": {
+      "type": "logam-english-faq",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "faq",
+          "settings": {
+            "question": "Will I receive the English edition?",
+            "answer": "<p>Yes. This page sells the English edition. Want it in हिन्दी or ગુજરાતી? Switch the edition above. The art and content are the same.</p>"
+          }
+        },
+        "b2": {
+          "type": "faq",
+          "settings": {
+            "question": "Who is the book for?",
+            "answer": "<p>Children and grown-ups alike: families, parents, teachers and seekers.</p>"
+          }
+        },
+        "b3": {
+          "type": "faq",
+          "settings": {
+            "question": "How can I pay?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, debit or credit cards, or net banking. Or pay just 20% now and the rest when the book reaches you.</p>"
+          }
+        },
+        "b4": {
+          "type": "faq",
+          "settings": {
+            "question": "When will it arrive?",
+            "answer": "<p>In 3–5 business days, anywhere in India, with free shipping. You get a tracking number by email once it ships.</p>"
+          }
+        },
+        "b5": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it arrives damaged or in the wrong language?",
+            "answer": "<p>WhatsApp us a photo on +91 82381 88824 within 7 days of delivery and we send a replacement.</p>"
+          }
+        },
+        "b6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I send it as a gift?",
+            "answer": "<p>Yes. Enter the recipient’s name and address at checkout and we deliver it to them.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "languages": {
+      "type": "logam-english-languages",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी edition",
+            "product": "happy-hanuman-therapy-book-hindi"
+          }
+        },
+        "b2": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી edition",
+            "tag": "Bestseller",
+            "product": "therapy-book-gujarati"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "inside",
+    "steps",
+    "details",
+    "videos",
+    "leaders",
+    "stats",
+    "reviews",
+    "author",
+    "faq",
+    "languages"
+  ]
+}

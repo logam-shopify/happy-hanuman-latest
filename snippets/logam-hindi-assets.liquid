@@ -1,0 +1,9 @@
+{%- comment -%}
+  Shared assets for every Logam-hindi section. Each section renders this;
+  the browser fetches each URL once, and logam-hindi.js guards against
+  running twice.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Serif:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@600;700&family=Noto+Serif+Gujarati:wght@600;700&display=swap" media="print" onload="this.media='all'">
+{{ 'logam-hindi.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'logam-hindi.js' | asset_url }}" defer></script>

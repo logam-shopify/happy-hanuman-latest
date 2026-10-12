@@ -1,0 +1,209 @@
+{%- comment -%} Bulk order / Free demo: "For every occasion". Coloured band with text, photo and occasion chips. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{{ 'logam-bulk-content.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.page_bg }}; --lh-band: {{ section.settings.bg }}; --lh-gap-m: {{ section.settings.gap_m }}px; --lh-gap: {{ section.settings.gap }}px; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh lh--band lb-occasions">
+  <div class="lh-band"><div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.text -%}
+    <div class="lb-occasions__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 1200px) 532px, (min-width: 750px) 50vw, calc(100vw - 32px)', loading: 'lazy', alt: section.settings.image_alt }}
+      {%- else -%}
+        <img src="{{ 'lb-bk-officegift2.jpg' | asset_url }}" width="1024" height="1024" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+    {%- if section.blocks.size > 0 -%}
+      <ul class="lb-occasions__chips" role="list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div></div>
+</section>
+
+{% schema %}
+{
+  "name": "Logam-Bulk Occasions",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "For every occasion"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Anyone can order"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Shops, offices, doctors, schools, temples and families give it to customers, clients, guests and loved ones."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Empty: shows the office-gift photo from the design. Cropped 4:3."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (alt text)",
+      "default": "Giving the pocket Hanuman Chalisa to a client in an office"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Band background",
+      "default": "#FBEFDD"
+    },
+    {
+      "type": "color",
+      "id": "page_bg",
+      "label": "Background above the band",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "gap_m",
+      "label": "Space above (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space above (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Occasion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Diwali & New Year gifts"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Bulk Occasions",
+      "blocks": [
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Diwali & New Year gifts"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Shop or office opening"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Gifts for clients"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Gifts for dealers & staff"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Weddings & functions"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Birthdays & anniversaries"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "In loving memory"
+          }
+        },
+        {
+          "type": "chip",
+          "settings": {
+            "text": "Temple & trust events"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

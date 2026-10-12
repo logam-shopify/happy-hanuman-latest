@@ -1,0 +1,320 @@
+{%- render 'logam-book-cart' -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Cart",
+  "tag": "div",
+  "class": "logam-cart-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Cart drawer for the Logam book pages. Opens on Add to cart, the step 5 buttons and the header cart icon."
+    },
+    {
+      "type": "header",
+      "content": "Step 5 product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_journey",
+      "label": "Show Hanuman ji's journey and the step 5 card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_on",
+      "label": "Step 5 offer is active",
+      "default": false,
+      "info": "Off: the journey and step 5 card are design only, and 'Add step 5' does nothing. Turn on once the step 5 product and the 10% discount are set up."
+    },
+    {
+      "type": "number",
+      "id": "unlock_amount",
+      "label": "Unlock step 5 at cart value (₹)",
+      "default": 1998,
+      "info": "Same as the minimum purchase of your 10% discount."
+    },
+    {
+      "type": "product",
+      "id": "step5_product",
+      "label": "Step 5 product (Colouring Sheets)",
+      "info": "Its price and image load automatically. The offer needs this product and 'Step 5 offer is active'."
+    },
+    {
+      "type": "image_picker",
+      "id": "step5_image",
+      "label": "Step 5 card photo",
+      "info": "Optional. Shows the colouring sheets photo from the design if empty."
+    },
+    {
+      "type": "text",
+      "id": "step5_title",
+      "label": "Step 5 product name",
+      "info": "Leave empty to use the product title.",
+      "default": "आर्ट थेरेपी कलरिंग शीट्स"
+    },
+    {
+      "type": "text",
+      "id": "step5_line",
+      "label": "Step 5 line text in cart",
+      "default": "43 शीट्स · स्टेप 5"
+    },
+    {
+      "type": "text",
+      "id": "card_price",
+      "label": "Step 5 card price (no product selected)",
+      "default": "₹999"
+    },
+    {
+      "type": "text",
+      "id": "card_compare",
+      "label": "Step 5 card old price (no product selected)",
+      "default": "₹1,999"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "कार्ट"
+    },
+    {
+      "type": "text",
+      "id": "item_one",
+      "label": "Item (1)",
+      "default": "आइटम"
+    },
+    {
+      "type": "text",
+      "id": "item_many",
+      "label": "Items (2+)",
+      "default": "आइटम"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Close (screen readers)",
+      "default": "कार्ट बंद करें"
+    },
+    {
+      "type": "header",
+      "content": "Hanuman ji's journey"
+    },
+    {
+      "type": "text",
+      "id": "j_title",
+      "label": "Heading (before step 5)",
+      "default": "बच्चो, हनुमान जी को स्टेप 5 तक पहुँचाओ!"
+    },
+    {
+      "type": "text",
+      "id": "j_title_done",
+      "label": "Heading (step 5 reached)",
+      "default": "जय श्री राम! हनुमान जी स्टेप 5 पर पहुँच गए"
+    },
+    {
+      "type": "text",
+      "id": "pill",
+      "label": "Step badge (before)",
+      "default": "5 में से 4 स्टेप"
+    },
+    {
+      "type": "text",
+      "id": "pill_done",
+      "label": "Step badge (after)",
+      "default": "5 में से 5 स्टेप"
+    },
+    {
+      "type": "text",
+      "id": "label_book",
+      "label": "Label under steps 1–4",
+      "default": "स्टेप 1–4: किताब"
+    },
+    {
+      "type": "text",
+      "id": "label_step5",
+      "label": "Step 5 label (before)",
+      "default": "स्टेप 5 · 10% छूट"
+    },
+    {
+      "type": "text",
+      "id": "label_step5_done",
+      "label": "Step 5 label (after)",
+      "default": "10% छूट मिल गई"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "j_text",
+      "label": "Text (before)",
+      "default": "कलरिंग शीट्स जोड़ें: हनुमान जी स्टेप 5 पर पहुँचेंगे और कुल रकम पर <b>10% छूट</b> मिलेगी।"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "j_text_done",
+      "label": "Text (after)",
+      "default": "पाँचों स्टेप अनलॉक, और पूरे कार्ट पर <b>10% छूट</b>।"
+    },
+    {
+      "type": "text",
+      "id": "hanuman_label",
+      "label": "Picture description (screen readers)",
+      "default": "संजीवनी पर्वत के साथ उड़ते हनुमान जी"
+    },
+    {
+      "type": "header",
+      "content": "Cart lines"
+    },
+    {
+      "type": "text",
+      "id": "remove",
+      "label": "Remove",
+      "default": "हटाएँ"
+    },
+    {
+      "type": "text",
+      "id": "qty_less",
+      "label": "Decrease (screen readers)",
+      "default": "संख्या कम करें"
+    },
+    {
+      "type": "text",
+      "id": "qty_more",
+      "label": "Increase (screen readers)",
+      "default": "संख्या बढ़ाएँ"
+    },
+    {
+      "type": "header",
+      "content": "Step 5 card"
+    },
+    {
+      "type": "text",
+      "id": "up_eyebrow",
+      "label": "Small text",
+      "default": "स्टेप 5 · बच्चों के लिए"
+    },
+    {
+      "type": "text",
+      "id": "up_text",
+      "label": "Text",
+      "default": "43 शीट्स, हर चौपाई के लिए एक। रंग भरें और राम नाम ढूँढ़ें!"
+    },
+    {
+      "type": "text",
+      "id": "up_off",
+      "label": "Offer line",
+      "default": "+ पूरे कार्ट पर 10% छूट"
+    },
+    {
+      "type": "text",
+      "id": "up_button",
+      "label": "Button",
+      "default": "स्टेप 5 जोड़ें"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "text",
+      "id": "disc_label",
+      "label": "Discount line",
+      "info": "Shown when Shopify applies a discount. Create the 10% automatic discount in Shopify admin → Discounts.",
+      "default": "कार्ट पर 10% छूट"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "Total label",
+      "default": "कुल रकम"
+    },
+    {
+      "type": "text",
+      "id": "checkout",
+      "label": "Checkout button",
+      "default": "चेकआउट ›"
+    },
+    {
+      "type": "text",
+      "id": "foot_note",
+      "label": "Note under checkout",
+      "default": "फ़्री शिपिंग · अभी सिर्फ़ 20% दें"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty cart text",
+      "default": "आपका कार्ट खाली है"
+    },
+    {
+      "type": "text",
+      "id": "empty_button",
+      "label": "Empty cart button",
+      "default": "खरीदारी जारी रखें"
+    }
+  ],
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "line",
+      "name": "Book line text",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Or use the match word below."
+        },
+        {
+          "type": "text",
+          "id": "match",
+          "label": "Match word",
+          "info": "Used when the product title or handle contains this word, e.g. english."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name in cart",
+          "info": "Optional. Uses the product title if empty."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Line text",
+          "default": "A4 · स्टेप 1–4"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "line",
+        "settings": {
+          "match": "hindi",
+          "title": "हैप्पी हनुमान थेरेपी बुक",
+          "text": "हिन्दी एडिशन · A4 · स्टेप 1–4"
+        }
+      },
+      {
+        "type": "line",
+        "settings": {
+          "match": "english",
+          "title": "हैप्पी हनुमान थेरेपी बुक",
+          "text": "English एडिशन · A4 · स्टेप 1–4"
+        }
+      },
+      {
+        "type": "line",
+        "settings": {
+          "match": "gujarati",
+          "title": "हैप्पी हनुमान थेरेपी बुक",
+          "text": "ગુજરાતી एडिशन · A4 · स्टेप 1–4"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,608 @@
+/* Logam Product Info — gallery + buy box. Mobile first; desktop at 750 / 990. */
+
+.logam-product-info {
+  background: var(--lpi-bg);
+  color: var(--lpi-text);
+  padding: var(--lpi-pt-m) 0 var(--lpi-pb-m);
+}
+.logam-product-info *,
+.logam-product-info *::before,
+.logam-product-info *::after { box-sizing: border-box; }
+
+/* Poppins on every piece of text, including the theme's buttons, quantity
+   input and Shopify's payment button — those set font-family on stronger
+   selectors, hence !important. */
+.logam-product-info,
+.logam-product-info * { font-family: 'Poppins', sans-serif !important; }
+
+.logam-product-info__container { padding: 0 16px; }
+
+.logam-product-info__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.logam-product-info__empty { text-align: center; }
+.logam-product-info__empty svg { width: 100%; max-width: 420px; height: auto; }
+
+/* ---------- Gallery ---------- */
+.logam-product-info__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.logam-product-info__stage {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--lpi-soft);
+  box-shadow: 0 0 0 4px var(--lpi-soft);
+}
+
+.logam-product-info__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.logam-product-info__track::-webkit-scrollbar { display: none; }
+
+.logam-product-info__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+.logam-product-info__slide img,
+.logam-product-info__slide svg,
+.logam-product-info__slide video,
+.logam-product-info__slide iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.logam-product-info__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--lpi-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.logam-product-info__badge[hidden] { display: none; }
+
+.logam-product-info__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--lpi-accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.logam-product-info__nav svg { width: 13px; height: 13px; }
+.logam-product-info__nav--prev { left: 6px; }
+.logam-product-info__nav--next { right: 6px; }
+.logam-product-info__nav[disabled] { opacity: 0; pointer-events: none; }
+
+.logam-product-info__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px;
+}
+.logam-product-info__thumbs::-webkit-scrollbar { display: none; }
+
+.logam-product-info__thumb {
+  flex: 0 0 calc((100% - 32px) / 4.6);
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--lpi-soft);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.logam-product-info__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.logam-product-info__thumb.is-active { border-color: var(--lpi-accent); }
+
+/* ---------- Details ---------- */
+.logam-product-info__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.logam-product-info__option {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.logam-product-info__pill { position: relative; cursor: pointer; text-decoration: none; }
+.logam-product-info__pill input { position: absolute; opacity: 0; pointer-events: none; }
+.logam-product-info__pill span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--lpi-accent-soft);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: var(--lpi-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.logam-product-info__pill.is-active span,
+.logam-product-info__pill input:checked + span {
+  border-color: transparent;
+  background: var(--lpi-gradient);
+  color: #fff;
+}
+.logam-product-info a.logam-product-info__pill span { color: var(--lpi-text); }
+.logam-product-info a.logam-product-info__pill.is-active span { color: #fff; }
+@media (hover: hover) {
+  .logam-product-info__pill:not(.is-active):hover span { border-color: var(--lpi-accent); }
+}
+.logam-product-info__pill:focus-visible { outline: none; }
+.logam-product-info__pill:focus-visible span,
+.logam-product-info__pill input:focus-visible + span { outline: 2px solid var(--lpi-accent); outline-offset: 2px; }
+
+.logam-product-info__title {
+  margin: 2px 0 0;
+  font-size: 23px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--lpi-accent);
+}
+
+.logam-product-info__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.logam-product-info__mrp { margin: 0; font-size: 16px; font-weight: 600; color: #111; }
+.logam-product-info__mrp s { margin-left: 2px; font-weight: 400; color: #8a8a8a; }
+.logam-product-info__mrp[hidden] { display: none; }
+
+.logam-product-info__reviews {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #111;
+  cursor: pointer;
+}
+/* Partial stars: gold layer clipped to the live rating width. */
+.logam-product-info__stars {
+  --lpi-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z'/%3E%3C/svg%3E");
+  position: relative;
+  width: 70px;
+  height: 14px;
+  background: #d9d9d9;
+  -webkit-mask: var(--lpi-star) 0 0 / 14px 14px repeat-x;
+  mask: var(--lpi-star) 0 0 / 14px 14px repeat-x;
+}
+.logam-product-info__stars::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: var(--lpi-rating, 0%);
+  background: var(--lpi-accent);
+}
+
+.logam-product-info__price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.logam-product-info__price { font-size: 28px; font-weight: 600; line-height: 1.1; color: #111; }
+.logam-product-info__tax { font-size: 14px; color: #6b7280; }
+
+/* ---------- Offer box ---------- */
+.logam-product-info__offer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 14px 12px;
+  border-radius: 20px;
+  background: var(--lpi-soft);
+}
+.logam-product-info__offer-pct {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--lpi-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.logam-product-info__offer-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.logam-product-info__offer-copy strong { font-size: 14px; font-weight: 600; color: #2b1a0e; }
+.logam-product-info__offer-copy > span { font-size: 12px; color: #6b5d55; }
+.logam-product-info__offer-copy ul { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.logam-product-info__offer-copy li { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #3a2e22; }
+.logam-product-info__offer-copy li b { font-weight: 600; }
+.logam-product-info__offer-copy svg { flex: none; width: 16px; height: 16px; color: var(--lpi-accent); }
+
+/* ---------- Buy box: the theme's own snippets, re-laid out ----------
+   product-quantity + product-buy render the same elements main-product uses
+   (ap-quantityselector, ap-productform, loader-button, Shopify's payment
+   button). Their wrappers become display: contents so quantity + Add to cart
+   share row one and Buy it now spans row two. Selectors are doubled up and
+   use !important only where ap-theme.css does, so the theme can't win. */
+.logam-product-info {
+  /* lighter top → deeper bottom, both derived from the Accent setting */
+  --lpi-gradient: linear-gradient(180deg, color-mix(in srgb, var(--lpi-accent) 90%, #fff), color-mix(in srgb, var(--lpi-accent) 88%, #000));
+  --lpi-accent-soft: color-mix(in srgb, var(--lpi-accent) 45%, #fff);
+  --lpi-minus-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M4 12h16'/%3E%3C/svg%3E");
+  --lpi-plus-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M4 12h16M12 4v16'/%3E%3C/svg%3E");
+  --lpi-cart-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.5 2.5h2.6c.6 0 1.1.4 1.3 1L5.8 5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3Cpath fill-rule='evenodd' d='M5.4 5.5h16.3c.6 0 1 .6.9 1.2l-1.7 7.4c-.2.8-.9 1.4-1.7 1.4H8.8c-.8 0-1.5-.6-1.7-1.4zM13 7.6h1.9v2h2v1.9h-2v2H13v-2h-2V9.6h2z'/%3E%3Ccircle cx='9.5' cy='19.5' r='1.8'/%3E%3Ccircle cx='18' cy='19.5' r='1.8'/%3E%3C/svg%3E");
+  --lpi-buy-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 3.5h2.2l2.2 10.3c.1.6.7 1 1.3 1h6.8c.6 0 1.1-.4 1.3-1L22.5 7H10'/%3E%3Ccircle cx='13' cy='19.5' r='1.5'/%3E%3Ccircle cx='19.5' cy='19.5' r='1.5'/%3E%3Cpath d='M1.5 8h5M2.5 11h5M3.5 14h4.5'/%3E%3C/svg%3E");
+  --lpi-btn-h: 40px;
+}
+
+.logam-product-info__buy {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 10px;
+  padding-top: 8px;
+}
+.logam-product-info__buy .ap-productform__buy-buttons,
+.logam-product-info__buy .ap-productform__buy-buttons form,
+.logam-product-info__buy .ap-productform__payment-container { display: contents; }
+
+/* Quantity */
+.logam-product-info__buy .ap-productform__quantity { grid-column: 1; grid-row: 1; margin: 0; }
+.logam-product-info__buy .ap-productform__quantity-label {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.logam-product-info__buy .ap-quantityselector {
+  --ap-quantityselector-height: var(--lpi-btn-h);
+  display: flex;
+  width: 100%;
+  height: var(--lpi-btn-h);
+  border: 1px solid #bdbdbd;
+  border-radius: 999px;
+  background: #fff;
+  overflow: hidden;
+}
+.logam-product-info__buy .ap-quantityselector__button {
+  flex: none;
+  width: 44px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--lpi-text);
+  cursor: pointer;
+}
+.logam-product-info__buy .ap-quantityselector__button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+}
+.logam-product-info__buy .ap-quantityselector__button svg { display: none; }
+.logam-product-info__buy .ap-quantityselector__button::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--lpi-minus-ico) center / contain no-repeat;
+  mask: var(--lpi-minus-ico) center / contain no-repeat;
+}
+.logam-product-info__buy .ap-quantityselector__button:last-child::after {
+  -webkit-mask-image: var(--lpi-plus-ico);
+  mask-image: var(--lpi-plus-ico);
+}
+.logam-product-info__buy .ap-quantityselector__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: var(--lpi-btn-h);
+  color: var(--lpi-text);
+}
+
+/* Add to cart — theme swaps button--primary/secondary/ternary on variant
+   change, so the skin is keyed off the stable class, not those. */
+.logam-product-info__buy .ap-productform__add-button.button {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  height: var(--lpi-btn-h);
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid var(--lpi-accent);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--lpi-accent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.logam-product-info__buy .ap-productform__add-button.button::before,
+.logam-product-info__buy .ap-productform__add-button.button::after { display: none; }
+/* The theme rewrites this span's innerHTML on variant change, which would
+   drop an icon placed inside it — so ours lives on the span as ::after. */
+.logam-product-info__buy .ap-text-loaderbutton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: inherit;
+}
+.logam-product-info__buy .ap-text-loaderbutton svg { width: 20px; height: 20px; }
+.logam-product-info__buy .ap-text-loaderbutton[hidden] { display: none; }
+.logam-product-info__buy .ap-loader-loaderbutton { color: var(--lpi-accent); }
+.logam-product-info__buy .ap-productform__add-button.button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Buy it now — Shopify's dynamic checkout button */
+.logam-product-info__buy .shopify-payment-button {
+  grid-column: 1 / -1;
+  min-height: var(--lpi-btn-h);
+  border-radius: 999px;
+  background: var(--lpi-gradient);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--lpi-accent) 25%, transparent);
+  overflow: hidden;
+}
+.logam-product-info__buy .shopify-payment-button:hover { background: var(--lpi-gradient); filter: brightness(0.96); }
+.logam-product-info .logam-product-info__buy .shopify-payment-button__button--unbranded {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--lpi-btn-h);
+  padding: 0 16px !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2px;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+.logam-product-info__buy .shopify-payment-button__button--unbranded::after {
+  -webkit-mask-image: var(--lpi-buy-ico);
+  mask-image: var(--lpi-buy-ico);
+}
+.logam-product-info .logam-product-info__buy .shopify-payment-button__button--branded { border-radius: 999px !important; }
+.logam-product-info__buy .shopify-payment-button__more-options { display: none; }
+.logam-product-info__buy--no-checkout .shopify-payment-button { display: none !important; }
+
+@media (hover: hover) {
+  .logam-product-info__buy .ap-productform__add-button.button:not([disabled]):hover,
+  .logam-product-info__buy .shopify-payment-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ---------- Reels ---------- */
+.logam-product-info__reels {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin: 4px -16px 0;
+  padding: 0 16px;
+  scroll-padding: 0 16px;
+}
+.logam-product-info__reels::-webkit-scrollbar { display: none; }
+.logam-product-info__reel {
+  position: relative;
+  flex: 0 0 44%;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #d9d9d9;
+  scroll-snap-align: start;
+}
+.logam-product-info__reel video,
+.logam-product-info__reel img,
+.logam-product-info__reel svg:not(.lpi-ico-on):not(.lpi-ico-off) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logam-product-info__reel-sound {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  cursor: pointer;
+}
+.logam-product-info__reel-sound svg { width: 16px; height: 16px; }
+.logam-product-info__reel-sound .lpi-ico-on,
+.logam-product-info__reel-sound.is-on .lpi-ico-off { display: none; }
+.logam-product-info__reel-sound.is-on .lpi-ico-on { display: block; }
+
+/* ---------- Payments + summary ---------- */
+.logam-product-info__pay { padding-top: 12px; border-top: 1px solid #eee; }
+.logam-product-info__pay-label {
+  margin-bottom: 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+.logam-product-info__short { font-size: 14px; line-height: 1.6; color: #4a4a4a; }
+
+/* Payment logos here run one size down from their default (assets/payment-logos.css) —
+   the footer's size read fine, but at 32px/18px the row felt oversized next to the buy box. */
+.logam-product-info__pay .pay-logos__item { height: 26px; padding: 0 5px; }
+.logam-product-info__pay .pay-logos__item img { height: 14px; }
+.logam-product-info__pay .pay-logos__item--net { font-size: 10.5px; }
+.logam-product-info__pay .pay-logos__item--net svg { width: 14px; height: 11px; }
+
+/* ---------- Accordions + links ---------- */
+.logam-product-info__acc { border-bottom: 1px solid #e6e6e6; }
+.logam-product-info__acc:first-of-type { border-top: 1px solid #e6e6e6; }
+.logam-product-info__acc > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+.logam-product-info__acc > summary::-webkit-details-marker { display: none; }
+.logam-product-info__acc > summary svg { flex: none; width: 16px; height: 16px; transition: transform 0.25s ease; }
+.logam-product-info__acc[open] > summary svg { transform: rotate(180deg); }
+.logam-product-info__acc-body { padding: 0 8px 16px; font-size: 14px; line-height: 1.65; color: #4a4a4a; }
+.logam-product-info__acc-body > :first-child { margin-top: 0; }
+.logam-product-info__acc-body > :last-child { margin-bottom: 0; }
+
+.logam-product-info__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #6b6b6b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.logam-product-info__link svg { flex: none; width: 22px; height: 22px; }
+.logam-product-info__link:hover { color: var(--lpi-accent); }
+
+/* The theme sets main#main { overflow-x: hidden }, which silently kills
+   position: sticky. clip keeps the no-horizontal-scroll guarantee without
+   creating a scroll container — and only on pages using this gallery. */
+main#main:has(.logam-product-info--sticky-media) { overflow-x: clip; }
+
+/* ---------- Tablet ---------- */
+@media (min-width: 750px) {
+  .logam-product-info__nav { width: 44px; height: 44px; }
+  .logam-product-info__nav svg { width: 18px; height: 18px; }
+  .logam-product-info__nav--prev { left: 12px; }
+  .logam-product-info__nav--next { right: 12px; }
+  .logam-product-info__thumb { flex-basis: 76px; }
+  .logam-product-info__reel { flex-basis: 30%; }
+}
+
+/* ---------- Desktop: gallery left, buy box right ---------- */
+@media (min-width: 990px) {
+  .logam-product-info { padding: var(--lpi-pt) 0 var(--lpi-pb); }
+  .logam-product-info .logam-product-info__container { max-width: none; padding: 0 clamp(24px, 3vw, 48px); }
+
+  .logam-product-info__grid {
+    grid-template-columns: minmax(0, 50fr) minmax(0, 50fr);
+    gap: clamp(32px, 4vw, 64px);
+    max-width: 1440px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .logam-product-info--sticky-media .logam-product-info__gallery {
+    position: sticky;
+    top: 24px;
+  }
+
+  .logam-product-info__details { gap: 6px; }
+  .logam-product-info__title { order: -1; font-size: 30px; margin-bottom: 6px; }
+  .logam-product-info__thumb { flex: 1 1 0; min-width: 0; }
+  .logam-product-info__thumbs { gap: 12px; }
+  .logam-product-info__slide img,
+  .logam-product-info__slide svg,
+  .logam-product-info__slide video,
+  .logam-product-info__slide iframe { aspect-ratio: 4 / 3; }
+  .logam-product-info__thumb { aspect-ratio: 4 / 3; }
+  .logam-product-info__mrp { font-size: 17px; }
+  .logam-product-info__price { font-size: 32px; }
+  .logam-product-info__badge { font-size: 14px; padding: 6px 12px; }
+  .logam-product-info__offer { padding: 16px 18px 16px 14px; gap: 14px; }
+  .logam-product-info__offer-copy strong { font-size: 15px; }
+  .logam-product-info { --lpi-btn-h: 48px; }
+  .logam-product-info__pill span { min-height: 44px; padding: 0 22px; font-size: 15px; }
+  .logam-product-info__buy { grid-template-columns: 150px minmax(0, 1fr); padding-top: 12px; }
+  .logam-product-info__buy .ap-productform__add-button.button,
+  .logam-product-info .logam-product-info__buy .shopify-payment-button__button--unbranded { font-size: 14px !important; }
+
+  .logam-product-info__reels { margin: 4px 0 0; padding: 0; scroll-padding: 0; }
+  .logam-product-info__reel { flex-basis: calc((100% - 20px) / 3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logam-product-info * { transition: none !important; scroll-behavior: auto !important; }
+}

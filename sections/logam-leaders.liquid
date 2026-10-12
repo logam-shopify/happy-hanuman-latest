@@ -1,0 +1,263 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div class="lg-lead" style="--lg-lead-bg: {{ s.bg_color }}; --lg-lead-text: {{ s.text_color }}; --lg-lead-accent: {{ s.accent_color }}; --lg-lead-pt: {{ s.padding_top }}px; --lg-lead-pb: {{ s.padding_bottom }}px;">
+  <div class="lg-lead__inner">
+    {%- if s.heading != blank -%}
+      <h2 class="lg-lead__heading">{{ s.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if s.description != blank -%}
+      <p class="lg-lead__sub">{{ s.description | escape }}</p>
+    {%- endif -%}
+
+    <div class="lg-lead__slider" data-lg-lead>
+      {%- for block in section.blocks -%}
+        <article class="lg-lead__card{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+          <div class="lg-lead__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 460px', class: 'lg-lead__img-desk', alt: block.settings.author }}
+              {{ block.settings.mobile_image | default: block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '100vw', class: 'lg-lead__img-mob', alt: block.settings.author }}
+            {%- endif -%}
+            {%- if block.settings.badge != blank -%}
+              <span class="lg-lead__badge">{{ block.settings.badge | escape }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="lg-lead__body">
+            <span class="lg-lead__mark" aria-hidden="true">“</span>
+            {%- if block.settings.quote != blank -%}
+              <blockquote class="lg-lead__quote">“{{ block.settings.quote | escape }}”</blockquote>
+            {%- endif -%}
+            <div class="lg-lead__who">
+              {%- if block.settings.author != blank -%}
+                <p class="lg-lead__author">{{ block.settings.author | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.designation != blank -%}
+                <p class="lg-lead__role">{{ block.settings.designation | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.note != blank -%}
+                <p class="lg-lead__note">{{ block.settings.note | escape }}</p>
+              {%- endif -%}
+            </div>
+            {%- if s.rating_label != blank -%}
+              <div class="lg-lead__rating">
+                <span class="lg-lead__stars" aria-hidden="true">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg>
+                  {%- endfor -%}
+                </span>
+                <span class="lg-lead__rating-label">{{ s.rating_label | escape }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="lg-lead__nav">
+          <button type="button" class="lg-lead__arrow" data-dir="-1" aria-label="Previous testimonial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <span class="lg-lead__count" aria-live="polite"><span data-lg-lead-current>1</span> / {{ section.blocks.size }}</span>
+          <button type="button" class="lg-lead__arrow" data-dir="1" aria-label="Next testimonial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .lg-lead {
+    background: var(--lg-lead-bg);
+    color: var(--lg-lead-text);
+    padding: var(--lg-lead-pt) 20px var(--lg-lead-pb);
+  }
+  #shopify-section-{{ section.id }} .lg-lead__inner { max-width: 1180px; margin: 0 auto; }
+  #shopify-section-{{ section.id }} .lg-lead__heading {
+    margin: 0 0 22px;
+    text-align: center;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--lg-lead-accent);
+  }
+  #shopify-section-{{ section.id }} .lg-lead__sub {
+    max-width: 740px;
+    margin: 0 auto 26px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: .8;
+  }
+
+  #shopify-section-{{ section.id }} .lg-lead__card {
+    display: none;
+    grid-template-columns: minmax(0, 432px) minmax(0, 1fr);
+    gap: 38px;
+    align-items: stretch;
+    padding: 42px 42px 42px 42px;
+    border: 1px solid #e6e6e6;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .05);
+  }
+  #shopify-section-{{ section.id }} .lg-lead__card.is-active { display: grid; }
+
+  #shopify-section-{{ section.id }} .lg-lead__media {
+    position: relative;
+    aspect-ratio: 432 / 350;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ece8e3;
+  }
+  #shopify-section-{{ section.id }} .lg-lead__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .lg-lead__img-mob { display: none !important; }
+  #shopify-section-{{ section.id }} .lg-lead__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #14261d;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .lg-lead__body { display: flex; flex-direction: column; }
+  #shopify-section-{{ section.id }} .lg-lead__mark { height: 28px; font-family: Georgia, 'Times New Roman', serif; font-size: 64px; font-weight: 700; line-height: .85; color: var(--lg-lead-accent); }
+  #shopify-section-{{ section.id }} .lg-lead__quote {
+    margin: 40px 0 0;
+    padding: 0;
+    border: 0;
+    max-width: 520px;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--lg-lead-text);
+  }
+  #shopify-section-{{ section.id }} .lg-lead__who { margin-top: 44px; }
+  #shopify-section-{{ section.id }} .lg-lead__author { margin: 0; font-size: 21px; line-height: 1.3; }
+  #shopify-section-{{ section.id }} .lg-lead__role { margin: 4px 0 0; font-size: 10px; font-weight: 500; letter-spacing: .03em; text-transform: uppercase; color: var(--lg-lead-accent); }
+  #shopify-section-{{ section.id }} .lg-lead__note { margin: 10px 0 0; max-width: 580px; font-size: 14px; line-height: 1.5; opacity: .85; }
+  #shopify-section-{{ section.id }} .lg-lead__rating { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 28px; }
+  #shopify-section-{{ section.id }} .lg-lead__stars { display: inline-flex; gap: 2px; color: var(--lg-lead-accent); }
+  #shopify-section-{{ section.id }} .lg-lead__stars svg { width: 15px; height: 15px; }
+  #shopify-section-{{ section.id }} .lg-lead__rating-label { font-size: 10px; letter-spacing: .05em; text-transform: uppercase; opacity: .6; }
+
+  #shopify-section-{{ section.id }} .lg-lead__nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; }
+  #shopify-section-{{ section.id }} .lg-lead__arrow {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid #e3e3e3;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--lg-lead-accent);
+    cursor: pointer;
+  }
+  #shopify-section-{{ section.id }} .lg-lead__arrow:hover { border-color: var(--lg-lead-accent); }
+  #shopify-section-{{ section.id }} .lg-lead__arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #shopify-section-{{ section.id }} .lg-lead__count { font-size: 12px; opacity: .6; min-width: 44px; text-align: center; }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-lead { padding-left: 16px; padding-right: 16px; }
+    #shopify-section-{{ section.id }} .lg-lead__heading { font-size: 20px; margin-bottom: 10px; }
+    #shopify-section-{{ section.id }} .lg-lead__sub { font-size: 12px; margin-bottom: 16px; max-width: 280px; }
+    #shopify-section-{{ section.id }} .lg-lead__card { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 10px 10px 24px; border-radius: 20px; }
+    #shopify-section-{{ section.id }} .lg-lead__media { aspect-ratio: 350 / 212; border-radius: 12px; }
+    #shopify-section-{{ section.id }} .lg-lead__img-desk { display: none !important; }
+    #shopify-section-{{ section.id }} .lg-lead__img-mob { display: block !important; }
+    #shopify-section-{{ section.id }} .lg-lead__badge { font-size: 11px; }
+    #shopify-section-{{ section.id }} .lg-lead__mark { margin-top: 14px; height: 26px; font-size: 58px; }
+    #shopify-section-{{ section.id }} .lg-lead__body { padding: 0 2px; }
+    #shopify-section-{{ section.id }} .lg-lead__quote { margin-top: 14px; padding-bottom: 14px; border-bottom: 1px solid #eee; font-size: 15px; }
+    #shopify-section-{{ section.id }} .lg-lead__who { margin-top: 14px; }
+    #shopify-section-{{ section.id }} .lg-lead__author { font-size: 14px; }
+    #shopify-section-{{ section.id }} .lg-lead__role { font-size: 9px; text-transform: none; letter-spacing: 0; }
+    #shopify-section-{{ section.id }} .lg-lead__note { font-size: 13px; }
+    #shopify-section-{{ section.id }} .lg-lead__rating { padding-top: 18px; }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lg-lead { padding-top: {{ section.settings.padding_top_mobile }}px; padding-bottom: {{ section.settings.padding_bottom_mobile }}px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('#shopify-section-{{ section.id }} [data-lg-lead]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    var cards = root.querySelectorAll('.lg-lead__card');
+    var current = root.querySelector('[data-lg-lead-current]');
+    var index = 0;
+    function show(i) {
+      index = (i + cards.length) % cards.length;
+      cards.forEach(function (c, n) { c.classList.toggle('is-active', n === index); });
+      if (current) current.textContent = index + 1;
+    }
+    root.querySelectorAll('.lg-lead__arrow').forEach(function (btn) {
+      btn.addEventListener('click', function () { show(index + Number(btn.dataset.dir)); });
+    });
+    var startX = null;
+    root.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+    document.addEventListener('shopify:block:select', function (e) {
+      var i = Array.prototype.indexOf.call(cards, e.target);
+      if (i > -1) show(i);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Logam Leaders",
+  "tag": "section",
+  "class": "section--logam-leaders",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Spiritual Leaders Say" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "text", "id": "rating_label", "label": "Label next to stars", "default": "Unanimous acclaim", "info": "Leave blank to hide the stars." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#14201A" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#D9692E" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom — desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom — mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)" },
+        { "type": "text", "id": "badge", "label": "Badge on image" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "info": "Quote marks are added automatically." },
+        { "type": "text", "id": "author", "label": "Name" },
+        { "type": "text", "id": "designation", "label": "Designation" },
+        { "type": "textarea", "id": "note", "label": "Extra line under name" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Logam Leaders", "blocks": [ { "type": "testimonial" } ] }
+  ]
+}
+{% endschema %}

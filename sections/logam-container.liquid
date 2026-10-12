@@ -1,0 +1,150 @@
+{{ 'logam-container.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign slides = section.blocks | where: 'type', 'slide'
+-%}
+
+{%- style -%}
+  #logam-container-{{ section.id }} {
+    --lc-bg: {{ section.settings.bg_color }};
+    --lc-heading: {{ section.settings.heading_color }};
+    --lc-text: {{ section.settings.text_color }};
+    --lc-accent: {{ section.settings.accent }};
+    --lc-pt: {{ section.settings.padding_top }}px;
+    --lc-pb: {{ section.settings.padding_bottom }}px;
+    --lc-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --lc-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+  }
+{%- endstyle -%}
+
+<section
+  id="logam-container-{{ section.id }}"
+  class="logam-container"
+  data-lc
+>
+  <div class="logam-container__inner page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="logam-container__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div class="logam-container__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if slides.size > 0 -%}
+      <div class="logam-container__carousel">
+        <div class="logam-container__track" data-lc-track>
+          {%- for block in slides -%}
+            <div class="logam-container__slide" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag:
+                    widths: '375, 550, 750, 900',
+                    sizes: '(min-width: 750px) 500px, 90vw',
+                    width: block.settings.image.width,
+                    height: block.settings.image.height,
+                    loading: 'lazy',
+                    class: 'logam-container__image'
+                }}
+              {%- else -%}
+                <div class="logam-container__image logam-container__image--placeholder">
+                  {{ 'lifestyle-1' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.quote != blank -%}
+                <div class="logam-container__quote">
+                  <span class="logam-container__mark" aria-hidden="true">&ldquo;</span>
+                  <p>{{ block.settings.quote }}</p>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if slides.size > 1 -%}
+          <div class="logam-container__nav">
+            <button type="button" class="logam-container__arrow" data-lc-nav="-1" aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button type="button" class="logam-container__arrow" data-lc-nav="1" aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    function init(root) {
+      if (!root || root.dataset.lcReady) return;
+      var track = root.querySelector('[data-lc-track]');
+      var slides = track ? Array.prototype.slice.call(track.children) : [];
+      if (!track || slides.length < 2) return;
+      root.dataset.lcReady = '1';
+
+      function currentIndex() {
+        return track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0;
+      }
+      function goTo(i) {
+        i = (i + slides.length) % slides.length; // loop both ends
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      }
+      root.querySelectorAll('[data-lc-nav]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          goTo(currentIndex() + parseInt(btn.dataset.lcNav, 10));
+        });
+      });
+    }
+    document.querySelectorAll('[data-lc]').forEach(init);
+    document.addEventListener('shopify:section:load', function (e) {
+      init(e.target.querySelector && e.target.querySelector('[data-lc]'));
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Logam Container",
+  "tag": "section",
+  "class": "logam-container-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Spiritual Leader Say" },
+    { "type": "richtext", "id": "text", "label": "Description", "default": "<p>This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life.</p>" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF1E7" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#C4602E" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#5B5B5B" },
+    { "type": "color", "id": "accent", "label": "Accent (arrows, quote mark)", "default": "#C4602E" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Costs are low, there's always promotions or discounts..." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam Container",
+      "blocks": [{ "type": "slide" }, { "type": "slide" }, { "type": "slide" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,152 @@
+{%- render 'logam-book-faq' -%}
+
+{% schema %}
+{
+  "name": "Logam-English FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Questions"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Good to know"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Will I receive the English edition?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes. This page sells the English edition. Want it in हिन्दी or ગુજરાતી? Switch the edition above. The art and content are the same.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-English FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Will I receive the English edition?",
+            "answer": "<p>Yes. This page sells the English edition. Want it in हिन्दी or ગુજરાતી? Switch the edition above. The art and content are the same.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Who is the book for?",
+            "answer": "<p>Children and grown-ups alike: families, parents, teachers and seekers.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How can I pay?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, debit or credit cards, or net banking. Or pay just 20% now and the rest when the book reaches you.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "When will it arrive?",
+            "answer": "<p>In 3–5 business days, anywhere in India, with free shipping. You get a tracking number by email once it ships.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What if it arrives damaged or in the wrong language?",
+            "answer": "<p>WhatsApp us a photo on +91 82381 88824 within 7 days of delivery and we send a replacement.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I send it as a gift?",
+            "answer": "<p>Yes. Enter the recipient’s name and address at checkout and we deliver it to them.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

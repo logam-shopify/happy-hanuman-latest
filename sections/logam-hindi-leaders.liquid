@@ -1,0 +1,196 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-leaders', hi: true, fb_photos: 'hh-leader-1-anupam-kher.jpg,hh-leader-2-morari-bapu.jpg,hh-leader-3-hari-prakash-shastri.jpg,hh-leader-4-akshat-gupta.jpg,hh-leader-5-jay-vasavada.jpg,hh-leader-6-swami-sachidananda.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Leaders",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "आशीर्वाद"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "संतों और महानुभावों के विचार"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "अंग्रेज़ी से अनुवादित"
+    },
+    {
+      "type": "range",
+      "id": "dcols",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Band background",
+      "default": "#FBEFDD"
+    },
+    {
+      "type": "color",
+      "id": "page_bg",
+      "label": "Space above background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "gap_m",
+      "label": "Space above (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space above (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        },
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Photo",
+          "info": "Shown on top of the card, wide (2:1)."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-hindi Leaders",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "यह किताब सिर्फ़ युवाओं और बच्चों के लिए नहीं, सबके लिए बहुत उपयोगी है। किताब के चित्र अद्भुत हैं, बहुत बढ़िया काम।",
+            "name": "अनुपम खेर",
+            "role": "एक्टर और डायरेक्टर, हनुमान भक्त"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "अच्छे चित्र अच्छा चरित्र बना सकते हैं। इस काम से मुझे बहुत ख़ुशी है।",
+            "name": "पूज्य मोरारी बापू"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "हनुमान जी पर इतना गहरा और शानदार काम मैंने पहले कभी नहीं देखा।",
+            "name": "पूज्य हरि प्रकाश शास्त्री",
+            "role": "सालंगपुर धाम"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "बहुत सुंदर काम है। बच्चों और युवाओं के लिए हनुमान जी पर इससे दिलचस्प किताब मैंने नहीं देखी।",
+            "name": "अक्षत गुप्ता",
+            "role": "लेखक"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "यह किताब हर किसी के हाथ में पहुँचनी चाहिए। इसे बहुत दिलचस्प तरीके से पेश किया गया है।",
+            "name": "जय वसावड़ा",
+            "role": "लेखक"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "आशीष, भगवान तुम्हारे साथ हैं। बहुत अच्छा काम, अब किताब पूरी हुई। इस काम में ख़ुद भगवान तुम्हारे साथ हैं।",
+            "name": "पद्म भूषण स्वामी सच्चिदानंद"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

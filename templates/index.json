@@ -1,0 +1,1390 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "logam_hero_edd": {
+      "type": "logam-hero",
+      "settings": {
+        "media_type": "video",
+        "video": "shopify://files/videos/Hanuman ji videoo.mp4",
+        "video_mobile": "shopify://files/videos/Happy Hnauman.mp4",
+        "video_url": "",
+        "video_url_mobile": "",
+        "height": "adapt",
+        "height_mobile": "adapt",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "fade_color": "#ffffff",
+        "fade_opacity": 0,
+        "fade_size": 60,
+        "eyebrow": "",
+        "heading": "A Divine First Friend\nFor Your Child’s\nHeart & Soul",
+        "heading_size": 56,
+        "heading_size_mobile": 26,
+        "text": "<p>A beautifully illustrated Hanuman Chalisa book crafted for children and families. Introduce your little one to values of faith, strength, love, and devotion - through art, stories, and soulful learning.</p>",
+        "button1_label": "Bring Hanuman Home",
+        "button1_link": "shopify://collections/all-products",
+        "button1_style": "solid",
+        "button2_label": "",
+        "button2_link": "",
+        "button2_style": "outline",
+        "banner_link": "",
+        "banner_link_label": "",
+        "position": "middle-left",
+        "position_mobile": "top",
+        "text_align": "left",
+        "content_width": 560,
+        "content_box": false,
+        "text_color": "#111111",
+        "button_bg": "#f57622",
+        "button_text": "#ffffff",
+        "button_radius": 14
+      }
+    },
+    "slideshow_xqYPzy": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_c8zT4U": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/Home_Page_Banner.jpg",
+            "link_url": "/collections/all-products",
+            "link_aria_label": "Shop all Happy Hanuman books",
+            "open_in_new_tab": false,
+            "image_mobile": "shopify://shop_images/Home_Page_Banner_Mobile.jpg",
+            "position_image_mb": "center",
+            "color_subheading": "",
+            "subheading": "",
+            "heading": "",
+            "description": "",
+            "color_des": "#ffffff",
+            "button1_label": "",
+            "link1": "",
+            "style_btn": "btn-base",
+            "button2_label": "",
+            "link2": "",
+            "style_btn_2": "btn-base",
+            "slide_morecontent": "",
+            "box_size": "medium",
+            "box_align": "left",
+            "text_align": "left",
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "color_btn": "#ffffff",
+            "bg_btn": "#db5c04",
+            "color_btn_hover": "",
+            "bg_btn_hover": "",
+            "button_opacity": 10,
+            "blocks_overlay_color": "#000000",
+            "overlay_opacity": 1
+          }
+        }
+      },
+      "block_order": [
+        "slide_c8zT4U"
+      ],
+      "disabled": true,
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "setwidthout": "full",
+        "setwidthout_content": "container",
+        "progress_bar_color": "#ffffff",
+        "bg_btn_arrow": "",
+        "color_btn_arrow": "#ffffff",
+        "autoplay_duration": 5,
+        "background_color": "#282828",
+        "slideshow_height": "slideshow--desktop-670",
+        "slideshow_height_mobile": "mobile--slideshow-500",
+        "auto_play": false,
+        "show_dot": false,
+        "show_btn": false,
+        "show_bg_content": false,
+        "slide_font_size": 50,
+        "slide_font_weight": "400",
+        "slide_font_transform": "none",
+        "slide_font_lineheight": "1.2",
+        "slide_font_spacing": "0",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "social_facebook": "",
+        "social_tw": "",
+        "social_pinterest": "",
+        "social_linkedin": ""
+      }
+    },
+    "6fe8fbaa-5a22-4c15-86c6-9ad636d793b6": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_KnnHVM": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/c00e1de1b0d81978281c8ad06c7bf441_1.png",
+            "link_url": "",
+            "link_aria_label": "",
+            "open_in_new_tab": false,
+            "position_image_mb": "right",
+            "color_subheading": "#bc2802",
+            "subheading": "In-store and online.",
+            "heading": "More horror \n<br>\nnovels from \n<br>\nstar authors",
+            "description": "Stay up-to-date with the most exciting new books.\n \n<span class=\"sl-lable\" style=\"position: absolute; top: 50%;     left: -35%; transform: translate(-50%,-50%);\"><span style=\" position: relative; max-width: 200px; max-height: 200px; display: inline-block;\"><span style=\"position: absolute;left: 50%;transform: translate(-50%,-50%);top: 50%;font-size: 36px;line-height: 36px;font-weight: 900;color: #fff;text-transform: uppercase;z-index: 1;\">\n15%<br>off\n</span><img alt=\"\" src=\"https://cdn.shopify.com/s/files/1/0906/6014/3387/files/ap_bo_bgsale_1.png?v=1729500188\" loading=\"lazy\" style=\"margin: 0;animation: spinnerRotate 6s linear infinite;\"></span></span>",
+            "color_des": "#000000",
+            "button1_label": "discover now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "link1": "",
+            "style_btn": "btn-base",
+            "button2_label": "",
+            "link2": "",
+            "style_btn_2": "btn-base",
+            "slide_morecontent": "",
+            "box_size": "medium",
+            "box_align": "right",
+            "text_align": "left",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "color_btn": "#000000",
+            "bg_btn": "#ffffff",
+            "color_btn_hover": "#ffffff",
+            "bg_btn_hover": "#027a36",
+            "button_opacity": 10,
+            "blocks_overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "slide_KnnHVM"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 1199px) {.sl-lable {opacity: 0; }}"
+      ],
+      "settings": {
+        "setwidthout": "full",
+        "setwidthout_content": "container",
+        "progress_bar_color": "#ffffff",
+        "bg_btn_arrow": "#ffffff",
+        "color_btn_arrow": "#db5c04",
+        "autoplay_duration": 9,
+        "background_color": "rgba(0,0,0,0)",
+        "slideshow_height": "slideshow--fit slideshow--desktop-full",
+        "slideshow_height_mobile": "adapt",
+        "auto_play": false,
+        "show_dot": true,
+        "show_btn": false,
+        "show_bg_content": false,
+        "slide_font_size": 60,
+        "slide_font_weight": "600",
+        "slide_font_transform": "uppercase",
+        "slide_font_lineheight": "1.1",
+        "slide_font_spacing": "0",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "social_facebook": "",
+        "social_tw": "",
+        "social_pinterest": "",
+        "social_linkedin": ""
+      }
+    },
+    "service_nizft6": {
+      "type": "service",
+      "blocks": {
+        "service_jcmV7G": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color_block": "rgba(0,0,0,0)",
+            "service_icon": "",
+            "title_small": "",
+            "title": "fast delivery",
+            "description": "Free standard delivery",
+            "button1_label": "",
+            "link1": ""
+          }
+        },
+        "service_L4xGEE": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color_block": "rgba(0,0,0,0)",
+            "service_icon": "",
+            "title_small": "",
+            "title": "Best prices & offers",
+            "description": "Multiple gift options available",
+            "button1_label": "",
+            "link1": ""
+          }
+        },
+        "service_yCWkr3": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color_block": "rgba(0,0,0,0)",
+            "service_icon": "",
+            "title_small": "",
+            "title": "Great daily deal",
+            "description": "Orders $50 or more",
+            "button1_label": "",
+            "link1": ""
+          }
+        },
+        "service_MaBTkD": {
+          "type": "service",
+          "settings": {
+            "width": "25%",
+            "bg_color_block": "rgba(0,0,0,0)",
+            "service_icon": "",
+            "title_small": "",
+            "title": "click & collect",
+            "description": "Check your local stores now",
+            "button1_label": "",
+            "link1": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_jcmV7G",
+        "service_L4xGEE",
+        "service_yCWkr3",
+        "service_MaBTkD"
+      ],
+      "disabled": true,
+      "settings": {
+        "fullwidth": false,
+        "background-color": "#f9f5f0",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "margin_mobile": "",
+        "padding_desktop": "60px 0px 51px 0px",
+        "padding_mobile": "40px 0px 40px 0px",
+        "sub_heading": "",
+        "tab_heading": "",
+        "tab_heading_size": 2,
+        "tab_description": "",
+        "btn_text": "",
+        "btn_link": "",
+        "style_btn": "btn-base",
+        "text_align": "left",
+        "bottom_description": "",
+        "btn_text_bottom": "",
+        "btn_link_bottom": "",
+        "style_btn_bottom": "btn-base",
+        "layout": "style-2",
+        "no_gutter": false,
+        "padding_inner": "",
+        "icon_size": "36",
+        "text_align_item": "left",
+        "heading_size": "p",
+        "color_title_small": "",
+        "color_title": "#000000",
+        "color_des": "#9a9a9a",
+        "color_btn": "",
+        "bg_btn": "",
+        "color_btn_hover": "",
+        "bg_btn_hover": "",
+        "style_btn_item": "btn-base"
+      }
+    },
+    "credibility_strip_edd": {
+      "type": "logam-credibility-strip",
+      "blocks": {
+        "s0": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "30,303",
+            "stat_label": "World record holder",
+            "stat_desc": "Books signed in 30 continuous hours"
+          }
+        },
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "1,00,000+",
+            "stat_label": "Devoted families",
+            "stat_desc": "Readers nourished across India & overseas"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "Archival",
+            "stat_label": "Heritage quality",
+            "stat_desc": "170 GSM fine art paper & gold foil cloth binding"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "All-India",
+            "stat_label": "Doorstep delivery",
+            "stat_desc": "Free insured transit with real-time tracking"
+          }
+        }
+      },
+      "block_order": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "accent_color": "#e07a2f",
+        "muted_color": "#6b6b6b",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "shop_by_language_edd": {
+      "type": "logam-shop-by-language",
+      "blocks": {
+        "lang_en": {
+          "type": "language",
+          "settings": {
+            "native_label": "English",
+            "description": "A timeless prayer made simple, poetic, and accessible for modern young minds worldwide.",
+            "cta_label": "Explore English edition",
+            "lang_code": "en",
+            "collection": "english",
+            "link": ""
+          }
+        },
+        "lang_gu": {
+          "type": "language",
+          "settings": {
+            "native_label": "ગુજરાતી",
+            "description": "માતૃભાષામાં પ્રેમ, શક્તિ અને સંસ્કાર સાથે. સરળ છતાં ઊંડી વાર્તા-શૈલીમાં રજૂઆત.",
+            "cta_label": "Explore Gujarati edition",
+            "lang_code": "gu",
+            "collection": "gujarati",
+            "link": ""
+          }
+        },
+        "lang_hi": {
+          "type": "language",
+          "settings": {
+            "native_label": "हिन्दी",
+            "description": "भक्ति, शौर्य और आत्मबल की पहली पाठशाला। हर बच्चे के मन को निर्भय बनाने वाला ग्रंथ।",
+            "cta_label": "Explore Hindi edition",
+            "lang_code": "hi",
+            "collection": "hindi",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "lang_en",
+        "lang_gu",
+        "lang_hi"
+      ],
+      "settings": {
+        "heading": "Choose the Language That Feels Like Home",
+        "subheading": "The complete Happy Hanuman therapy edition, lovingly translated and printed in English, Gujarati, and Hindi with identical fine archival bindings.",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "muted_color": "#555555",
+        "accent_color": "#e8630a",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "second_kdNQrp": {
+      "type": "logam-tradition",
+      "blocks": {
+        "point_NnBPFW": {
+          "type": "point",
+          "settings": {
+            "icon": "book",
+            "title": "Timeless lessons made simple",
+            "text": "Relatable analogies that unpack high philosophical concepts into playground-ready kindness and perseverance."
+          }
+        },
+        "point_RFM4rx": {
+          "type": "point",
+          "settings": {
+            "icon": "palette",
+            "title": "Hand-painted soulful artwork",
+            "text": "Every chaupai accompanied by immersive original illustrations that spark visual imagination and awe."
+          }
+        },
+        "point_mMdL7z": {
+          "type": "point",
+          "settings": {
+            "icon": "heart",
+            "title": "Created with pure Bhakti",
+            "text": "A non-sectarian, reverent offering designed to be cherished across generations as a lifelong heirloom."
+          }
+        }
+      },
+      "block_order": [
+        "point_NnBPFW",
+        "point_RFM4rx",
+        "point_mMdL7z"
+      ],
+      "settings": {
+        "heading_part1": "Where Tradition Meets",
+        "heading_part2": "Transformation",
+        "description": "<p>Happy Hanuman began with a humble prayer: to bring Hanuman’s infinite compassion, strength, and values into everyday life. Every page blends classical devotion with creative pedagogical psychology guiding children and families toward clarity, faith, and mutual harmony.</p>",
+        "image": "shopify://shop_images/Small_hindi10_1.png",
+        "quote": "“Ancient wisdom, thoughtfully retold for a new generation.”",
+        "quote_caption": "Chapter 04 • The Ocean of Courage",
+        "note": "A gentle way to grow devotion — one page, one thought, one heartfelt blessing at a time.",
+        "bg_color": "#fdf3ec",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "slide_cstm_EDwMAB": {
+      "type": "logam-leaders",
+      "blocks": {
+        "testimonial_LdR3pR": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/20240712_113221_1_22c8abd1-b8d3-4d25-aae3-4fb31409ee5d.png",
+            "badge": "Cultural blessing",
+            "quote": "This book is very useful not only for youth and children, but for everyone. The pictures in the book are wonderful, truly great work.",
+            "author": "Anupam Kher",
+            "designation": "Indian Actor, Director & Hanuman Bhakt",
+            "note": "Commending the author’s dedication to bringing the essence of devotion to the modern youth in such an engaging, artistically sublime format."
+          }
+        },
+        "testimonial_A9jPFQ": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/PADMA_BHUSHAN_SWAMI_SACHIDANAND_8c05d969-e87b-4d4c-aff3-9810567ca15c.png",
+            "badge": "",
+            "quote": "Ashish, God is with you. Very nice work, now done with the book. God himself is with you in this work.",
+            "author": "Padma Bhushan Swami Sachidananda",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_Eyxjqb": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Jay_Vasavada_a41a6a43-8747-4458-8e13-90168ebe5327.png",
+            "badge": "",
+            "quote": "This book should be something that goes into everyone's hands. Very interesting presentation.",
+            "author": "Jay Vasavada, Author",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_4tDpMa": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/MORARI_BAPU_0142aa67-5afb-449b-9652-fd981e604eae.png",
+            "badge": "",
+            "quote": "Good pictures can create good character, I express my pleasure in this work.",
+            "author": "Pujya Morari Bapu",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_j8UzTc": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/HARI_PRAKASH_SWAMI_SALANGPURDHAM_d32fac17-4e39-416f-be79-a03b14c5ca74.png",
+            "badge": "",
+            "quote": "I have never seen such deep and excellent work on Hanumanji.",
+            "author": "Pujya Hari Prakash Shastri, Salangpur Dham",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_DeahUy": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/AKSHAT_GUPTA_54e304cd-8d2f-48dc-9217-dd86057747c0.png",
+            "badge": "",
+            "quote": "That's a wonderful work, I have never seen a more interesting book on Hanumanji for children and youth.",
+            "author": "Akshat Gupta, Author",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_HWKh8Q": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Ami_Ganatra_a54a15f5-a5e4-4075-9324-880a4707d743.png",
+            "badge": "",
+            "quote": "Hanuman mantra is not a force but a measure of intelligence like no other, this book makes you feel it beautifully.",
+            "author": "Ami Ganatra, Author",
+            "designation": "",
+            "note": ""
+          }
+        },
+        "testimonial_Ez6P6X": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/P._Vijay_Shankar_Mehta_b978661d-2c97-4cfa-bca0-bfbd0567c0ea.png",
+            "badge": "",
+            "quote": "Amazing work of Hanumat Seva by Ashishji. Be happy always, our Hanuman.",
+            "author": "P. Vijay Shankar Mehta, Hamare Hanuman, Ujjain",
+            "designation": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_LdR3pR",
+        "testimonial_A9jPFQ",
+        "testimonial_Eyxjqb",
+        "testimonial_4tDpMa",
+        "testimonial_j8UzTc",
+        "testimonial_DeahUy",
+        "testimonial_HWKh8Q",
+        "testimonial_Ez6P6X"
+      ],
+      "settings": {
+        "heading": "What Spiritual Leader Say",
+        "description": "This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life. Each page carries art, guidance, and exercises to help you live with devotion and strength.",
+        "rating_label": "Unanimous acclaim",
+        "bg_color": "#ffffff",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "slide_cstm_KyqWGz": {
+      "type": "slide-cstm",
+      "blocks": {
+        "testimonial_Ybpy8E": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Small_hindi10_1.png",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_RFCz46": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Happy-Hanuman-Logo_1.png",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_4L4XYR": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        },
+        "testimonial_UkYMAB": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/4811218.jpg",
+            "quote": "Costs are low, there’s always promotions or discounts...",
+            "author": "",
+            "designation": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_Ybpy8E",
+        "testimonial_RFCz46",
+        "testimonial_4L4XYR",
+        "testimonial_UkYMAB"
+      ],
+      "disabled": true,
+      "name": "slide-cstm",
+      "settings": {
+        "heading": "What Spiritual Leader Say",
+        "description": "This project began with a single prayerful sketch and a promise to bring Hanuman's values into everyday life. Each page carries art, guidance, and exercises to help you live with devotion and strength."
+      }
+    },
+    "advanced_content_JjFd76": {
+      "type": "logam-collection",
+      "blocks": {
+        "p_hi": {
+          "type": "product",
+          "settings": {
+            "product": "happy-hanuman-therapy-book-hindi",
+            "badge": "Most popular • Hindi",
+            "badge_filled": true,
+            "reviews": "",
+            "title": "Happy Hanuman Therapy Book (Hindi)",
+            "subtitle": "Archival Hardcover • 120+ Pages • Gold Foil Embellished"
+          }
+        },
+        "p_en": {
+          "type": "product",
+          "settings": {
+            "product": "therapy-book-english",
+            "badge": "English edition",
+            "badge_filled": false,
+            "reviews": "",
+            "title": "Happy Hanuman Therapy Book (English)",
+            "subtitle": "Archival Hardcover • 120+ Pages • Gold Foil Embellished"
+          }
+        },
+        "p_gu": {
+          "type": "product",
+          "settings": {
+            "product": "therapy-book-gujarati",
+            "badge": "Gujarati edition",
+            "badge_filled": false,
+            "reviews": "",
+            "title": "Happy Hanuman Therapy Book (Gujarati)",
+            "subtitle": "Archival Hardcover • 120+ Pages • Gold Foil Embellished"
+          }
+        }
+      },
+      "block_order": [
+        "p_hi",
+        "p_en",
+        "p_gu"
+      ],
+      "settings": {
+        "heading": "Explore the Happy Hanuman Collection",
+        "description": "Select your preferred language. Each volume features full-color archival illustrations, word-by-word insights, and calming mindfulness practices.",
+        "details_label": "Details",
+        "buy_label": "Buy now",
+        "bg_color": "#fdf3ec",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "advanced_content_AcJtzy": {
+      "type": "advanced-content",
+      "blocks": {
+        "text_4XPTJp": {
+          "type": "text",
+          "settings": {
+            "width": "20%",
+            "padding_desktop": "30px",
+            "padding_mobile_item": "20px",
+            "text_align": "center",
+            "bg_text": "#ffffff",
+            "background_image": "shopify://shop_images/Group_367.jpg",
+            "text_list_icon": "",
+            "content_sub": "",
+            "color_sub": "#9a9a9a",
+            "content_title": "",
+            "heading_size": "h5",
+            "color_title": "#000000",
+            "content_description": "",
+            "content_des_2": "",
+            "color_description": "#ffffff",
+            "button1_label": "",
+            "link1": "",
+            "style_btn": "btn-base btn-sm",
+            "button2_label": "",
+            "link2": "",
+            "style_btn_2": "btn-base",
+            "color_btn": "",
+            "bg_btn": "",
+            "color_btn_hover": "",
+            "bg_btn_hover": ""
+          }
+        },
+        "product_VwVVHw": {
+          "type": "product",
+          "settings": {
+            "width": "80%",
+            "padding_inner": "",
+            "heading": "",
+            "heading_size_2": "h3",
+            "adv_productdescription": "",
+            "collection": "english",
+            "limit": 10,
+            "perviewDesktop": 3,
+            "perviewMobile": 1,
+            "spaceBetween": 30,
+            "arrows": false,
+            "arrow_heading": false,
+            "dots": false
+          }
+        }
+      },
+      "block_order": [
+        "text_4XPTJp",
+        "product_VwVVHw"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".text-list-content.text-center.h-100 {background-repeat: space;}"
+      ],
+      "settings": {
+        "setwidthout": "container",
+        "background-color": "#ffffff",
+        "bg_align": "center",
+        "primary_bg": "#ffffff",
+        "heading_color": "#db5c04",
+        "text_color": "#282828",
+        "sub_heading": "",
+        "tab_heading": "Choose Your Path",
+        "tab_heading_size": 3,
+        "tab_description": "",
+        "h_description_2": "",
+        "btn_text": "",
+        "btn_link": "",
+        "style_btn": "btn-base",
+        "text_align": "center",
+        "class": "",
+        "no_gutter": false,
+        "align_item": "normal",
+        "border_width": "",
+        "margin_desktop": "80px 0",
+        "margin_tablet": "",
+        "margin_mobile": "",
+        "padding_desktop": "",
+        "padding_mobile": "",
+        "padding_content": ""
+      }
+    },
+    "banner_grid_3rgPQD": {
+      "type": "banner-grid",
+      "blocks": {
+        "banner_grid_CLxGNL": {
+          "type": "banner-grid",
+          "settings": {
+            "width": "50%",
+            "background_color": "",
+            "color_title": "#f6fa36",
+            "padding_inner": "83px  130px 0 0",
+            "heading_title": "Fantastic Fantasy",
+            "heading": "House of \n<br>\nFlame and \n<br>\nShadow",
+            "description": "<span class=\"d-lg-block d-none\" style=\"\n    font-size: 14px;\n    font-weight: 600;\n    line-height: 26px;\n    position: absolute;\n    bottom: 37px;\n    right: 227px;\n\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>\n<span class=\"d-lg-none d-block\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>",
+            "description_2": "<span class=\"lable-banner d-sm-block d-none\" style=\"\n    position: absolute;\n    top: 87px;\n    left: 35%;\n    transform: translateX(-50%);\n\"><span style=\" position: relative; max-width: 200px; max-height: 200px; display: inline-block;\"><span style=\"position: absolute;left: 50%;transform: translate(-50%,-50%);top: 50%;font-size: 18px;line-height: 1.2;font-weight: bold;color: #000;text-transform: uppercase;z-index: 1;text-align: center;\">\n<span style=\"\n    font-size: 14px;\n    font-weight: 400;\n    text-decoration: line-through;\n\">\n$9.49\n</span>\n<br>\n$7.49\n</span><img src=\"https://cdn.shopify.com/s/files/1/0906/6014/3387/files/Vector.png?v=1729934452\" loading=\"lazy\" style=\"margin: 0;animation: spinnerRotate 6s linear infinite;\"></span></span>",
+            "button1_label": "Shop Now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "link1": "",
+            "button2_label": "",
+            "link2": "",
+            "text_align": "left",
+            "position_text": "top-right"
+          }
+        },
+        "banner_grid_NhDFex": {
+          "type": "banner-grid",
+          "settings": {
+            "width": "50%",
+            "background_color": "",
+            "color_title": "#f19788",
+            "padding_inner": "83px 115px 0 0",
+            "heading_title": "Mystery Collection",
+            "heading": "The Devil's\n<br>\n Bones",
+            "description": "<span class=\"d-lg-block d-none\" style=\"\n    font-size: 14px;\n    font-weight: 600;\n    line-height: 26px;\n    position: absolute;\n    bottom: 37px;\n    right: 227px;\n\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>\n<span class=\"d-lg-none d-block\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>",
+            "description_2": "<span class=\"lable-banner d-sm-block d-none\" style=\"\n    position: absolute;\n    top: 87px;\n    left: 35%;\n    transform: translateX(-50%);\n\"><span style=\" position: relative; max-width: 200px; max-height: 200px; display: inline-block;\"><span style=\"position: absolute;left: 50%;transform: translate(-50%,-50%);top: 50%;font-size: 18px;line-height: 1.2;font-weight: bold;color: #fff;text-transform: uppercase;z-index: 1;text-align: center;\">\n<span style=\"\n    font-size: 14px;\n    font-weight: 400;\n    text-decoration: line-through;\n\">\n$9.49\n</span>\n<br>\n$7.49\n</span><img src=\"https://cdn.shopify.com/s/files/1/0906/6014/3387/files/Vector_1.png?v=1730254099\" loading=\"lazy\" style=\"margin: 0;animation: spinnerRotate 6s linear infinite;\"></span></span>",
+            "button1_label": "Shop Now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "link1": "",
+            "button2_label": "",
+            "link2": "",
+            "text_align": "left",
+            "position_text": "top-right"
+          }
+        }
+      },
+      "block_order": [
+        "banner_grid_CLxGNL",
+        "banner_grid_NhDFex"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 1500px) {.description > span > .lable-banner {left: 12% !important; }}",
+        "@media (max-width: 991px) {.description > span > .lable-banner {left: 10px !important; transform: none !important; top: 10px !important; }}"
+      ],
+      "settings": {
+        "setwidthout": "container",
+        "margin_desktop": "0 0 80px",
+        "margin_tablet_large": "0 0 80px",
+        "margin_mobile": "0 0 40px",
+        "padding_desktop": "",
+        "padding_tablet_lager": "0px 0px 0px 0px",
+        "padding_mobile": "",
+        "heading_color": "#282828",
+        "text_color": "#282828",
+        "sub_heading": "",
+        "tab_heading": "",
+        "tab_heading_size": 2,
+        "tab_description": "",
+        "btn_text": "",
+        "btn_link": "",
+        "style_btn": "btn-base",
+        "text_align": "left",
+        "distance_col": "",
+        "color_title_center": "#ffffff",
+        "color_description": "#ffffff",
+        "color_btn": "",
+        "bg_btn": "",
+        "color_btn_hover": "",
+        "bg_btn_hover": "",
+        "heading_size_2": "h3",
+        "position_btn_bottom": true,
+        "style_btn_item": "btn-base btn-sm",
+        "style_btn_2": "btn-base"
+      }
+    },
+    "cstm_image_tjiFRQ": {
+      "type": "cstm-image",
+      "disabled": true,
+      "name": "Responsive Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/Group_372.png",
+        "mobile_image": "shopify://shop_images/Frame_292.jpg",
+        "banner_link": "shopify://products/happy-hanuman-pocket-book"
+      }
+    },
+    "cstm_video_EnXa9m": {
+      "type": "logam-reels",
+      "blocks": {
+        "video_aVVkPi": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/3a062e52a9a043f3bbf4f7187e64db41.mp4",
+            "product_link": ""
+          }
+        },
+        "video_nLCtVM": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/50bceda5292d4bdebf80fe8f44dbc9c1.mp4",
+            "product_link": ""
+          }
+        },
+        "video_zDwPCb": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/177f6fcfe2104c3e855f602d69f8927d.mp4",
+            "product_link": ""
+          }
+        },
+        "video_QXJ9J6": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/af2e22ade7de40c7b888ef5797562524.mp4",
+            "product_link": ""
+          }
+        },
+        "video_xnrFxV": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b413df13ca66410ab4ee3a2ed203a958.mp4",
+            "product_link": ""
+          }
+        },
+        "video_cNq6ak": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b4fcf8579daf4865a6c4a66cb50de993.mp4",
+            "product_link": ""
+          }
+        },
+        "video_tBeAi9": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0d579796e53f4475ac9ad5ff4684be46.mp4",
+            "product_link": ""
+          }
+        },
+        "video_8FdtWK": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/beed91a6442f44bb9cde8984dd1828c0.mp4",
+            "product_link": ""
+          }
+        },
+        "video_r94Dg7": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/068d27fcb222462fab08e4305cae8310.mp4",
+            "product_link": ""
+          }
+        },
+        "video_knmA7C": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/74006de5341b4f82a97c69abac66515f.mp4",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_aVVkPi",
+        "video_nLCtVM",
+        "video_zDwPCb",
+        "video_QXJ9J6",
+        "video_xnrFxV",
+        "video_cNq6ak",
+        "video_tBeAi9",
+        "video_8FdtWK",
+        "video_r94Dg7",
+        "video_knmA7C"
+      ],
+      "settings": {
+        "heading": "Happy Hanuman in Real Hands, Real Homes",
+        "description": "Over 1,00,000 children, educators, and parents discovering strength, calm, and genuine joy in sacred connection.",
+        "shop_label": "Shop",
+        "bg_color": "#ffffff",
+        "text_color": "#14201a",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "second_VGrzix": {
+      "type": "logam-author",
+      "blocks": {
+        "pill_ted": {
+          "type": "pill",
+          "settings": {
+            "icon": "badge",
+            "label": "TEDx Speaker"
+          }
+        },
+        "pill_gwr": {
+          "type": "pill",
+          "settings": {
+            "icon": "trophy",
+            "label": "Guinness Record Holder"
+          }
+        },
+        "pill_par": {
+          "type": "pill",
+          "settings": {
+            "icon": "family",
+            "label": "Parenting Visionary"
+          }
+        }
+      },
+      "block_order": [
+        "pill_ted",
+        "pill_gwr",
+        "pill_par"
+      ],
+      "settings": {
+        "heading_part1": "The Heart Behind",
+        "heading_part2": "Happy Hanuman",
+        "lead": "Ashish Bhalani is a celebrated TEDx speaker, parenting mentor, and author known widely for his pioneering work in family consciousness through initiatives like Garbh Yatra and Pregnancy 90.",
+        "text": "He humbly refrains from calling himself the author: “I am only a medium through whom Hanuman ji poured His blessings. We wanted children to see Hanuman not merely as a formidable deity in a far-off temple, but as an affectionate elder brother, protector, and soul friend who smiles with them and teaches them to be kind and fearless.”",
+        "link_label": "Read the Author’s Full Story",
+        "link": "/pages/about-us",
+        "image": "shopify://shop_images/Aashish_Bhalani.png",
+        "name": "Ashish Bhalani",
+        "role": "Author & Devotional Catalyst",
+        "bg_color": "#fdf3ec",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "logam_why_us_edd": {
+      "type": "logam-why-us",
+      "blocks": {
+        "reason_1": {
+          "type": "reason",
+          "settings": {
+            "icon": "temple",
+            "title": "Rooted in Authenticity",
+            "text": "Honors sacred texts without religious dogma. A celebration of timeless wisdom, humility, and unwavering loyalty that suits modern diverse households."
+          }
+        },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "icon": "mind",
+            "title": "Emotional Resilience",
+            "text": "Gives children a calm psychological anchor during times of anxiety, fear of failure, or loneliness. Instills the belief that strength comes from within."
+          }
+        },
+        "reason_3": {
+          "type": "reason",
+          "settings": {
+            "icon": "book",
+            "title": "Soulful Bedtime Ritual",
+            "text": "Short, beautifully illustrated sections make daily 15-minute readings deeply fulfilling for both parents and children, fostering lifelong memories."
+          }
+        },
+        "reason_4": {
+          "type": "reason",
+          "settings": {
+            "icon": "gift",
+            "title": "Heirloom Keepsake",
+            "text": "Thick archival grade paper, smyth-sewn binding, and heavy cloth-textured hardcover meant to survive childhood and be passed down lovingly."
+          }
+        }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_2",
+        "reason_3",
+        "reason_4"
+      ],
+      "settings": {
+        "heading": "Why Parents Choose Happy Hanuman",
+        "description": "Designed by childhood educators and Vedic scholars to replace passive screen time with soulful bonding.",
+        "bg_color": "#ffffff",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "image_banner_p8qhQF": {
+      "type": "image-banner",
+      "blocks": {
+        "text_Ug9hay": {
+          "type": "text",
+          "settings": {
+            "setwidthout": "container",
+            "text_align": "left",
+            "position_text": "mid-left",
+            "padding_inner": "0 0 0 100px",
+            "heading_title": "Best Collection.",
+            "color_title": "#ffd600",
+            "heading": "Top favourite \n<br>\nRomance stories",
+            "heading_size": "h3",
+            "color_title_center": "#ffffff",
+            "description": "Find our take on the best books of all time.",
+            "description_2": "",
+            "color_description": "#ffffff",
+            "title_countdown": "",
+            "time_picker": "",
+            "date_picker": "",
+            "button1_label": "discover now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "color_btn": "",
+            "bg_btn": "",
+            "color_btn_hover": "",
+            "bg_btn_hover": "",
+            "link1": "",
+            "style_btn": "btn-base"
+          }
+        }
+      },
+      "block_order": [
+        "text_Ug9hay"
+      ],
+      "disabled": true,
+      "settings": {
+        "setwidthout": "container",
+        "height_img": "450",
+        "height_img_mobile": "450",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "margin_mobile": "",
+        "tab_heading": "",
+        "tab_heading_size": 2,
+        "tab_description": "",
+        "heading_color": "",
+        "text_color": "",
+        "overlay": "#000000",
+        "overlay_opacity": 1
+      }
+    },
+    "banner_grid_RF7cGr": {
+      "type": "banner-grid",
+      "blocks": {
+        "banner_grid_M44hJE": {
+          "type": "banner-grid",
+          "settings": {
+            "width": "50%",
+            "background_color": "",
+            "color_title": "#36fa84",
+            "padding_inner": "83px  59px 0 0",
+            "heading_title": "Save over $20.",
+            "heading": "A Girl \n<br>\nCalled Echo",
+            "description": "<span class=\"d-lg-block d-none\" style=\"\n    font-size: 14px;\n    font-weight: 600;\n    line-height: 26px;\n    position: absolute;\n    bottom: 37px;\n    right: 227px;\n\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>\n<span class=\"d-lg-none d-block\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>",
+            "description_2": "<span class=\"lable-banner d-sm-block d-none\" style=\"\n    position: absolute;\n    top: 87px;\n    left: 35%;\n    transform: translateX(-50%);\n\"><span style=\" position: relative; max-width: 200px; max-height: 200px; display: inline-block;\"><span style=\"position: absolute;left: 50%;transform: translate(-50%,-50%);top: 50%;font-size: 18px;line-height: 1.2;font-weight: bold;color: #000;text-transform: uppercase;z-index: 1;text-align: center;\">\n<span style=\"\n    font-size: 14px;\n    font-weight: 400;\n    text-decoration: line-through;\n\">\n$9.49\n</span>\n<br>\n$7.49\n</span><img src=\"https://cdn.shopify.com/s/files/1/0906/6014/3387/files/Vector_2.png?v=1730254099\" loading=\"lazy\" style=\"margin: 0;animation: spinnerRotate 6s linear infinite;\"></span></span>",
+            "button1_label": "Shop Now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "link1": "",
+            "button2_label": "",
+            "link2": "",
+            "text_align": "left",
+            "position_text": "top-right"
+          }
+        },
+        "banner_grid_xeyamn": {
+          "type": "banner-grid",
+          "settings": {
+            "width": "50%",
+            "background_color": "",
+            "color_title": "#f5ae66",
+            "padding_inner": "83px  160px 0 0",
+            "heading_title": "Most exciting new books.",
+            "heading": "Bury Me\n<br>\n When I'm \n<br>\nDead",
+            "description": "<span class=\"d-lg-block d-none\" style=\"\n    font-size: 14px;\n    font-weight: 600;\n    line-height: 26px;\n    position: absolute;\n    bottom: 37px;\n    right: 227px;\n\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>\n<span class=\"d-lg-none d-block\">\nBuy online at \n<a href=\"#\">\nbokifa.com\n</a>\n</span>",
+            "description_2": "<span class=\"lable-banner d-sm-block d-none\" style=\"\n    position: absolute;\n    top: 87px;\n    left: 35%; \n    transform: translateX(-50%);\n\"><span style=\" position: relative; max-width: 200px; max-height: 200px; display: inline-block;\"><span style=\"position: absolute;left: 50%;transform: translate(-50%,-50%);top: 50%;font-size: 18px;line-height: 1.2;font-weight: bold;color: #000;text-transform: uppercase;z-index: 1;text-align: center;\">\n<span style=\"\n    font-size: 14px;\n    font-weight: 400;\n    text-decoration: line-through;\n\">\n$9.49\n</span>\n<br>\n$7.49\n</span><img src=\"https://cdn.shopify.com/s/files/1/0906/6014/3387/files/Vector_3.png?v=1730254099\" loading=\"lazy\" style=\"margin: 0;animation: spinnerRotate 6s linear infinite;\"></span></span>",
+            "button1_label": "Shop Now\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+            "link1": "",
+            "button2_label": "",
+            "link2": "",
+            "text_align": "left",
+            "position_text": "top-right"
+          }
+        }
+      },
+      "block_order": [
+        "banner_grid_M44hJE",
+        "banner_grid_xeyamn"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 1500px) {.description > span > .lable-banner {left: 12% !important; }}",
+        "@media (max-width: 991px) {.description > span > .lable-banner {left: 10px !important; transform: none !important; top: 10px !important; }}"
+      ],
+      "settings": {
+        "setwidthout": "container",
+        "margin_desktop": "",
+        "margin_tablet_large": "0px 0px 0px 0px",
+        "margin_mobile": "",
+        "padding_desktop": "",
+        "padding_tablet_lager": "0px 0px 0px 0px",
+        "padding_mobile": "",
+        "heading_color": "#282828",
+        "text_color": "#282828",
+        "sub_heading": "",
+        "tab_heading": "",
+        "tab_heading_size": 2,
+        "tab_description": "",
+        "btn_text": "",
+        "btn_link": "",
+        "style_btn": "btn-base",
+        "text_align": "left",
+        "distance_col": "15",
+        "color_title_center": "#ffffff",
+        "color_description": "#ffffff",
+        "color_btn": "",
+        "bg_btn": "",
+        "color_btn_hover": "",
+        "bg_btn_hover": "",
+        "heading_size_2": "h3",
+        "position_btn_bottom": true,
+        "style_btn_item": "btn-base btn-sm",
+        "style_btn_2": "btn-base"
+      }
+    },
+    "line_section_JnQziR": {
+      "type": "line-section",
+      "settings": {
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingtablet": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "margintablet": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgborder": "#e2e2e2",
+        "wborder": "1px 0px 0px 0px"
+      }
+    },
+    "blog_carousel_E6E8Bj": {
+      "type": "blog-carousel",
+      "disabled": true,
+      "settings": {
+        "setwidthout": "container",
+        "margin_desktop": "80px 0 64px",
+        "margin_mobile": "40px 0",
+        "padding_desktop": "",
+        "padding_mobile": "",
+        "background-color": "#ffffff",
+        "heading_color": "#282828",
+        "text_color": "#999999",
+        "background_item": "#ffffff",
+        "color_title": "#000000",
+        "color_info": "#999999",
+        "color_date": "#999999",
+        "color_tag": "#027a36",
+        "color_description": "#282828",
+        "color_btn": "#000000",
+        "color_btn_hover": "#027a36",
+        "sub_heading": "",
+        "tab_heading": "News & events",
+        "tab_heading_size": 3,
+        "tab_description": "",
+        "btn_text": "browse all\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"13\" viewBox=\"0 0 8 13\" fill=\"none\">\n    <path d=\"M7.46484 6.28516C7.72005 6.59505 7.72005 6.90495 7.46484 7.21484L2.21484 12.4648C1.90495 12.7201 1.59505 12.7201 1.28516 12.4648C1.02995 12.1549 1.02995 11.8451 1.28516 11.5352L6.07031 6.75L1.28516 1.96484C1.02995 1.65495 1.02995 1.34505 1.28516 1.03516C1.59505 0.779948 1.90495 0.779948 2.21484 1.03516L7.46484 6.28516Z\" fill=\"currentColor\"/>\n</svg>",
+        "btn_link": "shopify://blogs/news",
+        "style_btn": "btn-outline",
+        "text_align": "left",
+        "blog": "news",
+        "limit": 10,
+        "perviewDesktop": 3,
+        "spaceBetween": 30,
+        "arrows": false,
+        "arrow_heading": false,
+        "dots": false,
+        "nowrap": false,
+        "show_date": true,
+        "show_author": true,
+        "show_description": false,
+        "show_tag": true,
+        "btn_blog": "",
+        "show_view_all": false,
+        "style_btn_item": "btn-base"
+      }
+    },
+    "image_banner_ggBM9V": {
+      "type": "image-banner",
+      "disabled": true,
+      "name": "Image banner",
+      "settings": {
+        "setwidthout": "full",
+        "featured_image": "shopify://shop_images/Group_363.png",
+        "image_mobile": "shopify://shop_images/Section_6_Mobile.png",
+        "height_img": "default-img",
+        "height_img_mobile": "default-img",
+        "margin_desktop": "",
+        "margin_tablet": "",
+        "margin_mobile": "",
+        "tab_heading": "",
+        "tab_heading_size": 2,
+        "tab_description": "",
+        "heading_color": "",
+        "text_color": "",
+        "overlay": "#000000",
+        "overlay_opacity": 1
+      }
+    },
+    "collapsible_content_HUqH3E": {
+      "type": "logam-faq",
+      "blocks": {
+        "collapsible_row_AdfzyR": {
+          "type": "question",
+          "settings": {
+            "question": "In which languages is the book available?",
+            "answer": "<p>The book is available in English, Hindi, and Gujarati, ensuring accessibility to readers across different regions and preferences.</p>"
+          }
+        },
+        "collapsible_row_Vi8Cae": {
+          "type": "question",
+          "settings": {
+            "question": "What sizes are available for the book?",
+            "answer": "<p>The book comes in three sizes: pocket size for convenience, A4 size for easy reading, and a larger size for an immersive experience.</p>"
+          }
+        },
+        "collapsible_row_gQF4tY": {
+          "type": "question",
+          "settings": {
+            "question": "How can I pre-book the Hanuman Chalisa book?",
+            "answer": "<p>You can pre-book directly on our website through the pre-booking section. Limited copies are available, so don’t miss the opportunity!</p>"
+          }
+        },
+        "collapsible_row_jgcN8W": {
+          "type": "question",
+          "settings": {
+            "question": "What are Art Combos, and how can I purchase them?",
+            "answer": "<p>Art Combos are coloring pages featuring the beautiful illustrations from the book. You can purchase these combos on our website and enjoy the meditative joy of coloring divine artworks.</p>"
+          }
+        },
+        "collapsible_row_3LtXbn": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my shipment across India?",
+            "answer": "<p>Once you place your order, we’ll send you a confirmation email with tracking details. You can also check the status through the “Track Your Order” section on our website.</p>"
+          }
+        },
+        "collapsible_row_7Tc64x": {
+          "type": "question",
+          "settings": {
+            "question": "Are there any discounts or offers available?",
+            "answer": "<p>We occasionally run special offers for our customers. Check the homepage or subscribe to our newsletter for updates on discounts and exclusive deals.</p>"
+          }
+        },
+        "collapsible_row_MA8UN3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I gift this book to someone?",
+            "answer": "<p>Absolutely! The Hanuman Chalisa book makes a thoughtful gift. Just mention the recipient’s details at checkout, and we’ll take care of the rest.</p>"
+          }
+        },
+        "collapsible_row_qT4MRg": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Currently, we ship within India, but we are working on expanding our delivery options to international locations. Stay tuned for updates!</p>"
+          }
+        },
+        "collapsible_row_4AeQQ6": {
+          "type": "question",
+          "settings": {
+            "question": "How do I contact customer support?",
+            "answer": "<p>If you have any questions or need assistance, feel free to reach out to us via the “Contact Us” page. Our team is here to help!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_AdfzyR",
+        "collapsible_row_Vi8Cae",
+        "collapsible_row_gQF4tY",
+        "collapsible_row_jgcN8W",
+        "collapsible_row_3LtXbn",
+        "collapsible_row_7Tc64x",
+        "collapsible_row_MA8UN3",
+        "collapsible_row_qT4MRg",
+        "collapsible_row_4AeQQ6"
+      ],
+      "settings": {
+        "heading": "Got Questions? We’re Here.",
+        "description": "Everything you need to know about editions, delivery, and gifting.",
+        "open_first": false,
+        "help_title": "Need assistance with your order?",
+        "help_text": "Our devotional support team in Gujarat is happy to assist.",
+        "call_label": "Call",
+        "phone": "+91 82381 88824",
+        "bg_color": "#fdf3ec",
+        "text_color": "#14201a",
+        "accent_color": "#d9692e",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    }
+  },
+  "order": [
+    "logam_hero_edd",
+    "slideshow_xqYPzy",
+    "6fe8fbaa-5a22-4c15-86c6-9ad636d793b6",
+    "service_nizft6",
+    "credibility_strip_edd",
+    "shop_by_language_edd",
+    "second_kdNQrp",
+    "slide_cstm_EDwMAB",
+    "slide_cstm_KyqWGz",
+    "advanced_content_JjFd76",
+    "advanced_content_AcJtzy",
+    "banner_grid_3rgPQD",
+    "cstm_image_tjiFRQ",
+    "cstm_video_EnXa9m",
+    "second_VGrzix",
+    "logam_why_us_edd",
+    "image_banner_p8qhQF",
+    "banner_grid_RF7cGr",
+    "line_section_JnQziR",
+    "blog_carousel_E6E8Bj",
+    "image_banner_ggBM9V",
+    "collapsible_content_HUqH3E"
+  ]
+}

@@ -1,0 +1,309 @@
+{%- comment -%}
+  Bulk / free demo cart drawer (design: "bk-cart"), rendered from the real Shopify cart.
+  Lines are recognised by product (the section's bulk and demo products) or by the hidden _lb property.
+  logam-bulk-order.js re-renders it through the Section Rendering API after every cart change
+  and swaps only [data-lb-drawer-in], so the overlay stays in place.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign sx_b = section.blocks | where: 'type', 'steps' | first
+  assign sx = sx_b.settings
+  assign mx_b = section.blocks | where: 'type', 'messages' | first
+  assign mx = mx_b.settings
+  assign jx_b = section.blocks | where: 'type', 'drawer_journey' | first
+  assign jx = jx_b.settings
+  assign dx_b = section.blocks | where: 'type', 'drawer' | first
+  assign dx = dx_b.settings
+  assign tiers = section.blocks | where: 'type', 'tier'
+  assign langs = section.blocks | where: 'type', 'language'
+  assign n_tiers = tiers.size
+  assign others = 0
+  for item in cart.items
+    assign kind = item.properties['_lb']
+    if s.product != blank and item.product_id == s.product.id
+      assign kind = 'bulk'
+    elsif s.demo_product != blank and item.product_id == s.demo_product.id
+      assign kind = 'demo'
+    endif
+    if kind == 'bulk' and bulk_line == blank
+      assign bulk_line = item
+    elsif kind == 'demo' and demo_line == blank
+      assign demo_line = item
+    else
+      assign others = others | plus: 1
+    endif
+  endfor
+  assign pct = s.advance_percent | default: 50
+  if bulk_line != blank
+    # whole-pack variants are added once; the number of books is in the line's Books property
+    assign q = bulk_line.properties['Books'] | remove: ',' | plus: 0
+    if q == 0
+      assign q = bulk_line.quantity
+    endif
+    assign k = 0
+    for t in tiers
+      if q >= t.settings.min_qty
+        assign k = forloop.index0
+      endif
+    endfor
+    assign tier = tiers[k]
+    assign unit = tier.settings.price
+    assign full = q | times: unit
+    assign next_i = k | plus: 1
+    assign next = tiers[next_i]
+    assign step_pct = 100
+    if n_tiers > 1
+      assign gaps = n_tiers | minus: 1
+      assign step_pct = 100.0 | divided_by: gaps
+    endif
+    # The "x% now, rest before dispatch" wording only when the product really charges that share
+    assign adv_paise = full | times: pct
+    assign adv_ok = false
+    if pct < 100 and bulk_line.original_line_price == adv_paise
+      assign adv_ok = true
+    endif
+    if next != blank
+      assign span = next.settings.min_qty | minus: tier.settings.min_qty
+      assign into = q | minus: tier.settings.min_qty | times: 1.0 | divided_by: span
+      assign pos = k | plus: into | times: step_pct
+      assign more = next.settings.min_qty | minus: q
+    else
+      assign pos = 100
+    endif
+  endif
+  assign close_svg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>'
+-%}
+{%- capture demo_price -%}
+  {%- if s.demo_product != blank -%}{% render 'logam-bulk-inr', paise: s.demo_product.price %}{%- else -%}{{ s.demo_price_text }}{%- endif -%}
+{%- endcapture -%}
+{%- capture cloud -%}<svg viewBox="0 0 64 30" aria-hidden="true"><path d="M 14 26 C 6 26, 2 20, 6 15 C 8 11, 14 10, 17 12 C 19 5, 28 2, 34 6 C 38 2, 48 3, 50 10 C 57 9, 62 14, 60 20 C 59 24, 55 26, 51 26 Z" fill="#FFFFFF"/></svg>{%- endcapture -%}
+<div class="lb-cart__in" data-lb-drawer-in data-count="{{ cart.item_count }}" data-total="{{ cart.total_price }}">
+  <div class="hh-head">
+    <button type="button" class="hh-x" data-lb-close aria-label="{{ dx.dr_close | escape }}">{{ close_svg }}</button>
+    <h2 class="hh-title">{{ dx.dr_title }}</h2>
+    <span class="hh-count">
+      {%- if bulk_line != blank -%}
+        {%- render 'logam-bulk-inr', rupees: q, symbol: '' %} {{ dx.dr_books_word }}{% if demo_line != blank %} + {{ dx.dr_demo_word }}{% endif %}
+      {%- elsif cart.item_count == 1 -%}1 {{ dx.dr_item_one }}
+      {%- else -%}{{ cart.item_count }} {{ dx.dr_item_many }}
+      {%- endif -%}
+    </span>
+  </div>
+
+  <div class="hh-body lb-cart__body">
+    <p class="lb-cart__err" data-lb-cart-err role="alert" hidden></p>
+
+    {%- if bulk_line != blank -%}
+      <section class="hh-journey" aria-label="{{ jx.dr_journey_label | escape }}">
+        <div class="hh-jtop">
+          <p class="hh-jtitle">
+            {%- if next != blank -%}
+              {%- capture more_txt -%}{% render 'logam-bulk-inr', rupees: more, symbol: '' %}{%- endcapture -%}
+              {{ jx.dr_j_next | replace: '[n]', more_txt | replace: '[price]', next.settings.price }}
+            {%- else -%}
+              {{ jx.dr_j_max | replace: '[price]', unit }}
+            {%- endif -%}
+          </p>
+          <span class="hh-pill">{{ jx.dr_j_pill | replace: '[price]', unit }}</span>
+        </div>
+        <div class="hh-stage lb-cart__stage">
+          <div class="hh-cloud hh-cloud--1">{{ cloud }}</div>
+          <div class="hh-cloud hh-cloud--2">{{ cloud }}</div>
+          <div class="hh-cloud hh-cloud--3">{{ cloud }}</div>
+          <div class="hh-track lb-cart__track">
+            <div class="hh-fill" style="width: {{ pos }}%"></div>
+            {%- for t in tiers -%}
+              {%- assign left = forloop.index0 | times: step_pct -%}
+              <span class="lb-cart__dot{% if forloop.index0 <= k %} is-on{% endif %}" style="left: {{ left }}%"></span>
+            {%- endfor -%}
+            <div class="hh-runner" style="left: {{ pos }}%">
+              <div class="hh-bob">{%- render 'logam-cart-hanuman', label: jx.dr_hanuman_label -%}</div>
+            </div>
+          </div>
+          <div class="lb-cart__labels">
+            {%- for t in tiers -%}
+              {%- assign left = forloop.index0 | times: step_pct -%}
+              {%- liquid
+                assign m = t.settings.min_qty
+                if m >= 1000
+                  assign short = m | divided_by: 1000 | append: 'k'
+                else
+                  assign short = m
+                endif
+              -%}
+              <span class="lb-cart__label{% if forloop.first %} is-first{% elsif forloop.last %} is-last{% endif %}" style="left: {{ left }}%"><b>{{ short }}</b>₹{{ t.settings.price }}</span>
+            {%- endfor -%}
+          </div>
+        </div>
+        <p class="lb-cart__jsub">{% if next != blank %}{{ jx.dr_j_sub }}{% else %}{{ jx.dr_j_sub_max }}{% endif %}</p>
+        {%- if next != blank -%}
+          {%- capture next_qty -%}{% render 'logam-bulk-inr', rupees: next.settings.min_qty, symbol: '' %}{%- endcapture -%}
+          <button type="button" class="lb-cart__jump" data-lb-cart-jump="{{ next.settings.min_qty }}" data-key="{{ bulk_line.key }}">{{ jx.dr_j_jump | replace: '[qty]', next_qty | replace: '[price]', next.settings.price }}</button>
+        {%- endif -%}
+      </section>
+    {%- elsif demo_line != blank -%}
+      <section class="hh-journey" aria-label="{{ jx.dr_path_label | escape }}">
+        <div class="hh-jtop">
+          <p class="hh-jtitle">{{ jx.dr_path_title }}</p>
+          <span class="hh-pill lb-cart__pill--green">{{ jx.dr_path_pill }}</span>
+        </div>
+        <div class="hh-stage lb-cart__stage">
+          <div class="hh-cloud hh-cloud--1">{{ cloud }}</div>
+          <div class="hh-cloud hh-cloud--2">{{ cloud }}</div>
+          <div class="hh-cloud hh-cloud--3">{{ cloud }}</div>
+          <div class="hh-track lb-cart__track">
+            <div class="hh-fill" style="width: 6%"></div>
+            <span class="lb-cart__dot is-on" style="left: 0%"></span>
+            <span class="lb-cart__dot lb-cart__dot--goal" style="left: 100%"></span>
+            <div class="hh-runner" style="left: 0%">
+              <div class="hh-bob">{%- render 'logam-cart-hanuman', label: jx.dr_hanuman_label -%}</div>
+            </div>
+          </div>
+          <div class="lb-cart__labels">
+            <span class="lb-cart__label is-first" style="left: 0%"><b>{{ jx.dr_path_left_title }}</b>{{ jx.dr_path_left_sub | replace: '[demo_price]', demo_price }}</span>
+            <span class="lb-cart__label is-last" style="left: 100%"><b>{{ jx.dr_path_right_title }}</b>{{ jx.dr_path_right_sub }}</span>
+          </div>
+        </div>
+        <p class="lb-cart__jsub">{{ jx.dr_path_text }}</p>
+        {%- if jx.bulk_page_url != blank -%}
+          <a class="lb-cart__outline" href="{{ jx.bulk_page_url }}">{{ jx.dr_path_button }}</a>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    {%- if bulk_line != blank -%}
+      {%- liquid
+        assign p = bulk_line.properties
+        assign lang_label = p['Language']
+        assign lang_code = 'en'
+        assign chalisa = ''
+        for l in langs
+          if l.settings.value == p['Language']
+            assign lang_label = l.settings.label
+            assign lang_code = l.settings.code
+            assign chalisa = l.settings.chalisa
+          endif
+        endfor
+        if chalisa == blank
+          assign chalisa = langs.first.settings.chalisa
+        endif
+      -%}
+      <div class="lb-cart__card" data-lb-card="bulk" data-key="{{ bulk_line.key }}">
+        <div class="lb-cart__top">
+          <div class="lb-cart__thumb">{%- render 'logam-bulk-cover', s: sx, mini: true, brand: p['Brand name'], slogan: p['Slogan'], phone: p['Phone'], address: p['Address or website'], chalisa: chalisa, lang: lang_code -%}</div>
+          <div class="lb-cart__info">
+            <div class="lb-cart__name">{{ dx.dr_bulk_title }}</div>
+            <div class="lb-cart__sub">{{ dx.dr_bulk_sub | replace: '[lang]', lang_label }}</div>
+            <div class="lb-cart__sub">{{ dx.dr_unit | replace: '[price]', unit }}</div>
+          </div>
+        </div>
+        <div class="lb-cart__row">
+          <span class="lb-cart__qty">{%- render 'logam-bulk-inr', rupees: q, symbol: '' %} {{ dx.dr_books_word }}</span>
+          <b class="lb-cart__total">{%- render 'logam-bulk-inr', rupees: full -%}</b>
+        </div>
+        <dl class="lb-cart__dl">
+          <dt>{{ dx.dr_brand }}</dt><dd>{{ p['Brand name'] | escape }}</dd>
+          <dt>{{ dx.dr_phone }}</dt><dd>{{ p['Phone'] | escape }}</dd>
+          <dt>{{ dx.dr_logo }}</dt><dd>{{ p['Logo'] | default: dx.dr_logo_whatsapp | escape }}</dd>
+        </dl>
+        <button type="button" class="lb-cart__link" data-lb-edit="bulk">{{ dx.dr_edit }}</button>
+      </div>
+    {%- endif -%}
+
+    {%- if demo_line != blank -%}
+      {%- liquid
+        assign dp = demo_line.properties
+        assign d_label = dp['Language']
+        assign d_code = 'en'
+        assign d_chalisa = ''
+        for l in langs
+          if l.settings.value == dp['Language']
+            assign d_label = l.settings.label
+            assign d_code = l.settings.code
+            assign d_chalisa = l.settings.chalisa
+          endif
+        endfor
+        if d_chalisa == blank
+          assign d_chalisa = langs.first.settings.chalisa
+        endif
+      -%}
+      <div class="lb-cart__card" data-lb-card="demo" data-key="{{ demo_line.key }}">
+        <div class="lb-cart__top">
+          <div class="lb-cart__thumb">{%- render 'logam-bulk-cover', s: sx, mini: true, brand: dp['Brand name'], slogan: dp['Slogan'], phone: dp['Phone'], address: dp['Address or website'], chalisa: d_chalisa, lang: d_code -%}</div>
+          <div class="lb-cart__info">
+            <div class="lb-cart__name">{{ dx.dr_demo_title }}</div>
+            <div class="lb-cart__sub">{{ dx.dr_demo_sub | replace: '[lang]', d_label }}</div>
+            <div class="lb-cart__free"><s>{{ mx.demo_was }}</s> <b>{{ mx.demo_free }}</b></div>
+          </div>
+        </div>
+        {%- if bulk_line == blank -%}
+          <dl class="lb-cart__dl">
+            <dt>{{ dx.dr_brand }}</dt><dd>{{ dp['Brand name'] | escape }}</dd>
+            <dt>{{ dx.dr_phone }}</dt><dd>{{ dp['Phone'] | escape }}</dd>
+            <dt>{{ dx.dr_logo }}</dt><dd>{{ dp['Logo'] | default: dx.dr_logo_whatsapp | escape }}</dd>
+          </dl>
+        {%- endif -%}
+        <div class="lb-cart__actions">
+          <button type="button" class="lb-cart__link" data-lb-edit="demo">{{ dx.dr_edit }}</button>
+          <button type="button" class="lb-cart__link lb-cart__link--muted" data-lb-cart-remove data-key="{{ demo_line.key }}">{{ dx.dr_remove }}</button>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if others > 0 -%}
+      <ul class="lb-cart__others">
+        {%- for item in cart.items -%}
+          {%- if item.key == bulk_line.key or item.key == demo_line.key -%}{%- continue -%}{%- endif -%}
+          <li>
+            {%- if item.image -%}{{ item.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: item.product.title, width: 48, height: 48 }}{%- endif -%}
+            <span class="lb-cart__oname">{{ item.product.title }}{% unless item.product.has_only_default_variant %} · {{ item.variant.title }}{% endunless %} × {{ item.quantity }}</span>
+            <b>{%- render 'logam-bulk-inr', paise: item.final_line_price -%}</b>
+            <button type="button" class="lb-cart__link lb-cart__link--muted" data-lb-cart-remove data-key="{{ item.key }}">{{ dx.dr_remove }}</button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if cart.item_count == 0 -%}
+      <p class="lb-cart__empty">{{ dx.dr_empty }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="hh-foot lb-cart__foot">
+      {%- if bulk_line != blank -%}
+        <div class="lb-cart__line"><span>{%- render 'logam-bulk-inr', rupees: q, symbol: '' %} {{ dx.dr_books_word }} × ₹{{ unit }}</span><b>{%- render 'logam-bulk-inr', rupees: full -%}</b></div>
+        <div class="lb-cart__line"><span>{{ dx.dr_delivery_gst }}</span><b class="is-green">{{ dx.dr_delivery_gst_value }}</b></div>
+        {%- if demo_line != blank -%}
+          <div class="lb-cart__line"><span>{{ dx.dr_demo_row }}</span><b>{{ mx.demo_free }} · {% render 'logam-bulk-inr', paise: demo_line.final_line_price %}</b></div>
+        {%- endif -%}
+      {%- elsif demo_line != blank -%}
+        <div class="lb-cart__line"><span>{{ dx.dr_demo_line }}</span><span><s>{{ mx.demo_was }}</s> <b class="is-green">{{ mx.demo_free }}</b></span></div>
+        <div class="lb-cart__line"><span>{{ mx.sum_delivery_label }}</span><b>{%- render 'logam-bulk-inr', paise: demo_line.final_line_price -%}</b></div>
+      {%- endif -%}
+      {%- if cart.total_discount > 0 -%}
+        <div class="lb-cart__line is-green"><span>{{ cart.discount_applications.first.title | default: dx.dr_discount }}</span><b>−{%- render 'logam-bulk-inr', paise: cart.total_discount -%}</b></div>
+      {%- endif -%}
+      <form action="{{ routes.cart_url }}" method="post" class="hh-totrow">
+        <div class="hh-tot">
+          <small>
+            {%- if adv_ok -%}{{ dx.dr_pay_bulk | replace: '[percent]', pct }}
+            {%- elsif demo_line != blank and others == 0 -%}{{ dx.dr_pay_demo }}
+            {%- else -%}{{ dx.dr_pay_total }}{%- endif -%}
+          </small>
+          <div><b>{%- render 'logam-bulk-inr', paise: cart.total_price -%}</b></div>
+          {%- if adv_ok -%}
+            {%- capture full_txt -%}{% render 'logam-bulk-inr', rupees: full %}{%- endcapture -%}
+            <small>{{ dx.dr_rest | replace: '[total]', full_txt }}</small>
+          {%- elsif demo_line != blank and bulk_line == blank -%}
+            <small>{{ dx.dr_demo_rest }}</small>
+          {%- endif -%}
+        </div>
+        {%- capture pay_txt -%}{% render 'logam-bulk-inr', paise: cart.total_price %}{%- endcapture -%}
+        {%- comment -%} Standard checkout button: Razorpay Magic Checkout picks it up {%- endcomment -%}
+        <button type="submit" name="checkout" class="hh-checkout">{{ dx.dr_pay_button | replace: '[amount]', pay_txt }}</button>
+      </form>
+      <div class="lb-cart__note">{% if bulk_line != blank %}{{ dx.dr_note_bulk }}{% else %}{{ dx.dr_note_demo }}{% endif %}</div>
+    </div>
+  {%- endif -%}
+</div>

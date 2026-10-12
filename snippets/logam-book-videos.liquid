@@ -1,0 +1,35 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections: layout only, all text comes from section settings. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; --lh-dcols: {{ section.settings.dcols }}; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-videos">
+  <div class="lh__in">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, sub: section.settings.sub -%}
+    {%- assign fb = fb_posters | default: '' | split: ',' -%}
+    <div class="lh-scroll">
+      {%- for block in section.blocks -%}
+        {%- assign vid = block.settings.video -%}
+        {%- assign poster = block.settings.poster | default: vid.preview_image -%}
+        <div class="lh-reel" data-lh-reel {{ block.shopify_attributes }}>
+          {%- if poster != blank -%}
+            {{ poster | image_url: width: 540 | image_tag: widths: '256, 384, 540', sizes: '(min-width: 750px) 25vw, 128px', loading: 'lazy', alt: block.settings.caption | escape }}
+          {%- elsif fb[forloop.index0] != blank -%}
+            <img src="{{ fb[forloop.index0] | asset_url }}" alt="{{ block.settings.caption | escape }}" loading="lazy">
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag }}
+          {%- endif -%}
+          {%- if vid != blank -%}
+            {%- comment -%} Video file loads only when tapped — keeps the page fast. {%- endcomment -%}
+            <template>{{ vid | video_tag: controls: true, playsinline: true, preload: 'none' }}</template>
+            <button type="button" class="lh-reel__play" aria-label="Play video {{ forloop.index }}">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="rgba(43,26,14,.72)"/><path d="M16 12.5l11 7.5-11 7.5z" fill="#fff"/></svg>
+            </button>
+          {%- endif -%}
+          {%- if block.settings.caption != blank -%}<span class="lh-reel__cap">{{ block.settings.caption }}</span>{%- endif -%}
+          {%- if block.settings.duration != blank -%}<span class="lh-reel__time">{{ block.settings.duration }}</span>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

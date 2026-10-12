@@ -1,0 +1,134 @@
+/* Logam Container — testimonial/quote carousel. Mobile first; desktop at 750px. */
+
+.logam-container {
+  background: var(--lc-bg);
+  padding: var(--lc-pt-m) 0 var(--lc-pb-m);
+  text-align: center;
+}
+.logam-container *,
+.logam-container *::before,
+.logam-container *::after { box-sizing: border-box; }
+
+.logam-container__inner { padding: 0 20px; }
+
+.logam-container__title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--lc-heading);
+}
+
+.logam-container__text {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--lc-text);
+}
+.logam-container__text p { margin: 0; }
+
+.logam-container__carousel {
+  max-width: 380px;
+  margin: 28px auto 0;
+}
+
+.logam-container__track {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.logam-container__track::-webkit-scrollbar { display: none; }
+
+/* Padding keeps the quote card's shadow inside the scroll box so it isn't clipped. */
+.logam-container__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 0 6px 24px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.logam-container__image,
+.logam-container__image--placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.logam-container__quote {
+  position: relative;
+  margin-top: 18px;
+  padding: 28px 20px 22px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+.logam-container__quote p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--lc-text);
+  text-align: center;
+}
+.logam-container__mark {
+  position: absolute;
+  top: 6px;
+  left: 18px;
+  font-size: 34px;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: #d8d0c6;
+}
+
+.logam-container__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.logam-container__arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1.5px solid var(--lc-accent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lc-accent);
+  cursor: pointer;
+}
+.logam-container__arrow svg { width: 16px; height: 16px; }
+.logam-container__arrow:hover { background: var(--lc-accent); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .logam-container__track { scroll-behavior: auto; }
+  .logam-container__arrow { transition: none; }
+}
+
+@media (min-width: 750px) {
+  .logam-container { padding: var(--lc-pt) 0 var(--lc-pb); }
+  .logam-container__title { font-size: 28px; }
+  .logam-container__text { font-size: 16px; }
+  .logam-container__carousel { max-width: 1200px; margin-top: 40px; }
+
+  /* Desktop: no slider — cards sit side by side. */
+  .logam-container__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .logam-container__slide { padding: 0; }
+  .logam-container__nav { display: none; }
+}

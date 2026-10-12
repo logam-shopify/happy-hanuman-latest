@@ -1,0 +1,26 @@
+{%- comment -%} fb_*: theme-asset images shown while the matching image setting is empty {%- endcomment -%}
+{%- render 'logam-book-author', hi: true, fb_image: 'hh-author-ashish-bhalani.jpg' -%}
+
+{% schema %}
+{
+  "name": "Logam-hindi Author",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small text", "default": "लेखक के बारे में" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name", "default": "आशीष भालाणी" },
+    { "type": "text", "id": "role", "label": "Role", "default": "TEDx स्पीकर · ‘गर्भ यात्रा’ और ‘प्रेग्नेंसी 90’ के को-ऑथर" },
+    { "type": "richtext", "id": "bio", "label": "Bio", "default": "<p>आशीष ख़ुद को इस किताब का लेखक नहीं, बल्कि हनुमान जी के आशीर्वाद का माध्यम मानते हैं। इसीलिए कवर पर उनका नाम नहीं है; वहाँ लिखा है कि यह परमात्मा के आशीर्वाद से लिखी गई है।</p>" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg", "label": "Band background", "default": "#FBEFDD" },
+    { "type": "color", "id": "page_bg", "label": "Space above background", "default": "#FFF8EE" },
+    { "type": "range", "id": "gap_m", "label": "Space above (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "gap", "label": "Space above (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pt_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "pb_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "pt", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pb", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [ { "name": "Logam-hindi Author" } ]
+}
+{% endschema %}

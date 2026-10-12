@@ -1,0 +1,44 @@
+{%- comment -%}
+  The payment methods this store actually accepts, as real brand marks.
+  Added by EDD (Aug 2026). Styles live in assets/payment-logos.css.
+
+  Usage:
+    {% render 'payment-logos' %}                  product page (default size)
+    {% render 'payment-logos', variant: 'footer' %}  footer (one size down, right-aligned)
+
+  This replaced a single 250x22px PNG of the theme's demo graphic — Mastercard /
+  PayPal / VISA / Amex / Skrill / Google Pay / Discover. PayPal, Skrill, Amex and
+  Discover are NOT accepted here, it omitted UPI entirely, and at 250x22 it was too
+  low-resolution to read on a phone. That PNG was rendered on the product page AND
+  sitewide in the footer, so the same wrong list of methods appeared on every page.
+
+  Methods below are the ones the merchant confirmed: UPI (Google Pay / PhonePe /
+  Paytm), cards (Visa / Mastercard / RuPay) and Net Banking. Full Cash on Delivery
+  is NOT offered and is deliberately never claimed.
+
+  Files are assets/pay-*.svg|png — vector wherever the brand ships vector, so they
+  stay crisp at any pixel density. If the accepted methods ever change, this list is
+  the only place to edit.
+{%- endcomment -%}
+
+{%- assign variant = variant | default: 'default' -%}
+
+{{ 'payment-logos.css' | asset_url | stylesheet_tag }}
+
+<ul class="pay-logos pay-logos--{{ variant }}" role="list">
+  <li class="pay-logos__item"><img src="{{ 'pay-upi.svg' | asset_url }}" alt="UPI" width="67" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-gpay.svg' | asset_url }}" alt="Google Pay" width="48" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-phonepe.svg' | asset_url }}" alt="PhonePe" width="59" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-paytm.png' | asset_url }}" alt="Paytm" width="57" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-visa.svg' | asset_url }}" alt="Visa" width="56" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-mastercard.svg' | asset_url }}" alt="Mastercard" width="29" height="18" loading="lazy"></li>
+  <li class="pay-logos__item"><img src="{{ 'pay-rupay.png' | asset_url }}" alt="RuPay" width="70" height="18" loading="lazy"></li>
+  <li class="pay-logos__item pay-logos__item--net">
+    <svg viewBox="0 0 24 18" fill="none" aria-hidden="true">
+      <path d="M2.6 6.6L12 2l9.4 4.6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M4.8 8v6M9.6 8v6M14.4 8v6M19.2 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M2.6 16h18.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span>Net Banking</span>
+  </li>
+</ul>

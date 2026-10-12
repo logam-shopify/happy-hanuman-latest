@@ -1,0 +1,871 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_jM7Dxx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "1393b77e-a8c0-433b-89a8-43bc490e6816": {
+          "type": "product_sku",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "free_shipping_bar_edd": {
+          "type": "free_shipping_bar",
+          "settings": {}
+        },
+        "text_7R7M3t": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.short_des.value }}"
+          }
+        },
+        "375e1ccb-99cc-41e5-813c-45a1a57566be": {
+          "type": "product_description",
+          "disabled": true,
+          "settings": {}
+        },
+        "b8da14d9-fa65-4645-913b-4e91ff632b94": {
+          "type": "product_variants",
+          "settings": {
+            "variant_type": "grid",
+            "color_variant": "default"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "83916474-fbe9-46c1-afd0-c761ee898dc6": {
+          "type": "wishlist-compare",
+          "disabled": true,
+          "settings": {}
+        },
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7": {
+          "type": "product_policy",
+          "disabled": true,
+          "settings": {
+            "content_1": "Quick delivery right to your door.",
+            "content_2": "Delivery time: 3-5 business days",
+            "content_3": "Easy process, your satisfaction first."
+          }
+        },
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92": {
+          "type": "payment",
+          "settings": {
+            "bg_color": "#f6f6f6",
+            "image": "shopify://shop_images/image_32.png"
+          }
+        },
+        "d2dc3fb0-828b-419d-831c-f2f77453e516": {
+          "type": "categories",
+          "disabled": true,
+          "settings": {}
+        },
+        "3906805c-dd1d-47bb-905f-c7609da7417d": {
+          "type": "tags",
+          "disabled": true,
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_jM7Dxx",
+        "1393b77e-a8c0-433b-89a8-43bc490e6816",
+        "price",
+        "free_shipping_bar_edd",
+        "text_7R7M3t",
+        "375e1ccb-99cc-41e5-813c-45a1a57566be",
+        "b8da14d9-fa65-4645-913b-4e91ff632b94",
+        "quantity_selector",
+        "83916474-fbe9-46c1-afd0-c761ee898dc6",
+        "457532d6-4c43-4150-aef0-c4eab3d86aa7",
+        "b7d23da0-3873-4f9a-b9c6-9df8bcd72f92",
+        "d2dc3fb0-828b-419d-831c-f2f77453e516",
+        "3906805c-dd1d-47bb-905f-c7609da7417d",
+        "share"
+      ],
+      "disabled": true,
+      "settings": {
+        "media_type": "carousel",
+        "thumbnails_position": "bottom",
+        "carousel_page_dots": false,
+        "carousel_prevnextbuttons": false,
+        "enable_video_looping": true,
+        "show_cosselling": false,
+        "crossell_limit": 4,
+        "show_upsell": false,
+        "upsell_limit": 4,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70": {
+      "type": "product-content",
+      "blocks": {
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66": {
+          "type": "product_description",
+          "settings": {
+            "tab_name": "Description"
+          }
+        },
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03": {
+          "type": "tab_custom",
+          "settings": {
+            "tab_name": "Additional information",
+            "tab_custom_content": "{{ product.metafields.custom.additional_information | metafield_tag }}"
+          }
+        },
+        "judge_me_reviews_review_widget_WH7V8q": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "7cca183b-2a77-4cb3-a100-ae76a5e24b66",
+        "5d25217f-c0a7-454c-9bdf-2e9b6e9cfd03",
+        "judge_me_reviews_review_widget_WH7V8q"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_featured_products": false,
+        "featured_product_title": "You May Also Like",
+        "limit": 6,
+        "product": "",
+        "enable_guide": true,
+        "guide1_label": "Shipping & Returns",
+        "guide1_icon": "<svg fill=\"none\" focusable=\"false\" width=\"29\" height=\"24\" class=\"icon icon--picto-fast-delivery   product-tabs__trust-icon\" viewbox=\"0 0 29 24\">\n        <path d=\"M4 3H20V8M20 17H11.68C11.68 17 11 16 10 16M20 17V8M20 17H22.32M20 8H26.5L28 12.5V17H25.68C25.68 17 25 16 24 16M24 16C25 16 26 17 26 18C26 19 25 20 24 20C23 20 22 19 22 18C22 17.6527 22.1206 17.3054 22.32 17M24 16C23.3473 16 22.6946 16.426 22.32 17M10 16C11 16 12 17 12 18C12 19 11 20 10 20C9 20 8 19 8 18C8 17.6527 8.12061 17.3054 8.31996 17M10 16C9.3473 16 8.69459 16.426 8.31996 17M8.31996 17H4M10 12H3M10 8H1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide1_returns_content": "<p><strong>Shipping<br/></strong>We deliver your parcel within 2–3 working days. As soon as your package has left our warehouse, you will receive a confirmation by email. This confirmation contains a tracking number that you can use to find out where your package is.</p><p><strong>Return Policy</strong><br/><br/>We offer a <strong>7-day replacement policy</strong> for products that arrive with physical damage only. If you receive a damaged item, please report it within <strong>7 days of delivery</strong>.<br/><br/>To request a replacement, please contact our support team with clear photos of the damaged product and packaging. Once the issue is verified, we will arrange for a <strong>replacement of the same item</strong>.<br/><br/>Please note:<br/><em>This policy applies only to products with physical damage during transit.<br/>Returns or refunds are not available. Only </em><em><strong>replacement </strong></em><em>will be provided for eligible cases.</em></p>",
+        "guide2_label": "",
+        "guide2_icon": "",
+        "guide2_returns_content": "",
+        "guide3_label": "Secure Payment",
+        "guide3_icon": "<svg fill=\"none\" focusable=\"false\" width=\"24\" height=\"24\" class=\"icon icon--picto-secure-payment   product-tabs__trust-icon\" viewbox=\"0 0 24 24\">\n        <path d=\"M4 18H1V6M4 18V16H6M4 18V22H11V18M6 16C6 15.6667 6 15.3 6 14.5C6 13.5 6.73438 13 7.5 13C8.26562 13 9 13.5 9 14.5C9 15.3 9 15.6667 9 16M6 16H9M9 16H11V18M11 18H23V6M1 6V2H23V6M1 6H23M9 10H5M19 10V14H13V10H19Z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n      </svg>",
+        "guide3_returns_content": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p><p>We accept payments with :<br/>Visa, MasterCard, American Express, Paypal, Diners Club, Discover and more.</p>"
+      }
+    },
+    "logam_gujarati_main_XBAcN9": {
+      "type": "logam-gujarati-main",
+      "blocks": {
+        "edition_CRRqCG": {
+          "type": "edition",
+          "settings": {
+            "label": "English",
+            "product": "therapy-book-english",
+            "match": "",
+            "url": ""
+          }
+        },
+        "edition_Qncwmq": {
+          "type": "edition",
+          "settings": {
+            "label": "हिन्दी",
+            "product": "happy-hanuman-therapy-book-hindi",
+            "match": "",
+            "url": ""
+          }
+        },
+        "edition_YxPwTr": {
+          "type": "edition",
+          "settings": {
+            "label": "ગુજરાતી",
+            "product": "therapy-book-gujarati",
+            "match": "",
+            "url": ""
+          }
+        },
+        "trust_GDPw6j": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "3 થી 5 વર્કિંગ દિવસમાં ફ્રી ડિલિવરી",
+            "text": "પુસ્તક મોકલતાં જ ઇમેઇલ પર ટ્રેકિંગ નંબર"
+          }
+        },
+        "trust_Q7ynGn": {
+          "type": "trust",
+          "settings": {
+            "icon": "replace",
+            "title": "પુસ્તક ખરાબ હાલતમાં કે ખોટી ભાષામાં આવ્યું? ફ્રીમાં બદલી આપીશું",
+            "text": "ડિલિવરીના 7 દિવસમાં WhatsApp પર ફોટો મોકલો"
+          }
+        },
+        "payment_XhinJD": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_upi",
+            "name": "UPI",
+            "show_name": false
+          }
+        },
+        "payment_nMYNYi": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_gpay",
+            "name": "Google Pay",
+            "show_name": false
+          }
+        },
+        "payment_A8YE6W": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_phonepe",
+            "name": "PhonePe",
+            "show_name": false
+          }
+        },
+        "payment_4rfP3t": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_paytm",
+            "name": "Paytm",
+            "show_name": false
+          }
+        },
+        "payment_wtHbP8": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_visa",
+            "name": "Visa",
+            "show_name": false
+          }
+        },
+        "payment_GCE9aB": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_mastercard",
+            "name": "Mastercard",
+            "show_name": false
+          }
+        },
+        "payment_ULQFmM": {
+          "type": "payment",
+          "settings": {
+            "icon": "logo_rupay",
+            "name": "RuPay",
+            "show_name": false
+          }
+        },
+        "payment_WcDbib": {
+          "type": "payment",
+          "settings": {
+            "icon": "bank",
+            "name": "નેટ બેન્કિંગ",
+            "show_name": true
+          }
+        },
+        "box_item_brmNtM": {
+          "type": "box_item",
+          "settings": {
+            "text": "<b>હેપ્પી હનુમાન થેરાપી બુક</b>, ગુજરાતી એડિશન, A4 સાઇઝ"
+          }
+        }
+      },
+      "block_order": [
+        "edition_CRRqCG",
+        "edition_Qncwmq",
+        "edition_YxPwTr",
+        "trust_GDPw6j",
+        "trust_Q7ynGn",
+        "payment_XhinJD",
+        "payment_nMYNYi",
+        "payment_A8YE6W",
+        "payment_4rfP3t",
+        "payment_wtHbP8",
+        "payment_GCE9aB",
+        "payment_ULQFmM",
+        "payment_WcDbib",
+        "box_item_brmNtM"
+      ],
+      "name": "Logam-Gujarati Main",
+      "settings": {
+        "product": "therapy-book-gujarati",
+        "eyebrow": "હનુમાન ચાલીસા · ગુજરાતી એડિશન",
+        "show_rating": true,
+        "rating_text": "ત્રણેય એડિશનના [count] રિવ્યૂ",
+        "reviews_anchor": "reviews",
+        "save_text": "[amount]ની બચત · [percent]% ઓફ",
+        "price_note": "આખા ભારતમાં ફ્રી શિપિંગ",
+        "show_badge": false,
+        "badge_text": "ઓફ",
+        "ratio": "1",
+        "desc_source": "short",
+        "desc_words": 45,
+        "desc_custom": "",
+        "edition_label": "એડિશન:",
+        "edition_note": "ત્રણેયમાં એ જ પુસ્તક, એ જ ચિત્રો",
+        "size_label": "સાઇઝ",
+        "size_value": "A4 · 43 પાનાં",
+        "buy_label": "હમણાં ખરીદો",
+        "buy_price": true,
+        "cart_label": "કાર્ટમાં ઉમેરો",
+        "qty_label": "સંખ્યા",
+        "qty_less": "સંખ્યા ઘટાડો",
+        "qty_more": "સંખ્યા વધારો",
+        "offer_badge": "20%",
+        "offer_text": "<strong>હમણાં ફક્ત 20% ચૂકવો,</strong> બાકીના પુસ્તક મળે ત્યારે",
+        "pay_title": "સુરક્ષિત પેમેન્ટ",
+        "pay_methods": "",
+        "box_eyebrow": "",
+        "box_title": "તમને શું મળશે",
+        "box_image": "shopify://shop_images/12.jpg",
+        "box_upsell": "",
+        "box_upsell_note": "કલરિંગ શીટ્સ અલગથી મળે છે",
+        "box_upsell_label": "ઉમેરો",
+        "sticky": true,
+        "sticky_label": "ગુજરાતી એડિશન",
+        "accent": "#c24e00",
+        "bg": "#fff8ee",
+        "pb_m": 0,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_inside_UNqqqh": {
+      "type": "logam-gujarati-inside",
+      "blocks": {
+        "photo_imd3q3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download_3.jpg",
+            "caption": ""
+          }
+        },
+        "photo_mji4nT": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/hh-gu-inside-2-guidance-page.jpg",
+            "caption": ""
+          }
+        },
+        "photo_R4e3Yq": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/hh-gu-inside-1-book-with-murti.jpg",
+            "caption": ""
+          }
+        },
+        "photo_xPFg9R": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/download.jpg",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_imd3q3",
+        "photo_mji4nT",
+        "photo_R4e3Yq",
+        "photo_xPFg9R"
+      ],
+      "name": "Logam-Gujarati Inside",
+      "settings": {
+        "eyebrow": "અંદર જુઓ",
+        "title": "ગુજરાતી હનુમાન ચાલીસાના અસલી ફોટા",
+        "sub": "",
+        "fallback_count": 5,
+        "ratio": "1",
+        "ratio_d": "0.75",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_steps_rYhTiK": {
+      "type": "logam-gujarati-steps",
+      "blocks": {
+        "step_RUAAEc": {
+          "type": "step",
+          "settings": {
+            "title": "સરળ ભાષામાં ઊંડી સમજ",
+            "text": "દરેક ચોપાઈનો સરળ અને ઊંડો અર્થ, વાલ્મીકિ રામાયણ, રામચરિતમાનસ અને ભગવદ્ ગીતાના સંદર્ભ સાથે",
+            "image": "shopify://shop_images/HH_STEP_1_GUJARATI.png",
+            "caption": ""
+          }
+        },
+        "step_eFYgjP": {
+          "type": "step",
+          "settings": {
+            "title": "હાથે દોરેલાં ચિત્રો",
+            "text": "દરેક ચિત્રમાં એ ચોપાઈનો ભાવ અને શીખ છે, મન પર સારી અસર થાય એ રીતે બનાવેલું",
+            "image": "shopify://shop_images/6_74bdb8b0-88ea-41d8-8636-cea8748efea8.png",
+            "caption": ""
+          }
+        },
+        "step_Peq4ap": {
+          "type": "step",
+          "settings": {
+            "title": "હેપ્પી હનુમાન ચેલેન્જ",
+            "text": "એ ચોપાઈની શીખને પોતાના જીવનમાં ઉતારવાની એક ચેલેન્જ",
+            "image": "shopify://shop_images/Screenshot_2026-10-08_at_4.43.16_PM.png",
+            "caption": ""
+          }
+        },
+        "step_J7rVzp": {
+          "type": "step",
+          "settings": {
+            "title": "છુપાયેલું રામ નામ શોધો",
+            "text": "દરેક હાથે દોરેલા ચિત્રમાં છુપાયેલું “રામ” નામ શોધો",
+            "image": "shopify://shop_images/ram.jpg",
+            "caption": "મળ્યું? આ ચિત્રમાં “રામ” મગરના જડબા પર છુપાયેલું છે"
+          }
+        },
+        "locked_k9ewTD": {
+          "type": "locked",
+          "settings": {
+            "eyebrow": "સ્ટેપ 5 · અલગથી મળે છે",
+            "title": "કલરિંગ શીટ્સ સાથે આર્ટ થેરાપી",
+            "text": "43 શીટ્સ. દરેક શીટની આગળ ચિત્ર છે અને પાછળ તેની લાઇન આર્ટ, જેમાં તમે રંગ પૂરશો. રામ નામ શોધવાની રમત આ શીટ્સ પર પણ છે, અને એમાં પુસ્તક કરતાં વધુ નામ છુપાયેલાં છે.",
+            "image": "shopify://shop_images/step_5.jpg",
+            "product": "happy-hanuman-art-therapy-colouring-sheets",
+            "note": "પુસ્તક સાથે લો: પાંચેય સ્ટેપ અને કુલ રકમ પર 10% છૂટ",
+            "button": "સ્ટેપ 5 અનલૉક કરો · [price]માં ઉમેરો",
+            "added": "સ્ટેપ 5 અનલૉક · કાર્ટમાં ઉમેરાઈ ગયું ✓"
+          }
+        }
+      },
+      "block_order": [
+        "step_RUAAEc",
+        "step_eFYgjP",
+        "step_Peq4ap",
+        "step_J7rVzp",
+        "locked_k9ewTD"
+      ],
+      "name": "Logam-Gujarati Steps",
+      "settings": {
+        "eyebrow": "કેવી રીતે કામ કરે છે",
+        "title": "હેપ્પી હનુમાન થેરાપીનાં 5 સ્ટેપ",
+        "sub": "સ્ટેપ 1 થી 4 આ જ પુસ્તકમાં છે. સ્ટેપ 5 અલગ સેટ છે: આર્ટ થેરાપી કલરિંગ શીટ્સ.",
+        "img_mobile": true,
+        "layout_d": "cards",
+        "hint": "",
+        "bg": "#fff8ee",
+        "bg_d": "#f9efdf",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_details_jQGVRn": {
+      "type": "logam-gujarati-details",
+      "blocks": {
+        "row_pHpThd": {
+          "type": "row",
+          "settings": {
+            "label": "એડિશન",
+            "value": "ગુજરાતી"
+          }
+        },
+        "row_Qn9BCL": {
+          "type": "row",
+          "settings": {
+            "label": "સાઇઝ",
+            "value": "A4"
+          }
+        },
+        "row_gXW4np": {
+          "type": "row",
+          "settings": {
+            "label": "પાનાં",
+            "value": "43, હાથે દોરેલાં ચિત્રો સાથે"
+          }
+        },
+        "row_9XHbdr": {
+          "type": "row",
+          "settings": {
+            "label": "કોના માટે",
+            "value": "બાળકો અને મોટાઓ: પરિવાર, માતા-પિતા, ટીચર, હનુમાન ભક્તો"
+          }
+        },
+        "row_WMeUBL": {
+          "type": "row",
+          "settings": {
+            "label": "ડિલિવરી",
+            "value": "ફ્રી, 3 થી 5 વર્કિંગ દિવસમાં"
+          }
+        },
+        "row_PQeaRi": {
+          "type": "row",
+          "settings": {
+            "label": "બદલી",
+            "value": "ખરાબ હાલતમાં કે ખોટી એડિશન આવે તો 7 દિવસમાં"
+          }
+        }
+      },
+      "block_order": [
+        "row_pHpThd",
+        "row_Qn9BCL",
+        "row_gXW4np",
+        "row_9XHbdr",
+        "row_WMeUBL",
+        "row_PQeaRi"
+      ],
+      "name": "Logam-Gujarati Details",
+      "settings": {
+        "eyebrow": "વિગતો",
+        "title": "આ એડિશન વિશે",
+        "sub": "",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_videos_fEAG89": {
+      "type": "logam-gujarati-videos",
+      "blocks": {
+        "video_UEMxkX": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-09 at 12.35.50 (1).mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_jbKBjX": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-259.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_zWPcCU": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-707.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        },
+        "video_NpRwdx": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Video-840.mp4",
+            "caption": "",
+            "duration": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_UEMxkX",
+        "video_jbKBjX",
+        "video_zWPcCU",
+        "video_NpRwdx"
+      ],
+      "name": "Logam-Gujarati Videos",
+      "settings": {
+        "eyebrow": "જુઓ",
+        "title": "વાચકોના અનુભવ",
+        "sub": "",
+        "dcols": 4,
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_leaders_RRayXD": {
+      "type": "logam-gujarati-leaders",
+      "blocks": {
+        "quote_htbrQg": {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક ફક્ત યુવાનો અને બાળકો માટે જ નહીં, સૌ માટે ખૂબ ઉપયોગી છે. પુસ્તકનાં ચિત્રો અદ્ભુત છે, ખૂબ સરસ કામ.",
+            "name": "અનુપમ ખેર",
+            "role": "એક્ટર અને ડિરેક્ટર, હનુમાન ભક્ત",
+            "photo": "shopify://shop_images/anupam.jpg"
+          }
+        },
+        "quote_7m6ybX": {
+          "type": "quote",
+          "settings": {
+            "quote": "સારાં ચિત્રો સારું ચરિત્ર બનાવી શકે છે. આ કામથી મને ખૂબ આનંદ છે.",
+            "name": "પૂજ્ય મોરારિબાપુ",
+            "role": "",
+            "photo": "shopify://shop_images/bapu.jpg"
+          }
+        },
+        "quote_N9zXyQ": {
+          "type": "quote",
+          "settings": {
+            "quote": "હનુમાનજી પર આટલું ઊંડું અને ઉત્તમ કામ મેં ક્યારેય જોયું નથી.",
+            "name": "પૂજ્ય હરિપ્રકાશ શાસ્ત્રી",
+            "role": "સાળંગપુર ધામ",
+            "photo": "shopify://shop_images/shastri.jpg"
+          }
+        },
+        "quote_WaACJB": {
+          "type": "quote",
+          "settings": {
+            "quote": "ખૂબ સુંદર કામ છે. બાળકો અને યુવાનો માટે હનુમાનજી પર આનાથી વધુ રસપ્રદ પુસ્તક મેં જોયું નથી.",
+            "name": "અક્ષત ગુપ્તા",
+            "role": "લેખક",
+            "photo": "shopify://shop_images/gupta.jpg"
+          }
+        },
+        "quote_7MKmYN": {
+          "type": "quote",
+          "settings": {
+            "quote": "આ પુસ્તક દરેકના હાથમાં પહોંચવું જોઈએ. રજૂઆત ખૂબ રસપ્રદ છે.",
+            "name": "જય વસાવડા",
+            "role": "લેખક",
+            "photo": "shopify://shop_images/jay.jpg"
+          }
+        },
+        "quote_LdAiLr": {
+          "type": "quote",
+          "settings": {
+            "quote": "આશિષ, ભગવાન તારી સાથે છે. ખૂબ સરસ કામ, હવે પુસ્તક પૂરું થયું. આ કામમાં ખુદ ભગવાન તારી સાથે છે.",
+            "name": "પદ્મભૂષણ સ્વામી સચ્ચિદાનંદ",
+            "role": "",
+            "photo": "shopify://shop_images/swami.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "quote_htbrQg",
+        "quote_7m6ybX",
+        "quote_N9zXyQ",
+        "quote_WaACJB",
+        "quote_7MKmYN",
+        "quote_LdAiLr"
+      ],
+      "name": "Logam-Gujarati Leaders",
+      "settings": {
+        "eyebrow": "આશીર્વાદ",
+        "title": "સંતો અને મહાનુભાવોના વિચાર",
+        "sub": "અંગ્રેજી પરથી અનુવાદ",
+        "dcols": 3,
+        "bg": "#fbefdd",
+        "page_bg": "#fff8ee",
+        "gap_m": 28,
+        "gap": 64,
+        "pt_m": 26,
+        "pb_m": 22,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "logam_gujarati_stats_UEa6LK": {
+      "type": "logam-gujarati-stats",
+      "name": "Logam-Gujarati Stats",
+      "settings": {
+        "image": "shopify://shop_images/record.svg",
+        "eyebrow": "ગિનેસ વર્લ્ડ રેકોર્ડ હોલ્ડર",
+        "title": "30 કલાકમાં 30,303 પુસ્તકો પર હસ્તાક્ષર",
+        "sub": "સુરત, ગુજરાત · 3 ડિસેમ્બર 2024 · 1,00,000+ વાચકો",
+        "bg": "#2b1a0e",
+        "pt_m": 22,
+        "pb_m": 22,
+        "pt": 40,
+        "pb": 40
+      }
+    },
+    "logam_gujarati_reviews_hfCabh": {
+      "type": "logam-gujarati-reviews",
+      "name": "Logam-Gujarati Reviews",
+      "settings": {
+        "eyebrow": "રિવ્યૂ",
+        "title": "વાચકો શું કહે છે",
+        "count_text": "[count] રિવ્યૂ",
+        "stat_value": "84%",
+        "stat_text": "વાચકોએ 5 સ્ટાર આપ્યા",
+        "note": "ગુજરાતી, English અને हिन्दी, ત્રણેય એડિશનના રિવ્યૂ સાથે. પુસ્તક એક જ છે.",
+        "anchor": "reviews",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_author_URhiXW": {
+      "type": "logam-gujarati-author",
+      "name": "Logam-Gujarati Author",
+      "settings": {
+        "eyebrow": "લેખક વિશે",
+        "image": "shopify://shop_images/Aashish_Bhalani.png",
+        "name": "આશિષ ભાલાણી",
+        "role": "TEDx સ્પીકર · ‘ગર્ભયાત્રા’ અને ‘પ્રેગ્નન્સી 90’ના કો-ઓથર",
+        "bio": "<p>આશિષભાઈ પોતાને આ પુસ્તકના લેખક નહીં, પણ હનુમાનજીના આશીર્વાદનું માધ્યમ માને છે. એટલે જ કવર પર તેમનું નામ નથી; ત્યાં લખ્યું છે કે આ પુસ્તક પરમાત્માના આશીર્વાદથી લખાયું છે.</p>",
+        "bg": "#fbefdd",
+        "page_bg": "#fff8ee",
+        "gap_m": 28,
+        "gap": 64,
+        "pt_m": 26,
+        "pb_m": 26,
+        "pt": 64,
+        "pb": 64
+      }
+    },
+    "logam_gujarati_faq_kPLzAX": {
+      "type": "logam-gujarati-faq",
+      "blocks": {
+        "faq_7pNdEt": {
+          "type": "faq",
+          "settings": {
+            "question": "શું મને ગુજરાતી એડિશન જ મળશે?",
+            "answer": "<p>હા. આ પેજ પરથી ગુજરાતી એડિશન મળે છે. English કે हिन्दी જોઈએ? ઉપર એડિશન બદલો. ચિત્રો અને બાકી બધું ત્રણેયમાં સરખું છે.</p>"
+          }
+        },
+        "faq_43L7hh": {
+          "type": "faq",
+          "settings": {
+            "question": "શું કલરિંગ શીટ્સ સાથે આવે છે?",
+            "answer": "<p>ના. આ પુસ્તકમાં સ્ટેપ 1 થી 4 છે. આર્ટ થેરાપી કલરિંગ શીટ્સ (સ્ટેપ 5) 43 શીટ્સનો અલગ સેટ છે, ₹999નો. પુસ્તક સાથે લેશો તો કુલ રકમ પર 10% છૂટ મળશે.</p>"
+          }
+        },
+        "faq_GGXfny": {
+          "type": "faq",
+          "settings": {
+            "question": "આ પુસ્તક કોના માટે છે?",
+            "answer": "<p>બાળકો અને મોટાઓ, બંને માટે: પરિવાર, માતા-પિતા, ટીચર અને હનુમાન ભક્તો.</p>"
+          }
+        },
+        "faq_hhyeUW": {
+          "type": "faq",
+          "settings": {
+            "question": "પેમેન્ટ કેવી રીતે કરું?",
+            "answer": "<p>UPI, Google Pay, PhonePe, Paytm, ડેબિટ કે ક્રેડિટ કાર્ડ (Visa, Mastercard, RuPay), અથવા નેટ બેન્કિંગથી. અથવા હમણાં ફક્ત 20% ચૂકવો અને બાકીના પુસ્તક મળે ત્યારે.</p>"
+          }
+        },
+        "faq_c96ez7": {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ક્યારે પહોંચશે?",
+            "answer": "<p>આખા ભારતમાં 3 થી 5 વર્કિંગ દિવસમાં, ફ્રી શિપિંગ સાથે. પુસ્તક મોકલતાં જ તમને ઇમેઇલ પર ટ્રેકિંગ નંબર મળશે.</p>"
+          }
+        },
+        "faq_eaBwVN": {
+          "type": "faq",
+          "settings": {
+            "question": "પુસ્તક ખરાબ હાલતમાં કે ખોટી ભાષામાં આવે તો?",
+            "answer": "<p>ડિલિવરીના 7 દિવસમાં +91 82381 88824 પર WhatsAppથી ફોટો મોકલો, અમે નવું પુસ્તક મોકલી આપીશું.</p>"
+          }
+        },
+        "faq_twJdPB": {
+          "type": "faq",
+          "settings": {
+            "question": "શું આ ગિફ્ટ તરીકે મોકલી શકાય?",
+            "answer": "<p>હા. ચેકઆઉટ વખતે જેને મોકલવું હોય તેનું નામ અને સરનામું લખો, અમે સીધું તેમને પહોંચાડીશું.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_7pNdEt",
+        "faq_43L7hh",
+        "faq_GGXfny",
+        "faq_hhyeUW",
+        "faq_c96ez7",
+        "faq_eaBwVN",
+        "faq_twJdPB"
+      ],
+      "name": "Logam-Gujarati FAQ",
+      "settings": {
+        "eyebrow": "સવાલ-જવાબ",
+        "title": "જાણવા જેવું",
+        "sub": "",
+        "open_first": false,
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 0,
+        "pt": 64,
+        "pb": 0
+      }
+    },
+    "logam_gujarati_languages_C4QrY4": {
+      "type": "logam-gujarati-languages",
+      "blocks": {
+        "edition_iPBMPh": {
+          "type": "edition",
+          "settings": {
+            "product": "therapy-book-english",
+            "label": "English એડિશન",
+            "tag": ""
+          }
+        },
+        "edition_iwxMQ3": {
+          "type": "edition",
+          "settings": {
+            "product": "happy-hanuman-therapy-book-hindi",
+            "label": "हिन्दी એડિશન",
+            "tag": ""
+          }
+        }
+      },
+      "block_order": [
+        "edition_iPBMPh",
+        "edition_iwxMQ3"
+      ],
+      "name": "Logam-Gujarati Languages",
+      "settings": {
+        "eyebrow": "",
+        "title": "બીજી ભાષામાં પણ",
+        "sub": "",
+        "bg": "#fff8ee",
+        "pt_m": 28,
+        "pb_m": 30,
+        "pt": 64,
+        "pb": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "b4b2e57a-b15e-4f11-b27e-b0500d52dc70",
+    "logam_gujarati_main_XBAcN9",
+    "logam_gujarati_inside_UNqqqh",
+    "logam_gujarati_steps_rYhTiK",
+    "logam_gujarati_details_jQGVRn",
+    "logam_gujarati_videos_fEAG89",
+    "logam_gujarati_leaders_RRayXD",
+    "logam_gujarati_stats_UEa6LK",
+    "logam_gujarati_reviews_hfCabh",
+    "logam_gujarati_author_URhiXW",
+    "logam_gujarati_faq_kPLzAX",
+    "logam_gujarati_languages_C4QrY4"
+  ]
+}

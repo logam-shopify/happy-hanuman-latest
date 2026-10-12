@@ -1,0 +1,43 @@
+{%- comment -%} Shared by the Logam-hindi and Logam-English sections. app_html = Judge.me app blocks, rendered by the section file. {%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ section.settings.bg }}; --lh-pt-m: {{ section.settings.pt_m }}px; --lh-pb-m: {{ section.settings.pb_m }}px; --lh-pt: {{ section.settings.pt }}px; --lh-pb: {{ section.settings.pb }}px; }
+{%- endstyle -%}
+{%- liquid
+  assign p = product
+  assign rating_value = p.metafields.reviews.rating.value.rating | default: 0
+  assign rating_count = p.metafields.reviews.rating_count | plus: 0
+  assign rating_pct = rating_value | times: 20
+-%}
+<section id="lh-{{ section.id }}" class="lh{% if hi %} lh--hi{% endif %} lh-reviews">
+  <div class="lh__in" id="{{ section.settings.anchor | default: 'reviews' }}" style="scroll-margin-top: 80px">
+    {%- render 'logam-hindi-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+    <div class="lh-reviews__aside">
+
+    {%- if rating_count > 0 -%}
+      <div class="lh-sum">
+        <div>
+          <strong>{{ rating_value | round: 1 }}</strong>
+          <span class="lh-stars" aria-label="{{ rating_value | round: 1 }} / 5"><span style="width: {{ rating_pct }}%"></span></span>
+          <small>{{ section.settings.count_text | replace: '[count]', rating_count }}</small>
+        </div>
+        {%- if section.settings.stat_value != blank -%}
+          <div><strong>{{ section.settings.stat_value }}</strong><small>{{ section.settings.stat_text }}</small></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}<p class="lh-reviews__note">{{ section.settings.note }}</p>{%- endif -%}
+    </div>
+    <div class="lh-reviews__widget">
+
+    {%- if app_html != blank -%}
+      {{ app_html }}
+    {%- elsif p != blank -%}
+      {%- comment -%} Judge.me's widget (needs the Judge.me app embed turned on). {%- endcomment -%}
+      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget jdgm-outside-widget" data-id="{{ p.id }}" data-product-title="{{ p.title | escape }}">
+        {{ p.metafields.judgeme.widget }}
+      </div>
+    {%- endif -%}
+    </div>
+  </div>
+</section>

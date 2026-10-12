@@ -1,0 +1,40 @@
+{%- comment -%}
+  Rupees with Indian digit grouping, as in the design: 220000 → ₹2,20,000.
+  Params: rupees (number) or paise (integer, e.g. cart.total_price); symbol (default '₹', '' for none).
+{%- endcomment -%}
+{%- liquid
+  assign sym = symbol | default: '₹'
+  if symbol == ''
+    assign sym = ''
+  endif
+  assign frac = ''
+  if paise != blank
+    assign whole = paise | divided_by: 100
+    assign p = paise | modulo: 100
+    if p > 0
+      assign frac = p | prepend: '0' | slice: -2, 2 | prepend: '.'
+    endif
+  else
+    assign whole = rupees | round
+  endif
+  assign digits = whole | abs | append: ''
+  assign out = digits
+  if digits.size > 3
+    assign head_len = digits.size | minus: 3
+    assign out = digits | slice: head_len, 3
+    assign head = digits | slice: 0, head_len
+    for i in (1..8)
+      if head.size <= 2
+        assign out = head | append: ',' | append: out
+        break
+      endif
+      assign cut = head.size | minus: 2
+      assign out = head | slice: cut, 2 | append: ',' | append: out
+      assign head = head | slice: 0, cut
+    endfor
+  endif
+  if whole < 0
+    assign out = out | prepend: '-'
+  endif
+  echo sym | append: out | append: frac
+-%}

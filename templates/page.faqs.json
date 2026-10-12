@@ -1,0 +1,248 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "setwidthout": "full",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "height": 450,
+        "margin_desktop": "",
+        "bg_img": "shopify://shop_images/Mask_group_13_1.jpg",
+        "background_color": "#222222",
+        "color_title": "#ffffff",
+        "color_breadcrumb": "#ffffff"
+      }
+    },
+    "37965532-19cc-42e6-aca6-c53a66c39838": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-0": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How much is shipping?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Standard Shipping: We charge items are $5.99 for the first item + $1.99 for additional items shipped domestic and $6.99 for the first item + $1.99 per each additional product to the rest of the world.</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I expedite my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>We currently do not offer expedited shipping because all of our products are custom made-to-order after each purchase. We are looking into ways to expand our shipping options for you.</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I deliver to multiple addresses?",
+            "icon": "chat_bubble",
+            "row_content": "<p>We do not offer shipping to multiple addresses for a single order. If you would like items delivered to multiple addresses, please place those orders separately.</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you offer delivery to PO Boxes or Military APO/FPO addresses?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Yes, we can send shipments to PO Boxes and Military APO/FPO addresses. Orders shipped to APO addresses are done so via DHL or UPS, and then are turned over to USPS for final delivery (through the military mail system). Shipments to APOs can take up to 45 additional days to arrive. Unfortunately, once the package enters the military mail system, tracking ceases to update for military security reasons. This means that we no longer have visibility of your order and cannot provide tracking information.</p>",
+            "page": ""
+          }
+        },
+        "6411fa10-7eec-461f-bcf8-dbcb278dc79c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will I be charged VAT taxes?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Items shipping internationally from the US are shipped DDU (Delivered Duty Unpaid) and we do not collect VAT (Value Added Taxes). All taxes, duties, and customs fees are the responsibility of the recipient of the package. Depending on the receiving country, your package may incur local customs or VAT charges. We recommend contacting your local customs office for more information regarding your country’s customs policies. Items fulfilled from the UK and EU are charged a 20% VAT rate.</p>",
+            "page": ""
+          }
+        },
+        "d38673f8-faae-417a-a977-c22e15fce2ce": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you alert us once our order ships?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Yes! An email will be sent to you with the tracking information once it ships out to you!</p>",
+            "page": ""
+          }
+        },
+        "438737e4-ecc5-4b13-b45d-fb096dcd5c7d": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Where do I get tracking info?",
+            "icon": "chat_bubble",
+            "row_content": "<p>An email with tracking details will be sent to you the moment your product is shipped out!</p>",
+            "page": ""
+          }
+        },
+        "bc5ceaa2-aed4-4d23-bd9a-01200c0367db": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Have not received my order yet, now what?",
+            "icon": "chat_bubble",
+            "row_content": "<p>First, check tracking info and see if it was delivered. If it says delivered but never received please allow a few more days. Sometimes products are delivered late by DHL or scanned delivered by mistake. Then call or email us regarding the whereabouts of your order!</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-0",
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-1",
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-2",
+        "template--18034441683225__37965532-19cc-42e6-aca6-c53a66c39838-1677230555b2858e61-3",
+        "6411fa10-7eec-461f-bcf8-dbcb278dc79c",
+        "d38673f8-faae-417a-a977-c22e15fce2ce",
+        "438737e4-ecc5-4b13-b45d-fb096dcd5c7d",
+        "bc5ceaa2-aed4-4d23-bd9a-01200c0367db"
+      ],
+      "settings": {
+        "heading_color": "#282828",
+        "caption": "",
+        "heading": "Help Center",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "open_first_collapsible_row": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-0": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What payment methods do you accept?",
+            "icon": "chat_bubble",
+            "row_content": "<p>We accept Paypal, Debit and all major Credit Cards</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is your ordering process?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Ordering process is simply 4 quick steps: 1. Select your favorite items and add them to cart<br/>2. Enter your billing and shipping information<br/>3. Select shipping method<br/>4. Checkout</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What should I do if I made a mistake on my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Immediately contact us by phone or email and our team will gladly resolve all of your concerns! Email: support@leoclothes.com</p>",
+            "page": ""
+          }
+        },
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I apply a coupon code?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Enter your coupon code inside you shopping cart! Coupon code section lies between your listed items and checkout! You can also enter your coupon code during checkout when entering your payment information! (Please note that you must hit apply coupon before adding payment)</p>",
+            "page": ""
+          }
+        },
+        "aef72c41-8ed1-4f34-a4dd-9fc33e466a45": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I change my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Email us regarding all changes to an order!</p>",
+            "page": ""
+          }
+        },
+        "8669c189-621e-49e5-b2ce-1ea2a4566770": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I cancel my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>We can only process cancellations for items that have not gone into production. Please email us at support@leoclothes.com with your order details we will cancel your order and provide a full refund. We cannot cancel orders once the printing process has begun.</p>",
+            "page": ""
+          }
+        },
+        "970afedc-ecf4-4776-8010-fb17d0f26a44": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What’s the status of my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Following a successful order, please expect a confirmation email. You will also receive an update email when your order goes into production. Once your order ships, we will send a third email with your tracking information. The most recent information on your order is always available via the receipt link provided in our email correspondence. If you did not receive the status update emails, please check your spam folder or promotions tab in case it was redirected there. Replacements, Exchanges, and Returns</p>",
+            "page": ""
+          }
+        },
+        "c7af1831-4540-4b6d-8795-72b690301f27": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is your return policy?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Please see our Return Policy. My shirt doesn’t fit. What can I do? You may exchange apparel items, unworn, unused, and unwashed, for a different size within 10 days of the delivery date. We can only accept apparel exchanges for a different size, in the same style and color that was originally ordered. Customers are responsible for return and exchange shipping rates. We do not exchange posters, hats, cell phone cases, or other non apparel products. Only one exchange is allowed for each item ordered. I’m unsatisfied with my product. What can I do? We are committed to providing you with the absolute best products, and are happy to replace your order for any of the following reasons: The product is flawed. The print quality is poor. The product you received is different from the product originally represented on our site. Please email us at support@leoclothes.com with a photo of the product you received along with detail shots you wish to include. We will use this information to look into a replacement and prevent future errors. Our customer service team will review your claim. If your claim is approved, we will provide you with a replacement free of charge. For all other requests please email us at support@leoclothes.com. Our customer service team will review your claim. If your claim is approved, we will provide you with a return address. Customers are responsible for return and exchange shipping rates. Please allow 3-5 business days after your return is received for a refund to appear. Any unauthorized returns, or returns of items that are washed, worn, or damaged will not be eligible for a refund or replacement, and the item will be forfeited.</p>",
+            "page": ""
+          }
+        },
+        "f0ddb7a8-876c-4ebd-a26c-1e0d6f09bfe9": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if my order is defective, wrong size, or incorrect product?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Send us an email with attaching photo(s) and we will send out a replacement within 72 business hours!</p>",
+            "page": ""
+          }
+        },
+        "530d7154-5ffb-4074-a5e9-14fcae196701": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What should I do in case of late or missing refunds?",
+            "icon": "chat_bubble",
+            "row_content": "<p><br/>            If you haven’t received a refund yet, first check your bank account again. Then contact your credit card company, it may take some time before your refund is officially posted. Next contact your bank. There is often some processing time before a refund is posted. If you’ve done all of this and you still have not received your refund yet, please contact us at support@leoclothes.com. Who will be responsible for shipping fee if I exchange or return an order. You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund. Depending on where you live, the time it may take for your exchanged product to reach you, may vary. If you are shipping an item over $75, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.<br/>          </p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-0",
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-1",
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-2",
+        "template--18034441683225__c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab-1677230555b2858e61-3",
+        "aef72c41-8ed1-4f34-a4dd-9fc33e466a45",
+        "8669c189-621e-49e5-b2ce-1ea2a4566770",
+        "970afedc-ecf4-4776-8010-fb17d0f26a44",
+        "c7af1831-4540-4b6d-8795-72b690301f27",
+        "f0ddb7a8-876c-4ebd-a26c-1e0d6f09bfe9",
+        "530d7154-5ffb-4074-a5e9-14fcae196701"
+      ],
+      "settings": {
+        "heading_color": "#282828",
+        "caption": "",
+        "heading": "Ordering",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "open_first_collapsible_row": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "37965532-19cc-42e6-aca6-c53a66c39838",
+    "c9ac342e-90ec-46bc-8fa1-c42bdb86c1ab"
+  ]
+}

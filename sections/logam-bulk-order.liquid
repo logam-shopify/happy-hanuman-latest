@@ -1,0 +1,1660 @@
+{%- comment -%}
+  Bulk order / free demo order form (design: "Buy more, save more" + "Make it yours" + bk-cart drawer).
+  Page type "Bulk order": price tiers, quantity, live back-cover preview, 50% advance.
+  Page type "Free demo": one book with the buyer's brand for the delivery charge.
+  On submit: details (and the logo file) go to the Google Sheet webhook, then into the real cart
+  (line item properties) and the drawer opens with Razorpay Magic Checkout's standard checkout button.
+  Without a product the form only sends the details to the sheet ("lead" mode).
+  Behaviour: assets/logam-bulk-order.js. Visitor source (UTM): assets/logam-utm.js.
+{%- endcomment -%}
+{%- render 'logam-hindi-assets' -%}
+{{ 'logam-cart.css' | asset_url | stylesheet_tag }}
+{{ 'logam-bulk-order.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'logam-utm.js' | asset_url }}" defer></script>
+<script src="{{ 'logam-bulk-order.js' | asset_url }}" defer></script>
+{%- liquid
+  assign s = section.settings
+  assign sx_b = section.blocks | where: 'type', 'steps' | first
+  assign sx = sx_b.settings
+  assign fx_b = section.blocks | where: 'type', 'fields' | first
+  assign fx = fx_b.settings
+  assign mx_b = section.blocks | where: 'type', 'messages' | first
+  assign mx = mx_b.settings
+  assign dx_b = section.blocks | where: 'type', 'drawer' | first
+  assign dx = dx_b.settings
+  assign is_bulk = true
+  if s.mode == 'demo'
+    assign is_bulk = false
+  endif
+  assign tiers = section.blocks | where: 'type', 'tier'
+  assign langs = section.blocks | where: 'type', 'language'
+  assign first_lang = langs.first
+  assign min_qty = tiers.first.settings.min_qty | default: 120
+  assign unit = tiers.first.settings.price | default: 40
+  assign total = min_qty | times: unit
+  assign pct = s.advance_percent | default: 50
+  assign now_amt = total | times: pct | divided_by: 100.0 | round
+  assign rest_amt = total | minus: now_amt
+  if is_bulk
+    assign product = s.product
+  else
+    assign product = s.demo_product
+  endif
+  assign step_n = 0
+-%}
+{%- capture v_qty -%}{% render 'logam-bulk-inr', rupees: min_qty, symbol: '' %}{%- endcapture -%}
+{%- capture v_total -%}{% render 'logam-bulk-inr', rupees: total %}{%- endcapture -%}
+{%- capture v_now -%}{% render 'logam-bulk-inr', rupees: now_amt %}{%- endcapture -%}
+{%- capture v_rest -%}{% render 'logam-bulk-inr', rupees: rest_amt %}{%- endcapture -%}
+{%- capture demo_price -%}
+  {%- if s.demo_product != blank -%}{% render 'logam-bulk-inr', paise: s.demo_product.price %}{%- else -%}{{ s.demo_price_text }}{%- endif -%}
+{%- endcapture -%}
+{%- capture b_qty -%}<span data-lb-bind="qty">{{ v_qty }}</span>{%- endcapture -%}
+{%- capture b_unit -%}<span data-lb-bind="unit">{{ unit }}</span>{%- endcapture -%}
+{%- capture b_total -%}<span data-lb-bind="total">{{ v_total }}</span>{%- endcapture -%}
+{%- capture b_now -%}<span data-lb-bind="now">{{ v_now }}</span>{%- endcapture -%}
+{%- capture b_rest -%}<span data-lb-bind="rest">{{ v_rest }}</span>{%- endcapture -%}
+{%- style -%}
+  #lh-{{ section.id }} { --lh-bg: {{ s.bg }}; --lh-pt-m: {{ s.pt_m }}px; --lh-pb-m: {{ s.pb_m }}px; --lh-pt: {{ s.pt }}px; --lh-pb: {{ s.pb }}px; }
+{%- endstyle -%}
+<section id="lh-{{ section.id }}" class="lh lb-order lb-order--{{ s.mode }}" data-lb-order data-section="{{ section.id }}">
+  <span id="{{ s.anchor | default: 'order' | handleize }}" class="lb-order__anchor"></span>
+  <div class="lh__in">
+
+    {%- if is_bulk and s.show_tiers and tiers.size > 0 -%}
+      <div class="lb-tiers">
+        <div class="lb-tiers__head">
+          {%- if s.tiers_title != blank -%}<h2 class="lh-title lb-tiers__title">{{ s.tiers_title }}</h2>{%- endif -%}
+          {%- if s.tiers_side != blank -%}<span class="lb-tiers__side">{{ s.tiers_side }}</span>{%- endif -%}
+        </div>
+        <div class="lb-tiers__list">
+          {%- for t in tiers -%}
+            {%- liquid
+              assign next_i = forloop.index
+              assign next = tiers[next_i]
+              assign save = tiers.first.settings.price | minus: t.settings.price
+            -%}
+            {%- capture label -%}
+              {%- if t.settings.label != blank -%}{{ t.settings.label }}
+              {%- else -%}{% render 'logam-bulk-inr', rupees: t.settings.min_qty, symbol: '' %} {{ s.books_word }}{%- endif -%}
+            {%- endcapture -%}
+            <button type="button" class="lb-tier{% if forloop.first %} is-active{% endif %}" data-lb-tier="{{ t.settings.min_qty }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ t.shopify_attributes }}>
+              <span class="lb-tier__range">{{ label }}</span>
+              <span class="lb-tier__price">₹{{ t.settings.price }}</span>
+              <span class="lb-tier__badge{% if forloop.first %} is-first{% endif %}">{% if forloop.first %}{{ s.tier_first_badge }}{% else %}{{ s.tier_save_badge | replace: '[amount]', save }}{% endif %}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+        {%- if s.tiers_note != blank -%}<p class="lb-tiers__note">{{ s.tiers_note }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- render 'logam-hindi-heading', eyebrow: s.eyebrow, title: s.title, sub: s.sub -%}
+
+    <form class="lb-order__grid" data-lb-form novalidate>
+      <input type="text" name="lb_website" class="lb-hp" tabindex="-1" autocomplete="off" aria-hidden="true" data-lb-hp>
+      <div class="lb-order__main">
+
+        {%- assign step_n = step_n | plus: 1 -%}
+        <div class="lb-card">
+          <div class="lb-card__head"><span class="lb-card__num" aria-hidden="true">{{ step_n }}</span><div><h3>{{ sx.lang_title }}</h3>{%- if sx.lang_sub != blank -%}<p>{{ sx.lang_sub }}</p>{%- endif -%}</div></div>
+          <div class="lb-langs" role="group" aria-label="{{ sx.lang_title | escape }}">
+            {%- for l in langs -%}
+              <button type="button" class="lb-lang{% if forloop.first %} is-active{% endif %}" data-lb-lang="{{ l.settings.code }}" lang="{{ l.settings.code }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ l.shopify_attributes }}>{{ l.settings.label }}</button>
+            {%- endfor -%}
+          </div>
+          {%- if sx.lang_note != blank -%}<p class="lb-help">{{ sx.lang_note }}</p>{%- endif -%}
+        </div>
+
+        {%- if is_bulk -%}
+          {%- assign step_n = step_n | plus: 1 -%}
+          <div class="lb-card">
+            <div class="lb-card__head"><span class="lb-card__num" aria-hidden="true">{{ step_n }}</span><div><h3>{{ sx.qty_title }}</h3>{%- if sx.qty_sub != blank -%}<p>{{ sx.qty_sub }}</p>{%- endif -%}</div></div>
+            <div class="lb-qty">
+              <div class="lb-qty__count">{{ b_qty }} {{ s.books_word }}</div>
+              <div class="lb-qty__sum"><div class="lb-qty__total">{{ b_total }}</div><div class="lb-qty__unit">{{ sx.qty_unit | replace: '[unit]', b_unit }}</div></div>
+            </div>
+            <div class="lb-presets" role="group" aria-label="{{ sx.qty_title | escape }}">
+              {%- for t in tiers -%}
+                <button type="button" class="lb-preset{% if forloop.first %} is-active{% endif %}" data-lb-set="{{ t.settings.min_qty }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{% render 'logam-bulk-inr', rupees: t.settings.min_qty, symbol: '' %}</button>
+              {%- endfor -%}
+            </div>
+            {%- if tiers.size > 1 -%}
+              {%- liquid
+                assign t2 = tiers[1]
+                assign more = t2.settings.min_qty | minus: min_qty
+              -%}
+              {%- capture more_txt -%}{% render 'logam-bulk-inr', rupees: more, symbol: '' %}{%- endcapture -%}
+              {%- capture jump_txt -%}{% render 'logam-bulk-inr', rupees: t2.settings.min_qty, symbol: '' %}{%- endcapture -%}
+              <div class="lb-nudge" data-lb-nudge>
+                <span class="lb-nudge__chip" data-lb-nudge-chip>₹{{ t2.settings.price }}</span>
+                <span class="lb-nudge__text"><span data-lb-nudge-text>{{ sx.nudge_text | replace: '[n]', more_txt | replace: '[price]', t2.settings.price }}</span> <button type="button" class="lb-nudge__jump" data-lb-jump>{{ sx.nudge_jump | replace: '[qty]', jump_txt }}</button></span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- assign step_n = step_n | plus: 1 -%}
+        <div class="lb-card">
+          <div class="lb-card__head"><span class="lb-card__num" aria-hidden="true">{{ step_n }}</span><div><h3>{{ sx.cover_title }}</h3>{%- if sx.cover_sub != blank -%}<p>{{ sx.cover_sub }}</p>{%- endif -%}</div></div>
+          <div class="lb-order__slot" data-lb-slot="mobile">
+            <div class="lb-order__cover" data-lb-cover-main>
+              {%- render 'logam-bulk-cover', s: sx, chalisa: first_lang.settings.chalisa, lang: first_lang.settings.code -%}
+              {%- if sx.cover_note != blank -%}<p class="lb-help lb-help--center">{{ sx.cover_note }}</p>{%- endif -%}
+            </div>
+          </div>
+
+          <label class="lb-field">
+            <span class="lb-field__label">{{ fx.brand_label }}<span class="lb-req" aria-hidden="true"> *</span></span>
+            <input type="text" maxlength="40" autocomplete="organization" placeholder="{{ fx.brand_placeholder | escape }}" data-lb-f="brand" aria-describedby="lb-err-brand-{{ section.id }}" required>
+          </label>
+          <p class="lb-err" id="lb-err-brand-{{ section.id }}" data-lb-err="brand" hidden>{{ fx.brand_error }}</p>
+
+          <label class="lb-field">
+            <span class="lb-field__label">{{ fx.slogan_label }}<span class="lb-opt"> {{ fx.optional_word }}</span></span>
+            <input type="text" maxlength="60" placeholder="{{ fx.slogan_placeholder | escape }}" data-lb-f="slogan">
+          </label>
+          {%- if fx.slogan_help != blank -%}<p class="lb-help">{{ fx.slogan_help }}</p>{%- endif -%}
+
+          <label class="lb-field">
+            <span class="lb-field__label">{{ fx.phone_label }}<span class="lb-req" aria-hidden="true"> *</span></span>
+            <input type="tel" inputmode="tel" maxlength="16" autocomplete="tel" placeholder="{{ fx.phone_placeholder | escape }}" data-lb-f="phone" aria-describedby="lb-err-phone-{{ section.id }}" required>
+          </label>
+          <p class="lb-err" id="lb-err-phone-{{ section.id }}" data-lb-err="phone" hidden>{{ fx.phone_error }}</p>
+
+          <label class="lb-field">
+            <span class="lb-field__label">{{ fx.address_label }}<span class="lb-opt"> {{ fx.optional_word }}</span></span>
+            <input type="text" maxlength="60" autocomplete="street-address" placeholder="{{ fx.address_placeholder | escape }}" data-lb-f="address">
+          </label>
+
+          <div class="lb-field">
+            <span class="lb-field__label" id="lb-logo-{{ section.id }}">{{ fx.logo_label }}<span class="lb-req" aria-hidden="true"> *</span></span>
+            <label class="lb-drop" data-lb-drop>
+              <span class="lb-drop__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4.5"/><path d="M7.5 9L12 4.5 16.5 9"/><path d="M4.5 15v3.5a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V15"/></svg></span>
+              <span class="lb-drop__txt"><span class="lb-drop__name" data-lb-filename>{{ fx.upload_title }}</span><span class="lb-drop__meta" data-lb-filemeta>{{ fx.upload_meta | replace: '[mb]', fx.max_mb }}</span></span>
+              <span class="lb-drop__btn" data-lb-choose>{{ fx.upload_button }}</span>
+              <input type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" aria-labelledby="lb-logo-{{ section.id }}" aria-describedby="lb-err-logo-{{ section.id }}" data-lb-file>
+            </label>
+            <label class="lb-check"><input type="checkbox" data-lb-later><span>{{ fx.later_label }}</span></label>
+            {%- if fx.logo_help != blank -%}<p class="lb-help">{{ fx.logo_help }}</p>{%- endif -%}
+            <p class="lb-err" id="lb-err-logo-{{ section.id }}" data-lb-err="logo" hidden>{{ fx.logo_error }}</p>
+          </div>
+
+          {%- if fx.show_gstin -%}
+            <label class="lb-field">
+              <span class="lb-field__label">{{ fx.gstin_label }}<span class="lb-opt"> {{ fx.optional_word }}</span></span>
+              <input type="text" maxlength="15" autocapitalize="characters" placeholder="{{ fx.gstin_placeholder | escape }}" data-lb-f="gstin" class="lb-upper">
+            </label>
+          {%- endif -%}
+
+          <label class="lb-field">
+            <span class="lb-field__label">{{ fx.notes_label }}<span class="lb-opt"> {{ fx.optional_word }}</span></span>
+            <textarea rows="3" maxlength="300" placeholder="{{ fx.notes_placeholder | escape }}" data-lb-f="notes"></textarea>
+          </label>
+        </div>
+      </div>
+
+      <div class="lb-order__side">
+        <div class="lb-order__slot" data-lb-slot="desktop">
+          {%- if sx.side_label != blank -%}<p class="lb-order__side-label">{{ sx.side_label }}</p>{%- endif -%}
+        </div>
+
+        {%- if is_bulk -%}
+          <div class="lb-sum">
+            <div class="lb-sum__rows">
+              <div class="lb-sum__row"><span>{{ mx.sum_books | replace: '[qty]', b_qty | replace: '[unit]', b_unit }}</span><b>{{ b_total }}</b></div>
+              <div class="lb-sum__row"><span>{{ mx.sum_delivery_label }}</span><b class="is-green">{{ mx.sum_delivery_value }}</b></div>
+              <div class="lb-sum__row"><span>{{ mx.sum_gst_label }}</span><b>{{ mx.sum_gst_value }}</b></div>
+            </div>
+            {%- if pct < 100 -%}
+              <div class="lb-sum__pay">
+                <span class="lb-sum__pct">{{ pct }}%</span>
+                <div><div class="lb-sum__title">{{ mx.advance_title | replace: '[now]', b_now }}</div><div class="lb-sum__text">{{ mx.advance_text | replace: '[rest]', b_rest }}</div></div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="lb-sum">
+            <div class="lb-sum__rows">
+              <div class="lb-sum__row"><span>{{ mx.demo_line }}</span><span class="lb-nowrap"><s>{{ mx.demo_was }}</s> <b class="is-green">{{ mx.demo_free }}</b></span></div>
+              <div class="lb-sum__row"><span>{{ mx.sum_delivery_label }}</span><b>{{ demo_price }}</b></div>
+            </div>
+            <div class="lb-sum__pay lb-sum__pay--green">
+              <div><div class="lb-sum__title">{{ mx.demo_pay_title | replace: '[demo_price]', demo_price }}</div><div class="lb-sum__text">{{ mx.demo_pay_text }}</div></div>
+              {%- if mx.demo_badge != blank -%}<span class="lb-sum__badge">{{ mx.demo_badge }}</span>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="lb-done" data-lb-done role="status" hidden>
+          <p class="lb-done__title">{{ mx.done_title }}</p>
+          <p class="lb-done__text">{{ mx.done_text }}</p>
+          {%- if s.whatsapp != blank -%}<a class="lh-btn lh-btn--outline lh-btn--full" data-lb-wa href="https://wa.me/{{ s.whatsapp | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">{{ mx.done_whatsapp }}</a>{%- endif -%}
+        </div>
+
+        {%- liquid
+          if product != blank
+            assign main_label = s.cta_label
+          else
+            assign main_label = s.lead_cta_label
+          endif
+        -%}
+        <button type="button" class="lh-btn lh-btn--primary lh-btn--full lb-order__cta" data-lb-submit="{{ s.mode }}" data-lb-main>{{ main_label | replace: '[total]', b_total | replace: '[now]', b_now | replace: '[demo_price]', demo_price }}</button>
+        {%- if is_bulk and s.demo_button_label != blank -%}
+          <button type="button" class="lh-btn lh-btn--outline lh-btn--full lb-order__alt" data-lb-submit="demo">{{ s.demo_button_label | replace: '[demo_price]', demo_price }}</button>
+        {%- endif -%}
+        {%- if s.cta_note != blank -%}<p class="lb-help lb-help--center">{{ s.cta_note }}</p>{%- endif -%}
+
+        {%- if request.design_mode -%}
+          {%- liquid
+            assign warn = ''
+            if s.webhook_url == blank and product == blank
+              assign warn = warn | append: '<li>' | append: s.mode | append: ' page: add the Google Sheet webhook URL or choose a product, otherwise the button cannot send anything.</li>'
+            elsif s.webhook_url == blank
+              assign warn = warn | append: '<li>No Google Sheet webhook URL yet: orders still reach the cart, but the details are not saved to the sheet.</li>'
+            endif
+          -%}
+          {%- if warn != blank -%}<ul class="lb-editor-warn">{{ warn }}</ul>{%- endif -%}
+        {%- endif -%}
+      </div>
+
+      <div class="lb-order__trust">
+        <div class="lb-trust">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'trust' -%}
+                <div class="lb-trust__item" {{ block.shopify_attributes }}>
+                  {%- render 'logam-bulk-icon', name: block.settings.icon -%}
+                  <div><div class="lb-trust__title">{{ block.settings.title }}</div>{%- if block.settings.text != blank -%}<div class="lb-trust__text">{{ block.settings.text }}</div>{%- endif -%}</div>
+                </div>
+              {%- when 'payments' -%}
+                <div class="lb-trust__item lb-trust__item--pay" {{ block.shopify_attributes }}>
+                  <div class="lb-trust__row">{%- render 'logam-bulk-icon', name: 'lock' -%}<div class="lb-trust__title">{{ block.settings.title }}</div></div>
+                  <ul class="lb-pay" aria-label="{{ block.settings.list_label | escape }}">
+                    <li><img src="{{ 'lb-pay-upi.svg' | asset_url }}" alt="UPI" width="48" height="17" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-gpay.svg' | asset_url }}" alt="Google Pay" width="46" height="19" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-phonepe.svg' | asset_url }}" alt="PhonePe" width="58" height="17" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-paytm.svg' | asset_url }}" alt="Paytm" width="50" height="16" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-visa.svg' | asset_url }}" alt="Visa" width="46" height="15" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-mastercard.svg' | asset_url }}" alt="Mastercard" width="36" height="22" loading="lazy"></li>
+                    <li><img src="{{ 'lb-pay-rupay.svg' | asset_url }}" alt="RuPay" width="50" height="15" loading="lazy"></li>
+                    <li class="lb-pay__nb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.3L12 4.5l8.5 4.8z"/><path d="M6 11v6M10 11v6M14 11v6M18 11v6"/><path d="M3.5 19.5h17"/></svg><span>{{ block.settings.netbanking }}</span></li>
+                  </ul>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </form>
+  </div>
+
+  {%- if s.show_sticky -%}
+    <div class="lb-sticky" data-lb-sticky>
+      {%- if s.sticky_image != blank -%}
+        {{ s.sticky_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 46, height: 46 }}
+      {%- else -%}
+        <img src="{{ 'lb-bk-s2.jpg' | asset_url }}" alt="" width="46" height="46" loading="lazy">
+      {%- endif -%}
+      <div class="lb-sticky__txt">
+        <div class="lb-sticky__title{% if s.sticky_green %} is-green{% endif %}">{{ s.sticky_title | replace: '[total]', b_total | replace: '[demo_price]', demo_price }}{% if s.sticky_was != blank %} <s>{{ s.sticky_was }}</s>{% endif %}</div>
+        <div class="lb-sticky__line">{{ s.sticky_line | replace: '[qty]', b_qty | replace: '[unit]', b_unit | replace: '[demo_price]', demo_price }}</div>
+      </div>
+      <button type="button" class="lb-sticky__btn" data-lb-submit="{{ s.mode }}">{{ s.sticky_button }}</button>
+    </div>
+  {%- endif -%}
+
+  <div class="lb-toast" data-lb-toast role="status" aria-live="polite"></div>
+
+  {%- if s.product != blank or s.demo_product != blank -%}
+    <div class="hh-overlay lb-cart" data-lb-drawer hidden>
+      <button type="button" class="hh-scrim" data-lb-close aria-label="{{ dx.dr_close | escape }}"></button>
+      <aside class="hh-drawer lb-cart__drawer" role="dialog" aria-modal="true" aria-label="{{ dx.dr_title | escape }}">
+        {%- render 'logam-bulk-drawer' -%}
+      </aside>
+    </div>
+  {%- endif -%}
+
+  <script type="application/json" data-lb-config>
+    {
+      "mode": {{ s.mode | json }},
+      "tiers": [{% for t in tiers %}{"min": {{ t.settings.min_qty | default: 1 }}, "price": {{ t.settings.price | default: 0 }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+      "advance": {{ pct }},
+      "langs": [{% for l in langs %}{"code": {{ l.settings.code | json }}, "value": {{ l.settings.value | json }}, "label": {{ l.settings.label | json }}, "chalisa": {{ l.settings.chalisa | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+      "bulkProduct": {{ s.product.id | default: 0 }},
+      "bulkVariants": [{% if s.product != blank %}{% for v in s.product.variants %}{"id": {{ v.id }}, "title": {{ v.title | json }}, "price": {{ v.price }}}{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}],
+      "demoProduct": {{ s.demo_product.id | default: 0 }},
+      "demoVariant": {% if s.demo_product != blank %}{{ s.demo_product.selected_or_first_available_variant.id }}{% else %}0{% endif %},
+      "demoPrice": {{ demo_price | strip | json }},
+      "webhook": {{ s.webhook_url | strip | json }},
+      "whatsapp": {{ s.whatsapp | remove: '+' | remove: ' ' | json }},
+      "maxMb": {{ fx.max_mb | default: 25 }},
+      "pv": {"brand": {{ sx.pv_brand | json }}, "slogan": {{ sx.pv_slogan | json }}, "phone": {{ sx.pv_phone | json }}, "address": {{ sx.pv_address | json }}},
+      "t": {
+        "nudge": {{ sx.nudge_text | json }},
+        "jump": {{ sx.nudge_jump | json }},
+        "max": {{ sx.nudge_max | json }},
+        "fileType": {{ fx.file_type_toast | json }},
+        "fileSize": {{ fx.file_size_toast | json }},
+        "fileAdded": {{ fx.file_added | json }},
+        "change": {{ fx.upload_change | json }},
+        "missingOne": {{ mx.missing_one | json }},
+        "missingMany": {{ mx.missing_many | json }},
+        "sending": {{ mx.sending_label | json }},
+        "uploading": {{ mx.uploading_label | json }},
+        "sendError": {{ mx.send_error | json }},
+        "notSetUp": {{ mx.not_set_up | json }},
+        "demoDupe": {{ mx.demo_dupe | json }},
+        "updated": {{ mx.cart_updated | json }},
+        "waText": {{ s.wa_text | json }},
+        "logoLater": {{ dx.dr_logo_whatsapp | json }},
+        "pdfLogo": {{ sx.pdf_logo | json }}
+      }
+    }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Logam-Bulk Order form",
+  "tag": "div",
+  "class": "lb-order-wrap",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Page type",
+      "options": [
+        {
+          "value": "bulk",
+          "label": "Bulk order (120+ books)"
+        },
+        {
+          "value": "demo",
+          "label": "Free demo (1 book)"
+        }
+      ],
+      "default": "bulk"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor for links",
+      "default": "order",
+      "info": "Buttons linking to #order scroll here."
+    },
+    {
+      "type": "header",
+      "content": "Checkout and Google Sheet"
+    },
+    {
+      "type": "paragraph",
+      "content": "Pick the products the buttons add to the cart. Bulk: one variant per price tier, in the same order as the tiers below, priced at the advance (e.g. ₹20 for a ₹40 tier at 50%). Demo: one variant at the demo price. Without a product the form only sends the details to the Google Sheet."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Bulk order product"
+    },
+    {
+      "type": "product",
+      "id": "demo_product",
+      "label": "Free demo product"
+    },
+    {
+      "type": "text",
+      "id": "webhook_url",
+      "label": "Google Sheet webhook URL",
+      "info": "The Apps Script web app URL (ends in /exec). Every submission, the logo file and the visitor's UTM source are saved there."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number (with country code)",
+      "default": "917069002999"
+    },
+    {
+      "type": "text",
+      "id": "wa_text",
+      "label": "WhatsApp message after sending",
+      "default": "Hi! I just sent my back cover details on your website. Request ID: [id]"
+    },
+    {
+      "type": "text",
+      "id": "demo_price_text",
+      "label": "Demo price text (used when no demo product is chosen)",
+      "default": "₹69"
+    },
+    {
+      "type": "header",
+      "content": "Price tiers (bulk)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add one Price tier block per row. The lowest tier's quantity is the minimum order."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tiers",
+      "label": "Show the price table",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tiers_title",
+      "label": "Heading",
+      "default": "Buy more, save more"
+    },
+    {
+      "type": "text",
+      "id": "tiers_side",
+      "label": "Side text",
+      "default": "Price per book"
+    },
+    {
+      "type": "text",
+      "id": "tier_first_badge",
+      "label": "First tier badge",
+      "default": "Starting price"
+    },
+    {
+      "type": "text",
+      "id": "tier_save_badge",
+      "label": "Other tiers badge",
+      "default": "Save ₹[amount] a book",
+      "info": "[amount] = saving per book."
+    },
+    {
+      "type": "text",
+      "id": "books_word",
+      "label": "Word for books",
+      "default": "books"
+    },
+    {
+      "type": "text",
+      "id": "tiers_note",
+      "label": "Note",
+      "default": "The lower price applies to every book in your order. Tap a row to choose it."
+    },
+    {
+      "type": "range",
+      "id": "advance_percent",
+      "label": "Paid now (advance)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Form heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Order in 3 steps"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Make it yours"
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Buttons and messages"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Main button",
+      "default": "Add to cart · [total]",
+      "info": "Tokens: [total], [now], [demo_price]."
+    },
+    {
+      "type": "text",
+      "id": "lead_cta_label",
+      "label": "Main button when no product is chosen",
+      "default": "Send my order details · [total]"
+    },
+    {
+      "type": "text",
+      "id": "demo_button_label",
+      "label": "Bulk page: free demo button",
+      "default": "Get 1 free demo first · [demo_price] delivery",
+      "info": "Adds a free demo with the same back cover. Empty hides it."
+    },
+    {
+      "type": "text",
+      "id": "cta_note",
+      "label": "Note under the buttons",
+      "default": "One demo per buyer. The ₹69 is adjusted in your bulk order."
+    },
+    {
+      "type": "header",
+      "content": "Sticky bar (mobile)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky",
+      "label": "Show once the main button scrolls away",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "sticky_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "sticky_title",
+      "label": "Price",
+      "default": "[total]"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_green",
+      "label": "Green price",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sticky_was",
+      "label": "Struck-through price"
+    },
+    {
+      "type": "text",
+      "id": "sticky_line",
+      "label": "Line",
+      "default": "[qty] books · ₹[unit] each"
+    },
+    {
+      "type": "text",
+      "id": "sticky_button",
+      "label": "Button",
+      "default": "Add to cart"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFF8EE"
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "pt",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "steps",
+      "name": "Form steps and preview",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "lang_title",
+          "label": "Title",
+          "default": "Book language"
+        },
+        {
+          "type": "text",
+          "id": "lang_sub",
+          "label": "Subtitle",
+          "default": "One language per order"
+        },
+        {
+          "type": "text",
+          "id": "lang_note",
+          "label": "Note",
+          "default": "Need two languages? Place a second order for the other one."
+        },
+        {
+          "type": "text",
+          "id": "qty_title",
+          "label": "Title",
+          "default": "How many books?"
+        },
+        {
+          "type": "text",
+          "id": "qty_sub",
+          "label": "Subtitle",
+          "default": "Choose 120, 500, 1,000, 5,000 or 10,000 books."
+        },
+        {
+          "type": "text",
+          "id": "qty_unit",
+          "label": "Price per book line",
+          "default": "₹[unit] per book"
+        },
+        {
+          "type": "text",
+          "id": "nudge_text",
+          "label": "Next tier nudge",
+          "default": "<b>Add [n] more books</b> and every book costs ₹[price].",
+          "info": "[n] = books to add, [price] = next tier price. <b> allowed."
+        },
+        {
+          "type": "text",
+          "id": "nudge_jump",
+          "label": "Nudge link",
+          "default": "Make it [qty]"
+        },
+        {
+          "type": "text",
+          "id": "nudge_max",
+          "label": "Best price reached",
+          "default": "<b>Best price unlocked:</b> ₹[price] for every book in your order."
+        },
+        {
+          "type": "text",
+          "id": "cover_title",
+          "label": "Title",
+          "default": "Your back cover"
+        },
+        {
+          "type": "text",
+          "id": "cover_sub",
+          "label": "Subtitle",
+          "default": "What you type shows up on the cover below"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "label": "Back cover template",
+          "info": "Default: the design's template (1200 × 896)."
+        },
+        {
+          "type": "text",
+          "id": "cover_meaning",
+          "label": "Meaning line on the cover",
+          "default": "Hanuman ji’s glory has carried through all four yugs."
+        },
+        {
+          "type": "text",
+          "id": "cover_note",
+          "label": "Note under the preview",
+          "default": "Preview only. We WhatsApp you the final design before printing."
+        },
+        {
+          "type": "text",
+          "id": "side_label",
+          "label": "Desktop: label above the preview",
+          "default": "Live preview of your back cover"
+        },
+        {
+          "type": "text",
+          "id": "pv_brand",
+          "label": "Preview: brand placeholder",
+          "default": "Your brand here"
+        },
+        {
+          "type": "text",
+          "id": "pv_slogan",
+          "label": "Preview: slogan placeholder",
+          "default": "Your slogan here"
+        },
+        {
+          "type": "text",
+          "id": "pv_phone",
+          "label": "Preview: phone placeholder",
+          "default": "Your number here"
+        },
+        {
+          "type": "text",
+          "id": "pv_address",
+          "label": "Preview: address placeholder",
+          "default": "Your address here"
+        },
+        {
+          "type": "text",
+          "id": "pdf_logo",
+          "label": "Preview: PDF logo text",
+          "default": "[brand] · PDF logo ✓"
+        }
+      ]
+    },
+    {
+      "type": "fields",
+      "name": "Form fields",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "optional_word",
+          "label": "Optional marker",
+          "default": "(optional)"
+        },
+        {
+          "type": "text",
+          "id": "brand_label",
+          "label": "Brand: label",
+          "default": "Brand or firm name"
+        },
+        {
+          "type": "text",
+          "id": "brand_placeholder",
+          "label": "Brand: placeholder",
+          "default": "e.g. Patel Sweets"
+        },
+        {
+          "type": "text",
+          "id": "brand_error",
+          "label": "Brand: error",
+          "default": "Please enter your brand or firm name."
+        },
+        {
+          "type": "text",
+          "id": "slogan_label",
+          "label": "Slogan: label",
+          "default": "Slogan or quote line"
+        },
+        {
+          "type": "text",
+          "id": "slogan_placeholder",
+          "label": "Slogan: placeholder",
+          "default": "e.g. Sweetness since 1985"
+        },
+        {
+          "type": "text",
+          "id": "slogan_help",
+          "label": "Slogan: help",
+          "default": "Leave it empty and we print the back without a slogan."
+        },
+        {
+          "type": "text",
+          "id": "phone_label",
+          "label": "Phone: label",
+          "default": "Phone number"
+        },
+        {
+          "type": "text",
+          "id": "phone_placeholder",
+          "label": "Phone: placeholder",
+          "default": "10-digit mobile number"
+        },
+        {
+          "type": "text",
+          "id": "phone_error",
+          "label": "Phone: error",
+          "default": "Please enter a 10-digit mobile number."
+        },
+        {
+          "type": "text",
+          "id": "address_label",
+          "label": "Address: label",
+          "default": "Address or website"
+        },
+        {
+          "type": "text",
+          "id": "address_placeholder",
+          "label": "Address: placeholder",
+          "default": "e.g. Station Road, Anand"
+        },
+        {
+          "type": "text",
+          "id": "logo_label",
+          "label": "Logo: label",
+          "default": "Logo or photo"
+        },
+        {
+          "type": "text",
+          "id": "upload_title",
+          "label": "Logo: upload title",
+          "default": "Upload your logo"
+        },
+        {
+          "type": "text",
+          "id": "upload_meta",
+          "label": "Logo: file types",
+          "default": "JPG, PNG or PDF · up to [mb] MB"
+        },
+        {
+          "type": "text",
+          "id": "upload_button",
+          "label": "Logo: button",
+          "default": "Choose"
+        },
+        {
+          "type": "text",
+          "id": "upload_change",
+          "label": "Logo: button after a file is chosen",
+          "default": "Change"
+        },
+        {
+          "type": "text",
+          "id": "file_added",
+          "label": "Logo: file added",
+          "default": "[size] · added ✓"
+        },
+        {
+          "type": "range",
+          "id": "max_mb",
+          "label": "Logo: largest file",
+          "min": 1,
+          "max": 25,
+          "step": 1,
+          "unit": "MB",
+          "default": 25
+        },
+        {
+          "type": "text",
+          "id": "later_label",
+          "label": "Logo: WhatsApp option",
+          "default": "I’ll send my logo on WhatsApp after ordering"
+        },
+        {
+          "type": "text",
+          "id": "logo_help",
+          "label": "Logo: help",
+          "default": "A photo works too: a family photo for a wedding, or a loved one’s photo in their memory."
+        },
+        {
+          "type": "text",
+          "id": "logo_error",
+          "label": "Logo: error",
+          "default": "Please upload your logo or photo, or tick “I’ll send my logo on WhatsApp”."
+        },
+        {
+          "type": "text",
+          "id": "file_type_toast",
+          "label": "Logo: wrong file message",
+          "default": "Please choose a JPG, PNG or PDF file"
+        },
+        {
+          "type": "text",
+          "id": "file_size_toast",
+          "label": "Logo: too big message",
+          "default": "This file is over [mb] MB. Tick “send on WhatsApp” and send it to us there"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gstin",
+          "label": "Show GSTIN field",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "gstin_label",
+          "label": "GSTIN: label",
+          "default": "GSTIN, for a GST invoice"
+        },
+        {
+          "type": "text",
+          "id": "gstin_placeholder",
+          "label": "GSTIN: placeholder",
+          "default": "15-character GSTIN"
+        },
+        {
+          "type": "text",
+          "id": "notes_label",
+          "label": "Notes: label",
+          "default": "Anything else?"
+        },
+        {
+          "type": "text",
+          "id": "notes_placeholder",
+          "label": "Notes: placeholder",
+          "default": "Colours, a second line, the date you need the books by…"
+        }
+      ]
+    },
+    {
+      "type": "messages",
+      "name": "Summary and messages",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "sum_books",
+          "label": "Bulk: books row",
+          "default": "[qty] books × ₹[unit]"
+        },
+        {
+          "type": "text",
+          "id": "sum_delivery_label",
+          "label": "Delivery label",
+          "default": "Delivery"
+        },
+        {
+          "type": "text",
+          "id": "sum_delivery_value",
+          "label": "Bulk: delivery value",
+          "default": "Free"
+        },
+        {
+          "type": "text",
+          "id": "sum_gst_label",
+          "label": "Bulk: GST label",
+          "default": "GST"
+        },
+        {
+          "type": "text",
+          "id": "sum_gst_value",
+          "label": "Bulk: GST value",
+          "default": "Included"
+        },
+        {
+          "type": "text",
+          "id": "advance_title",
+          "label": "Bulk: pay now",
+          "default": "Pay [now] now"
+        },
+        {
+          "type": "text",
+          "id": "advance_text",
+          "label": "Bulk: rest",
+          "default": "The rest, [rest], before dispatch"
+        },
+        {
+          "type": "text",
+          "id": "demo_line",
+          "label": "Demo: book row",
+          "default": "Pocket Hanuman Chalisa, your brand × 1"
+        },
+        {
+          "type": "text",
+          "id": "demo_was",
+          "label": "Demo: book price (struck through)",
+          "default": "₹40"
+        },
+        {
+          "type": "text",
+          "id": "demo_free",
+          "label": "Demo: free word",
+          "default": "Free"
+        },
+        {
+          "type": "text",
+          "id": "demo_pay_title",
+          "label": "Demo: you pay",
+          "default": "You pay [demo_price]"
+        },
+        {
+          "type": "text",
+          "id": "demo_pay_text",
+          "label": "Demo: under you pay",
+          "default": "Adjusted when you order 120+ books"
+        },
+        {
+          "type": "text",
+          "id": "demo_badge",
+          "label": "Demo: badge",
+          "default": "BOOK FREE"
+        },
+        {
+          "type": "text",
+          "id": "missing_one",
+          "label": "One detail missing",
+          "default": "One detail is missing for your back cover"
+        },
+        {
+          "type": "text",
+          "id": "missing_many",
+          "label": "Several details missing",
+          "default": "A few details are missing for your back cover"
+        },
+        {
+          "type": "text",
+          "id": "sending_label",
+          "label": "Sending",
+          "default": "Sending…"
+        },
+        {
+          "type": "text",
+          "id": "uploading_label",
+          "label": "Uploading the logo",
+          "default": "Uploading your logo…"
+        },
+        {
+          "type": "text",
+          "id": "send_error",
+          "label": "Sending failed",
+          "default": "Couldn’t send your details. Check your internet and try again."
+        },
+        {
+          "type": "text",
+          "id": "not_set_up",
+          "label": "Form not set up",
+          "default": "This form isn’t ready yet. Please WhatsApp us your details."
+        },
+        {
+          "type": "text",
+          "id": "demo_dupe",
+          "label": "Demo already in cart",
+          "default": "One free demo per buyer. It’s already in your cart"
+        },
+        {
+          "type": "text",
+          "id": "cart_updated",
+          "label": "Cart updated",
+          "default": "Cart updated"
+        },
+        {
+          "type": "text",
+          "id": "done_title",
+          "label": "Sent (no product): title",
+          "default": "Thank you! We’ve got your details."
+        },
+        {
+          "type": "text",
+          "id": "done_text",
+          "label": "Sent (no product): text",
+          "default": "We’ll WhatsApp your back cover design within 24 hours."
+        },
+        {
+          "type": "text",
+          "id": "done_whatsapp",
+          "label": "Sent (no product): WhatsApp button",
+          "default": "WhatsApp us"
+        }
+      ]
+    },
+    {
+      "type": "drawer_journey",
+      "name": "Cart: price journey",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "bulk_page_url",
+          "label": "Bulk order page link",
+          "default": "/pages/bulk-order"
+        },
+        {
+          "type": "text",
+          "id": "dr_journey_label",
+          "label": "Price journey (screen readers)",
+          "default": "Price journey"
+        },
+        {
+          "type": "text",
+          "id": "dr_hanuman_label",
+          "label": "Hanuman ji image (screen readers)",
+          "default": "Hanuman ji flying with the Sanjeevani mountain"
+        },
+        {
+          "type": "text",
+          "id": "dr_j_next",
+          "label": "Journey: next tier",
+          "default": "Add [n] more books, pay ₹[price] each"
+        },
+        {
+          "type": "text",
+          "id": "dr_j_max",
+          "label": "Journey: best price",
+          "default": "Best price unlocked: ₹[price] a book"
+        },
+        {
+          "type": "text",
+          "id": "dr_j_pill",
+          "label": "Journey: pill",
+          "default": "₹[price] a book"
+        },
+        {
+          "type": "text",
+          "id": "dr_j_sub",
+          "label": "Journey: text",
+          "default": "The lower price applies to every book in your order."
+        },
+        {
+          "type": "text",
+          "id": "dr_j_sub_max",
+          "label": "Journey: text at best price",
+          "default": "Jai Shri Ram! Every book in your order is at the lowest price."
+        },
+        {
+          "type": "text",
+          "id": "dr_j_jump",
+          "label": "Journey: button",
+          "default": "Make it [qty] · ₹[price] each"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_label",
+          "label": "Demo path (screen readers)",
+          "default": "Your path"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_title",
+          "label": "Demo path: title",
+          "default": "Step 1 of 2: your free book"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_pill",
+          "label": "Demo path: pill",
+          "default": "Book free"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_left_title",
+          "label": "Demo path: start",
+          "default": "Free demo"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_left_sub",
+          "label": "Demo path: start price",
+          "default": "[demo_price] delivery"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_right_title",
+          "label": "Demo path: goal",
+          "default": "120+ books"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_right_sub",
+          "label": "Demo path: goal price",
+          "default": "₹40 → ₹22 a book"
+        },
+        {
+          "type": "text",
+          "id": "dr_path_text",
+          "label": "Demo path: text",
+          "default": "Liked it? Order 120+ books with the same back cover. Your ₹69 is adjusted."
+        },
+        {
+          "type": "text",
+          "id": "dr_path_button",
+          "label": "Demo path: button",
+          "default": "See bulk prices"
+        }
+      ]
+    },
+    {
+      "type": "drawer",
+      "name": "Cart: items and totals",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "dr_title",
+          "label": "Title",
+          "default": "Cart"
+        },
+        {
+          "type": "text",
+          "id": "dr_close",
+          "label": "Close (screen readers)",
+          "default": "Close cart"
+        },
+        {
+          "type": "text",
+          "id": "dr_books_word",
+          "label": "Books",
+          "default": "books"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_word",
+          "label": "Demo",
+          "default": "demo"
+        },
+        {
+          "type": "text",
+          "id": "dr_item_one",
+          "label": "Item",
+          "default": "item"
+        },
+        {
+          "type": "text",
+          "id": "dr_item_many",
+          "label": "Items",
+          "default": "items"
+        },
+        {
+          "type": "text",
+          "id": "dr_bulk_title",
+          "label": "Bulk card: title",
+          "default": "Pocket Hanuman Chalisa"
+        },
+        {
+          "type": "text",
+          "id": "dr_bulk_sub",
+          "label": "Bulk card: line",
+          "default": "Your back cover · [lang]"
+        },
+        {
+          "type": "text",
+          "id": "dr_unit",
+          "label": "Bulk card: price",
+          "default": "₹[price] a book"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_title",
+          "label": "Demo card: title",
+          "default": "Pocket Hanuman Chalisa with your brand"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_sub",
+          "label": "Demo card: line",
+          "default": "Free demo · [lang] · 1 book"
+        },
+        {
+          "type": "text",
+          "id": "dr_brand",
+          "label": "Details: brand",
+          "default": "Brand"
+        },
+        {
+          "type": "text",
+          "id": "dr_phone",
+          "label": "Details: phone",
+          "default": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "dr_logo",
+          "label": "Details: logo",
+          "default": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "dr_logo_whatsapp",
+          "label": "Details: logo on WhatsApp",
+          "default": "On WhatsApp after ordering"
+        },
+        {
+          "type": "text",
+          "id": "dr_edit",
+          "label": "Edit link",
+          "default": "Edit details"
+        },
+        {
+          "type": "text",
+          "id": "dr_remove",
+          "label": "Remove link",
+          "default": "Remove"
+        },
+        {
+          "type": "text",
+          "id": "dr_empty",
+          "label": "Empty cart",
+          "default": "Your cart is empty."
+        },
+        {
+          "type": "text",
+          "id": "dr_delivery_gst",
+          "label": "Footer: delivery and GST",
+          "default": "Delivery · GST"
+        },
+        {
+          "type": "text",
+          "id": "dr_delivery_gst_value",
+          "label": "Footer: delivery and GST value",
+          "default": "Free · Included"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_row",
+          "label": "Footer: demo with bulk",
+          "default": "Demo book · delivery"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_line",
+          "label": "Footer: demo only",
+          "default": "Pocket Hanuman Chalisa × 1"
+        },
+        {
+          "type": "text",
+          "id": "dr_discount",
+          "label": "Footer: discount",
+          "default": "Adjusted"
+        },
+        {
+          "type": "text",
+          "id": "dr_pay_bulk",
+          "label": "Pay label (bulk)",
+          "default": "Pay [percent]% now"
+        },
+        {
+          "type": "text",
+          "id": "dr_pay_demo",
+          "label": "Pay label (demo)",
+          "default": "You pay"
+        },
+        {
+          "type": "text",
+          "id": "dr_pay_total",
+          "label": "Pay label (other)",
+          "default": "Total"
+        },
+        {
+          "type": "text",
+          "id": "dr_rest",
+          "label": "Under the amount (bulk)",
+          "default": "of [total] · rest before dispatch"
+        },
+        {
+          "type": "text",
+          "id": "dr_demo_rest",
+          "label": "Under the amount (demo)",
+          "default": "Delivery only · your book is free"
+        },
+        {
+          "type": "text",
+          "id": "dr_pay_button",
+          "label": "Checkout button",
+          "default": "Pay [amount] ›"
+        },
+        {
+          "type": "text",
+          "id": "dr_note_bulk",
+          "label": "Note (bulk)",
+          "default": "Design on WhatsApp within 24 hours · Free delivery"
+        },
+        {
+          "type": "text",
+          "id": "dr_note_demo",
+          "label": "Note (demo)",
+          "default": "Design on WhatsApp within 24 hours · ₹69 adjusted in your bulk order"
+        }
+      ]
+    },
+    {
+      "type": "tier",
+      "name": "Price tier",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "number",
+          "id": "min_qty",
+          "label": "Books",
+          "default": 120
+        },
+        {
+          "type": "number",
+          "id": "price",
+          "label": "Price per book (₹)",
+          "default": 40
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Row label",
+          "info": "Leave empty for \"120 books\"."
+        }
+      ]
+    },
+    {
+      "type": "language",
+      "name": "Language",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button",
+          "default": "English"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value in the order",
+          "default": "English"
+        },
+        {
+          "type": "select",
+          "id": "code",
+          "label": "Script",
+          "options": [
+            {
+              "value": "en",
+              "label": "English"
+            },
+            {
+              "value": "hi",
+              "label": "Hindi (Devanagari)"
+            },
+            {
+              "value": "gu",
+              "label": "Gujarati"
+            }
+          ],
+          "default": "en"
+        },
+        {
+          "type": "text",
+          "id": "chalisa",
+          "label": "Chalisa line on the cover",
+          "default": "Charon jug partap tumhara"
+        }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp check"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery truck"
+            },
+            {
+              "value": "receipt",
+              "label": "Receipt"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            }
+          ],
+          "default": "whatsapp"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Your design on WhatsApp first"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Within 24 hours. We print only after you approve it"
+        }
+      ]
+    },
+    {
+      "type": "payments",
+      "name": "Payment methods",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Secure checkout"
+        },
+        {
+          "type": "text",
+          "id": "list_label",
+          "label": "List name (screen readers)",
+          "default": "Payment methods we accept"
+        },
+        {
+          "type": "text",
+          "id": "netbanking",
+          "label": "Net banking label",
+          "default": "Net banking"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logam-Bulk Order form",
+      "blocks": [
+        {
+          "type": "steps"
+        },
+        {
+          "type": "fields"
+        },
+        {
+          "type": "messages"
+        },
+        {
+          "type": "drawer_journey"
+        },
+        {
+          "type": "drawer"
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "min_qty": 120,
+            "price": 40
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "min_qty": 500,
+            "price": 35
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "min_qty": 1000,
+            "price": 30
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "min_qty": 5000,
+            "price": 25
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "min_qty": 10000,
+            "price": 22
+          }
+        },
+        {
+          "type": "language",
+          "settings": {
+            "label": "English",
+            "value": "English",
+            "code": "en",
+            "chalisa": "Charon jug partap tumhara"
+          }
+        },
+        {
+          "type": "language",
+          "settings": {
+            "label": "हिन्दी",
+            "value": "Hindi",
+            "code": "hi",
+            "chalisa": "चारों जुग परताप तुम्हारा"
+          }
+        },
+        {
+          "type": "language",
+          "settings": {
+            "label": "ગુજરાતી",
+            "value": "Gujarati",
+            "code": "gu",
+            "chalisa": "ચારો જુગ પરતાપ તુમ્હારા"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "Your design on WhatsApp first",
+            "text": "Within 24 hours. We print only after you approve it"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery across India",
+            "text": "Printed in 7–10 working days after your OK, then 3–5 days to reach you"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "receipt",
+            "title": "GST included",
+            "text": "Add your GSTIN above for a GST invoice"
+          }
+        },
+        {
+          "type": "payments",
+          "settings": {
+            "title": "Secure checkout"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
